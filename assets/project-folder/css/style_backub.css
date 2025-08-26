@@ -1,0 +1,837 @@
+/* =======================================================
+   OneLink — Final Unified Theme
+   ======================================================= */
+
+/* Reset + base */
+*,*::before,*::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+    "Noto Kufi Arabic", "Noto Sans Arabic", Arial, sans-serif;
+  background: #fafbfc;
+  color: #111827;
+  line-height: 1.6;
+}
+html[lang="ar"] body { direction: rtl; }
+a { color: inherit; text-decoration: none; }
+.container { width: min(1100px, 92%); margin-inline: auto; }
+
+/* ================= Header (dark hero) ================ */
+.site-header {
+  background: linear-gradient(180deg, #3b0764 0%, #1e293b 100%);
+  border-bottom: 0;
+  color: #fff;
+}
+.header-inner {
+  padding: 40px 0 24px;
+  text-align: center;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+.brand-mark[hidden],
+.brand-mark[src=""],
+.brand-mark:not([src]) { display: none; }
+.brand-name {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: .3px;
+}
+.tagline { margin: 6px 0 0; color: #e5e7eb; line-height: 1.35; }
+.tagline.en { opacity: .9; font-size: .95rem; }
+.main-nav { margin-top: 14px; display: inline-flex; gap: 12px; }
+.main-nav a {
+  color: #e5e7eb;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+.main-nav a:hover {
+  background: rgba(255,255,255,.09);
+  border-color: rgba(255,255,255,.18);
+}
+
+/* ================= Cards grid ======================== */
+.grid#cards {
+  --col: minmax(240px, 1fr);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--col));
+  gap: 18px;
+  padding: 18px 0 8px;
+}
+.card.service-card {
+  background: #fff;
+  border: 1px solid #e6e8eb;
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+}
+.card.service-card .icon {
+  width: 56px; height: 56px; object-fit: contain;
+}
+.card.service-card .icon[hidden],
+.card.service-card .icon[src=""],
+.card.service-card .icon:not([src]) { display: none; }
+.card.service-card .name-ar {
+  margin: 4px 0 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.card.service-card .name-en {
+  margin: 0;
+  color: #5f6b7a;
+  font-size: .92rem;
+}
+
+/* زر "انتقل" أخضر */
+.btn.btn-go {
+  margin-top: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #16a34a;
+  border: 1px solid #16a34a;
+  color: #fff;
+  font-weight: 600;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn.btn-go:hover {
+  transform: translateY(-1px);
+  background: #15803d;
+  box-shadow: 0 8px 18px rgba(21,128,61,.25);
+}
+.btn.btn-go:focus-visible {
+  outline: 3px solid #22c55e33;
+  outline-offset: 2px;
+}
+
+/* =============== Store buttons section =============== */
+.download-apps {
+  margin: 26px 0 0;
+  padding: 12px 0 0;
+  text-align: center;
+}
+.download-apps h3 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  color: #111827;
+}
+.store-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.store-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  height: 38px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e2e6ea;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0,0,0,.04);
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.store-btn .store-ic {
+  width: 20px; height: 20px; object-fit: contain; flex: 0 0 20px;
+}
+.store-btn .store-ic[hidden],
+.store-btn .store-ic[src=""],
+.store-btn .store-ic:not([src]) { display: none; }
+.store-btn .store-text { font-size: .95rem; color: #111827; letter-spacing: .2px; }
+.store-btn::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0) 42%, rgba(255,255,255,.7) 50%, rgba(255,255,255,0) 58%, transparent 100%);
+  transform: translateX(-120%);
+  transition: transform .6s ease;
+  pointer-events: none;
+}
+.store-btn:hover::before { transform: translateX(120%); }
+.store-btn:hover {
+  transform: translateY(-2px);
+  border-color: #cfd6dd;
+  box-shadow: 0 6px 14px rgba(17,24,39,.10);
+}
+
+/* ================= Footer (dark) ===================== */
+.site-footer {
+  background: #0f172a;
+  color: #cbd5e1;
+  border-top: 0;
+  padding: 14px 0;
+  text-align: center;
+  font-size: .95rem;
+  margin-top: 22px;
+}
+
+/* ================ Helpers/Responsive ================= */
+.hidden { display: none !important; }
+html[lang="ar"] .name-ar,
+html[lang="ar"] .tagline { line-height: 1.5; }
+@media (max-width: 640px) {
+  .brand-name { font-size: 1.65rem; }
+  .header-inner { padding: 34px 0 18px; }
+}
+/* ===== Green Header + small polish ===== */
+
+/* هيدر أخضر متدرّج */
+.site-header{
+  background: linear-gradient(180deg, #166534 0%, #065f46 100%) !important; /* أخضر داكن */
+  border-bottom: 0 !important;
+  color:#fff !important;
+  box-shadow: 0 2px 0 rgba(0,0,0,.06); /* خط ظل خفيف أسفل الهيدر */
+}
+.header-inner{ padding:40px 0 24px !important; text-align:center !important; }
+.brand-name{ color:#fff !important; font-size:2rem !important; font-weight:800 !important; }
+.tagline{ color:#eafaf1 !important; }
+.main-nav a{ color:#eafaf1 !important; }
+.main-nav a:hover{
+  background: rgba(255,255,255,.12) !important;
+  border-color: rgba(255,255,255,.24) !important;
+}
+
+/* تحسينات دقيقة للكروت والهوامش */
+.grid#cards{ padding-top: 20px !important; }
+.card.service-card{ border-color:#e5eee7 !important; }          /* حدود أنعم مائلة للأخضر */
+.btn.btn-go{ background:#16a34a !important; border-color:#16a34a !important; } /* أخضر متناغم */
+.btn.btn-go:hover{ background:#15803d !important; }
+
+/* أزرار المتاجر: مواءمة طفيفة */
+.store-buttons{ gap:12px !important; }
+.store-btn:hover{ border-color:#b7d7c0 !important; box-shadow:0 6px 14px rgba(22,163,74,.12) !important; }
+
+/* فوتر: نخليه كما هو (داكن) – أتبعناه بلون أخضر خافت في النص */
+.site-footer{ background:#0f172a !important; color:#cfe5d6 !important; }
+/* ===== مساواة زر "انتقل" ===== */
+.btn.btn-go {
+  display: inline-block;
+  width: 100%;              /* يملأ عرض الكرت */
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* ===== أزرار تحميل التطبيق ===== */
+.download-apps {
+  margin: 32px 0 0;
+  padding: 16px 0;
+  text-align: center;
+}
+.download-apps h3 {
+  margin: 0 0 12px;
+  font-size: 1.2rem;
+  color: #166534;   /* أخضر */
+  font-weight: 700;
+}
+.store-btn {
+  border: 1px solid #16a34a;
+  background: #16a34a;
+  color: #fff;
+}
+.store-btn .store-text { color:#fff; }
+.store-btn:hover {
+  background:#15803d;
+  border-color:#15803d;
+  box-shadow:0 6px 14px rgba(21,128,61,.2);
+}
+
+/* ===== كلمة "روابط موحدة" تحت العنوان ===== */
+.subtitle-unified {
+  margin: 6px 0 0;
+  font-size: 1rem;
+  color: #e5e7eb;
+  font-weight: 500;
+}
+.site-footer p {
+  margin: 4px 0;
+}
+
+.dev-line {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .95rem;
+  margin-top: 6px;
+}
+
+.footer-bottom .rights {
+  font-weight: 500;
+}
+.footer-bottom {
+  font-size: .95rem;
+  margin-top: 6px;
+  text-align: center; /* يكون بالنص */
+  color: #333;
+}
+.dev-line, .footer-bottom {
+  font-size: .95rem;
+  margin: 4px 0;
+  text-align: center;
+  color: #111827; /* لون داكن وواضح */
+  font-weight: 600; /* يبرز النص */
+}
+
+.footer-bottom {
+  font-size: .95rem;
+  margin: 4px 0;
+  text-align: center;
+  color: #ffffff;         /* أبيض */
+  font-weight: 600;
+  display: flex;          /* نخليهم بنفس السطر */
+  justify-content: center;/* محاذاة للوسط */
+  gap: 6px;               /* مسافة صغيرة بين النصوص */
+  flex-wrap: wrap;        /* لو الشاشة صغيرة ينزلوا تحت بعض */
+}
+
+.footer-bottom .brand-copy {
+  color: #16a34a;         /* أخضر */
+  font-weight: 700;
+}
+/* Footer layout & colors (dark background friendly) */
+.site-footer { padding: 16px 0; text-align: center; }
+
+/* line 1: developer line */
+.dev-line {
+  font-size: .95rem;
+  margin: 4px 0;
+  color: #ffffff;      /* أبيض واضح على الخلفية الداكنة */
+  font-weight: 600;
+}
+
+/* line 2: rights + year + OneLink (center, one row) */
+.footer-bottom {
+  font-size: .95rem;
+  margin: 4px 0;
+  color: #ffffff;      /* أبيض */
+  font-weight: 600;
+  display: flex;       /* كل العناصر في سطر واحد */
+  justify-content: center;
+  align-items: center;
+  gap: 6px;            /* مسافة بسيطة بين الكلمات */
+  flex-wrap: wrap;     /* لو ضاقت الشاشة ينزل سطرين بدون كسر الشكل */
+}
+
+/* 2025 OneLink © */
+.footer-bottom .brand-copy {
+  color: #16a34a;      /* أخضر */
+  font-weight: 700;
+}
+.dev-line, .footer-bottom {
+  font-size: .95rem;
+  margin: 4px 0;
+  text-align: center;
+  color: #111827; /* نص واضح */
+  font-weight: 600;
+}
+
+.footer-bottom span {
+  color: #16a34a; /* يخلي OneLink©2025 أخضر */
+  font-weight: 700;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 6px; /* يضبط المسافة بين - والنص */
+}
+.site-footer {
+  background: #111827; /* لون داكن */
+  padding: 15px 0;
+  text-align: center;
+}
+
+.site-footer .container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.dev-line {
+  font-size: .95rem;
+  margin: 3px 0;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.dev-line span {
+  color: #16a34a; /* أخضر */
+  font-weight: 600;
+}
+
+.footer-bottom {
+  font-size: .9rem;
+  margin: 2px 0;
+  color: #d1d5db; /* رمادي فاتح */
+  font-weight: 500;
+}
+
+.footer-bottom span {
+  color: #16a34a;
+  font-weight: 700;
+}
+/* ===== Toolbar / Search ===== */
+.toolbar{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  padding: 10px 0 4px;
+  flex-wrap: wrap;
+}
+#service-search{
+  width:min(520px, 92%);
+  height:40px;
+  padding:0 40px 0 12px;          /* مساحة لزر المسح */
+  border:1px solid #d1d5db; border-radius:10px;
+  background:#fff; color:#111827; font-size:1rem;
+}
+#service-search:focus{ outline:3px solid #22c55e33; border-color:#16a34a; }
+.btn-clear{
+  margin-inline-start:-46px;       /* يدخل فوق الحقل من اليمين (RTL) */
+  width:34px; height:34px; border-radius:999px; border:0; cursor:pointer;
+  background:#f1f5f9; font-size:18px; line-height:34px;
+}
+.btn-clear:hover{ background:#e2e8f0; }
+.count{ color:#475569; font-size:.95rem; }
+/* الكرت قابل للنقر: لمسة تفاعلية */
+.card.service-card {
+  position: relative;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.card.service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(17,24,39,.10);
+  border-color: #cfd6dd;
+}
+.card.service-card:focus-visible {
+  outline: 3px solid #22c55e55;
+  outline-offset: 2px;
+}
+
+/* زر الرجوع لأعلى */
+.back-top{
+  position: fixed;
+  bottom: 18px;
+  left: 18px;      /* RTL: الزر يسار */
+  right: auto;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: #16a34a;
+  color: #fff;
+  font-size: 20px;
+  line-height: 42px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(22,163,74,.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, box-shadow .2s ease;
+  z-index: 1000;
+}
+.back-top.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+.back-top:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(22,163,74,.45);
+}
+.back-top:focus-visible{
+  outline: 3px solid #22c55e55;
+  outline-offset: 2px;
+}
+/* زر الرجوع لأعلى */
+#backTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  cursor: pointer;
+  display: none; /* مخفي مبدئياً */
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+#backTop.show {
+  display: block;
+}
+
+#backTop:hover {
+  background-color: #0d7a33;
+}
+/* زر الرجوع لأعلى */
+#backTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  font-size: 20px;
+  line-height: 46px; /* يوسّط السهم عموديًا */
+  text-align: center;
+  cursor: pointer;
+  display: none;          /* مخفي مبدئيًا */
+  z-index: 1000;
+  box-shadow: 0 6px 14px rgba(22,163,74,.25);
+  transition: transform .15s ease, background-color .2s ease, opacity .2s ease;
+  opacity: .95;
+}
+#backTop.show { display: block; }
+#backTop:hover { background-color: #0d7a33; transform: translateY(-2px); }
+/* Back-to-top button */
+.back-top{
+  position: fixed;
+  inset: auto 16px 18px auto;    /* أسفل يمين */
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: none;
+  background:#16a34a;
+  color:#fff;
+  font-size:20px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 18px rgba(22,163,74,.28);
+  cursor:pointer;
+  z-index: 9999;
+
+  opacity:0; visibility:hidden; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
+}
+.back-top:hover{ background:#15803d; }
+.back-top.show{
+  opacity:1; visibility:visible; transform: translateY(0);
+}
+.store-ic { height: 20px; margin-inline-end: 8px; vertical-align: middle; }
+/* أزرار المتاجر */
+.store-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;             /* مسافة بين الأيقونة والنص */
+  padding: 8px 14px;
+  border-radius: 999px; /* كبسولة */
+  background: #22c55e;  /* نفس أخضر الأزرار */
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.store-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;   /* كبسولة */
+  background: #22c55e;   /* خلفية خضراء */
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* هنا تلصق الكود الجديد */
+.store-ic {
+  height: 40px;      /* ارتفاع الصورة */
+  width: auto;       /* العرض يتناسب مع الارتفاع */
+  margin-inline-end: 8px;
+  vertical-align: middle;
+}
+
+.store-btn:hover { filter: brightness(0.95); }
+
+/* حجم الأيقونات */
+.store-ic {
+  height: 22px;     /* كبّر/صغّر من هنا: جرّب 22–26 */
+  width: auto;
+  vertical-align: middle;
+}
+
+/* موبايل */
+@media (max-width: 480px) {
+  .store-ic { height: 18px; }
+  .store-btn { padding: 7px 12px; gap: 6px; }
+}
+
+.store-btn { padding: 10px 16px; } /* مساحة إضافية حول الأيقونة */
+
+/* تكبير الشعار داخل الزر */
+.store-buttons .store-btn > img.store-ic{
+  height: 56px !important;   /* جرّب 56 أو 60 */
+  width: auto !important;
+  display: inline-block;
+}
+
+/* لو تبغى الشعار فقط بدون النص اللي بجانبه */
+.store-buttons .store-btn .store-text { display: none; }
+.apple-logo {
+  height: 60px !important;   /* تكبير شعار أبل */
+  width: auto !important;    /* العرض يتناسب مع الارتفاع */
+}
+/* شريط أزرار المتاجر */
+.store-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* زر المتجر: نجعله شفاف تمامًا */
+.store-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;              /* بدون حواف داخلية */
+  background: transparent; /* إزالة الخلفية الخضراء */
+  box-shadow: none;        /* إزالة الظل إن وُجد */
+  border-radius: 0;        /* لا كبسولة */
+  text-decoration: none;
+}
+
+/* حجم أيقونة المتجر */
+.store-ic {
+  height: 40px;   /* غيّرها إلى 48px إذا تبيها أكبر */
+  width: auto;
+  vertical-align: middle;
+}
+/* شعار App Store بحجم موحد */
+.apple-logo {
+  height: 52px !important;   /* يخليه نفس طول جوجل بلاي */
+  width: auto !important;    /* العرض يتناسب */
+  display: inline-block;
+}
+/* أجبر كل شعارات المتاجر تكبر */
+.store-buttons .store-btn > img.store-ic{
+  height: 56px !important;
+  width: auto !important;
+  display: inline-block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  vertical-align: middle;
+}
+
+/* لو تبغى صورة أبل أكبر شوي من غيرها (اختياري) */
+.store-buttons .store-btn > img.store-ic[src*="apple"]{
+  height: 60px !important;
+}
+
+/* خلي الزر شفاف وما فيه خلفية */
+.store-btn{
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+/* أخفِ النص داخل أزرار المتاجر (اختياري) */
+.store-buttons .store-btn > .store-text{
+  display: none !important;
+}
+.store-ic {
+  height: 48px;     /* جرّب 50px لو تبي أوضح */
+  width: auto;
+  vertical-align: middle;
+}
+/* توحيد حجم أيقونات المتاجر */
+.store-buttons .store-ic {
+  height: 52px;       /* ارتفاع موحد */
+  width: auto;        /* العرض يتناسب مع الارتفاع */
+  display: inline-block;
+  object-fit: contain; /* يحافظ على الشكل بدون تمدد */
+}
+/* توحيد حجم أيقونات المتاجر */
+.store-buttons .store-ic {
+  height: 52px;       /* ارتفاع موحد */
+  width: auto;        /* العرض يتناسب مع الارتفاع */
+  display: inline-block;
+  object-fit: contain; /* يحافظ على الشكل بدون تمدد */
+}
+/* توحيد مقاسات شعارات المتاجر */
+/* تكبير شعار App Store */
+.store-ic[alt="App Store"] {
+  height: 58px !important;  /* أكبر من البقية */
+  width: auto !important;
+}
+
+.store-ic[alt="Google Play"] {
+  height: 52px !important;
+  width: auto !important;
+}
+
+.store-ic[alt="AppGallery"] {
+  height: 52px !important;
+  width: auto !important;
+}
+/* زر الرجوع */
+.back-btn-container {
+  margin: 15px;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #22c55e;   /* أخضر */
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  background: #16a34a;   /* أخضر أغمق عند التمرير */
+}
+/* زر الرجوع العائم */
+.back-fab {
+  position: fixed;          /* ثابت فوق الصفحة */
+  top: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;     /* دائرة كاملة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #22c55e;      /* أخضر */
+  color: #fff;
+  font-size: 20px;          /* حجم السهم */
+  text-decoration: none;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  z-index: 10000;           /* فوق كل شيء */
+}
+
+.back-fab:hover { background: #16a34a; }
+.back-fab:active { transform: scale(0.96); }
+/* زر الرجوع */
+.back-btn-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.back-btn {
+  text-decoration: none;
+  font-size: 22px;
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 28px;
+  color: rgba(128,128,128,.7);
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease, transform .3s ease;
+  z-index: 100000; /* أعلى من أي عنصر عائم */
+}
+.scroll-top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.scroll-top-btn:hover {
+  color: rgba(50,50,50,.9);
+  transform: scale(1.1);
+}
+.scroll-top-btn { opacity: 1 !important; pointer-events: auto !important; }
+/* زر الرجوع */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 28px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease, transform .3s ease;
+  z-index: 9999;
+}
+
+/* عند الظهور */
+.scroll-top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+  animation: fadeInUp 0.6s ease;
+}
+
+/* تأثير عند الهوفر */
+.scroll-top-btn:hover {
+  transform: scale(1.2) rotate(10deg);
+  animation: shake 0.4s;
+}
+
+/* أنيميشن الظهور */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* أنيميشن الاهتزاز */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}

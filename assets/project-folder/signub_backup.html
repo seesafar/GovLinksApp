@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إنشاء حساب جديد - OneLink</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .auth-card{max-width:520px;margin:32px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    .auth-card h1{margin:0 0 12px}
+    .row{margin:10px 0}
+    .row label{display:block;margin-bottom:6px;font-weight:600}
+    .row input,.row select{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px}
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{padding:10px 14px;border:0;border-radius:8px;cursor:pointer}
+    .btn-primary{background:#1a5c2d;color:#fff}
+    .btn-ghost{background:#f6f6f6}
+    .help{font-size:.9em;color:#666}
+    .social{display:flex;gap:10px;margin-top:12px}
+    .social .btn{flex:1}
+    .ok{color:#1a5c2d}
+    .err{color:#b00020}
+  </style>
+</head>
+<body id="page-signup">
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="../icons/onelink-mark.svg" alt="OneLink Mark" class="brand-mark" />
+        <h1 class="brand-name">OneLink</h1>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="services.html">الخدمات</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-page">
+  <form class="auth-card" id="signupForm" novalidate>
+    <h1>إنشاء حساب جديد</h1>
+    <p class="hint">واجهة تجريبية لإنشاء الحساب (فرونت فقط)</p>
+
+    <div class="form-row">
+      <label class="label" for="suUser">اسم المستخدم (UserName)</label>
+      <input class="input" id="suUser" name="user" type="text" minlength="3" required>
+    </div>
+
+    <div class="form-row">
+      <label class="label" for="suEmail">البريد الإلكتروني</label>
+      <input class="input" id="suEmail" name="email" type="email" required>
+    </div>
+
+    <div class="form-row">
+      <label class="label" for="suPass">كلمة المرور</label>
+      <input class="input" id="suPass" name="pass" type="password" minlength="6" required>
+    </div>
+
+    <div class="form-row">
+      <label class="label" for="suPass2">تأكيد كلمة المرور</label>
+      <input class="input" id="suPass2" name="pass2" type="password" minlength="6" required>
+    </div>
+
+    <div class="form-row">
+      <button class="btn btn-primary" type="submit">إنشاء الحساب</button>
+    </div>
+
+    <div class="divider">أو</div>
+
+    <div class="oauth-grid">
+      <button type="button" class="btn btn-ghost">Apple</button>
+      <button type="button" class="btn btn-ghost">Google</button>
+    </div>
+  </form>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="dev-line">Developer: Safer Al-Ghamdi</p>
+      <p class="footer-bottom">OneLink ©2025 — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تسجيل الدخول - OneLink</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* لمسة سريعة للنموذج */
+    .auth-wrap{max-width:480px;margin:40px auto;padding:20px;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+    .auth-wrap h1{margin:0 0 10px;font-size:24px}
+    .auth-wrap p.hint{margin:0 0 20px;color:#666}
+    .form-row{margin-bottom:14px}
+    .form-row label{display:block;margin-bottom:6px;font-weight:600}
+    .form-row input{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px}
+    .row-inline{display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .btn-primary{background:#1a5c2d;color:#fff;border:0;padding:10px 16px;border-radius:10px;cursor:pointer}
+    .btn-primary:disabled{opacity:.6;cursor:not-allowed}
+    .msg{margin-top:10px;font-size:14px}
+    .msg.error{color:#c62828}
+    .msg.ok{color:#1b5e20}
+    .oauth{display:flex;gap:10px;margin-top:15px}
+    .oauth button{flex:1;border:1px solid #ddd;background:#fff;border-radius:10px;padding:10px;cursor:pointer}
+  </style>
+</head>
+<body>
+
+  <!-- الهيدر (مثل بقية الصفحات) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <p class="subtitle-unified">رابط موحّد</p>
+      <div class="brand">
+        <img src="../icons/onelink-mark.svg" alt="OneLink Mark" class="brand-mark" />
+        <h1 class="brand-name">OneLink</h1>
+      </div>
+      <p class="tagline ar">كل خدماتك الحكومية في مكان واحد</p>
+      <p class="tagline en">All your government services in one place</p>
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="services.html">الخدمات</a>
+        <a href="login.html"  data-auth="out">تسجيل الدخول</a>
+        <a href="signup.html" data-auth="out">حساب جديد</a>
+        <a href="account.html" data-auth="in">حسابي (<span data-username></span>)</a>
+        <a href="settings.html" data-auth="in">الإعدادات</a>
+        <button type="button" id="btnLogout" class="linklike" data-auth="in">تسجيل الخروج</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding:20px;">
+    <div class="auth-wrap">
+      <h1>تسجيل الدخول</h1>
+      <p class="hint">واجهة تجريبية للتدقيق فقط.</p>
+
+      <form id="loginForm" autocomplete="on" novalidate>
+        <div class="form-row">
+          <label for="loginUser">اسم المستخدم أو البريد</label>
+          <input id="loginUser" name="user" type="text" required />
+        </div>
+
+        <div class="form-row">
+          <label for="loginPass">كلمة المرور</label>
+          <div class="row-inline">
+            <input id="loginPass" name="pass" type="password" required />
+            <button type="button" id="togglePass" title="إظهار/إخفاء" class="btn-primary" style="background:#2f6f3f;">👁️</button>
+          </div>
+        </div>
+
+        <div class="row-inline" style="margin:12px 0;">
+          <label><input type="checkbox" id="rememberMe"> تذكرني</label>
+          <a href="#" style="color:#1a5c2d;text-decoration:none;">نسيت كلمة المرور؟</a>
+        </div>
+
+        <button class="btn-primary" id="btnLogin" type="submit">دخول</button>
+        <div class="msg" id="loginMsg" aria-live="polite"></div>
+
+        <div class="oauth">
+          <button type="button" id="btnGoogle">Google</button>
+          <button type="button" id="btnApple">Apple</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="dev-line">المطور: <span>Developer: Safer Al-Ghamdi</span></p>
+      <p class="footer-bottom">OneLink ©2025 — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <!-- سكربت زر الخروج في الناف -->
+  <script>
+    document.addEventListener('click', (e)=>{
+      if (e.target && e.target.id === 'btnLogout') {
+        if (window.logout) { window.logout(); }
+        else { import('./js/auth.js').then(m => m.logout && m.logout()); }
+      }
+    });
+  </script>
+
+  <!-- استدعاء سكربتات المشروع -->
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

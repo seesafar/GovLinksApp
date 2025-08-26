@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneLink - الخدمات</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <body>
+  <!-- الهيدر -->
+   <header class="site-header">
+  <div class="container header-inner">
+    <p class="subtitle-unified">رابط موحد</p>
+    <div class="brand">
+      <img src="../icons/onelink-mark.svg" alt="OneLink Mark" class="brand-mark" onerror="this.hidden=true">
+      <h1 class="brand-name">OneLink</h1>
+    </div>
+    <p class="tagline ar">كل خدماتك الحكومية في مكان واحد</p>
+    <p class="tagline en">All your government services in one place</p>
+    <nav class="main-nav">
+      <a href="./index.html">الرئيسية</a>
+      <a href="./services.html">الخدمات</a>
+    </nav>
+  </div>
+</header>
+</body>
+
+<!-- زر الرجوع -->
+<a href="index.html" class="back-fab" aria-label="رجوع" title="رجوع">⬅</a>
+<!-- زر الرجوع للصفحة الرئيسية -->
+<div class="back-btn-container">
+  <a href="index.html" class="back-btn" title="رجوع">⬅</a>
+</div>
+
+
+<!-- شريط أدوات / بحث -->
+<section class="toolbar">
+  <input id="service-search" type="search"
+         placeholder="ابحث عن خدمة… (أبشر، ناجز، Tawakkalna)" aria-label="ابحث عن خدمة">
+  <button id="clear-search" class="btn-clear" type="button" aria-label="مسح البحث">×</button>
+  <span class="count">النتائج: <b id="result-count">0</b></span>
+</section>
+
+  <!-- شبكة الكروت -->
+  <main class="grid" id="cards">
+
+    <!-- أبشر -->
+    <article class="card service-card" data-name="absher">
+      <img class="icon" src="../icons/absher.png" alt="أبشر" onerror="this.hidden=true">
+      <p class="name-ar">أبشر</p>
+      <p class="name-en">Absher</p>
+      <a class="btn btn-go" href="https://www.absher.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- وزارة التعليم -->
+    <article class="card service-card" data-name="education">
+      <img class="icon" src="../icons/education.png" alt="وزارة التعليم" onerror="this.hidden=true">
+      <p class="name-ar">وزارة التعليم</p>
+      <p class="name-en">Ministry of Education</p>
+      <a class="btn btn-go" href="https://www.moe.gov.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+   <!-- وزارة الداخلية -->
+<article class="card service-card" data-name="interior">
+  <img class="icon" src="../icons/saudi_palm.png" alt="وزارة الداخلية" onerror="this.hidden=true">
+  <p class="name-ar">وزارة الداخلية</p>
+  <p class="name-en">Ministry of Interior</p>
+  <a class="btn btn-go" href="https://www.moi.gov.sa" target="_blank" rel="noopener">انتقل</a>
+</article>
+
+<!-- توكلنا -->
+<article class="card service-card" data-name="tawakkalna">
+  <img class="icon" src="../icons/tawakalna.png" alt="توكلنا" onerror="this.hidden=true">
+  <p class="name-ar">توكلنا</p>
+  <p class="name-en">Tawakkalna</p>
+  <a class="btn btn-go" href="https://ta.sdaia.gov.sa" target="_blank" rel="noopener">انتقل</a>
+</article>
+
+<!-- ناجز -->
+<article class="card service-card" data-name="najiz">
+  <img class="icon" src="../icons/najiz.png" alt="ناجز" onerror="this.hidden=true">
+  <p class="name-ar">ناجز</p>
+  <p class="name-en">Najiz</p>
+  <a class="btn btn-go" href="https://najiz.sa" target="_blank" rel="noopener">انتقل</a>
+</article>
+
+  </main>
+
+  <!-- سكشن المتاجر -->
+ <section class="download-apps">
+  <h3>حمّل التطبيق</h3>
+  <div class="store-buttons">
+
+   <!-- App Store -->
+<a class="store-btn" href="https://apps.apple.com/" target="_blank" rel="noopener">
+<img src="../icons/apple.png?v=3" class="store-ic" alt="App Store">
+  <span class="store-text">App Store</span>
+</a>
+
+<!-- Google Play -->
+<a class="store-btn" href="https://play.google.com/" target="_blank" rel="noopener">
+  <img src="../icons/google.png" class="store-ic" alt="Google Play">
+</a>
+
+<!-- Huawei AppGallery -->
+<a class="store-btn" href="https://appgallery.huawei.com/" target="_blank" rel="noopener">
+  <img src="../icons/huawei.png" class="store-ic" alt="AppGallery">
+</a>
+
+
+
+  </div>
+</section>
+
+
+<a href="#" class="scroll-top-btn" title="أعلى">⬆️</a>
+
+    <!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <p class="dev-line">
+      المطور: سفر الغامدي — <span>Developer: Safer Al-Ghamdi</span>
+    </p>
+    <p class="footer-bottom">
+      OneLink ©2025 — جميع الحقوق محفوظة
+    </p>
+  </div>
+</footer>
+
+    <!-- زر الرجوع لأعلى الصفحة -->
+    <a href="#" class="scroll-top-btn" title="أعلى">⬆️</a>
+
+    <!-- استدعاء ملف الجافاسكربت -->
+    <script src="js/main.js"></script>
+  </body>
+</html>
+
+
+فاصل
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneLink - الخدمات</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <body>
+  <!-- الهيدر -->
+   <nav class="main-nav">
+  <a href="index.html">الرئيسية</a>
+  <a href="services.html">الخدمات</a>
+
+  <!-- غير مسجّل -->
+  <a href="login.html"  data-auth="out">تسجيل الدخول</a>
+  <a href="#"          data-auth="out" onclick="alert('قريبًا 🙌')">حساب جديد</a>
+
+  <!-- مسجّل -->
+  <span data-auth="in">مرحبًا، <b data-username></b></span>
+<!-- بروفايل المستخدم -->
+<div class="nav-profile" data-auth="in">
+  <button class="profile-trigger" id="profileBtn" aria-expanded="false">
+    <span class="avatar" id="avatarInitial">U</span>
+    <span class="username" data-username></span>
+  </button>
+
+  <div class="profile-dropdown" id="profileMenu" hidden>
+    <a href="account.html">حسابي</a>
+    <a href="settings.html">الإعدادات</a>
+    <a href="#" id="btnLogout">تسجيل الخروج</a>
+  </div>
+</div>
+});
+
+</nav>
+
+  </div>
+</header>
+</body>
+
+
+
+
+<!-- شريط أدوات / بحث -->
+<section class="toolbar">
+  <input id="service-search" type="search"
+         placeholder="ابحث عن خدمة… (أبشر، ناجز، Tawakkalna)" aria-label="ابحث عن خدمة">
+  <button id="clear-search" class="btn-clear" type="button" aria-label="مسح البحث">×</button>
+  <span class="count">النتائج: <b id="result-count">0</b></span>
+</section>
+
+  <!-- شبكة الكروت -->
+  <main class="grid" id="cards">
+
+    <!-- أبشر -->
+    <article class="card service-card" data-name="absher">
+      <img class="icon" src="../icons/absher.png" alt="أبشر" onerror="this.hidden=true">
+      <p class="name-ar">أبشر</p>
+      <p class="name-en">Absher</p>
+      <a class="btn btn-go" href="https://www.absher.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- وزارة التعليم -->
+    <article class="card service-card" data-name="education">
+      <img class="icon" src="../icons/education.png" alt="وزارة التعليم" onerror="this.hidden=true">
+      <p class="name-ar">وزارة التعليم</p>
+      <p class="name-en">Ministry of Education</p>
+      <a class="btn btn-go" href="https://www.moe.gov.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+   <!-- وزارة الداخلية -->
+<article class="card service-card" data-name="interior">
+  <img class="icon" src="../icons/saudi_palm.png" alt="وزارة الداخلية" onerror="this.hidden=true">
+  <p class="name-ar">وزارة الداخلية</p>
+  <p class="name-en">Ministry of Interior</p>
+  <a class="btn btn-go" href="https://www.moi.gov.sa" target="_blank" rel="noopener">انتقل</a>
+</article>
+
+<!-- توكلنا -->
+<article class="card service-card" data-name="tawakkalna">
+  <img class="icon" src="../icons/tawakalna.png" alt="توكلنا" onerror="this.hidden=true">
+  <p class="name-ar">توكلنا</p>
+  <p class="name-en">Tawakkalna</p>
+  <a class="btn btn-go" href="https://ta.sdaia.gov.sa" target="_blank" rel="noopener">انتقل</a>
+</article>
+
+<!-- ناجز -->
+<article class="card service-card" data-name="najiz">
+  <img class="icon" src="../icons/najiz.png" alt="ناجز" onerror="this.hidden=true">
+  <p class="name-ar">ناجز</p>
+  <p class="name-en">Najiz</p>
+  <a class="btn btn-go" href="https://najiz.sa" target="_blank" rel="noopener">انتقل</a>
+</article>
+
+  </main>
+
+  <!-- سكشن المتاجر -->
+ <section class="download-apps">
+  <h3>حمّل التطبيق</h3>
+  <div class="store-buttons">
+
+   <!-- App Store -->
+<a class="store-btn" href="https://apps.apple.com/" target="_blank" rel="noopener">
+<img src="../icons/apple.png?v=3" class="store-ic" alt="App Store">
+  <span class="store-text">App Store</span>
+</a>
+
+<!-- Google Play -->
+<a class="store-btn" href="https://play.google.com/" target="_blank" rel="noopener">
+  <img src="../icons/google.png" class="store-ic" alt="Google Play">
+</a>
+
+<!-- Huawei AppGallery -->
+<a class="store-btn" href="https://appgallery.huawei.com/" target="_blank" rel="noopener">
+  <img src="../icons/huawei.png" class="store-ic" alt="AppGallery">
+</a>
+
+
+
+  </div>
+</section>
+
+
+<!-- زرّ الرجوع لأعلى -->
+<a href="#" class="scroll-top-btn" title="أعلى">⬆️</a>
+
+
+    <!-- الفوتر -->
+<footer class="site-footer">
+  <div class="container">
+    <p class="dev-line">
+      المطور: سفر الغامدي — <span>Developer: Safar Al-Ghamdi</span>
+    </p>
+    <p class="footer-bottom">OneLink ©2025 — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+
+    <!-- زر الرجوع لأعلى الصفحة -->
+    <a href="#" class="scroll-top-btn" title="أعلى">⬆️</a>
+
+    <!-- استدعاء ملف الجافاسكربت -->
+    <script src="js/main.js"></script>
+      <!-- استدعاء ملفات الجافاسكربت -->
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+document.addEventListener('click', (e)=>{
+  if (e.target && e.target.id === 'btnLogout') {
+    e.preventDefault();
+    if (window.logout) window.logout();
+  }
+});
+</script>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

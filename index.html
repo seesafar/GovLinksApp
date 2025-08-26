@@ -1,62 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>رابط – روابط الجهات الحكومية</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <main class="app">
-    <header class="header">
-      <h1>رابط</h1>
-      <p class="subtitle">كل خدماتك الحكومية في مكان واحد</p>
-    </header>
-
-    <section class="toolbar">
-      <input id="search" type="search" placeholder="ابحث عن جهة أو خدمة…" autocomplete="off" />
-      <button id="emergency" class="btn-ghost">وضع الطوارئ</button>
-    </section>
-
-    <ul id="links" class="card-list">
-      <!-- وزارة الداخلية -->
-      <li class="card" data-name="وزارة الداخلية moi أبشر absher داخليه">
-        <a href="https://www.moi.gov.sa" target="_blank" rel="noopener">
-          <span class="icon" aria-hidden="true">
-            <!-- درع بسيطة SVG -->
-            <svg viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z"/></svg>
-          </span>
-          <span class="label">وزارة الداخلية</span>
-          <span class="open">فتح ↗</span>
-        </a>
-      </li>
-
-      <!-- وزارة التعليم -->
-      <li class="card" data-name="وزارة التعليم moe تعليم جامعات مدارس">
-        <a href="https://www.moe.gov.sa" target="_blank" rel="noopener">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 3l10 5-10 5L2 8l10-5zm0 7l6.5-3.25V14L12 17l-6.5-3V6.75L12 10z"/></svg>
-          </span>
-          <span class="label">وزارة التعليم</span>
-          <span class="open">فتح ↗</span>
-        </a>
-      </li>
-
-      <!-- البوابة الوطنية -->
-      <li class="card" data-name="البوابة الوطنية my.gov.sa حكومة نفاذ خدمات">
-        <a href="https://www.my.gov.sa" target="_blank" rel="noopener">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M3 4h18v4H3V4zm0 6h18v10H3V10zm4 2v6h10v-6H7z"/></svg>
-          </span>
-          <span class="label">البوابة الوطنية</span>
-          <span class="open">فتح ↗</span>
-        </a>
-      </li>
-    </ul>
-
-    <footer class="footer">نسخة تجريبية • صُنِع بحب 🇸🇦</footer>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>

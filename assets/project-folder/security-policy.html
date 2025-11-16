@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OneLink - All Government Services in One Place</title>
+
+<!-- ✅ إعدادات الأمان -->
+<meta http-equiv="X-Frame-Options" content="DENY" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="Referrer-Policy" content="no-referrer" />
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  connect-src 'self';
+  font-src 'self' https:;
+  frame-ancestors 'none';
+  base-uri 'self';
+  form-action 'self';
+">
+
+
+  <style>
+    :root{--bg:#0f1720;--card:#0b1220;--accent:#f6c84c;--text:#e6eef8}
+    body{margin:0;font-family:Inter, "Cairo", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); line-height:1.6}
+    .wrap{max-width:980px;margin:32px auto;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
+    h1{color:var(--accent);margin-top:0}
+    h2{margin-bottom:6px;color:#cfe3ff}
+    p, li{color:var(--text);font-size:15px}
+    .cols{display:flex;gap:18px;flex-wrap:wrap}
+    .col{flex:1 1 320px;background:rgba(255,255,255,0.02);padding:14px;border-radius:10px}
+    pre{background:#071023;padding:12px;border-radius:8px;overflow:auto;color:#dbe9ff}
+    code{background:#071023;padding:2px 6px;border-radius:4px}
+    a{color:var(--accent);text-decoration:none}
+    footer{margin-top:18px;font-size:13px;color:#b8c7dd}
+    .note{background:#071523;padding:10px;border-radius:8px;border-left:4px solid var(--accent)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>سياسة الأمان — OneLink | رابطApp</h1>
+    <p>نسخة عربية — آخر تحديث: <strong>ضع تاريخك هنا</strong>.</p>
+
+    <section>
+      <h2>مقدمة</h2>
+      <p>تُعطي هذه الصفحة توجيهات حول كيفية الإبلاغ عن الثغرات الأمنية في نظام <strong>OneLink / رابطApp</strong>، وطريقة معالجتنا للإبلاغات، والإجراءات المتوقعة. هدفنا التعاون مع الباحثين الأمنيين لإصلاح المشكلات بسرعة وبأمان.</p>
+    </section>
+
+    <section>
+      <h2>نطاق السياسة (Scope)</h2>
+      <ul>
+        <li>يشمل: واجهات الويب الرسمية، API العامة المستخدمة من قبل التطبيق، موارد الاستضافة المرتبطة بالدومين الرسمي عند نشره.</li>
+        <li>لا يشمل (Out of scope): بيئات التطوير المحلية الخاصة بالمستخدمين، أنظمة الطرف الثالث التي لا نتحكم بها مباشرة.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>قنوات الاتصال (Contact)</h2>
+      <p>لإبلاغ عن ثغرة أمنية، استخدم القنوات التالية:</p>
+      <div class="cols">
+        <div class="col">
+          <h3>البريد الإلكتروني الأمني</h3>
+          <p><strong>security@example.com</strong> ← غيّر هذا للبريد الرسمي الخاصّ بك قبل النشر.</p>
+        </div>
+        <div class="col">
+          <h3>PGP / مفتاح التشفير</h3>
+          <p>استخدم المفتاح PGP التالي لتشفير تفاصيل الثغرة إن رغبت (بديل حتى تضيف مفتاحك):</p>
+          <pre>-----BEGIN PGP PUBLIC KEY BLOCK-----
+(tbd — ضع هنا مفتاحك العام PGP)
+-----END PGP PUBLIC KEY BLOCK-----</pre>
+        </div>
+      </div>
+      <p class="note">مهم: إذا لم تستطع استخدام PGP، أرسل التفاصيل عبر البريد مع عنوان الموضوع: <code>[Security Report] - <em>short-title</em></code>.</p>
+    </section>
+
+    <section>
+      <h2>ماذا نحتاج في تقرير الثغرة؟</h2>
+      <ul>
+        <li>وصف واضح للمشكلة وخطوات إعادة الإنتاج (PoC) إن أمكن.</li>
+        <li>تأثير متوقع (مثال: تسريب بيانات، تنفيذ كود عن بُعد، تجاوز صلاحيات).</li>
+        <li>بيئة الاختبار: (Local / Staging / URL محدد / نسخة التطبيق).</li>
+        <li>ملفات أو لقطات شاشة أو سجلات تدعم التقرير.</li>
+        <li>هل تريد نشر التقرير علناً بعد الإصلاح؟ (نعم / لا).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>أمثلة على ثغرات شائعة (غير حصرية)</h2>
+      <ul>
+        <li>Injection (SQL / NoSQL / Command injection)</li>
+        <li>Cross-Site Scripting (XSS) — تنفيذ جافاسكربت غير مرخص</li>
+        <li>Broken Authentication / Authorization</li>
+        <li>Information Disclosure — تسريب بيانات حساسة</li>
+        <li>Security Misconfiguration</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>التعامل والاستجابة (Timeline)</h2>
+      <p>نلتزم بالمواعيد التالية كإطار عام:</p>
+      <ul>
+        <li><strong>تأكيد الاستلام:</strong> خلال 72 ساعة (3 أيام) نرسل تأكيد استلام بالبريد.</li>
+        <li><strong>التقييم الأولي:</strong> خلال 7 أيام نبلّغك بتصنيف المشكلة وإجراءاتنا الأولية.</li>
+        <li><strong>التحديثات الدورية:</strong> كلما تطلّب التقييم أو الإصلاح، نرسل تحديثًا كل 7ـ14 يومًا حتى الإغلاق.</li>
+        <li><strong>الإغلاق:</strong> بعد الإصلاح والتحقق نبعث ملخصًا مع تاريخ الإصلاح والتغييرات الأمنية.</li>
+      </ul>
+      <p>ملاحظة: المدد أعلاه تقديرية وتختلف باختلاف خطورة الثغرة وتعقيدها.</p>
+    </section>
+
+    <section>
+      <h2>تسميات شدة الثغرات (Severity)</h2>
+      <ul>
+        <li><strong>Critical:</strong> تنفيذ كود عن بعد، تسريب بيانات حساسة على نطاق واسع.</li>
+        <li><strong>High:</strong> تجاوز صلاحيات يؤدي لتأثير كبير على المستخدمين أو البيانات.</li>
+        <li><strong>Medium:</strong> مشاكل تسمح بالاستغلال المحدود أو تتطلب شروط خاصة.</li>
+        <li><strong>Low:</strong> أخطاء تجميلية أو معلومات قد تكون مفيدة لكن لا تؤثر أمنيًا بشدة.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>سلوك متوقع من الباحث الأمني — سياسة أخلاقية</h2>
+      <ul>
+        <li>لا تقم بإساءة استخدام الثغرة لاختبارها على بيانات حقيقية للمستخدمين.</li>
+        <li>تجنّب أي نشاط قد يؤدي لحذف أو تشويه بيانات المستخدمين.</li>
+        <li>قد نطلب منك توقيع اتفاقية عدم إفشاء (NDA) في حالات حساسة قبل تبادل تفاصيل تحمل بيانات حقيقية.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>المكافآت والاعتراف (اختياري)</h2>
+      <p>حالياً لا يوجد برنامج مكافآت رسمي، لكن نقدر الباحثين ونذكر أسمائهم (بموافقة) في <em>Hall of Thanks</em> بعد التصريح بنشر التفاصيل.</p>
+    </section>
+
+    <section>
+      <h2>الاستثناءات والقيود القانونية</h2>
+      <p>نطلب من المبلّغ الالتزام بالقوانين المحلية والدولية. أي نشاط غير مصرح به خارج إطار الإبلاغ قد يعرّض صاحبه للمساءلة القانونية.</p>
+    </section>
+
+    <section>
+      <h2>Safe Harbor — نية حسنة</h2>
+      <p>إذا اتبعت إجراءاتنا وأبلغتنا بحسن نية ولم تقم بإساءة استغلال الثغرة، سنعتبر ذلك تعاونًا ونحمي المبلّغ من إجراءات قانونية بقدر الإمكان ضمن نطاق القوانين المعمول بها.</p>
+    </section>
+
+    <footer>
+      <p>للاتصال الأمني: <strong>security@example.com</strong> — الرجاء استبدال البريد بالمقصود قبل النشر.</p>
+      <p>صفحة سياسة الأمن (نسخة إنجليزية متاحة - انزل لأسفل لنسخة EN).</p>
+    </footer>
+
+    <hr style="margin:18px 0;border-color:rgba(255,255,255,0.03)">
+
+    <!-- ENGLISH VERSION -->
+    <section style="direction:ltr;">
+      <h1 style="color:#f6c84c">Security Policy — OneLink | رابطApp</h1>
+      <p>English version — Last updated: <strong>put-date-here</strong>.</p>
+
+      <h2>Introduction</h2>
+      <p>This page explains how to report security issues affecting <strong>OneLink / رابطApp</strong>, how we handle reports, and the expected timelines. We welcome responsible disclosure and work with security researchers to fix issues promptly.</p>
+
+      <h2>Scope</h2>
+      <ul>
+        <li>In scope: official web interfaces, public APIs used by the app, hosting resources tied to the official domain when published.</li>
+        <li>Out of scope: local developer environments and third-party systems we do not control.</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>Please report security issues to:</p>
+      <ul>
+        <li><strong>Email:</strong> <code>security@example.com</code> (replace before publishing)</li>
+        <li><strong>PGP Key:</strong> Use the provided public PGP key to encrypt sensitive reports (replace with your real key).</li>
+      </ul>
+
+      <h2>Report requirements</h2>
+      <p>Please include:</p>
+      <ul>
+        <li>A clear vulnerability description and reproduction steps (PoC).</li>
+        <li>Expected impact (data exposure, RCE, privilege escalation).</li>
+        <li>Test environment details (Local / Staging / specific URL).</li>
+        <li>Screenshots, logs, or attachments that support the report.</li>
+      </ul>
+
+      <h2>Timeline</h2>
+      <ul>
+        <li><strong>Acknowledgement:</strong> within 72 hours.</li>
+        <li><strong>Initial assessment:</strong> within 7 days.</li>
+        <li><strong>Periodic updates:</strong> every 7–14 days while the issue is handled.</li>
+      </ul>
+
+      <h2>Severity</h2>
+      <ul>
+        <li><strong>Critical:</strong> RCE, large-scale data leak.</li>
+        <li><strong>High:</strong> privilege bypass with significant impact.</li>
+        <li><strong>Medium:</strong> limited exploitability or special conditions.</li>
+        <li><strong>Low:</strong> cosmetic issues or low-impact info.</li>
+      </ul>
+
+      <h2>Responsible behaviour</h2>
+      <ul>
+        <li>Do not exploit or publish live data during testing.</li>
+        <li>We may ask for an NDA for sensitive investigations.</li>
+      </ul>
+
+      <h2>Rewards & Recognition</h2>
+      <p>No formal bounty program yet. We may acknowledge researchers by name (with consent) after disclosure remediation.</p>
+
+      <h2>Legal</h2>
+      <p>Follow local laws. Unauthorized actions outside the disclosure process may result in legal consequences.</p>
+
+      <h2>Safe Harbor</h2>
+      <p>If you act in good faith and follow this policy, we will strive to avoid legal actions and work collaboratively.</p>
+
+      <footer>
+        <p>Contact: <strong>security@example.com</strong> — replace before publishing.</p>
+      </footer>
+    </section>
+
+  </main>
+  <script src="security-header.js"></script>
+
+</body>
+</html>

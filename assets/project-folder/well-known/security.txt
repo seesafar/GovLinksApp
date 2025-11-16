@@ -1,0 +1,8 @@
+# OneLink - security contact file
+Contact: mailto:safar.dev@example.com
+Encryption: https://seesafar.github.io/onelink-app/pgp-key.txt
+Preferred-Languages: ar, en
+Policy: https://seesafar.github.io/onelink-app/security-policy.html
+Canonical: https://seesafar.github.io/onelink-app/.well-known/security.txt
+Acknowledgements: https://seesafar.github.io/onelink-app/security-acknowledgements.html
+Expires: 2026-11-10T00:00:00Z

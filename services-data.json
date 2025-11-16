@@ -1,0 +1,32 @@
+[
+  {
+    "id": "absher",
+    "nameAr": "أبشر",
+    "nameEn": "Absher",
+    "category": "منصات موحدة",
+    "url": "https://www.absher.sa",
+    "icon": "icons/absher.png",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "tawakkalna",
+    "nameAr": "توكلنا",
+    "nameEn": "Tawakkalna",
+    "category": "منصات موحدة",
+    "url": "https://web.tawakkalna.sdaia.gov.sa",
+    "icon": "icons/tawakkalna.png",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "najiz",
+    "nameAr": "ناجز",
+    "nameEn": "Najiz",
+    "category": "وزارة العدل",
+    "url": "https://najiz.sa",
+    "icon": "icons/najiz.png",
+    "enabled": true,
+    "order": 3
+  }
+]

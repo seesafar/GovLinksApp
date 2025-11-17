@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="assets/icons/android-chrome-512x512.png" alt="GovLinksApp Logo" width="96" height="96" />
+  <img src="icons/android-chrome-512x512.png" alt="GovLinksApp Logo" width="96" height="96" />
 </p>
+
 
 <h1 align="center" style="color:#0a3d2e;">GovLinksApp · OneLink</h1>
 

@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/preview/onelink-en-promo.png" alt="OneLink – English Promo Banner" width="900">
+ <img src="docs/preview/onelink-en-promo.png" alt="OneLink – English Promo Banner" width="900">
 </p>
 
 ---

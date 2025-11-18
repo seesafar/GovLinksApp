@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OneLink - All Government Services in One Place</title>
+
+<!-- ✅ إعدادات الأمان -->
+<meta http-equiv="X-Frame-Options" content="DENY" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="Referrer-Policy" content="no-referrer" />
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  connect-src 'self';
+  font-src 'self' https:;
+  frame-ancestors 'none';
+  base-uri 'self';
+  form-action 'self';
+">
+
+
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- الهيدر -->
+   <header class="site-header">
+  <div class="container header-inner">
+    <p class="subtitle-unified">رابط موحد</p>
+    <div class="brand">
+      <img src="../icons/onelink-mark.svg" alt="OneLink Mark" class="brand-mark" onerror="this.hidden=true">
+      <h1 class="brand-name">OneLink</h1>
+    </div>
+    <p class="tagline ar">كل خدماتك الحكومية في مكان واحد</p>
+    <p class="tagline en">All your government services in one place</p>
+    <nav class="main-nav">
+      <a href="./index.html">الرئيسية</a>
+      <a href="./services.html">الخدمات</a>
+    </nav>
+  </div>
+</header>
+
+  <!-- شبكة الكروت -->
+  <main class="grid" id="cards">
+
+    <!-- أبشر -->
+    <article class="card service-card" data-name="absher">
+      <img class="icon" src="../icons/absher.png" alt="أبشر" onerror="this.hidden=true">
+      <p class="name-ar">أبشر</p>
+      <p class="name-en">Absher</p>
+      <a class="btn btn-go" href="https://www.absher.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- وزارة التعليم -->
+    <article class="card service-card" data-name="education">
+      <img class="icon" src="../icons/education.png" alt="وزارة التعليم" onerror="this.hidden=true">
+      <p class="name-ar">وزارة التعليم</p>
+      <p class="name-en">Ministry of Education</p>
+      <a class="btn btn-go" href="https://www.moe.gov.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- وزارة الداخلية -->
+    <article class="card service-card" data-name="interior">
+      <img class="icon" src="../icons/interior.png" alt="وزارة الداخلية" onerror="this.hidden=true">
+      <p class="name-ar">وزارة الداخلية</p>
+      <p class="name-en">Ministry of Interior</p>
+      <a class="btn btn-go" href="https://www.moi.gov.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- توكلنا -->
+    <article class="card service-card" data-name="tawakkalna">
+      <img class="icon" src="../icons/tawakkalna.png" alt="توكلنا" onerror="this.hidden=true">
+      <p class="name-ar">توكلنا</p>
+      <p class="name-en">Tawakkalna</p>
+      <a class="btn btn-go" href="https://ta.sdaia.gov.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- ناجز -->
+<article class="card service-card" data-name="najiz">
+  <img class="icon" src="../icons/najiz.png" alt="ناجز" onerror="this.hidden=true">
+  <p class="name-ar">ناجز</p>
+  <p class="name-en">Najiz</p>
+  <a class="btn btn-go" href="https://najiz.sa" target="_blank" rel="noopener">انتقل</a>
+</article>
+
+
+  </main>
+
+  <!-- سكشن المتاجر -->
+ <section class="download-apps">
+  <h3>حمّل التطبيق</h3>
+  <div class="store-buttons">
+
+   <!-- App Store -->
+<a class="store-btn" href="https://apps.apple.com/" target="_blank" rel="noopener">
+<img src="../icons/apple.png?v=3" class="store-ic" alt="App Store">
+  <span class="store-text">App Store</span>
+</a>
+
+
+
+<!-- Google Play -->
+<a class="store-btn" href="https://play.google.com/" target="_blank" rel="noopener">
+  <img src="../icons/google.png" class="store-ic" alt="Google Play">
+</a>
+
+<!-- Huawei AppGallery -->
+<a class="store-btn" href="https://appgallery.huawei.com/" target="_blank" rel="noopener">
+  <img src="../icons/huawei.png" class="store-ic" alt="AppGallery">
+</a>
+
+
+  </div>
+</section>
+
+
+<button id="backTop" class="back-top" aria-label="الرجوع لأعلى" title="الرجوع لأعلى">↑</button>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <p class="dev-line">
+      المطور: سفر الغامدي — <span>Developer: Safer Al-Ghamdi</span>
+    </p>
+    <p class="footer-bottom">
+      OneLink ©2025 — جميع الحقوق محفوظة
+    </p>
+  </div>
+</footer>
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneLink - الرئيسية</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <nav class="main-nav">
+  <a href="index.html">الرئيسية</a>
+  <a href="services.html">الخدمات</a>
+
+  <!-- غير مسجّل -->
+  <a href="login.html"  data-auth="out">تسجيل الدخول</a>
+  <a href="#"          data-auth="out" onclick="alert('قريبًا 🙌')">حساب جديد</a>
+
+  <!-- مسجّل -->
+  <span data-auth="in">مرحبًا، <b data-username></b></span>
+  <button type="button" id="btnLogout" class="linklike" data-auth="in">تسجيل الخروج</button>
+</nav>
+
+  </div>
+</header>
+
+  <!-- شبكة الكروت -->
+  <main class="grid" id="cards">
+
+    <!-- أبشر -->
+    <article class="card service-card" data-name="absher">
+      <img class="icon" src="../icons/absher.png" alt="أبشر" onerror="this.hidden=true">
+      <p class="name-ar">أبشر</p>
+      <p class="name-en">Absher</p>
+      <a class="btn btn-go" href="https://www.absher.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- وزارة التعليم -->
+    <article class="card service-card" data-name="education">
+      <img class="icon" src="../icons/education.png" alt="وزارة التعليم" onerror="this.hidden=true">
+      <p class="name-ar">وزارة التعليم</p>
+      <p class="name-en">Ministry of Education</p>
+      <a class="btn btn-go" href="https://www.moe.gov.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- وزارة الداخلية -->
+    <article class="card service-card" data-name="interior">
+      <img class="icon" src="../icons/interior.png" alt="وزارة الداخلية" onerror="this.hidden=true">
+      <p class="name-ar">وزارة الداخلية</p>
+      <p class="name-en">Ministry of Interior</p>
+      <a class="btn btn-go" href="https://www.moi.gov.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- توكلنا -->
+    <article class="card service-card" data-name="tawakkalna">
+      <img class="icon" src="../icons/tawakkalna.png" alt="توكلنا" onerror="this.hidden=true">
+      <p class="name-ar">توكلنا</p>
+      <p class="name-en">Tawakkalna</p>
+      <a class="btn btn-go" href="https://ta.sdaia.gov.sa" target="_blank" rel="noopener">انتقل</a>
+    </article>
+
+    <!-- ناجز -->
+<article class="card service-card" data-name="najiz">
+  <img class="icon" src="../icons/najiz.png" alt="ناجز" onerror="this.hidden=true">
+  <p class="name-ar">ناجز</p>
+  <p class="name-en">Najiz</p>
+  <a class="btn btn-go" href="https://najiz.sa" target="_blank" rel="noopener">انتقل</a>
+</article>
+
+
+  </main>
+
+  <!-- سكشن المتاجر -->
+ <section class="download-apps">
+  <h3>حمّل التطبيق</h3>
+  <div class="store-buttons">
+
+   <!-- App Store -->
+<a class="store-btn" href="https://apps.apple.com/" target="_blank" rel="noopener">
+<img src="../icons/apple.png?v=3" class="store-ic" alt="App Store">
+  <span class="store-text">App Store</span>
+</a>
+
+
+
+<!-- Google Play -->
+<a class="store-btn" href="https://play.google.com/" target="_blank" rel="noopener">
+  <img src="../icons/google.png" class="store-ic" alt="Google Play">
+</a>
+
+<!-- Huawei AppGallery -->
+<a class="store-btn" href="https://appgallery.huawei.com/" target="_blank" rel="noopener">
+  <img src="../icons/huawei.png" class="store-ic" alt="AppGallery">
+</a>
+
+
+  </div>
+</section>
+
+
+<button id="backTop" class="back-top" aria-label="الرجوع لأعلى" title="الرجوع لأعلى">↑</button>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <p class="dev-line">
+      المطور: سفر الغامدي — <span>Developer: Safer Al-Ghamdi</span>
+    </p>
+    <p class="footer-bottom">
+      OneLink ©2025 — جميع الحقوق محفوظة
+    </p>
+  </div>
+</footer>
+  <!-- استدعاء ملفات الجافاسكربت -->
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
+
+--------------------
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OneLink - جميع الخدمات الحكومية</title>
+
+  <style>
+    /* ===============================
+       OneLink – Global Styles (RTL)
+       =============================== */
+    :root{
+      --green:#006c35; --green-700:#00562a; --green-500:#00994d;
+      --bg:#f9f9f9; --card:#ffffff; --text:#222222; --muted:#6b7280;
+      --border:rgba(0,0,0,0.08);
+      --shadow-sm:0 2px 6px rgba(0,0,0,.08);
+      --shadow-md:0 6px 14px rgba(0,0,0,.12);
+    }
+
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0; padding:0; background:var(--bg); color:var(--text);
+      font-family:Tahoma, "Segoe UI", Arial, sans-serif; line-height:1.6;
+    }
+
+    /* الهيدر */
+    header.site-header{
+      background:var(--green); color:#fff; text-align:center;
+      padding:24px 0; box-shadow:var(--shadow-sm);
+    }
+    header.site-header h1{ margin:6px 0; font-size:32px; font-weight:800; }
+    header .brand-top{
+      font-weight:800; letter-spacing:.3px; margin-bottom:6px; line-height:1.2;
+    }
+    header .brand-top span{ display:block; opacity:.9; font-weight:700; }
+    header .site-sub{ margin:6px 0 0; }
+    header .site-sub span{ display:block; color:#e9ffef; opacity:.9; }
+
+
+    /* عناوين الأقسام */
+    .section-title{
+      margin:24px 0 6px; padding-inline-start:10px;
+      border-inline-start:5px solid var(--green);
+      font-size:20px; color:#333;
+    }
+    .section-sub{
+      margin:0 15px 14px; color:var(--muted); font-size:13px;
+    }
+
+    /* شبكة الكروت */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+      gap:18px; padding:0 15px 22px; justify-items:center;
+    }
+    .card{
+      width:100%; background:var(--card); border:1px solid var(--border);
+      border-radius:14px; padding:16px 14px; text-align:center;
+      box-shadow:var(--shadow-sm);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:var(--green-500); }
+
+    /* الأيقونة الدائرية */
+    .icon-wrap{
+      width:70px; height:70px; margin:auto; border-radius:50%; overflow:hidden;
+      background:#fff; box-shadow:0 3px 6px rgba(0,0,0,.15);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .icon{ width:100%; height:100%; object-fit:cover; }
+    .name-ar{ font-weight:bold; font-size:14px; margin:8px 0 2px; }
+    .name-en{ font-size:12px; color:var(--muted); margin:0 0 10px; }
+
+    /* زر الانتقال */
+    .btn-go{
+      display:inline-block; padding:6px 12px; background:var(--green); color:#fff;
+      text-decoration:none; border-radius:22px; font-size:12px; font-weight:bold;
+      transition:background .2s ease, transform .12s ease;
+    }
+    .btn-go:hover{ background:var(--green-700); transform:translateY(-1px); }
+
+    /* أزرار المتاجر (مقاس موحّد) */
+    .store-buttons{
+      display:flex; gap:14px; justify-content:center; align-items:center;
+      margin:14px 0 26px;
+      flex-wrap:wrap;
+    }
+    .store-buttons img{
+      width:170px; height:54px; object-fit:contain;
+      background:#fff; border-radius:8px; box-shadow:var(--shadow-sm);
+      padding:6px 10px;
+    }
+
+    /* فوتر */
+    footer.footer{ background:#222; color:#fff; text-align:center; padding:16px; margin-top:30px; }
+    footer .line{ margin:6px 0; }
+
+    /* زر الرجوع للأعلى */
+    #backToTop{
+      position:fixed; bottom:20px; left:20px; width:48px; height:48px; border-radius:50%;
+      background:var(--green); color:#fff; font-size:22px; text-align:center; line-height:48px;
+      box-shadow:0 4px 8px rgba(0,0,0,.28); cursor:pointer; border:none; outline:none;
+      display:none; transition:transform .15s ease, background .2s ease; animation:pulse 2.2s infinite;
+    }
+    #backToTop:hover{ background:var(--green-700); transform:translateY(-2px); }
+    @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(0,108,53,.32)} 70%{box-shadow:0 0 0 12px rgba(0,108,53,0)} 100%{box-shadow:0 0 0 0 rgba(0,108,53,0)} }
+  </style>
+</head>
+
+<body>
+
+  <!-- الهيدر -->
+  <header class="site-header">
+    <div class="brand-top">
+      رابط موحد
+      <span>Unified Link</span>
+    </div>
+
+    <h1>OneLink</h1>
+
+    <p class="site-sub">
+      جميع الخدمات الحكومية في مكان واحد
+      <span>All government services in one place</span>
+    </p>
+  </header>
+
+  <main>
+
+    <!-- منصات موحدة وأساسيات -->
+    <h3 class="section-title">منصات موحدة وأساسيات</h3>
+    <div class="section-sub">Unified Platforms & Essentials</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/absher.png"      alt="أبشر"></div><p class="name-ar">أبشر</p><p class="name-en">Absher</p><a class="btn-go" href="https://www.absher.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/tawakkalna.png"  alt="توكلنا"></div><p class="name-ar">توكلنا</p><p class="name-en">Tawakkalna</p><a class="btn-go" href="https://ta.sdaia.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/nafath.png"      alt="نفاذ"></div><p class="name-ar">نفاذ</p><p class="name-en">Nafath</p><a class="btn-go" href="https://www.iam.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/najiz.png"       alt="ناجز"></div><p class="name-ar">ناجز</p><p class="name-en">Najiz</p><a class="btn-go" href="https://najiz.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/qiwa.png"        alt="قوى"></div><p class="name-ar">قوى</p><p class="name-en">Qiwa</p><a class="btn-go" href="https://qiwa.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/etimad.png"      alt="اعتماد"></div><p class="name-ar">اعتماد</p><p class="name-en">Etimad</p><a class="btn-go" href="https://etimad.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/balady.png"      alt="بلدي"></div><p class="name-ar">بلدي</p><p class="name-en">Balady</p><a class="btn-go" href="https://balady.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/ehkaam.png"      alt="إحكام"></div><p class="name-ar">إحكام</p><p class="name-en">Ehkaam</p><a class="btn-go" href="https://ehkaam.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/musaned.png"     alt="مساند"></div><p class="name-ar">مساند</p><p class="name-en">Musaned</p><a class="btn-go" href="https://www.musaned.com.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/nusuk.png"       alt="نسك"></div><p class="name-ar">نسك</p><p class="name-en">Nusuk</p><a class="btn-go" href="https://www.nusuk.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- وزارات وهيئات -->
+    <h3 class="section-title">وزارات وهيئات</h3>
+    <div class="section-sub">Ministries & Authorities</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moi.png"   alt="وزارة الداخلية"></div><p class="name-ar">وزارة الداخلية</p><p class="name-en">MOI</p><a class="btn-go" href="https://www.moi.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moe.png"   alt="وزارة التعليم"></div><p class="name-ar">وزارة التعليم</p><p class="name-en">MOE</p><a class="btn-go" href="https://www.moe.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moh.png"   alt="وزارة الصحة"></div><p class="name-ar">وزارة الصحة</p><p class="name-en">MOH</p><a class="btn-go" href="https://www.moh.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moj.png"   alt="وزارة العدل"></div><p class="name-ar">وزارة العدل</p><p class="name-en">MOJ</p><a class="btn-go" href="https://www.moj.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/momra.png" alt="الشؤون البلدية والقروية"></div><p class="name-ar">الشؤون البلدية والقروية</p><p class="name-en">MOMRA</p><a class="btn-go" href="https://momrah.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mhrsd.png" alt="الموارد البشرية والتنمية"></div><p class="name-ar">الموارد البشرية والتنمية</p><p class="name-en">HRSD</p><a class="btn-go" href="https://hrsd.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mot.png"   alt="وزارة النقل والخدمات اللوجستية"></div><p class="name-ar">النقل والخدمات اللوجستية</p><p class="name-en">MOT</p><a class="btn-go" href="https://www.mot.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mcit.png"  alt="الاتصالات وتقنية المعلومات"></div><p class="name-ar">الاتصالات وتقنية المعلومات</p><p class="name-en">MCIT</p><a class="btn-go" href="https://www.mcit.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moc.png"   alt="وزارة الثقافة"></div><p class="name-ar">وزارة الثقافة</p><p class="name-en">MOC</p><a class="btn-go" href="https://www.moc.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mewa.png"  alt="وزارة البيئة والمياه"></div><p class="name-ar">وزارة البيئة والمياه</p><p class="name-en">MEWA</p><a class="btn-go" href="https://www.mewa.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الصحة والتعليم والأسرة -->
+    <h3 class="section-title">الصحة والتعليم والأسرة</h3>
+    <div class="section-sub">Health, Education & Family</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moh.png"      alt="وزارة الصحة"></div><p class="name-ar">وزارة الصحة</p><p class="name-en">MOH</p><a class="btn-go" href="https://www.moh.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sehhaty.png"  alt="صحتي"></div><p class="name-ar">صحتي</p><p class="name-en">Sehhaty</p><a class="btn-go" href="https://www.sehhaty.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moe.png"      alt="وزارة التعليم"></div><p class="name-ar">وزارة التعليم</p><p class="name-en">MOE</p><a class="btn-go" href="https://www.moe.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/noor.png"     alt="نور"></div><p class="name-ar">نور</p><p class="name-en">Noor</p><a class="btn-go" href="https://noor.moe.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الأعمال والوظائف -->
+    <h3 class="section-title">الأعمال والوظائف</h3>
+    <div class="section-sub">Business & Jobs</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/qiwa.png"     alt="قوى"></div><p class="name-ar">قوى</p><p class="name-en">Qiwa</p><a class="btn-go" href="https://qiwa.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mhrsd.png"    alt="الموارد البشرية والتنمية"></div><p class="name-ar">الموارد البشرية والتنمية</p><p class="name-en">HRSD</p><a class="btn-go" href="https://hrsd.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/musaned.png"  alt="مساند"></div><p class="name-ar">مساند</p><p class="name-en">Musaned</p><a class="btn-go" href="https://www.musaned.com.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/hadaf.png"    alt="هدف"></div><p class="name-ar">هدف</p><p class="name-en">Hadaf</p><a class="btn-go" href="https://hrdf.org.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/tamheer.png"  alt="تمهير"></div><p class="name-ar">تمهير</p><p class="name-en">Tamheer</p><a class="btn-go" href="https://hrdf.org.sa/Programs/Tamheer" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/jadara.png"   alt="جدارة"></div><p class="name-ar">جدارة</p><p class="name-en">Jadara</p><a class="btn-go" href="https://jadara.hrsd.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- المرور والنقل -->
+    <h3 class="section-title">المرور والنقل</h3>
+    <div class="section-sub">Traffic & Transport</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moi.png"     alt="وزارة الداخلية"></div><p class="name-ar">وزارة الداخلية</p><p class="name-en">MOI</p><a class="btn-go" href="https://www.moi.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/traffic.png" alt="المرور"></div><p class="name-ar">المرور</p><p class="name-en">Traffic</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mot.png"     alt="وزارة النقل"></div><p class="name-ar">النقل والخدمات اللوجستية</p><p class="name-en">MOT</p><a class="btn-go" href="https://www.mot.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- المالية والضرائب -->
+    <h3 class="section-title">المالية والضرائب</h3>
+    <div class="section-sub">Finance & Taxes</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sama.png"  alt="البنك المركزي"></div><p class="name-ar">البنك المركزي</p><p class="name-en">SAMA</p><a class="btn-go" href="https://www.sama.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/zatca.png" alt="هيئة الزكاة والضريبة"></div><p class="name-ar">هيئة الزكاة والضريبة</p><p class="name-en">ZATCA</p><a class="btn-go" href="https://zatca.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/cma.png"   alt="هيئة السوق المالية"></div><p class="name-ar">هيئة السوق المالية</p><p class="name-en">CMA</p><a class="btn-go" href="https://cma.org.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sadad.png" alt="سداد"></div><p class="name-ar">سداد</p><p class="name-en">SADAD</p><a class="btn-go" href="https://www.sadad.com" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الإسكان والبلديات -->
+    <h3 class="section-title">الإسكان والبلديات</h3>
+    <div class="section-sub">Housing & Municipalities</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/momra.png"  alt="الشؤون البلدية والقروية والإسكان"></div><p class="name-ar">الشؤون البلدية والقروية والإسكان</p><p class="name-en">MOMRA</p><a class="btn-go" href="https://momrah.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/balady.png" alt="بلدي"></div><p class="name-ar">بلدي</p><p class="name-en">Balady</p><a class="btn-go" href="https://balady.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sakani.png" alt="سكني"></div><p class="name-ar">سكني</p><p class="name-en">Sakani</p><a class="btn-go" href="https://sakani.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- السياحة والحج والعمرة -->
+    <h3 class="section-title">السياحة والحج والعمرة</h3>
+    <div class="section-sub">Tourism, Hajj & Umrah</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mt.png"    alt="وزارة السياحة"></div><p class="name-ar">وزارة السياحة</p><p class="name-en">MT</p><a class="btn-go" href="https://mt.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/nusuk.png" alt="نسك"></div><p class="name-ar">نسك</p><p class="name-en">Nusuk</p><a class="btn-go" href="https://www.nusuk.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- البيئة والطاقة -->
+    <h3 class="section-title">البيئة والطاقة</h3>
+    <div class="section-sub">Environment & Energy</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mewa.png" alt="وزارة البيئة والمياه والزراعة"></div><p class="name-ar">وزارة البيئة والمياه والزراعة</p><p class="name-en">MEWA</p><a class="btn-go" href="https://mewa.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/nwc.png"  alt="المياه الوطنية"></div><p class="name-ar">المياه الوطنية</p><p class="name-en">NWC</p><a class="btn-go" href="https://nwc.com.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sec.png"  alt="الكهرباء"></div><p class="name-ar">الشركة السعودية للكهرباء</p><p class="name-en">SEC</p><a class="btn-go" href="https://www.se.com.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الثقافة والإعلام -->
+    <h3 class="section-title">الثقافة والإعلام</h3>
+    <div class="section-sub">Culture & Media</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moc.png"  alt="وزارة الثقافة"></div><p class="name-ar">وزارة الثقافة</p><p class="name-en">MOC</p><a class="btn-go" href="https://www.moc.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/citc.png" alt="هيئة الاتصالات"></div><p class="name-ar">هيئة الاتصالات وتقنية المعلومات</p><p class="name-en">CITC</p><a class="btn-go" href="https://www.citc.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الأمن والطوارئ -->
+    <h3 class="section-title">الأمن والطوارئ</h3>
+    <div class="section-sub">Security & Emergency</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/civildefense.png" alt="الدفاع المدني"></div><p class="name-ar">الدفاع المدني</p><p class="name-en">Civil Defense</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/srca.png"         alt="الهلال الأحمر"></div><p class="name-ar">الهلال الأحمر</p><p class="name-en">Red Crescent</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الاستثمار والتجارة -->
+    <h3 class="section-title">الاستثمار والتجارة</h3>
+    <div class="section-sub">Investment & Commerce</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/misa.png"  alt="وزارة الاستثمار"></div><p class="name-ar">وزارة الاستثمار</p><p class="name-en">MISA</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mocit.png" alt="وزارة التجارة"></div><p class="name-ar">وزارة التجارة</p><p class="name-en">MOCIT</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- راسلنا -->
+   <h3 class="section-title centered">راسلنا</h3>
+<div class="section-sub centered">Contact Us</div>
+    <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); padding-top:0">
+      <article class="card">
+        <div class="name-ar" style="margin-top:0">البريد الإلكتروني</div>
+        <div class="name-en">Email</div>
+        <a class="btn-go" href="mailto:support@onelink.sa">support@onelink.sa</a>
+      </article>
+      <article class="card">
+        <div class="name-ar" style="margin-top:0">واتساب</div>
+        <div class="name-en">WhatsApp</div>
+        <a class="btn-go" href="https://wa.me/966500000000" target="_blank" rel="noopener">تواصل الآن</a>
+      </article>
+      <article class="card">
+        <div class="name-ar" style="margin-top:0">X (تويتر)</div>
+        <div class="name-en">X (Twitter)</div>
+        <a class="btn-go" href="https://x.com/onelink" target="_blank" rel="noopener">@onelink</a>
+      </article>
+    </div>
+
+    <!-- حمّل التطبيق -->
+   <h3 class="section-title centered">حمّل التطبيق</h3>
+<div class="section-sub centered">Get the App</div>
+    <div class="store-buttons">
+  <a href="https://apps.apple.com/" target="_blank" aria-label="App Store" class="store-badge">
+    <img src="../icons/apple.png" alt="App Store">
+  </a>
+  <a href="https://play.google.com/" target="_blank" aria-label="Google Play" class="store-badge">
+    <img src="../icons/google.png" alt="Google Play">
+  </a>
+  <a href="https://appgallery.huawei.com/" target="_blank" aria-label="AppGallery" class="store-badge">
+    <img src="../icons/huawei.png" alt="AppGallery">
+  </a>
+</div>
+
+
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="footer">
+    <div class="container">
+      <div class="line dev">المطور: سفر الغامدي — <span dir="ltr">Developer: Safer Al-Ghamdi</span></div>
+      <div class="line">جميع الحقوق محفوظة — OneLink © 2025</div>
+    </div>
+  </footer>
+
+  <!-- زر الرجوع للأعلى -->
+  <button id="backToTop" title="أعلى">▲</button>
+
+  <!-- سكربت زر الرجوع للأعلى -->
+  <script>
+    const btn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      btn.style.display = (window.scrollY > 200) ? 'block' : 'none';
+    });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+  <script>
+(function(){
+  const q   = document.getElementById('liveSearch');
+  const clr = document.getElementById('clearSearch');
+  const shown = document.getElementById('shownCount');
+  const total = document.getElementById('totalCount');
+
+  // التقط كل الكروت في كل الأقسام
+  const cards = Array.from(document.querySelectorAll('.grid .card'));
+  total.textContent = cards.length;
+
+  // نبني نص البحث من العربي + الإنجليزي + data-key لو توفر
+  function pickText(card){
+    const ar  = card.querySelector('.name-ar')?.textContent || '';
+    const en  = card.querySelector('.name-en')?.textContent || '';
+    const key = card.getAttribute('data-key') || '';
+    return `${ar} ${en} ${key}`.toLowerCase();
+  }
+  const payload = cards.map(el => ({ el, txt: pickText(el) }));
+
+  // فلترة مع تحديث العداد
+  function applyFilter(){
+    const term = (q.value || '').toLowerCase().trim();
+    let count = 0;
+    if(!term){
+      payload.forEach(o => o.el.classList.remove('__hide'));
+      count = payload.length;
+    }else{
+      payload.forEach(o => {
+        const hit = o.txt.includes(term);
+        o.el.classList.toggle('__hide', !hit);
+        if(hit) count++;
+      });
+    }
+    shown.textContent = count;
+  }
+
+  // تحسين: انتظار بسيط قبل الفلترة (debounce)
+  let t;
+  q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(applyFilter, 80); });
+  clr.addEventListener('click', () => { q.value=''; applyFilter(); q.focus(); });
+
+  // تشغيل أولي
+  applyFilter();
+})();
+</script>
+<script src="security-header.js"></script>
+
+</body>
+</html>

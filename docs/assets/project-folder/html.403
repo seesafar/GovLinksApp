@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OneLink - All Government Services in One Place</title>
+
+<!-- ✅ إعدادات الأمان -->
+<meta http-equiv="X-Frame-Options" content="DENY" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="Referrer-Policy" content="no-referrer" />
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  connect-src 'self';
+  font-src 'self' https:;
+  frame-ancestors 'none';
+  base-uri 'self';
+  form-action 'self';
+">
+
+
+<style>
+body {
+  background-color: #0d0d0d;
+  color: #fdd835;
+  font-family: 'Cairo', sans-serif;
+  text-align: center;
+  padding: 100px 20px;
+}
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+  <h1>🚨 تحذير أمني</h1>
+  <p>تم رصد نشاط غير معتاد من اتصالك.</p>
+  <p>إذا كنت تختبر النظام لأغراض مشروعة، يرجى التواصل عبر البريد الرسمي.</p>
+  <p>أما إذا كنت تحاول العبث، فننصحك تحافظ على جهازك وسمعتك الرقمية 😉</p>
+  <script src="security-header.js"></script>
+
+</body>
+</html>

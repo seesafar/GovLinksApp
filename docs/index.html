@@ -3,10 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OneLink Â· GovLinksApp</title>
+  <title>OneLink  GovLinksApp</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="assets/icons/android-chrome-192x192.png" sizes="512x512">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/saudi-emblem.png">
+  <link rel="icon" type="image/png" sizes="32x32"  href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16"  href="assets/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/saudi-emblem.png">
+
   <meta name="theme-color" content="#0b3940" />
 
   <!-- Fonts -->
@@ -27,7 +31,11 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:1080px; margin:0 auto; padding:28px 20px 56px}
     header{display:grid; gap:10px; place-items:center; margin-bottom:24px}
-    .logo{width:80px;height:80px;border-radius:20px;background:#0a2e33 url("../icons/android-chrome-192x192.png") center/60% no-repeat; box-shadow:0 0 0 1px var(--border), 0 8px 30px rgba(0,0,0,.35)}
+    .logo{
+      width:80px;height:80px;border-radius:20px;
+      background:#0a2e33 url("assets/icons/saudi-emblem.png") center/60% no-repeat;
+      box-shadow:0 0 0 1px var(--border), 0 8px 30px rgba(0,0,0,.35)
+    }
     .title{font-size:28px; font-weight:800; letter-spacing:.3px}
     .subtitle{color:var(--muted); font-size:14px}
 
@@ -66,63 +74,61 @@
     .divider{height:1px;background:linear-gradient(90deg, transparent, var(--border), transparent); margin:22px 0}
   </style>
 </head>
-<base href="https://seesafar.github.io/GovLinksApp/">
 <body>
   <div class="wrap">
     <header>
       <div class="logo" aria-hidden="true"></div>
-      <div class="title">GovLinksApp Â· OneLink</div>
-      <div class="subtitle" id="strap">Ø¨ÙˆØ§Ø¨Ø© Ù…ÙˆØ­Ø¯Ø© Ù„ØªÙ†Ø¸ÙŠÙ… Ø±ÙˆØ§Ø¨Ø· Ø§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø­ÙƒÙˆÙ…ÙŠØ© ÙÙŠ ØªØ¬Ø±Ø¨Ø© Ø°ÙƒÙŠØ© ÙˆØ³Ø±ÙŠØ¹Ø© ÙˆØ¢Ù…Ù†Ø©</div>
+      <div class="title">GovLinksApp  OneLink</div>
+      <div class="subtitle" id="strap">بوابة موحدة لتنظيم روابط الخدمات الحكومية في تجربة ذكية وسريعة وآمنة</div>
     </header>
 
     <section class="hero">
       <div class="toprow">
-        <span class="badge" id="countries">Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ© â€¢ Ù…ØµØ± â€¢ Ø§Ù„ØµÙŠÙ†</span>
+        <span class="badge" id="countries">السعودية  مصر  الصين</span>
         <div class="lang">
-          <button id="btn-ar" class="active">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</button>
+          <button id="btn-ar" class="active">العربية</button>
           <button id="btn-en">English</button>
         </div>
       </div>
 
-      <h1 id="headline">Ø±Ø§Ø¨Ø· Ø§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø­ÙƒÙˆÙ…ÙŠØ© Ø§Ù„Ù…ÙˆØ­Ù‘Ø¯</h1>
+      <h1 id="headline">رابط الخدمات الحكومية الموحّد</h1>
       <p class="lead" id="lead">
-        ÙƒÙ„ Ø§Ù„Ø±ÙˆØ§Ø¨Ø· Ø§Ù„Ø±Ø³Ù…ÙŠØ© ÙÙŠ Ù…ÙƒØ§Ù† ÙˆØ§Ø­Ø¯ â€” ÙˆØ§Ø¬Ù‡Ø© Ø£Ù†ÙŠÙ‚Ø©ØŒ Ø³Ø±Ø¹Ø© Ø¹Ø§Ù„ÙŠØ©ØŒ ÙˆØ­Ù…Ø§ÙŠØ© Ù‚ÙˆÙŠØ©.
+        كل الروابط الرسمية في مكان واحد  واجهة أنيقة، سرعة عالية، وحماية قوية.
       </p>
 
-      <!-- Ø´Ø¹Ø§Ø±Ø§Øª/Ø±ÙˆØ§Ø¨Ø· Ø³Ø±ÙŠØ¹Ø© -->
       <div class="apps" id="apps">
         <a class="app" href="#" target="_blank" rel="noopener">
           <img src="assets/icons/absher.png" alt="Absher" width="42" height="42">
-          <span>Ø£Ø¨Ø´Ø±</span>
+          <span>أبشر</span>
         </a>
         <a class="app" href="#" target="_blank" rel="noopener">
-          <img src="assets/icons/Tawakkalna.png" alt="Tawakkalna" width="42" height="42"
-          <span>ØªÙˆÙƒÙ„Ù†Ø§</span>
+          <img src="assets/icons/Tawakkalna.png" alt="Tawakkalna" width="42" height="42">
+          <span>توكلنا</span>
         </a>
         <a class="app" href="#" target="_blank" rel="noopener">
-         <img src="assets/icons/najiz.png" alt="Najiz" width="42" height="42">
-          <span>Ù†Ø§Ø¬Ø²</span>
+          <img src="assets/icons/najiz.png" alt="Najiz" width="42" height="42">
+          <span>ناجز</span>
         </a>
         <a class="app" href="#" target="_blank" rel="noopener">
-         <img src="assets/icons/SADAD.png" alt="Sadad" width="42" height="42">
-          <span>Ø³Ø¯Ø§Ø¯</span>
+          <img src="assets/icons/SADAD.png" alt="Sadad" width="42" height="42">
+          <span>سداد</span>
         </a>
         <a class="app" href="#" target="_blank" rel="noopener">
           <img src="assets/icons/etimad.png" alt="Etimad" width="42" height="42">
-          <span>Ø§Ø¹ØªÙ…Ø§Ø¯</span>
+          <span>اعتماد</span>
         </a>
         <a class="app" href="#" target="_blank" rel="noopener">
           <img src="assets/icons/moc.png" alt="Ministry of Commerce" width="42" height="42">
-          <span>ÙˆØ²Ø§Ø±Ø© Ø§Ù„ØªØ¬Ø§Ø±Ø©</span>
+          <span>وزارة التجارة</span>
         </a>
       </div>
 
       <div class="grid">
         <div class="card">
-          <div class="li"><div class="dot"></div><div id="f1">ÙˆØ§Ø¬Ù‡Ø© Ø¹Ø±Ø¨ÙŠØ© Ø¹ØµØ±ÙŠØ© Ù„Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†</div></div>
-          <div class="li"><div class="dot"></div><div id="f2">ØªØ¹Ø¯Ø¯ Ø§Ù„Ù„ØºØ§Øª (AR/EN/ZH)</div></div>
-          <div class="li"><div class="dot"></div><div id="f3">Ø£Ù…Ù† Ù‚ÙˆÙŠ (Security Headers + CSP)</div></div>
-          <div class="li"><div class="dot"></div><div id="f4">ÙŠØ¹Ù…Ù„ Ø¹Ù„Ù‰ ÙƒÙ„ Ø§Ù„Ø£Ø¬Ù‡Ø²Ø©</div></div>
+          <div class="li"><div class="dot"></div><div id="f1">واجهة عربية عصرية للمستخدمين</div></div>
+          <div class="li"><div class="dot"></div><div id="f2">تعدد اللغات (AR/EN/ZH)</div></div>
+          <div class="li"><div class="dot"></div><div id="f3">أمن قوي (Security Headers + CSP)</div></div>
+          <div class="li"><div class="dot"></div><div id="f4">يعمل على كل الأجهزة</div></div>
         </div>
         <div class="card" style="display:grid; place-items:center">
           <img src="preview/onelink-en-promo.png" alt="OneLink Preview" style="width:100%; border-radius:14px; border:1px solid var(--border)">
@@ -131,7 +137,7 @@
           <div class="badge">Developer</div>
           <div style="font-weight:700; font-size:18px">Safar Al-Ghamdi</div>
           <div class="divider"></div>
-          <div class="li"><div class="dot"></div><div>ðŸ”’ Private License Â© 2025</div></div>
+          <div class="li"><div class="dot"></div><div>Private License  2025</div></div>
           <div class="li"><div class="dot"></div><div>All rights reserved.</div></div>
           <a class="badge" href="https://github.com/seesafar/GovLinksApp" target="_blank" rel="noopener">GitHub Repo</a>
         </div>
@@ -141,51 +147,50 @@
     <footer>
       <div class="divider"></div>
       <div class="gold">Powered by Safar Creative Hub</div>
-      <div class="muted">One Vision â€¢ One Nation â€¢ OneLink</div>
+      <div class="muted">One Vision  One Nation  OneLink</div>
     </footer>
   </div>
 
   <script>
-    // ØªØ¨Ø¯ÙŠÙ„ Ø§Ù„Ù„ØºØ© (Ø«Ù†Ø§Ø¦ÙŠ Ø¨Ø³ÙŠØ·)
     const t = {
       ar:{
-        dir:"rtl", title:"Ø±Ø§Ø¨Ø· Ø§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø­ÙƒÙˆÙ…ÙŠØ© Ø§Ù„Ù…ÙˆØ­Ù‘Ø¯",
-        strap:"Ø¨ÙˆØ§Ø¨Ø© Ù…ÙˆØ­Ø¯Ø© Ù„ØªÙ†Ø¸ÙŠÙ… Ø±ÙˆØ§Ø¨Ø· Ø§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø­ÙƒÙˆÙ…ÙŠØ© ÙÙŠ ØªØ¬Ø±Ø¨Ø© Ø°ÙƒÙŠØ© ÙˆØ³Ø±ÙŠØ¹Ø© ÙˆØ¢Ù…Ù†Ø©",
-        countries:"Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ© â€¢ Ù…ØµØ± â€¢ Ø§Ù„ØµÙŠÙ†",
-        lead:"ÙƒÙ„ Ø§Ù„Ø±ÙˆØ§Ø¨Ø· Ø§Ù„Ø±Ø³Ù…ÙŠØ© ÙÙŠ Ù…ÙƒØ§Ù† ÙˆØ§Ø­Ø¯ â€” ÙˆØ§Ø¬Ù‡Ø© Ø£Ù†ÙŠÙ‚Ø©ØŒ Ø³Ø±Ø¹Ø© Ø¹Ø§Ù„ÙŠØ©ØŒ ÙˆØ­Ù…Ø§ÙŠØ© Ù‚ÙˆÙŠØ©.",
-        f1:"ÙˆØ§Ø¬Ù‡Ø© Ø¹Ø±Ø¨ÙŠØ© Ø¹ØµØ±ÙŠØ© Ù„Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†",
-        f2:"ØªØ¹Ø¯Ø¯ Ø§Ù„Ù„ØºØ§Øª (AR/EN/ZH)",
-        f3:"Ø£Ù…Ù† Ù‚ÙˆÙŠ (Security Headers + CSP)",
-        f4:"ÙŠØ¹Ù…Ù„ Ø¹Ù„Ù‰ ÙƒÙ„ Ø§Ù„Ø£Ø¬Ù‡Ø²Ø©",
+        dir:"rtl", title:"رابط الخدمات الحكومية الموحّد",
+        strap:"بوابة موحدة لتنظيم روابط الخدمات الحكومية في تجربة ذكية وسريعة وآمنة",
+        countries:"السعودية  مصر  الصين",
+        lead:"كل الروابط الرسمية في مكان واحد  واجهة أنيقة، سرعة عالية، وحماية قوية.",
+        f1:"واجهة عربية عصرية للمستخدمين",
+        f2:"تعدد اللغات (AR/EN/ZH)",
+        f3:"أمن قوي (Security Headers + CSP)",
+        f4:"يعمل على كل الأجهزة"
       },
       en:{
-        dir:"ltr", title:"OneLink â€“ Unified Government Services",
+        dir:"ltr", title:"OneLink  Unified Government Services",
         strap:"A unified hub for official government service links with a fast, secure experience.",
-        countries:"Saudi â€¢ Egypt â€¢ China",
-        lead:"All official links in one place â€” elegant UI, high performance, and strong security.",
-        f1:"Modern Arabic-centric UI for citizens",
+        countries:"Saudi  Egypt  China",
+        lead:"All official links in one place  elegant UI, high performance, and strong security.",
+        f1:"Modern Arabic-centric UX for citizens",
         f2:"Multi-language (AR/EN/ZH)",
-        f3:"Strong Security (Security Headers + CSP)",
-        f4:"Works on all devices",
+        f3:"Strong security (Security Headers + CSP)",
+        f4:"Works on all devices"
       }
     };
-    const $ = s=>document.querySelector(s);
-    const apply = L=>{
-      const d=t[L];
-      document.documentElement.dir=d.dir;
-      $("#headline").textContent=d.title;
-      $("#strap").textContent=d.strap;
-      $("#countries").textContent=d.countries;
-      $("#lead").textContent=d.lead;
-      $("#f1").textContent=d.f1; $("#f2").textContent=d.f2; $("#f3").textContent=d.f3; $("#f4").textContent=d.f4;
-      $("#btn-ar").classList.toggle("active", L==="ar");
-      $("#btn-en").classList.toggle("active", L==="en");
+    const $ = s => document.querySelector(s);
+    const apply = L => {
+      const d = t[L];
+      document.documentElement.dir = d.dir;
+      $("#headline").textContent = d.title;
+      $("#strap").textContent = d.strap;
+      $("#countries").textContent = d.countries;
+      $("#lead").textContent = d.lead;
+      $("#f1").textContent = d.f1;
+      $("#f2").textContent = d.f2;
+      $("#f3").textContent = d.f3;
+      $("#f4").textContent = d.f4;
+      $("#btn-ar").classList.toggle("active", L === "ar");
+      $("#btn-en").classList.toggle("active", L === "en");
     };
-    $("#btn-ar").onclick=()=>apply("ar");
-    $("#btn-en").onclick=()=>apply("en");
+    $("#btn-ar").onclick = () => apply("ar");
+    $("#btn-en").onclick = () => apply("en");
   </script>
 </body>
 </html>
-
-
-

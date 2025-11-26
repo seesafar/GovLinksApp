@@ -1,0 +1,197 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OneLink  GovLinksApp</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/saudi-emblem.png">
+  <link rel="icon" type="image/png" sizes="32x32"  href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16"  href="assets/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/saudi-emblem.png">
+
+  <meta name="theme-color" content="#0b3940" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#082b31; --card:#0d3640; --ink:#e8f4f4; --muted:#a7c5c7; --brand:#19c37d; --ring:#1fe6a0;
+      --pill:#0f4150; --border:#174a54;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Cairo", system-ui, -apple-system, Segoe UI, sans-serif;
+      color:var(--ink); background:radial-gradient(1200px 800px at 10% -10%, #0e4650 0%, var(--bg) 40%, #072329 100%);
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1080px; margin:0 auto; padding:28px 20px 56px}
+    header{display:grid; gap:10px; place-items:center; margin-bottom:24px}
+    .logo{
+      width:80px;height:80px;border-radius:20px;
+      background:#0a2e33 url("assets/icons/saudi-emblem.png") center/60% no-repeat;
+      box-shadow:0 0 0 1px var(--border), 0 8px 30px rgba(0,0,0,.35)
+    }
+    .title{font-size:28px; font-weight:800; letter-spacing:.3px}
+    .subtitle{color:var(--muted); font-size:14px}
+
+    .hero{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), transparent 26%), var(--card);
+      border:1px solid var(--border); border-radius:22px; padding:28px; box-shadow:0 10px 40px rgba(0,0,0,.35)
+    }
+    .toprow{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+    .badge{padding:6px 10px; border-radius:999px; background:var(--pill); border:1px solid var(--border); color:var(--muted); font-size:12px}
+    .lang{display:flex; gap:8px}
+    .lang button{
+      padding:6px 10px; border-radius:10px; border:1px solid var(--border); background:#0b3940; color:var(--ink);
+      cursor:pointer; font-weight:600
+    }
+    .lang button.active{outline:2px solid var(--ring); background:#11525d}
+    h1{margin:14px 0 4px; font-size:34px}
+    p.lead{margin:0 0 16px; color:var(--muted)}
+    .apps{display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin:18px 0}
+    @media (max-width:960px){.apps{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:560px){.apps{grid-template-columns:repeat(2,1fr)}}
+    .app{
+      background:#0a3138; border:1px solid var(--border); border-radius:16px; padding:14px;
+      display:grid; gap:10px; place-items:center; min-height:110px; transition:.2s transform
+    }
+    .app:hover{transform:translateY(-2px)}
+    .app span{font-size:13px; color:var(--muted)}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    @media (max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:18px; padding:16px}
+    .li{display:flex; gap:10px; align-items:flex-start; margin:8px 0}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);margin-top:7px;box-shadow:0 0 0 3px rgba(25,195,125,.15)}
+    footer{margin-top:28px; text-align:center; color:#cfe8e6}
+    .gold{color:#ffd86b}
+    .muted{color:var(--muted)}
+    .divider{height:1px;background:linear-gradient(90deg, transparent, var(--border), transparent); margin:22px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo" aria-hidden="true"></div>
+      <div class="title">GovLinksApp  OneLink</div>
+      <div class="subtitle" id="strap">بوابة موحدة لتنظيم روابط الخدمات الحكومية في تجربة ذكية وسريعة وآمنة</div>
+    </header>
+
+    <section class="hero">
+      <div class="toprow">
+        <span class="badge" id="countries">السعودية  مصر  الصين</span>
+        <div class="lang">
+          <button id="btn-ar" class="active">العربية</button>
+          <button id="btn-en">English</button>
+        </div>
+      </div>
+
+      <h1 id="headline">رابط الخدمات الحكومية الموحّد</h1>
+      <p class="lead" id="lead">
+        كل الروابط الرسمية في مكان واحد  واجهة أنيقة، سرعة عالية، وحماية قوية.
+      </p>
+
+      <div class="apps" id="apps">
+        <a class="app" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/absher.png" alt="Absher" width="42" height="42">
+         <span id="absher-name">أبشر</span>
+
+        </a>
+        <a class="app" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/Tawakkalna.png" alt="Tawakkalna" width="42" height="42">
+          <span id="tawakkalna-name">توكلنا</span>
+        </a>
+        <a class="app" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/najiz.png" alt="Najiz" width="42" height="42">
+         <span id="najiz-name">ناجز</span>
+        </a>
+        <a class="app" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/SADAD.png" alt="Sadad" width="42" height="42">
+          
+        </a>
+        <a class="app" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/etimad.png" alt="Etimad" width="42" height="42">
+          <span>اعتماد</span>
+        </a>
+        <a class="app" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/moc.png" alt="Ministry of Commerce" width="42" height="42">
+          <span>وزارة التجارة</span>
+        </a>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="li"><div class="dot"></div><div id="f1">واجهة عربية عصرية للمستخدمين</div></div>
+          <div class="li"><div class="dot"></div><div id="f2">تعدد اللغات (AR/EN/ZH)</div></div>
+          <div class="li"><div class="dot"></div><div id="f3">أمن قوي (Security Headers + CSP)</div></div>
+          <div class="li"><div class="dot"></div><div id="f4">يعمل على كل الأجهزة</div></div>
+        </div>
+        <div class="card" style="display:grid; place-items:center">
+          <img src="preview/onelink-en-promo.png" alt="OneLink Preview" style="width:100%; border-radius:14px; border:1px solid var(--border)">
+        </div>
+        <div class="card" style="display:grid; gap:10px;">
+          <div class="badge">Developer</div>
+          <div style="font-weight:700; font-size:18px">Safar Al-Ghamdi</div>
+          <div class="divider"></div>
+          <div class="li"><div class="dot"></div><div>Private License  2025</div></div>
+          <div class="li"><div class="dot"></div><div>All rights reserved.</div></div>
+          <a class="badge" href="https://github.com/seesafar/GovLinksApp" target="_blank" rel="noopener">GitHub Repo</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="divider"></div>
+      <div class="gold">Powered by Safar Creative Hub</div>
+      <div class="muted">One Vision  One Nation  OneLink</div>
+    </footer>
+  </div>
+
+  <script>
+    const t = {
+      ar:{
+        dir:"rtl", title:"رابط الخدمات الحكومية الموحّد",
+        strap:"بوابة موحدة لتنظيم روابط الخدمات الحكومية في تجربة ذكية وسريعة وآمنة",
+        countries:"السعودية  مصر  الصين",
+        lead:"كل الروابط الرسمية في مكان واحد  واجهة أنيقة، سرعة عالية، وحماية قوية.",
+        f1:"واجهة عربية عصرية للمستخدمين",
+        f2:"تعدد اللغات (AR/EN/ZH)",
+        f3:"أمن قوي (Security Headers + CSP)",
+        f4:"يعمل على كل الأجهزة"
+      },
+      en:{
+        dir:"ltr", title:"OneLink  Unified Government Services",
+        strap:"A unified hub for official government service links with a fast, secure experience.",
+        countries:"Saudi  Egypt  China",
+        lead:"All official links in one place  elegant UI, high performance, and strong security.",
+        f1:"Modern Arabic-centric UX for citizens",
+        f2:"Multi-language (AR/EN/ZH)",
+        f3:"Strong security (Security Headers + CSP)",
+        f4:"Works on all devices"
+      }
+    };
+    const $ = s => document.querySelector(s);
+    const apply = L => {
+      const d = t[L];
+      document.documentElement.dir = d.dir;
+      $("#headline").textContent = d.title;
+      $("#strap").textContent = d.strap;
+      $("#countries").textContent = d.countries;
+      $("#lead").textContent = d.lead;
+      $("#f1").textContent = d.f1;
+      $("#f2").textContent = d.f2;
+      $("#f3").textContent = d.f3;
+      $("#f4").textContent = d.f4;
+      $("#btn-ar").classList.toggle("active", L === "ar");
+      $("#btn-en").classList.toggle("active", L === "en");
+    };
+    $("#btn-ar").onclick = () => apply("ar");
+    $("#btn-en").onclick = () => apply("en");
+  </script>
+</body>
+</html>

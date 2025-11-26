@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OneLink – الخدمات الحكومية الموحدة</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="lang-switch">
+            <button onclick="setLang('ar')" class="active">العربية</button>
+            <button onclick="setLang('en')">English</button>
+        </div>
+        <h1>رابط الخدمات الحكومية الموحد</h1>
+        <p>كل الروابط الرسمية في مكان واحد — واجهة أنيقة، سرعة عالية، وحماية قوية.</p>
+    </header>
+
+    <section class="services">
+        <div class="service"><img src="assets/absher.png"> <span>أبشر</span></div>
+        <div class="service"><img src="assets/tawakkalna.png"> <span>توكلنا</span></div>
+        <div class="service"><img src="assets/najez.png"> <span>ناجز</span></div>
+        <div class="service"><img src="assets/sadad.png"> <span>سداد</span></div>
+        <div class="service"><img src="assets/etimad.png"> <span>اعتماد</span></div>
+        <div class="service"><img src="assets/moc.png"> <span>وزارة التجارة</span></div>
+    </section>
+
+    <footer class="footer">
+        <p>Developer: Safar Al-Ghamdi</p>
+        <p>Private License 2025 ©</p>
+        <p>جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            if (lang === 'en') {
+                window.location.href = "index-en.html";
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+
+</body>
+</html>

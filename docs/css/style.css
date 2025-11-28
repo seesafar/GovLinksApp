@@ -1781,3 +1781,191 @@ h3.section-title,
   display: block;
   opacity: 0.9;
 }
+header .main-logo {
+  width: 120px;      /* حجم مناسب للهيدر */
+  height: auto;
+  display: block;
+  margin: 0 auto 16px;   /* وسط الصفحة + مسافة تحت */
+  filter: drop-shadow(0 0 8px rgba(0,255,200,0.25));
+}
+/* الهيدر الأساسي */
+header {
+  text-align: center;
+  padding: 32px 16px 8px;
+}
+
+/* شعار OneLink في الهيدر (ديسكتوب) */
+header .main-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 16px;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 200, 0.25));
+}
+
+/* عنوان رئيسي للهيدر */
+header .title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* السطر الوصفي تحت العنوان */
+header .subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* شاشات أقل من 768px (تابلت/جوال كبير) */
+@media (max-width: 768px) {
+  header {
+    padding: 20px 12px 4px;
+  }
+
+  header .main-logo {
+    width: 90px;           /* نصغّر الشعار شوي */
+    margin-bottom: 10px;
+  }
+
+  header .title {
+    font-size: 1.3rem;     /* نصغر العنوان */
+  }
+
+  header .subtitle {
+    font-size: 0.85rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+/* شاشات أقل من 480px (جوال صغير) */
+@media (max-width: 480px) {
+  header {
+    padding-top: 16px;
+  }
+
+  header .main-logo {
+    width: 80px;
+    margin-bottom: 8px;
+  }
+
+  header .title {
+    font-size: 1.15rem;
+  }
+
+  header .subtitle {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}
+header .main-logo{
+  width:120px;
+  height:auto;
+  display:block;
+  margin:0 auto 16px;
+  filter:drop-shadow(0 0 8px rgba(0,255,200,.25));
+}
+.services-section {
+  margin: 24px auto 40px;
+  max-width: 1180px;
+  padding: 0 16px 32px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.section-subtitle {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+.services-row {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.services-row::-webkit-scrollbar {
+  height: 6px;
+}
+.services-row::-webkit-scrollbar-track {
+  background: #020617;
+}
+.services-row::-webkit-scrollbar-thumb {
+  background: #22c55e;
+  border-radius: 999px;
+}
+
+.service-card {
+  min-width: 150px;
+  max-width: 170px;
+  background: radial-gradient(circle at top, #0b1120, #020617);
+  border-radius: 22px;
+  padding: 16px 12px 12px;
+  border: 1px solid rgba(30, 64, 175, 0.7);
+  box-shadow:
+    0 14px 35px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.service-icon-wrap {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 10%, #ffffff, #dbeafe, #0f766e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+}
+
+.service-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #ffffff;
+  object-fit: contain;
+}
+
+.service-name-ar {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.service-name-en {
+  margin: 2px 0 8px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.service-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: none;
+  background: #16a34a;
+  color: #f9fafb;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.service-btn:hover {
+  background: #22c55e;
+}
+.strip {
+  margin-top: 32px !important;   /* من 120px إلى 32px */
+}
+

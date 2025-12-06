@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneLink - All Government Services in One Place</title>
+
+  <!-- ✅ إعدادات الأمان -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: https:;
+    connect-src 'self';
+    font-src 'self' https:;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+
+  <style>
+    /* ===============================
+       OneLink – Global Styles (RTL)
+       =============================== */
+    :root{
+      --green:#006c35;
+      --green-700:#00562a;
+      --green-500:#00994d;
+      --bg:#f9f9f9;
+      --card:#ffffff;
+      --text:#222222;
+      --muted:#6b7280;
+      --border:rgba(0,0,0,0.08);
+      --shadow-sm:0 2px 6px rgba(0,0,0,.08);
+      --shadow-md:0 6px 14px rgba(0,0,0,.12);
+    }
+
+    html{ scroll-behavior:smooth; }
+
+    body{
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Tahoma, "Segoe UI", Arial, sans-serif;
+      line-height:1.6;
+    }
+
+    /* الهيدر */
+    header.site-header{
+      background:var(--green);
+      color:#fff;
+      text-align:center;
+      padding:24px 0;
+      box-shadow:var(--shadow-sm);
+      animation:fadeUp .7s ease-out forwards;
+    }
+
+    header.site-header h1{
+      margin:6px 0;
+      font-size:32px;
+      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    /* أيقونة صغيرة قبل كلمة OneLink */
+    header.site-header h1::before{
+      content:"🔗";
+      font-size:26px;
+      line-height:1;
+    }
+
+    header .brand-top{
+      font-weight:800;
+      letter-spacing:.3px;
+      margin-bottom:6px;
+      line-height:1.2;
+    }
+    header .brand-top span{
+      display:block;
+      opacity:.9;
+      font-weight:700;
+    }
+
+    header .site-sub{ margin:6px 0 0; }
+    header .site-sub span{
+      display:block;
+      color:#e9ffef;
+      opacity:.9;
+    }
+
+    /* شريط البحث */
+    .search{ padding:14px 15px 6px; }
+    .search .search-box{
+      max-width:720px;
+      margin:0 auto;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .search input[type="search"]{
+      flex:1;
+      padding:12px 14px;
+      border:1px solid rgba(0,0,0,0.08);
+      border-radius:12px;
+      font-size:14px;
+      outline:none;
+      background:#fff;
+      box-shadow:0 1px 2px rgba(0,0,0,.04);
+    }
+    .search button{
+      padding:12px 14px;
+      border:none;
+      border-radius:12px;
+      background:var(--green);
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .search .meta{
+      max-width:720px;
+      margin:8px auto 0;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* عناوين الأقسام */
+    .section-title{
+      margin:24px 0 6px;
+      padding-inline-start:10px;
+      border-inline-start:5px solid var(--green);
+      font-size:20px;
+      color:#333;
+      animation:fadeUp .7s ease-out forwards;
+    }
+    .section-sub{
+      margin:0 15px 14px;
+      color:var(--muted);
+      font-size:13px;
+      animation:fadeUp .7s ease-out forwards;
+    }
+    .section-title.centered{
+      text-align:center;
+      border:none;
+    }
+    .section-sub.centered{
+      text-align:center;
+      margin-top:-4px;
+    }
+
+    /* شبكة الكروت */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+      gap:18px;
+      padding:0 15px 22px;
+      justify-items:center;
+    }
+
+    .card{
+      width:100%;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px 14px;
+      text-align:center;
+      box-shadow:var(--shadow-sm);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      opacity:0;
+      animation:fadeUpSmooth 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .card:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow-md);
+      border-color:var(--green-500);
+    }
+
+    /* الأيقونة الدائرية */
+    .icon-wrap{
+      width:70px;
+      height:70px;
+      margin:auto;
+      border-radius:50%;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 3px 6px rgba(0,0,0,.15);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      animation:iconPop 0.7s ease-out forwards;
+      transform-origin:center;
+    }
+    .icon{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .name-ar{
+      font-weight:bold;
+      font-size:14px;
+      margin:8px 0 2px;
+    }
+    .name-en{
+      font-size:12px;
+      color:var(--muted);
+      margin:0 0 10px;
+    }
+
+    /* زر الانتقال */
+    .btn-go{
+      display:inline-block;
+      padding:6px 12px;
+      background:var(--green);
+      color:#fff;
+      text-decoration:none;
+      border-radius:22px;
+      font-size:12px;
+      font-weight:bold;
+      transition:background .2s ease, transform .12s ease;
+    }
+    .btn-go:hover{
+      background:var(--green-700);
+      transform:translateY(-1px);
+    }
+
+    /* شارات المتاجر */
+    .store-buttons{
+      display:flex;
+      gap:18px;
+      justify-content:center;
+      align-items:center;
+      margin:14px 0 26px;
+      flex-wrap:wrap;
+      animation:fadeUpFooter 0.9s ease-out forwards;
+      animation-delay:1.2s;
+    }
+
+    .store-badge{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      background:transparent !important;
+      border:none !important;
+      box-shadow:none !important;
+      transition:transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .store-badge img{
+      display:block;
+      height:48px;
+      width:auto;
+      object-fit:contain;
+      transition:transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .store-badge-google img{
+      height:64px;
+      transform:scale(1.06);
+      margin-top:-1px;
+      transition:transform 0.25s ease;
+    }
+    .store-badge-google img:hover{
+      transform:scale(1.1);
+    }
+
+    .store-buttons a:hover{
+      transform:translateY(-3px) scale(1.03);
+      box-shadow:0 6px 14px rgba(0,0,0,0.18);
+    }
+    .store-buttons a:hover img{
+      transform:scale(1.06);
+      filter:brightness(1.08);
+    }
+
+    /* فوتر */
+    footer.footer{
+      background:#222;
+      color:#fff;
+      text-align:center;
+      padding:16px;
+      margin-top:30px;
+      font-size:13px;
+      animation:fadeUpFooter 1s ease-out forwards;
+      animation-delay:1.5s;
+    }
+    footer .line{ margin:6px 0; }
+
+    /* زر الرجوع للأعلى */
+    #backToTop{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      background:var(--green);
+      color:#fff;
+      font-size:22px;
+      text-align:center;
+      line-height:48px;
+      box-shadow:0 4px 8px rgba(0,0,0,.28);
+      cursor:pointer;
+      border:none;
+      outline:none;
+      display:none;
+      transition:transform .15s ease, background .2s ease;
+      animation:pulse 2.2s infinite;
+    }
+    #backToTop:hover{
+      background:var(--green-700);
+      transform:translateY(-2px);
+    }
+
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(0,108,53,.32);}
+      70%{box-shadow:0 0 0 12px rgba(0,108,53,0);}
+      100%{box-shadow:0 0 0 0 rgba(0,108,53,0);}
+    }
+
+    /* ===== مساعد OneLink المصغّر ===== */
+    .ai-mini-btn{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      background:var(--green);
+      color:#fff;
+      font-size:24px;
+      box-shadow:0 4px 10px rgba(0,0,0,.25);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+    }
+    .ai-mini-btn:hover{
+      background:var(--green-700);
+      transform:translateY(-1px);
+    }
+
+    .ai-mini-bubble{
+      position:fixed;
+      bottom:84px;
+      right:20px;
+      width:320px;
+      max-width:90vw;
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      overflow:hidden;
+      z-index:9999;
+      display:none;
+    }
+
+    .ai-mini-header{
+      padding:10px 12px;
+      background:var(--green);
+      color:#fff;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:14px;
+    }
+    .ai-mini-close{
+      background:transparent;
+      border:none;
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      line-height:1;
+    }
+    .ai-mini-body{
+      padding:10px 12px 12px;
+      font-size:13px;
+    }
+    .ai-mini-body input{
+      width:100%;
+      padding:8px 10px;
+      margin:6px 0 8px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,.15);
+      font-size:13px;
+      box-sizing:border-box;
+    }
+    .ai-mini-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:6px;
+      margin-bottom:6px;
+    }
+    .ai-mini-actions button{
+      border:none;
+      border-radius:999px;
+      padding:6px 10px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    #aiMiniMic{
+      background:#e5e7eb;
+    }
+    #aiMiniSend{
+      background:var(--green);
+      color:#fff;
+    }
+    .ai-mini-status{
+      font-size:12px;
+      color:var(--muted);
+      min-height:16px;
+      margin-bottom:4px;
+    }
+    .ai-mini-answer{
+      font-size:13px;
+      color:#111827;
+      background:#f9fafb;
+      border-radius:8px;
+      padding:8px;
+      min-height:20px;
+      white-space:pre-wrap;
+    }
+
+    /* حركات عامة */
+    @keyframes fadeUp{
+      0%{opacity:0;transform:translateY(14px);}
+      100%{opacity:1;transform:translateY(0);}
+    }
+
+    @keyframes fadeUpSmooth{
+      0%{opacity:0;transform:translateY(24px) scale(0.98);}
+      60%{opacity:1;transform:translateY(-2px) scale(1.02);}
+      100%{opacity:1;transform:translateY(0) scale(1);}
+    }
+
+    @keyframes iconPop{
+      0%{opacity:0;transform:scale(0.6);}
+      60%{opacity:1;transform:scale(1.08);}
+      100%{opacity:1;transform:scale(1);}
+    }
+
+    @keyframes fadeUpFooter{
+      0%{opacity:0;transform:translateY(30px);}
+      100%{opacity:1;transform:translateY(0);}
+    }
+
+    /* تأخير دخول الكروت */
+    .grid .card:nth-child(1){animation-delay:0.1s;}
+    .grid .card:nth-child(2){animation-delay:0.2s;}
+    .grid .card:nth-child(3){animation-delay:0.3s;}
+    .grid .card:nth-child(4){animation-delay:0.4s;}
+    .grid .card:nth-child(5){animation-delay:0.5s;}
+    .grid .card:nth-child(6){animation-delay:0.6s;}
+    .grid .card:nth-child(7){animation-delay:0.7s;}
+    .grid .card:nth-child(8){animation-delay:0.8s;}
+    .grid .card:nth-child(9){animation-delay:0.9s;}
+    .grid .card:nth-child(10){animation-delay:1s;}
+
+    /* تدرج دخول الأيقونات */
+    .grid .card:nth-child(1) .icon-wrap{animation-delay:0.15s;}
+    .grid .card:nth-child(2) .icon-wrap{animation-delay:0.25s;}
+    .grid .card:nth-child(3) .icon-wrap{animation-delay:0.35s;}
+    .grid .card:nth-child(4) .icon-wrap{animation-delay:0.45s;}
+    .grid .card:nth-child(5) .icon-wrap{animation-delay:0.55s;}
+    .grid .card:nth-child(6) .icon-wrap{animation-delay:0.65s;}
+    .grid .card:nth-child(7) .icon-wrap{animation-delay:0.75s;}
+    .grid .card:nth-child(8) .icon-wrap{animation-delay:0.85s;}
+
+    .card:hover .icon-wrap{
+      transform:scale(1.08);
+      box-shadow:0 0 8px rgba(0,153,77,0.35);
+      border:1.5px solid var(--green-500);
+      transition:transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+    }
+
+    /* حركة لبلوك حقوق الملكية */
+    .copyright-block{
+      opacity:0;
+      transform:translateY(25px);
+      animation:fadeInCopyright 1.3s ease-out forwards;
+      animation-delay:0.5s;
+    }
+    @keyframes fadeInCopyright{
+      from{opacity:0;transform:translateY(25px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    /* زر اللغة في الزاوية */
+    .lang-menu{
+      position:fixed;
+      top:16px;
+      right:20px;
+      z-index:9999;
+    }
+    .lang-toggle{
+      background:var(--green);
+      color:#fff;
+      border:none;
+      border-radius:50%;
+      width:42px;
+      height:42px;
+      cursor:pointer;
+      font-size:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.25);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform 0.2s ease, background 0.2s ease;
+    }
+    .lang-toggle:hover{
+      background:var(--green-700);
+      transform:scale(1.05);
+    }
+    .lang-dropdown{
+      position:absolute;
+      top:46px;
+      right:0;
+      background:#fff;
+      border-radius:10px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.18);
+      padding:4px 0;
+      min-width:160px;
+      display:none;
+      flex-direction:column;
+      opacity:0;
+      transition:opacity 0.25s ease, transform 0.25s ease;
+      transform:translateY(-6px);
+    }
+    .lang-dropdown a{
+      padding:8px 14px;
+      text-decoration:none;
+      font-size:14px;
+      color:#111827;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+    .lang-dropdown a:last-child{
+      border-bottom:none;
+    }
+    .lang-dropdown a:hover{
+      background:var(--green);
+      color:#fff;
+    }
+    .lang-menu:hover .lang-dropdown{
+      display:flex;
+      opacity:1;
+      transform:translateY(0);
+    }
+    .lang-dropdown.show{
+      display:flex;
+      opacity:1;
+      transform:translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- الهيدر -->
+  <header class="site-header">
+    <div class="brand-top">
+      رابط موحد
+      <span>Unified Link</span>
+    </div>
+
+    <h1>OneLink</h1>
+
+    <p class="site-sub">
+      جميع الخدمات الحكومية في مكان واحد
+      <span>All government services in one place</span>
+    </p>
+
+    <!-- قائمة اختيار اللغة الحديثة -->
+    <div class="lang-menu">
+      <button class="lang-toggle" type="button" aria-label="تغيير اللغة">🌐</button>
+      <div class="lang-dropdown">
+        <a href="index-en.html">🇬🇧 English</a>
+        <a href="index.html">🇸🇦 العربية</a>
+      </div>
+    </div>
+  </header>
+
+  <a href="about.html">ℹ️ عن OneLink</a>
+
+  <!-- شريط البحث -->
+  <section class="search" aria-label="Search services">
+    <div class="search-box">
+      <input id="liveSearch" type="search"
+             placeholder="ابحث باسم الخدمة بالعربي أو الإنجليزي (مثال: أبشر، Najiz، HRSD)"
+             aria-label="ابحث عن خدمة" />
+      <button id="clearSearch" type="button" aria-label="مسح البحث">مسح</button>
+    </div>
+    <div class="meta" aria-hidden="true">
+      <span>النتائج: <b id="shownCount">0</b> / <b id="totalCount">0</b></span>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- منصات موحدة وأساسيات -->
+    <h3 class="section-title">منصات موحدة وأساسيات</h3>
+    <div class="section-sub">Unified Platforms & Essentials</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/absher.png"      alt="أبشر"></div><p class="name-ar">أبشر</p><p class="name-en">Absher</p><a class="btn-go" href="https://www.absher.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/tawakkalna.png"  alt="توكلنا"></div><p class="name-ar">توكلنا</p><p class="name-en">Tawakkalna</p><a class="btn-go" href="https://ta.sdaia.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/nafath.png"      alt="نفاذ"></div><p class="name-ar">نفاذ</p><p class="name-en">Nafath</p><a class="btn-go" href="https://www.iam.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/najiz.png"       alt="ناجز"></div><p class="name-ar">ناجز</p><p class="name-en">Najiz</p><a class="btn-go" href="https://najiz.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/qiwa.png"        alt="قوى"></div><p class="name-ar">قوى</p><p class="name-en">Qiwa</p><a class="btn-go" href="https://qiwa.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/etimad.png"      alt="اعتماد"></div><p class="name-ar">اعتماد</p><p class="name-en">Etimad</p><a class="btn-go" href="https://etimad.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/balady.png"      alt="بلدي"></div><p class="name-ar">بلدي</p><p class="name-en">Balady</p><a class="btn-go" href="https://balady.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/ehkaam.png"      alt="إحكام"></div><p class="name-ar">إحكام</p><p class="name-en">Ehkaam</p><a class="btn-go" href="https://ehkaam.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/musaned.png"     alt="مساند"></div><p class="name-ar">مساند</p><p class="name-en">Musaned</p><a class="btn-go" href="https://www.musaned.com.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/nusuk.png"       alt="نسك"></div><p class="name-ar">نسك</p><p class="name-en">Nusuk</p><a class="btn-go" href="https://www.nusuk.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- وزارات وهيئات -->
+    <h3 class="section-title">وزارات وهيئات</h3>
+    <div class="section-sub">Ministries & Authorities</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moi.png"   alt="وزارة الداخلية"></div><p class="name-ar">وزارة الداخلية</p><p class="name-en">MOI</p><a class="btn-go" href="https://www.moi.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moe.png"   alt="وزارة التعليم"></div><p class="name-ar">وزارة التعليم</p><p class="name-en">MOE</p><a class="btn-go" href="https://www.moe.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moh.png"   alt="وزارة الصحة"></div><p class="name-ar">وزارة الصحة</p><p class="name-en">MOH</p><a class="btn-go" href="https://www.moh.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moj.png"   alt="وزارة العدل"></div><p class="name-ar">وزارة العدل</p><p class="name-en">MOJ</p><a class="btn-go" href="https://www.moj.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/momra.png" alt="الشؤون البلدية والقروية"></div><p class="name-ar">الشؤون البلدية والقروية</p><p class="name-en">MOMRA</p><a class="btn-go" href="https://momrah.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mhrsd.png" alt="الموارد البشرية والتنمية"></div><p class="name-ar">الموارد البشرية والتنمية</p><p class="name-en">HRSD</p><a class="btn-go" href="https://hrsd.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mot.png"   alt="وزارة النقل والخدمات اللوجستية"></div><p class="name-ar">النقل والخدمات اللوجستية</p><p class="name-en">MOT</p><a class="btn-go" href="https://www.mot.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mcit.png"  alt="الاتصالات وتقنية المعلومات"></div><p class="name-ar">الاتصالات وتقنية المعلومات</p><p class="name-en">MCIT</p><a class="btn-go" href="https://www.mcit.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moc.png"   alt="وزارة الثقافة"></div><p class="name-ar">وزارة الثقافة</p><p class="name-en">MOC</p><a class="btn-go" href="https://www.moc.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mewa.png"  alt="وزارة البيئة والمياه"></div><p class="name-ar">وزارة البيئة والمياه</p><p class="name-en">MEWA</p><a class="btn-go" href="https://www.mewa.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الصحة والتعليم والأسرة -->
+    <h3 class="section-title">الصحة والتعليم والأسرة</h3>
+    <div class="section-sub">Health, Education & Family</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moh.png"      alt="وزارة الصحة"></div><p class="name-ar">وزارة الصحة</p><p class="name-en">MOH</p><a class="btn-go" href="https://www.moh.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sehhaty.png"  alt="صحتي"></div><p class="name-ar">صحتي</p><p class="name-en">Sehhaty</p><a class="btn-go" href="https://www.sehhaty.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moe.png"      alt="وزارة التعليم"></div><p class="name-ar">وزارة التعليم</p><p class="name-en">MOE</p><a class="btn-go" href="https://www.moe.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/noor.png"     alt="نور"></div><p class="name-ar">نور</p><p class="name-en">Noor</p><a class="btn-go" href="https://noor.moe.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الأعمال والوظائف -->
+    <h3 class="section-title">الأعمال والوظائف</h3>
+    <div class="section-sub">Business & Jobs</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/qiwa.png"     alt="قوى"></div><p class="name-ar">قوى</p><p class="name-en">Qiwa</p><a class="btn-go" href="https://qiwa.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mhrsd.png"    alt="الموارد البشرية والتنمية"></div><p class="name-ar">الموارد البشرية والتنمية</p><p class="name-en">HRSD</p><a class="btn-go" href="https://hrsd.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/musaned.png"  alt="مساند"></div><p class="name-ar">مساند</p><p class="name-en">Musaned</p><a class="btn-go" href="https://www.musaned.com.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/hadaf.png"    alt="هدف"></div><p class="name-ar">هدف</p><p class="name-en">Hadaf</p><a class="btn-go" href="https://hrdf.org.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/tamheer.png"  alt="تمهير"></div><p class="name-ar">تمهير</p><p class="name-en">Tamheer</p><a class="btn-go" href="https://hrdf.org.sa/Programs/Tamheer" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/jadara.png"   alt="جدارة"></div><p class="name-ar">جدارة</p><p class="name-en">Jadara</p><a class="btn-go" href="https://jadara.hrsd.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- المرور والنقل -->
+    <h3 class="section-title">المرور والنقل</h3>
+    <div class="section-sub">Traffic & Transport</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moi.png"     alt="وزارة الداخلية"></div><p class="name-ar">وزارة الداخلية</p><p class="name-en">MOI</p><a class="btn-go" href="https://www.moi.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/traffic.png" alt="المرور"></div><p class="name-ar">المرور</p><p class="name-en">Traffic</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mot.png"     alt="وزارة النقل"></div><p class="name-ar">النقل والخدمات اللوجستية</p><p class="name-en">MOT</p><a class="btn-go" href="https://www.mot.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- المالية والضرائب -->
+    <h3 class="section-title">المالية والضرائب</h3>
+    <div class="section-sub">Finance & Taxes</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sama.png"  alt="البنك المركزي"></div><p class="name-ar">البنك المركزي</p><p class="name-en">SAMA</p><a class="btn-go" href="https://www.sama.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/zatca.png" alt="هيئة الزكاة والضريبة"></div><p class="name-ar">هيئة الزكاة والضريبة</p><p class="name-en">ZATCA</p><a class="btn-go" href="https://zatca.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/cma.png"   alt="هيئة السوق المالية"></div><p class="name-ar">هيئة السوق المالية</p><p class="name-en">CMA</p><a class="btn-go" href="https://cma.org.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sadad.png" alt="سداد"></div><p class="name-ar">سداد</p><p class="name-en">SADAD</p><a class="btn-go" href="https://www.sadad.com" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الإسكان والبلديات -->
+    <h3 class="section-title">الإسكان والبلديات</h3>
+    <div class="section-sub">Housing & Municipalities</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/momra.png"  alt="الشؤون البلدية والقروية والإسكان"></div><p class="name-ar">الشؤون البلدية والقروية والإسكان</p><p class="name-en">MOMRA</p><a class="btn-go" href="https://momrah.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/balady.png" alt="بلدي"></div><p class="name-ar">بلدي</p><p class="name-en">Balady</p><a class="btn-go" href="https://balady.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sakani.png" alt="سكني"></div><p class="name-ar">سكني</p><p class="name-en">Sakani</p><a class="btn-go" href="https://sakani.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- السياحة والحج والعمرة -->
+    <h3 class="section-title">السياحة والحج والعمرة</h3>
+    <div class="section-sub">Tourism, Hajj & Umrah</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mt.png"    alt="وزارة السياحة"></div><p class="name-ar">وزارة السياحة</p><p class="name-en">MT</p><a class="btn-go" href="https://mt.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/nusuk.png" alt="نسك"></div><p class="name-ar">نسك</p><p class="name-en">Nusuk</p><a class="btn-go" href="https://www.nusuk.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- البيئة والطاقة -->
+    <h3 class="section-title">البيئة والطاقة</h3>
+    <div class="section-sub">Environment & Energy</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mewa.png" alt="وزارة البيئة والمياه والزراعة"></div><p class="name-ar">وزارة البيئة والمياه والزراعة</p><p class="name-en">MEWA</p><a class="btn-go" href="https://mewa.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/nwc.png"  alt="المياه الوطنية"></div><p class="name-ar">المياه الوطنية</p><p class="name-en">NWC</p><a class="btn-go" href="https://nwc.com.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/sec.png"  alt="الكهرباء"></div><p class="name-ar">الشركة السعودية للكهرباء</p><p class="name-en">SEC</p><a class="btn-go" href="https://www.se.com.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الثقافة والإعلام -->
+    <h3 class="section-title">الثقافة والإعلام</h3>
+    <div class="section-sub">Culture & Media</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/moc.png"  alt="وزارة الثقافة"></div><p class="name-ar">وزارة الثقافة</p><p class="name-en">MOC</p><a class="btn-go" href="https://www.moc.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/citc.png" alt="هيئة الاتصالات"></div><p class="name-ar">هيئة الاتصالات وتقنية المعلومات</p><p class="name-en">CITC</p><a class="btn-go" href="https://www.citc.gov.sa" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الأمن والطوارئ -->
+    <h3 class="section-title">الأمن والطوارئ</h3>
+    <div class="section-sub">Security & Emergency</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/civildefense.png" alt="الدفاع المدني"></div><p class="name-ar">الدفاع المدني</p><p class="name-en">Civil Defense</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/srca.png"         alt="الهلال الأحمر"></div><p class="name-ar">الهلال الأحمر</p><p class="name-en">Red Crescent</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- الاستثمار والتجارة -->
+    <h3 class="section-title">الاستثمار والتجارة</h3>
+    <div class="section-sub">Investment & Commerce</div>
+    <div class="grid">
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/misa.png"  alt="وزارة الاستثمار"></div><p class="name-ar">وزارة الاستثمار</p><p class="name-en">MISA</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+      <article class="card"><div class="icon-wrap"><img class="icon" src="../icons/mocit.png" alt="وزارة التجارة"></div><p class="name-ar">وزارة التجارة</p><p class="name-en">MOCIT</p><a class="btn-go" href="#" target="_blank" rel="noopener">انتقل</a></article>
+    </div>
+
+    <!-- ===== راسلنا ===== -->
+    <section class="contact-block" style="max-width:1100px;margin:40px auto 28px;padding:0 16px;">
+      <h3 class="section-title" style="text-align:center;border:none;margin-bottom:14px;">راسلنا</h3>
+      <p style="text-align:center;color:#6b7280;margin:-6px 0 18px;">Contact Us</p>
+
+      <div class="contact-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
+        <!-- X -->
+        <article style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:16px;text-align:center;">
+          <div style="font-weight:700;margin-bottom:6px;">(تويتر) X</div>
+          <div style="color:#6b7280;font-size:13px;margin-bottom:10px;">X (Twitter)</div>
+          <a href="https://x.com/onelinke" target="_blank" rel="noopener"
+             style="display:inline-block;background:#0a713f;color:#fff;padding:8px 14px;border-radius:999px;text-decoration:none;">onelinke</a>
+        </article>
+        <!-- WhatsApp -->
+        <article style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:16px;text-align:center;">
+          <div style="font-weight:700;margin-bottom:6px;">واتساب</div>
+          <div style="color:#6b7280;font-size:13px;margin-bottom:10px;">WhatsApp</div>
+          <a href="https://wa.me/966000000000" target="_blank" rel="noopener"
+             style="display:inline-block;background:#0a713f;color:#fff;padding:8px 14px;border-radius:999px;text-decoration:none;">تواصل الآن</a>
+        </article>
+        <!-- Email -->
+        <article style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:16px;text-align:center;">
+          <div style="font-weight:700;margin-bottom:6px;">البريد الإلكتروني</div>
+          <div style="color:#6b7280;font-size:13px;margin-bottom:10px;">Email</div>
+          <a href="mailto:support@onelink.sa"
+             style="display:inline-block;background:#0a713f;color:#fff;padding:8px 14px;border-radius:999px;text-decoration:none;">support@onelink.sa</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== حمّل التطبيق ===== -->
+    <section class="getapp-block" style="max-width:1100px;margin:0 auto 10px;padding:0 16px;text-align:center;">
+      <h3 style="margin:0 0 6px;font-size:20px;">حمّل التطبيق</h3>
+      <p style="margin:0 0 14px;color:#6b7280;">Get the App</p>
+
+      <div class="store-buttons">
+        <a href="https://appgallery.huawei.com/" target="_blank" rel="noopener" aria-label="AppGallery"
+           class="store-badge">
+          <img src="../icons/huawei.png" alt="AppGallery">
+        </a>
+
+        <a href="https://play.google.com/" target="_blank" rel="noopener" aria-label="Google Play"
+           class="store-badge store-badge-google">
+          <img src="../icons/google.png" alt="Google Play">
+        </a>
+
+        <a href="https://apps.apple.com/" target="_blank" rel="noopener" aria-label="App Store"
+           class="store-badge">
+          <img src="../icons/apple.png" alt="App Store">
+        </a>
+      </div>
+    </section>
+
+    <!-- سطر الملاحظة -->
+    <p id="store-note" style="margin:14px auto 4px;max-width:900px;color:#6b7280;font-size:13px;line-height:1.6;text-align:center;">
+      <span style="display:block;">متاح على جميع المتاجر الرسمية</span>
+      <span style="display:block;opacity:.95;">Available on all official stores</span>
+    </p>
+
+  </main>
+
+  <!-- زر الرجوع للأعلى -->
+  <button id="backToTop" title="الرجوع إلى أعلى الصفحة">↑</button>
+
+  <!-- الفوتر -->
+  <footer class="footer">
+    <div class="container">
+      <div class="line dev">المطور: سفر الغامدي — <span dir="ltr">Developer: Safar Al-Ghamdi</span></div>
+      <div class="line">جميع الحقوق محفوظة — OneLink © 2025</div>
+    </div>
+  </footer>
+
+  <!-- ===== سكربت المساعد + زر الرجوع للأعلى ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // زر الرجوع للأعلى
+      const backBtn = document.getElementById('backToTop');
+      if (backBtn) {
+        window.addEventListener('scroll', () => {
+          backBtn.style.display = (window.scrollY > 300) ? 'block' : 'none';
+        });
+        backBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // المساعد المصغّر
+      const aiBtn   = document.getElementById('aiMiniBtn');
+      const aiPanel = document.getElementById('aiMiniBubble');
+      const aiClose = document.getElementById('aiMiniClose');
+
+      if (aiBtn && aiPanel && aiClose) {
+        aiBtn.addEventListener('click', () => {
+          const isOpen = aiPanel.style.display === 'block';
+          aiPanel.style.display = isOpen ? 'none' : 'block';
+          aiPanel.hidden = isOpen;
+        });
+
+        aiClose.addEventListener('click', () => {
+          aiPanel.style.display = 'none';
+          aiPanel.hidden = true;
+        });
+
+        window.addEventListener('click', (e) => {
+          if (!aiPanel.contains(e.target) && e.target !== aiBtn) {
+            aiPanel.style.display = 'none';
+            aiPanel.hidden = true;
+          }
+        });
+      }
+
+      // منطق الردود البسيطة
+      const aiInput  = document.getElementById('aiMiniInput');
+      const aiSend   = document.getElementById('aiMiniSend');
+      const aiStatus = document.getElementById('aiMiniStatus');
+      const aiAnswer = document.getElementById('aiMiniAnswer');
+
+      function buildReply(text) {
+        const t = (text || '').toLowerCase();
+
+        if (t.includes('ابشر') || t.includes('أبشر')) {
+          return '🟢 للخدمات المرتبطة بأبشر: انزل لقسم "منصات موحدة وأساسيات" واضغط بطاقة "أبشر".';
+        }
+        if (t.includes('نفاذ') || t.includes('nafath')) {
+          return '🔐 لخدمات النفاذ الوطني الموحّد: توجه لقسم "منصات موحدة وأساسيات" ثم اختر "نفاذ".';
+        }
+        if (t.includes('توكلنا') || t.includes('tawakkalna') || t.includes('tawakalna')) {
+          return '📱 لخدمات تطبيق توكلنا: ستجد البطاقة ضمن "منصات موحدة وأساسيات".';
+        }
+        if (t.includes('مرور') || t.includes('مخالفات') || t.includes('رخصة')) {
+          return '🚗 خدمات المرور (استعلام، مخالفات، رخص): ادخل قسم "المرور والنقل"، أو عبر منصة "أبشر".';
+        }
+        if (t.includes('جواز') || t.includes('جواز السفر') || t.includes('سفر')) {
+          return '🛂 تجديد أو إصدار الجواز السعودي عادة من منصة "أبشر" → قسم الجوازات.';
+        }
+        if (t.includes('صحة') || t.includes('موعد') || t.includes('مستشفى') || t.includes('صحتي')) {
+          return '🏥 لخدمات الصحة وحجز المواعيد: ادخل قسم "الصحة والتعليم والأسرة" ثم اختر "وزارة الصحة" أو "صحتي".';
+        }
+        if (t.includes('وظيف') || t.includes('وظيفة') || t.includes('وظائف') ||
+            t.includes('جدارة') || t.includes('هدف') || t.includes('تمهير')) {
+          return '💼 للوظائف وبرامج الدعم الوظيفي: ادخل قسم "الأعمال والوظائف" (قوى، مساند، هدف، تمهير، جدارة).';
+        }
+
+        return '✨ لم أتعرف بدقة على الخدمة، جرّب كتابة اسم المنصة (مثال: أبشر، نفاذ، صحتي)، أو اختر أحد الأقسام مثل "الصحة والتعليم" أو "الأعمال والوظائف".';
+      }
+
+      function handleAsk() {
+        if (!aiInput || !aiSend || !aiStatus || !aiAnswer) return;
+
+        const question = (aiInput.value || '').trim();
+        if (!question) {
+          aiInput.focus();
+          return;
+        }
+
+        aiAnswer.textContent = '';
+        aiStatus.textContent = 'المساعد يكتب…';
+        aiSend.disabled = true;
+
+        let dots = 1;
+        const typingTimer = setInterval(() => {
+          dots = (dots % 3) + 1;
+          aiStatus.textContent = 'المساعد يكتب' + '…'.slice(0, dots);
+        }, 350);
+
+        setTimeout(() => {
+          clearInterval(typingTimer);
+          aiStatus.textContent = '';
+          aiAnswer.textContent = buildReply(question);
+          aiSend.disabled = false;
+        }, 1200);
+      }
+
+      if (aiSend && aiInput) {
+        aiSend.addEventListener('click', handleAsk);
+        aiInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleAsk();
+          }
+        });
+      }
+
+      // زر اللغة (فتح/إغلاق القائمة)
+      const langBtn = document.querySelector(".lang-toggle");
+      const langMenu = document.querySelector(".lang-dropdown");
+      if (langBtn && langMenu) {
+        langBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          langMenu.classList.toggle("show");
+        });
+        window.addEventListener("click", (e) => {
+          if (!langMenu.contains(e.target) && e.target !== langBtn) {
+            langMenu.classList.remove("show");
+          }
+        });
+      }
+    });
+  </script>
+
+  <!-- ===== هيكل المساعد المصغّر ===== -->
+  <div id="aiMiniBubble" class="ai-mini-bubble" aria-live="polite" hidden>
+    <div class="ai-mini-header">
+      <span>🤖 مساعد OneLink</span>
+      <button type="button" id="aiMiniClose" class="ai-mini-close" aria-label="إغلاق">×</button>
+    </div>
+    <div class="ai-mini-body">
+      <p id="aiMiniStatus">👋 مرحباً! كيف أقدر أساعدك اليوم؟</p>
+
+      <input type="text" id="aiMiniInput" placeholder="اكتب سؤالك هنا..." />
+
+      <div class="ai-mini-actions">
+        <button id="aiMiniMic" type="button" title="تحدّث الآن 🎙️">🎙️</button>
+        <button id="aiMiniSend" type="button">إرسال</button>
+      </div>
+
+      <div id="aiMiniAnswer" class="ai-mini-answer"></div>
+    </div>
+  </div>
+
+  <!-- الزر العائم الصغير -->
+  <button id="aiMiniBtn" class="ai-mini-btn" type="button" aria-label="مساعد OneLink">
+    🤖
+  </button>
+
+  <!-- بلوك حقوق الملكية -->
+  <section class="copyright-block" style="
+    text-align:center;
+    padding:22px 12px;
+    color:#fff;
+    background:linear-gradient(180deg,#006c35 0%,#00401f 100%);
+    border-top:1px solid rgba(255,255,255,0.15);
+    font-size:13px;
+    line-height:1.7;
+    letter-spacing:0.3px;
+    box-shadow:0 -3px 8px rgba(0,0,0,0.25);
+  ">
+    <p style="margin:4px 0;font-weight:600;">
+      🔗<span style="background:#fff;color:#006c35;border-radius:50%;padding:2px 7px;font-weight:700;margin:0 6px;">S</span>
+      © 2025 <strong>الملكية الخاصة للمطور سفر الغامدي</strong> — جميع الحقوق محفوظة.
+    </p>
+    <p style="margin:4px 0;opacity:.9;">
+      يُمنع إعادة النشر أو النسخ أو التعديل أو الاقتباس لأي جزء من هذا المشروع دون إذن خطي من المطور.
+    </p>
+    <p style="margin:4px 0;opacity:.85;font-style:italic;">
+      🔗<span style="background:#fff;color:#006c35;border-radius:50%;padding:2px 7px;font-weight:700;margin:0 6px;">S</span>
+      © 2025 <strong>Private ownership of Developer Safar Al-Ghamdi</strong> — All rights reserved.
+      Reproduction, copying, modification, or redistribution of any part of this project is strictly prohibited without written permission.
+    </p>
+  </section>
+
+  <script src="security-header.js"></script>
+  <script src="services.js"></script>
+</body>
+</html>

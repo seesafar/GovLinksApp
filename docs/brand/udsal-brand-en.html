@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink UDSAL · Brand Identity (EN)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --udsal-green-light: #00d68f;
+      --udsal-green-deep: #00b37a;
+      --udsal-green-core: #00ffd2;
+      --bg-deep: #020617;
+      --text-main: #e5e7eb;
+      --text-muted: #94a3b8;
+      --text-soft: #9ca3af;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --border-faint: rgba(148, 163, 184, 0.2);
+      --badge-bg: rgba(15, 23, 42, 0.9);
+      --badge-border: rgba(55, 65, 81, 0.8);
+      --radius-xl: 22px;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.9);
+      --shadow-glow: 0 0 45px rgba(0, 214, 143, 0.60);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 16px 40px;
+    }
+
+    .brand-shell {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.9), #020617 60%);
+      border-radius: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 26px 24px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-shell::before {
+      content: "";
+      position: absolute;
+      inset: -120px;
+      background:
+        radial-gradient(circle at 10% -10%, rgba(34, 197, 94, 0.13), transparent 55%),
+        radial-gradient(circle at 110% 0%, rgba(56, 189, 248, 0.12), transparent 52%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .brand-inner { position: relative; z-index: 2; }
+
+    header.brand-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-soft);
+      margin-bottom: 24px;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex: 1 1 260px;
+    }
+
+    /* Logo Orb (same drawing) */
+    .udsal-logo-orb {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at 30% 25%, var(--udsal-green-core) 0, var(--udsal-green-light) 22%, var(--udsal-green-deep) 58%, #022c22 100%);
+      box-shadow: var(--shadow-glow);
+      overflow: visible;
+    }
+    .udsal-logo-orb::before,
+    .udsal-logo-orb::after {
+      content: "";
+      position: absolute;
+      inset: -9px;
+      border-radius: inherit;
+      border: 3px solid transparent;
+      pointer-events: none;
+    }
+    .udsal-logo-orb::before {
+      border-top-color: rgba(0, 214, 143, 0.95);
+      border-right-color: rgba(0, 214, 143, 0.78);
+      transform: rotate(28deg);
+      box-shadow:
+        0 0 26px rgba(0, 214, 143, 0.7),
+        0 0 4px rgba(15, 23, 42, 1) inset;
+    }
+    .udsal-logo-orb::after {
+      border-bottom-color: rgba(0, 179, 122, 0.9);
+      border-left-color: rgba(0, 179, 122, 0.75);
+      transform: rotate(-34deg);
+      opacity: 0.96;
+      box-shadow:
+        0 0 26px rgba(0, 179, 122, 0.7),
+        0 0 4px rgba(15, 23, 42, 1) inset;
+    }
+    .udsal-core-dot {
+      position: absolute;
+      width: 26%;
+      height: 26%;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background:
+        radial-gradient(circle, var(--udsal-green-core) 0, #00f5b1 45%, rgba(0, 214, 143, 0.2) 100%);
+      box-shadow:
+        0 0 26px rgba(0, 255, 210, 0.9),
+        0 0 55px rgba(0, 214, 143, 0.7);
+    }
+    .udsal-core-ring {
+      position: absolute;
+      width: 58%;
+      height: 58%;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 30px rgba(0, 214, 143, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      opacity: 0.7;
+    }
+
+    .brand-title-block { display: flex; flex-direction: column; gap: 4px; }
+    .brand-kicker {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .brand-title {
+      font-size: 26px;
+      font-weight: 700;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .brand-title span.tm {
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+    .brand-subtitle {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 460px;
+      line-height: 1.7;
+    }
+    .brand-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .badge-pill {
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--badge-border);
+      background: var(--badge-bg);
+      font-size: 12px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge-pill strong {
+      color: var(--udsal-green-light);
+      font-weight: 600;
+    }
+
+    .brand-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+    .tagline-en {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+    .pill-link {
+      margin-top: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 12px;
+      color: var(--text-main);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.85;
+    }
+    .pill-link:hover {
+      border-color: var(--udsal-green-light);
+      color: var(--udsal-green-light);
+    }
+
+    main.brand-main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 18px;
+    }
+    @media (max-width: 880px) {
+      main.brand-main { grid-template-columns: minmax(0, 1fr); }
+      .brand-right { align-items: flex-start; margin-top: 6px; }
+    }
+
+    .card {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.96));
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-faint);
+      padding: 16px 18px 18px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+    .card h2 { font-size: 16px; margin-bottom: 4px; }
+    .card h3 { font-size: 14px; margin-bottom: 6px; }
+    .card .meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin-bottom: 6px;
+    }
+    .card p strong { color: var(--text-main); }
+
+    .pill-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .pill-label span.en {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 10px;
+    }
+
+    .stack { display: flex; flex-direction: column; gap: 10px; }
+
+    .color-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .swatch {
+      flex: 1 1 130px;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), #020617);
+    }
+    .swatch-chip {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      flex: 0 0 auto;
+      box-shadow: 0 0 18px rgba(15, 23, 42, 1);
+    }
+    .swatch-meta { display: flex; flex-direction: column; gap: 2px; }
+    .swatch-name { font-size: 12px; font-weight: 600; }
+    .swatch-code {
+      font-size: 11px;
+      color: var(--text-muted);
+      direction: ltr;
+      text-align: left;
+    }
+
+    .typo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .typo-block {
+      flex: 1 1 180px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 10px 11px 11px;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
+    }
+    .typo-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+    .typo-sample {
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .typo-meta {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .do-dont-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    @media (max-width: 720px) {
+      .do-dont-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+    .do-card, .dont-card {
+      border-radius: var(--radius-lg);
+      padding: 10px 11px;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .do-card {
+      border: 1px solid rgba(22, 163, 74, 0.7);
+      background: radial-gradient(circle at top, rgba(6, 95, 70, 0.5), rgba(15, 23, 42, 0.95));
+    }
+    .dont-card {
+      border: 1px solid rgba(248, 113, 113, 0.7);
+      background: radial-gradient(circle at top, rgba(127, 29, 29, 0.65), rgba(15, 23, 42, 0.97));
+    }
+    .do-card strong,
+    .dont-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .meta-small {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footnote {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.35);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: space-between;
+    }
+    .footnote strong { color: var(--udsal-green-light); }
+  </style>
+</head>
+<body>
+  <div class="brand-shell">
+    <div class="brand-inner">
+      <header class="brand-header">
+        <div class="brand-left">
+          <div class="udsal-logo-orb" aria-hidden="true">
+            <div class="udsal-core-ring"></div>
+            <div class="udsal-core-dot"></div>
+          </div>
+
+          <div class="brand-title-block">
+            <div class="brand-kicker">ONE PLATFORM · MANY COUNTRIES</div>
+            <div class="brand-title">
+              <span>OneLink UDSAL</span>
+              <span class="tm">™</span>
+            </div>
+            <div class="brand-subtitle">
+              Unified Digital Services Access Layer that connects government and global services
+              through a single data schema, global search, and multi-region routing — without heavy back-ends.
+            </div>
+            <div class="brand-badges">
+              <div class="badge-pill">
+                <strong>UDSAL</strong>
+                Unified Digital Services Access Layer
+              </div>
+              <div class="badge-pill">
+                Core engine powering OneLink global access.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-right">
+          <div class="tagline-en">“One Access. All Services.”</div>
+          <a href="../index-en.html" class="pill-link">
+            <span>Back to OneLink</span>
+          </a>
+        </div>
+      </header>
+
+      <main class="brand-main">
+        <section class="card">
+          <div class="pill-label">
+            <span class="en">SECTION 01</span>
+            <span>UDSAL Concept</span>
+          </div>
+          <h2>What is OneLink UDSAL™?</h2>
+          <p class="meta">
+            Unified Digital Services Access Layer · A unified architectural layer for digital services.
+          </p>
+
+          <div class="stack">
+            <p>
+              <strong>OneLink UDSAL™</strong> is an architectural layer that provides unified access
+              to government and global digital services via a
+              <strong>single data schema (Unified Service Schema)</strong>,
+              a <strong>global deep search engine</strong>, and
+              <strong>multi-region routing</strong> that lives entirely on the front-end.
+            </p>
+
+            <p>
+              UDSAL aims to make access to digital services
+              <strong>simpler, clearer, and more reliable</strong>, so that end users do not
+              need to know every portal or site; they only interact with a single unified layer.
+            </p>
+
+            <p>
+              From an engineering perspective, UDSAL acts as an
+              <strong>abstraction layer</strong> above services, normalizing how they are described,
+              discovered, and linked across multiple countries and platforms.
+            </p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="pill-label">
+            <span class="en">SECTION 02</span>
+            <span>Color & Typography</span>
+          </div>
+          <h2>Color System & Type</h2>
+          <p class="meta">
+            Colors draw from Saudi identity and OneLink’s visual language with a global tech tone.
+          </p>
+
+          <div class="color-row">
+            <div class="swatch">
+              <div
+                class="swatch-chip"
+                style="background: linear-gradient(135deg, #00d68f, #00b37a); box-shadow: 0 0 28px rgba(0,214,143,0.7);"
+              ></div>
+              <div class="swatch-meta">
+                <div class="swatch-name">UDSAL Hybrid Green</div>
+                <div class="swatch-code">#00D68F → #00B37A</div>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-chip" style="background:#020617;"></div>
+              <div class="swatch-meta">
+                <div class="swatch-name">Deep Space Background</div>
+                <div class="swatch-code">#020617</div>
+              </div>
+            </div>
+
+            <div class="swatch">
+              <div class="swatch-chip" style="background:#0b1120;"></div>
+              <div class="swatch-meta">
+                <div class="swatch-name">Surface Card</div>
+                <div class="swatch-code">#0B1120</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="typo-row">
+            <div class="typo-block">
+              <div class="typo-label">Primary Typeface</div>
+              <div class="typo-sample">Inter · OneLink UDSAL — Unified Access Layer</div>
+              <div class="typo-meta">
+                Used for UI, labels, and technical texts across UDSAL-powered experiences.
+              </div>
+            </div>
+
+            <div class="typo-block">
+              <div class="typo-label">Arabic Companion</div>
+              <div class="typo-sample" style="font-family: 'Cairo', system-ui;">OneLink UDSAL — طبقة الوصول الموحّدة</div>
+              <div class="typo-meta">
+                Cairo is used where Arabic labels or mixed language content are present.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="pill-label">
+            <span class="en">SECTION 03</span>
+            <span>Logo Philosophy</span>
+          </div>
+          <h2>UDSAL Logo & Usage</h2>
+          <p class="meta">
+            Dual Crescent · Core Orb · Hybrid Glow · A symbol of a unified core connecting the digital world.
+          </p>
+
+          <div class="stack">
+            <p>
+              The logo is built around a <strong>Core Orb</strong> representing the UDSAL engine,
+              surrounded by a <strong>dual crescent</strong> that encodes
+              <strong>multiple countries and services orbiting a single access layer.</strong>
+            </p>
+            <p>
+              The hybrid green gradient expresses the transition
+              <strong>from local to global</strong> and from
+              <strong>government services to international platforms</strong>, matching OneLink’s vision.
+            </p>
+
+            <div class="do-dont-grid">
+              <div class="do-card">
+                <strong>Do:</strong>
+                • Use the logo on UDSAL-related pages and dashboards.<br/>
+                • Keep the official colors and glow intensity.<br/>
+                • Place it on dark, calm backgrounds for maximum legibility.
+              </div>
+              <div class="dont-card">
+                <strong>Don’t:</strong>
+                • Replace government or institutional logos with UDSAL.<br/>
+                • Recolor the logo to arbitrary palettes.<br/>
+                • Place it on noisy photos or low-contrast backgrounds.
+              </div>
+            </div>
+
+            <p class="meta-small">
+              You may use the phrase <strong>“Powered by OneLink UDSAL™”</strong> to indicate that
+              a portal or product is built on top of this access layer.
+            </p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="pill-label">
+            <span class="en">SECTION 04</span>
+            <span>Future Vision</span>
+          </div>
+          <h2>UDSAL as a Global Standard</h2>
+          <p class="meta">
+            From an internal OneLink prototype into an open standard that any government can adopt.
+          </p>
+
+          <div class="stack">
+            <p>
+              The long-term vision is for UDSAL to evolve into a
+              <strong>global open standard for digital service access</strong>,
+              enabling countries and organizations to plug their services into a
+              <strong>shared schema and discovery layer</strong> while keeping full independence.
+            </p>
+
+            <p>
+              OneLink is the first implementation of this idea, starting with Saudi Arabia,
+              Egypt, China, and global services — and later expanding to more regions and deeper integrations.
+            </p>
+
+            <p class="meta-small">
+              This document is the official English brand specification for
+              <strong>OneLink UDSAL™</strong> and can be shared with partners or institutions
+              when discussing technical or strategic collaborations.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footnote">
+        <span>
+          OneLink UDSAL™ · Unified Digital Services Access Layer — Brand Spec (EN) v1.0
+        </span>
+        <span>
+          Part of the OneLink project by Safar Al-Ghamdi · Private Concept.
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

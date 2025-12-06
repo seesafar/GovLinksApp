@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink · التحقق من الروابط الرسمية (السعودية)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #000 55%, #000 100%);
+      color: #e5e7eb;
+    }
+
+    .page-shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 90px 16px 32px;
+    }
+
+    .verify-card {
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 22px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.9);
+      padding: 18px 18px 20px;
+    }
+
+    .verify-title {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .verify-sub {
+      font-size: 0.88rem;
+      color: #9ca3af;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 0.78rem;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: rgba(15, 23, 42, 0.96);
+      color: #9ca3af;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .verify-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .verify-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .panel {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(31, 41, 55, 0.98);
+      padding: 14px 14px 12px;
+    }
+
+    .panel h3 {
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .panel p {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      line-height: 1.7;
+    }
+
+    /* حق الإدخال */
+    .verify-input-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .verify-input {
+      flex: 1;
+      min-width: 220px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #020617;
+      padding: 7px 12px;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .verify-input::placeholder {
+      color: #6b7280;
+    }
+
+    .verify-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(34, 197, 94, 0.9);
+      background: #22c55e;
+      color: #022c22;
+      padding: 7px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .verify-result {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      display: none;
+    }
+
+    .verify-result.ok {
+      border-color: rgba(34, 197, 94, 0.9);
+      background: rgba(22, 163, 74, 0.18);
+      color: #bbf7d0;
+    }
+
+    .verify-result.warn {
+      border-color: #f97316;
+      background: rgba(251, 146, 60, 0.14);
+      color: #fed7aa;
+    }
+
+    .verify-result.bad {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.16);
+      color: #fecaca;
+    }
+
+    /* جدول النطاقات الموثوقة */
+    .domains-list {
+      margin-top: 10px;
+      padding: 10px 10px 8px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      font-size: 0.8rem;
+    }
+
+    .domains-list h4 {
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      color: #e5e7eb;
+    }
+
+    .domains-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .domains-tags span {
+      border-radius: 999px;
+      padding: 3px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #cbd5e1;
+    }
+
+    .legal-note {
+      margin-top: 14px;
+      font-size: 0.72rem;
+      color: #9ca3af;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الهيدر الموحد -->
+  <div data-include="core/layout/header.html"></div>
+
+  <main class="page-shell">
+    <section class="verify-card">
+      <h2 class="verify-title">التحقق من الروابط الرسمية · السعودية</h2>
+      <p class="verify-sub">
+        هذه الصفحة تساعدك تتأكد بشكل سريع أن الرابط الذي تشاهده ضمن OneLink يتبع
+        نطاقًا رسميًا موثوقًا في السعودية، مثل النطاقات الحكومية أو المنصّات الوطنية المعروفة.
+      </p>
+
+      <div class="badge-row">
+        <div class="badge">
+          <span class="dot"></span>
+          Saudi Official Domains
+        </div>
+        <div class="badge">
+          التحقق هنا إرشادي فقط — المعيار النهائي هو المتصفّح وشهادة الأمان (HTTPS).
+        </div>
+      </div>
+
+      <div class="verify-grid">
+        <!-- لوحة التحقق -->
+        <article class="panel">
+          <h3>تحقق سريع من رابط</h3>
+          <p>
+            الصق رابط الخدمة هنا (URL)، مثل:
+            <span dir="ltr">https://absher.sa</span> أو
+            <span dir="ltr">https://najiz.sa</span>، وسنخبرك إن كان ضمن النطاقات
+            الموثوقة التي يستخدمها OneLink عادةً.
+          </p>
+
+          <div class="verify-input-row">
+            <input
+              id="sa-url-input"
+              class="verify-input"
+              type="text"
+              placeholder="مثال: https://example.gov.sa أو https://something.sa"
+            />
+            <button class="verify-btn" type="button" onclick="checkSaudiUrl()">
+              تحقق الآن
+            </button>
+          </div>
+
+          <div id="sa-result" class="verify-result"></div>
+        </article>
+
+        <!-- قائمة النطاقات الموثوقة -->
+        <article class="panel">
+          <h3>النطاقات الرسمية المستخدمة في OneLink · السعودية</h3>
+          <p>
+            OneLink يركّز على النطاقات الحكومية والرسمية التالية داخل السعودية،
+            وقد نضيف نطاقات جديدة مع الوقت حسب المنصّات الوطنية المعتمدة.
+          </p>
+
+          <div class="domains-list">
+            <h4>أمثلة على TLDs موثوقة:</h4>
+            <div class="domains-tags">
+              <span>.gov.sa</span>
+              <span>.sa</span>
+              <span>.sdaia.gov.sa</span>
+              <span>.absher.sa</span>
+              <span>.najiz.sa</span>
+              <span>.balady.gov.sa</span>
+              <span>.etimad.sa</span>
+              <span>.hrsd.gov.sa</span>
+            </div>
+          </div>
+
+          <p class="legal-note">
+            ملاحظة: وجود نطاق داخل هذه القائمة لا يعني أننا نمثّل الجهة المالكة له،
+            بل يعني فقط أننا نوجّه المستخدم إلى المنصّات الحكومية المعروفة عبر روابط عامة.
+            تأكد دائماً أن المتصفح يظهر علامة القفل (HTTPS) وأن اسم النطاق مكتوب بشكل صحيح.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="core/layout/footer.html"></div>
+
+  <script src="core/js/include.js"></script>
+
+  <script>
+    // مجموعة النطاقات / النهايات الموثوقة في السعودية (شكل مبسط)
+   const cnTrustedPatterns = [
+  ".gov.cn",
+  "www.gov.cn",
+  "www.gjzwfw.gov.cn",
+  "12306.cn"
+];
+
+
+    function normalizeUrl(input) {
+      if (!input) return "";
+      input = input.trim();
+      // لو المستخدم كتب بس domain بدون https نضيفه
+      if (!input.startsWith("http://") && !input.startsWith("https://")) {
+        input = "https://" + input;
+      }
+      try {
+        const u = new URL(input);
+        return u.hostname.toLowerCase();
+      } catch (e) {
+        return "";
+      }
+    }
+
+    function checkSaudiUrl() {
+      const input = document.getElementById("sa-url-input").value;
+      const resultBox = document.getElementById("sa-result");
+      const host = normalizeUrl(input);
+
+      if (!host) {
+        resultBox.style.display = "block";
+        resultBox.className = "verify-result bad";
+        resultBox.textContent = "لم نستطع قراءة الرابط. تأكد من كتابته بشكل صحيح (مثال: https://example.gov.sa).";
+        return;
+      }
+
+      // هل النطاق ينتهي بأحد الأنماط الموثوقة؟
+      const isTrusted = saTrustedPatterns.some(pattern =>
+        host === pattern || host.endsWith(pattern)
+      );
+
+      resultBox.style.display = "block";
+
+      if (isTrusted) {
+        resultBox.className = "verify-result ok";
+        resultBox.innerHTML =
+          "✅ يبدو أن النطاق <span dir=\"ltr\">" +
+          host +
+          "</span> يتبع نطاقاً سعودياً رسمياً/معروفاً. تأكد دائماً من شهادة الأمان في المتصفح.";
+      } else if (host.endsWith(".com") || host.endsWith(".net") || host.endsWith(".org")) {
+        resultBox.className = "verify-result warn";
+        resultBox.innerHTML =
+          "⚠ النطاق <span dir=\"ltr\">" +
+          host +
+          "</span> ليس ضمن النطاقات الحكومية السعودية المعروفة لدينا. قد يكون موقعاً تجارياً أو خدمياً عادياً — تحقق من الجهة المالكة قبل إدخال أي بيانات.";
+      } else {
+        resultBox.className = "verify-result bad";
+        resultBox.innerHTML =
+          "❌ النطاق <span dir=\"ltr\">" +
+          host +
+          "</span> لا يطابق أنماط النطاقات السعودية الرسمية في هذه الصفحة. استخدمه بحذر، وتأكد من صحته من مصدر موثوق.";
+      }
+    }
+  </script>
+</body>
+</html>

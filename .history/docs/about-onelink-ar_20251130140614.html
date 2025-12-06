@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>عن OneLink · فكرة الرابط الموحد للخدمات الحكومية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: #f4f5f7;
+      color: #111827;
+      direction: rtl;
+    }
+
+    /* الشريط الأخضر العلوي */
+    .hero {
+      background: #047857;
+      color: #ecfdf5;
+      padding: 32px 16px 40px;
+    }
+
+    .hero-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-kicker {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 4px 0 8px;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      opacity: 0.95;
+      margin-bottom: 18px;
+    }
+
+    .hero-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #ecfdf5;
+      color: #065f46;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .hero-back span {
+      font-size: 14px;
+    }
+
+    /* أيقونة الكرة الصغيرة (تبديل اللغة) */
+    .lang-fab {
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: #047857;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(4, 120, 87, 0.65);
+      z-index: 20;
+    }
+
+    .lang-fab a {
+      color: #ecfdf5;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    /* المحتوى الأبيض تحت */
+    .page-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 16px 40px;
+    }
+
+    .section-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .section-title-mark {
+      width: 3px;
+      height: 24px;
+      border-radius: 999px;
+      background: #16a34a;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+
+    .card-wide {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      font-size: 13px;
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-label {
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-label span.emoji {
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #4b5563;
+    }
+
+    ul {
+      margin: 0;
+      padding-right: 18px;
+      font-size: 14px;
+      color: #374151;
+      line-height: 1.9;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- زر تغيير اللغة الصغير (يأخذ للمقال الإنجليزي) -->
+  <div class="lang-fab">
+    <a href="about-onelink-en.html" aria-label="View About OneLink in English">🌐</a>
+  </div>
+
+  <!-- الهيدر الأخضر -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-kicker">رابط موحّد · Unified Link</div>
+      <h1 class="hero-title">عن OneLink</h1>
+      <p class="hero-sub">
+        فكرة بسيطة لجمع أهم الخدمات الحكومية السعودية في صفحة واحدة سهلة وسريعة،
+        بدل ضياع الوقت في البحث عن الروابط الصحيحة.
+      </p>
+      <a class="hero-back" href="index-ar.html">
+        <span>←</span>
+        <span>الرجوع للبوابة الرئيسية</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- المحتوى -->
+  <main class="page-shell">
+
+    <!-- ما هو OneLink؟ -->
+    <section>
+      <div class="section-title-row">
+        <div class="section-title-mark"></div>
+        <h2 class="section-title">ما هو OneLink؟</h2>
+      </div>
+      <p class="section-sub">
+        نبذة سريعة عن فكرة المشروع والهدف منه.
+      </p>
+      <div class="card-wide">
+        OneLink هو مشروع شخصي غير رسمي يهدف إلى جمع أهم المنصات والخدمات الحكومية السعودية
+        في صفحة واحدة بسيطة وسهلة. بدلاً من البحث المتكرر في محركات البحث أو حفظ عشرات الروابط،
+        يقدّم لك OneLink نقطة بداية موحّدة للوصول للخدمة المطلوبة بسرعة.
+        <br /><br />
+        الصفحة تعمل كـ <strong>دليل موحّد</strong> للمنصات الرسمية (أبشر، ناجز، بلدي، اعتماد، قوى،
+        منصات الصحة، المرور، الإسكان، وغيرها) مع تركيز على الوضوح والسرعة والبساطة في الاستخدام.
+      </div>
+    </section>
+
+    <!-- أهداف المشروع (٤ كروت) -->
+    <section style="margin-top: 26px;">
+      <div class="section-title-row">
+        <div class="section-title-mark"></div>
+        <h2 class="section-title">أهداف المشروع</h2>
+      </div>
+      <p class="section-sub">
+        ماذا يحاول OneLink أن يقدّم للمستخدم؟
+      </p>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-label">
+            <span class="emoji">🚀</span>
+            <span>تسهيل الوصول للخدمات</span>
+          </div>
+          <p>
+            جمع روابط الخدمات الحكومية في مكان واحد واضح ومنظّم،
+            بحيث يصل المستخدم بسرعة للمنصة الرسمية المناسبة بأقل عدد من النقرات.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-label">
+            <span class="emoji">🧭</span>
+            <span>تقليل التشتّت والبحث</span>
+          </div>
+          <p>
+            بدلاً من إعادة البحث في كل مرة، يمكن للمستخدم الدخول على OneLink
+            واختيار القسم المناسب للوصول السريع للرابط الصحيح بدون ضياع.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-label">
+            <span class="emoji">📱</span>
+            <span>واجهة بسيطة ومريحة</span>
+          </div>
+          <p>
+            تصميم خفيف يعمل بسلاسة على الجوال والكمبيوتر،
+            مع تركيز على الوضوح، حجم خط مناسب، وأقل قدر ممكن من الإزعاج البصري.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-label">
+            <span class="emoji">🌱</span>
+            <span>مشروع قابل للتطوير</span>
+          </div>
+          <p>
+            إمكانية إضافة دول وأقسام جديدة لاحقاً (مصر، الصين، وغيرها)،
+            مع تطوير البحث، وتحسين التجربة، وإضافة أدوات مساعدة حسب الحاجة.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- كيف تستخدم الصفحة؟ -->
+    <section style="margin-top: 32px;">
+      <div class="section-title-row">
+        <div class="section-title-mark"></div>
+        <h2 class="section-title">كيف تستخدم صفحة OneLink؟</h2>
+      </div>
+      <p class="section-sub">
+        خطوات بسيطة للاستفادة من دليل الروابط.
+      </p>
+
+      <div class="card-wide">
+        <ul>
+          <li>افتح الصفحة الرئيسية <strong>OneLink</strong> (النسخة العربية: <code>index-ar.html</code>).</li>
+          <li>اختر الدولة أو النطاق الحالي (مثلاً: السعودية).</li>
+          <li>من قسم <strong>منصات موحدة وأساسيات</strong> يمكنك الدخول مباشرة لأشهر المنصات مثل أبشر، ناجز، توكلنا، نسك، وغيرها.</li>
+          <li>يمكنك لاحقاً استخدام البحث (عند تفعيله) للبحث باسم المنصة بالعربي أو الإنجليزي.</li>
+          <li>جرّب زر <strong>عرض كل الخدمات</strong> لمشاهدة الدليل الكامل لكل الروابط المصنّفة.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+<script src="../core/js/include.js"></script>
+
+</body>
+</html>

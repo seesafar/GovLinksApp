@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OneLink · Unified Government Services (EN)</title>
+
+  <!-- Favicons (نفس المستخدمة في index.html) -->
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/saudi-emblem.png?v=3">
+  <link rel="icon" type="image/png" sizes="32x32"  href="assets/icons/favicon-32x32.png?v=3">
+  <link rel="icon" type="image/png" sizes="16x16"  href="assets/icons/favicon-16.png?v=3">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/saudi-emblem.png?v=3">
+  <meta name="theme-color" content="#0b3940" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#082b31; --card:#0d3640; --ink:#e8f4f4; --muted:#a7c5c7;
+      --brand:#19c37d; --ring:#1fe6a0; --pill:#0f4150; --border:#174a54;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Cairo", system-ui, -apple-system, Segoe UI, sans-serif;
+      color:var(--ink);
+      background:radial-gradient(1200px 800px at 10% -10%, #0e4650 0%, var(--bg) 40%, #072329 100%);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit; text-decoration:none}
+
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:28px 20px 56px;
+    }
+
+    /* ====== Header ====== */
+    header{
+      text-align:center;
+      padding:16px 8px 24px;
+    }
+    header .main-logo{
+      width:130px;
+      height:auto;
+      display:block;
+      margin:0 auto 14px;
+      filter:drop-shadow(0 0 10px rgba(0,255,200,.25));
+    }
+    header .title{
+      font-size:1.7rem;
+      font-weight:700;
+      margin-bottom:6px;
+    }
+    header .subtitle{
+      font-size:.95rem;
+      color:var(--muted);
+    }
+
+    /* ====== Top bar / language buttons ====== */
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:16px;
+    }
+    .topbar .region{
+      padding:6px 10px;
+      border-radius:999px;
+      background:var(--pill);
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:.8rem;
+    }
+    .lang-switch{
+      display:flex;
+      gap:8px;
+    }
+    .lang-switch a{
+      padding:6px 10px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#0b3940;
+      font-size:.85rem;
+      font-weight:600;
+    }
+    .lang-switch a.active{
+      outline:2px solid var(--ring);
+      background:#11525d;
+    }
+
+    /* ====== Hero / Search ====== */
+    .hero{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), transparent 26%), var(--card);
+      border-radius:22px;
+      border:1px solid var(--border);
+      padding:24px 24px 28px;
+      box-shadow:0 10px 40px rgba(0,0,0,.35);
+      margin-bottom:20px;
+    }
+    .hero-title{
+      font-size:1.9rem;
+      margin:4px 0 6px;
+    }
+    .hero-lead{
+      font-size:.95rem;
+      color:var(--muted);
+      margin:0 0 16px;
+      max-width:620px;
+    }
+    .search-row{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .search-input{
+      flex:1;
+      min-width:240px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#071f25;
+      color:var(--ink);
+      font-family:inherit;
+      font-size:.9rem;
+    }
+    .search-input::placeholder{
+      color:var(--muted);
+    }
+    .search-btn{
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid var(--ring);
+      background:#0f4150;
+      color:var(--ink);
+      font-weight:600;
+      cursor:pointer;
+      min-width:90px;
+    }
+    .search-meta{
+      font-size:.8rem;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    /* ====== Sections & cards ====== */
+    h2.section-title{
+      margin:18px 0 10px;
+      font-size:1.1rem;
+    }
+    .section-sub{
+      font-size:.8rem;
+      color:var(--muted);
+      margin-bottom:12px;
+    }
+
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(6, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width:1080px){
+      .services-grid{grid-template-columns:repeat(4,1fr);}
+    }
+    @media (max-width:768px){
+      .services-grid{grid-template-columns:repeat(3,1fr);}
+    }
+    @media (max-width:520px){
+      .services-grid{grid-template-columns:repeat(2,1fr);}
+    }
+
+    .svc-card{
+      background:#0a3138;
+      border-radius:16px;
+      border:1px solid var(--border);
+      padding:12px 10px;
+      text-align:center;
+      display:grid;
+      place-items:center;
+      gap:6px;
+      min-height:112px;
+      transition:.2s transform, .2s box-shadow;
+      cursor:pointer;
+    }
+    .svc-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 24px rgba(0,0,0,.35);
+    }
+    .svc-tag{
+      font-size:.7rem;
+      color:var(--muted);
+    }
+    .svc-name{
+      font-size:.85rem;
+      font-weight:600;
+    }
+    .svc-action{
+      margin-top:2px;
+      font-size:.75rem;
+      color:var(--muted);
+      opacity:.9;
+    }
+
+    .svc-card img{
+      width:40px;
+      height:40px;
+      object-fit:contain;
+    }
+
+    footer{
+      margin-top:28px;
+      text-align:center;
+      font-size:.8rem;
+      color:var(--muted);
+    }
+    .divider{
+      height:1px;
+      margin:20px 0 12px;
+      background:linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .gold{color:#ffd86b}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- ====== HEADER ====== -->
+    <header>
+      <img src="logo/onelink-header.png"
+           alt="OneLink Logo"
+           class="main-logo">
+
+      <div class="title">GovLinksApp OneLink</div>
+      <div class="subtitle">
+        A unified smart gateway for official government services.
+      </div>
+    </header>
+
+    <!-- ====== HERO / SEARCH ====== -->
+    <section class="hero">
+      <div class="topbar">
+        <span class="region">Saudi Arabia • Egypt • China (soon)</span>
+
+        <div class="lang-switch">
+          <!-- Arabic نسخة الخدمات -->
+          <a href="services-sa.html">العربية</a>
+          <!-- English الحالية -->
+          <a href="services-en.html" class="active">English</a>
+        </div>
+      </div>
+
+      <h1 class="hero-title">OneLink – Unified Government Services</h1>
+      <p class="hero-lead">
+        All trusted government platforms in one secure page — modern UX,
+        fast access, and strong browser protection.
+      </p>
+
+      <div class="search-row">
+        <input class="search-input"
+               type="search"
+               placeholder="Search by English or Arabic service name (Absher, Najiz, HRSD, Qiwa…)" />
+        <button class="search-btn" type="button">Search</button>
+      </div>
+      <div class="search-meta">Results: <strong>0 / 0</strong> (demo layout – search is not active yet)</div>
+    </section>
+
+    <!-- ====== UNIFIED PLATFORMS & ESSENTIALS ====== -->
+    <section>
+      <h2 class="section-title">Unified Platforms & Essentials</h2>
+      <div class="section-sub">
+        The most used national platforms for citizens and residents.
+      </div>
+
+      <div class="services-grid">
+
+        <!-- استخدم نفس أسماء الأيقونات الموجودة عندك في assets/icons -->
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/nusuk.png" alt="Nusuk">
+          <div class="svc-tag">Pilgrimage Platform</div>
+          <div class="svc-name">Nusuk</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/musaned.png" alt="Musaned">
+          <div class="svc-tag">Domestic Labor</div>
+          <div class="svc-name">Musaned</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/etimad.png" alt="Etimad">
+          <div class="svc-tag">Government Procurement</div>
+          <div class="svc-name">Etimad</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/balady.png" alt="Balady">
+          <div class="svc-tag">Municipal Services</div>
+          <div class="svc-name">Balady</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/qiwa.png" alt="Qiwa">
+          <div class="svc-tag">Labor Market</div>
+          <div class="svc-name">Qiwa</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/najiz.png" alt="Najiz">
+          <div class="svc-tag">Justice Platform</div>
+          <div class="svc-name">Najiz</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/nafath.png" alt="Nafath">
+          <div class="svc-tag">Digital Identity</div>
+          <div class="svc-name">Nafath</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/tawakkalna.png" alt="Tawakkalna">
+          <div class="svc-tag">National Super App</div>
+          <div class="svc-name">Tawakkalna</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/absher.png" alt="Absher">
+          <div class="svc-tag">e-Services</div>
+          <div class="svc-name">Absher</div>
+          <div class="svc-action">Open</div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ====== MINISTRIES & AUTHORITIES ====== -->
+    <section>
+      <h2 class="section-title" style="margin-top:24px;">Ministries & Authorities</h2>
+      <div class="section-sub">
+        Direct links to the most important ministries and government entities.
+      </div>
+
+      <div class="services-grid">
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/mewa.png" alt="Environment, Water & Agriculture">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Environment, Water & Agriculture</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/moc.png" alt="Ministry of Commerce">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Ministry of Commerce</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/mcit.png" alt="MCIT">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Communications & IT (MCIT)</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/mot.png" alt="Transport & Logistics">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Transport & Logistics</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/hrsd.png" alt="HRSD">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Human Resources & Social Development</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/momra.png" alt="MOMRAH">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Municipal & Rural Affairs</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/moj.png" alt="MOJ">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Ministry of Justice</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/moh.png" alt="MOH">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Ministry of Health</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/moe.png" alt="MOE">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Ministry of Education</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+        <a class="svc-card" href="#" target="_blank" rel="noopener">
+          <img src="assets/icons/moi.png" alt="MOI">
+          <div class="svc-tag">Ministry</div>
+          <div class="svc-name">Ministry of Interior</div>
+          <div class="svc-action">Visit</div>
+        </a>
+
+      </div>
+    </section>
+
+    <footer>
+      <div class="divider"></div>
+      <div class="gold">Powered by Safar Creative Hub · OneLink</div>
+      <div>Unified Government Services Portal · Private License © 2025</div>
+    </footer>
+
+  </div>
+</body>
+</html>

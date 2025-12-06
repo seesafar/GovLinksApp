@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneLink · All Government Services</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+  body {
+    background: #020617;
+    color: #e5e7eb;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .page-wrap {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .back-row {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .back-link {
+    padding: 10px 18px;
+    background: #0f766e;
+    color: #fff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.2s;
+    display: inline-block;
+  }
+  .back-link:hover {
+    background: #0d5e56;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: #9ca3af;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+</style>
+
+</head>
+
+<body>
+  <div class="page-wrap">
+    <div class="back-row">
+      <a href="index-en.html" class="back-link">Back to main portal ←</a>
+    </div>
+
+    <h1>All Government Services</h1>
+    <p class="subtitle">
+      Trusted official platforms — arranged clearly for fast access.
+    </p>
+
+    <div class="services-grid">
+
+      <!-- مثال: أول خدمة -->
+      <a href="https://ehkaam.sa" target="_blank" rel="noopener noreferrer" class="service-card">
+        <div class="service-logo-ring">
+          <img src="assets/services/service-01.png" alt="Ehkaam" />
+        </div>
+        <div class="service-name">Ehkaam</div>
+        <button class="service-btn">Open</button>
+      </a>
+
+      <!-- مثال: خدمة ثانية -->
+      <a href="https://www.etimad.sa" target="_blank" rel="noopener noreferrer" class="service-card">
+        <div class="service-logo-ring">
+          <img src="assets/services/service-02.png" alt="Etimad" />
+        </div>
+        <div class="service-name">Etimad</div>
+        <button class="service-btn">Open</button>
+      </a>
+
+      <!-- مثال: خدمة ثالثة -->
+      <a href="https://balady.gov.sa" target="_blank" rel="noopener noreferrer" class="service-card">
+        <div class="service-logo-ring">
+          <img src="assets/services/service-03.png" alt="Balady" />
+        </div>
+        <div class="service-name">Balady</div>
+        <button class="service-btn">Open</button>
+      </a>
+
+      <!-- ... كرّر نفس البلوك لكل شعار عندك ... -->
+      <!-- انسخ <a class="service-card">...</a> وعدّل: href + src + الاسم -->
+      <!-- تقدر تكمّل إلى 52 خدمة عادي، الجريد بيلف تلقائي -->
+
+    </div>
+  </div>
+</body>
+</html>

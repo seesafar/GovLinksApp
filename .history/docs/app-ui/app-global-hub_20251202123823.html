@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink · Global Hub (Beta)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- إعدادات بسيطة -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #000 60%, #000 100%);
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      direction: rtl;
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 900px;
+      padding: 24px 16px 40px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .hub-card {
+      margin-top: 22px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top right, #1d283a 0, #020617 60%);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.9);
+      padding: 20px 18px 18px;
+    }
+
+    .hub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e0e7ff;
+      margin-bottom: 10px;
+    }
+
+    .hub-badge span {
+      font-size: 0.9rem;
+    }
+
+    .hub-title {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .hub-text {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .hub-list {
+      font-size: 0.86rem;
+      color: #9ca3af;
+      padding-right: 18px;
+      margin-bottom: 10px;
+    }
+
+    .hub-list li {
+      margin-bottom: 4px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #facc15;
+    }
+
+    .back-link {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: #e5e7eb;
+      text-decoration: none;
+      background: rgba(15, 23, 42, 0.9);
+      transition: all 0.16s ease-out;
+    }
+
+    .back-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.9);
+    }
+
+    .main-footer {
+      max-width: 900px;
+      width: 100%;
+      font-size: 0.74rem;
+      color: rgba(148, 163, 184, 0.85);
+      text-align: center;
+      padding: 12px 18px 26px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="../core/layout/header.html"></div>
+
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-title">OneLink · Global Hub</div>
+      <p class="hero-sub">
+        مركز تجريبي موحّد لقواعد السفر والصحة والتأشيرات حول العالم.
+      </p>
+    </header>
+
+    <main class="hub-card">
+      <div class="hub-badge">
+        <span>🌍</span>
+        <strong>Global Hub · Beta</strong>
+      </div>
+
+      <h2 class="hub-title">الصفحة تحت الإنشاء</h2>
+      <p class="hub-text">
+        سيتم قريباً ربط OneLink Global Hub بروابط رسمية مثل:
+        شنغن، IATA، WHO، تأشيرات أمريكا وبريطانيا، وحزم السفر العالمية.
+        الهدف أن تكون هذه الصفحة نقطة انطلاق واحدة قبل أي رحلة دولية.
+      </p>
+
+      <ul class="hub-list">
+        <li>مراجعة متطلبات التأشيرة قبل السفر.</li>
+        <li>الاطلاع على إرشادات الصحة والسجلات المطلوبة.</li>
+        <li>روابط موحدة لمصادر موثوقة فقط.</li>
+      </ul>
+
+      <p class="note">
+        ✳ هذه النسخة تجريبية – المحتوى التفصيلي سيتم ربطه لاحقاً بمحرك البحث العميق والخدمات العالمية.
+      </p>
+
+      <a href="index.html" class="back-link">
+        ⬅ العودة للصفحة الرئيسية
+      </a>
+    </main>
+  </div>
+
+  <footer class="main-footer">
+    🔗 S © 2025 Private ownership of Developer Safar Al-Ghamdi — All rights reserved.
+  </footer>
+
+  <script src="../core/js/include.js"></script>
+</body>
+</html>

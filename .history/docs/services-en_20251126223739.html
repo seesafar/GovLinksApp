@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>GovLinksApp OneLink · Unified Government Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✅ Security headers (نفس فكرة النسخة العربية) -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta
+    http-equiv="Permissions-Policy"
+    content="geolocation=(), microphone=(), camera=()"
+  />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https:;
+      connect-src 'self';
+      font-src 'self' https:;
+      frame-ancestors 'none';
+      base-uri 'self';
+      form-action 'self';
+    "
+  />
+
+  <!-- ✅ نفس ملف التنسيق الموجود داخل docs/css -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="app-shell app-shell--dark">
+  <!-- ============ Top App Header ============ -->
+  <header class="hero-header">
+    <div class="hero-logo-wrap">
+      <div class="hero-logo-circle">
+        <img
+          src="assets/icons/absher.png"
+          alt="GovLinksApp Logo"
+          class="hero-logo-img"
+        />
+      </div>
+      <div class="hero-title-block">
+        <h1 class="hero-app-name">GovLinksApp OneLink</h1>
+        <p class="hero-subtitle">
+          A unified gateway to organize official government links with a fast, smart and secure experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-meta-row">
+      <!-- 🌍 Region selector -->
+      <div class="region-chip">
+        <span class="region-label">Regions</span>
+        <span class="region-value">Saudi Arabia · Egypt · China (soon)</span>
+      </div>
+
+      <!-- 🌐 Language tabs -->
+      <div class="lang-tabs">
+        <a href="index.html" class="lang-tab">
+          العربية
+        </a>
+        <button class="lang-tab lang-tab--active" type="button">
+          English
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ Main Card ============ -->
+  <main class="main-layout">
+    <section class="portal-card">
+      <header class="portal-header">
+        <div class="portal-text">
+          <h2 class="portal-title">Unified Government Services Portal</h2>
+          <p class="portal-description">
+            All official government platforms in one secure page — a modern interface with strong protection for users.
+          </p>
+        </div>
+
+        <div class="portal-actions">
+          <a href="about-en.html" class="btn btn-ghost">
+            ℹ️ About OneLink
+          </a>
+          <a href="services-en.html" class="btn btn-primary">
+            View all services
+          </a>
+        </div>
+      </header>
+
+      <!-- 🔍 Global Search (UI فقط حالياً) -->
+      <div class="search-row">
+        <button class="search-chip search-chip--active" type="button">
+          Search
+        </button>
+        <input
+          type="search"
+          class="search-input"
+          placeholder="Search by Arabic or English service name (Absher, Najiz, HRSD, Qiwa...)"
+          aria-label="Search for a government service"
+        />
+        <div class="search-meta">
+          <span class="search-count-label">Results:</span>
+          <span class="search-count-value">0 / 0</span>
+        </div>
+      </div>
+
+      <!-- ============ Main Services Strip ============ -->
+      <section class="services-strip">
+        <header class="strip-header">
+          <h3 class="strip-title">Unified Platforms & Essentials</h3>
+          <p class="strip-subtitle">Most-used national portals for citizens and residents</p>
+        </header>
+
+        <div class="services-row">
+          <!-- Card: NUSUK -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/nusuk.png"
+                alt="Nusuk"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Nusuk</p>
+              <p class="service-name-ar">نسك</p>
+            </div>
+            <a
+              href="https://www.nusuk.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Musaned -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/musaned.png"
+                alt="Musaned"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Musaned</p>
+              <p class="service-name-ar">مساند</p>
+            </div>
+            <a
+              href="https://musaned.com.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Ehkame / Ejra ... (example) -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/ehkaam.png"
+                alt="Ehkaam"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Ehkaam</p>
+              <p class="service-name-ar">إحكام</p>
+            </div>
+            <a
+              href="https://ehkaam.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Balady -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/balady.png"
+                alt="Balady"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Balady</p>
+              <p class="service-name-ar">بلدي</p>
+            </div>
+            <a
+              href="https://balady.gov.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Etimad -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/etimad.png"
+                alt="Etimad"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Etimad</p>
+              <p class="service-name-ar">اعتماد</p>
+            </div>
+            <a
+              href="https://etimad.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Qiwa -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/qiwa.png"
+                alt="Qiwa"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Qiwa</p>
+              <p class="service-name-ar">قوى</p>
+            </div>
+            <a
+              href="https://qiwa.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Najiz -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/najiz.png"
+                alt="Najiz"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Najiz</p>
+              <p class="service-name-ar">ناجز</p>
+            </div>
+            <a
+              href="https://najiz.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Tawakkalna -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/tawakkalna.png"
+                alt="Tawakkalna"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Tawakkalna</p>
+              <p class="service-name-ar">توكلنا</p>
+            </div>
+            <a
+              href="https://tawakkalna.sdaia.gov.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Nafath -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/nafath.png"
+                alt="Nafath"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Nafath</p>
+              <p class="service-name-ar">نفاذ الوطني</p>
+            </div>
+            <a
+              href="https://www.iam.gov.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+
+          <!-- Card: Absher -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img
+                src="assets/icons/absher.png"
+                alt="Absher"
+                class="service-icon"
+              />
+            </div>
+            <div class="service-text">
+              <p class="service-name-en">Absher</p>
+              <p class="service-name-ar">أبشر</p>
+            </div>
+            <a
+              href="https://www.absher.sa/"
+              target="_blank"
+              rel="noopener"
+              class="service-btn"
+            >
+              Go
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ Developer & Features ============ -->
+      <section class="portal-grid">
+        <!-- Developer Card -->
+        <article class="dev-card">
+          <header class="dev-header">
+            <span class="dev-label">Developer</span>
+          </header>
+          <div class="dev-body">
+            <p class="dev-name">Safar Al-Ghamdi</p>
+            <p class="dev-role">
+              Independent developer · Private unified gateway for official Saudi government services.
+            </p>
+            <p class="dev-license">
+              Private License © 2025 🔒 · All rights reserved.
+            </p>
+          </div>
+        </article>
+
+        <!-- Features Card -->
+        <article class="features-card">
+          <h3 class="features-title">Why use GovLinksApp OneLink?</h3>
+          <ul class="features-list">
+            <li>Modern Arabic / English interface optimized for all devices.</li>
+            <li>Organized categories for ministries, platforms and essential services.</li>
+            <li>Security headers + CSP rules for better browser protection.</li>
+            <li>Only official government domains — no ads, no tracking scripts.</li>
+          </ul>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="main-footer main-footer--dark">
+    <p>
+      🔗 S © 2025 Private ownership of Developer Safar Al-Ghamdi — All rights reserved.
+      Reproduction, copying, or redistribution of this project is strictly prohibited without written permission.
+    </p>
+  </footer>
+
+  <!-- لو احتجت سكربت بسيط لاحقاً شنحطه هنا -->
+  <script src="services.js"></script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink Global Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- خط جميل للواجهة -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#020617;
+      --bg-soft:#0b1120;
+      --card:#020617;
+      --card-soft:#020617;
+      --border:#1f2937;
+      --accent:#2563eb;
+      --accent-soft:#1d4ed8;
+      --accent-pill:#0ea5e9;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --chip-bg:#020617;
+      --chip-border:#1f2937;
+      --danger:#f97316;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      min-height:100vh;
+      background:radial-gradient(circle at top,#020617 0,#000 55%,#000 100%);
+      font-family:"Cairo",system-ui,-apple-system,"Segoe UI",sans-serif;
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none;}
+    .page-wrap{
+      max-width:1100px;
+      margin:32px auto 28px;
+      padding:0 16px 32px;
+    }
+
+    /* العنوان الأعلى */
+    .hub-header{
+      text-align:center;
+      margin-bottom:22px;
+    }
+    .hub-pill-top{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.4);
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:10px;
+      background:rgba(15,23,42,.75);
+    }
+    .hub-title{
+      font-size:28px;
+      font-weight:700;
+      margin-bottom:6px;
+    }
+    .hub-subtitle{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* التبويبات */
+    .hub-tabs{
+      margin:22px auto 18px;
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      padding:6px 14px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.45);
+      background:rgba(15,23,42,.8);
+      font-size:13px;
+      color:var(--muted);
+      cursor:pointer;
+      transition:.18s ease;
+    }
+    .pill:hover{
+      border-color:var(--accent-soft);
+      color:#e5e7eb;
+    }
+    .pill-active{
+      background:linear-gradient(135deg,#0ea5e9,#2563eb);
+      border-color:transparent;
+      color:#e5f2ff;
+      box-shadow:0 10px 26px rgba(37,99,235,.4);
+    }
+
+    /* زر العودة */
+    .back-row{
+      text-align:center;
+      margin-bottom:18px;
+    }
+
+    /* شريط البحث + الشريحة اللي فوق النتائج */
+    .hub-shell{
+      background:radial-gradient(circle at top,#020617,#020617 55%,#020617 100%);
+      border-radius:28px;
+      border:1px solid rgba(30,64,175,.6);
+      box-shadow:
+        0 24px 80px rgba(15,23,42,.95),
+        0 0 0 1px rgba(15,23,42,.85);
+      padding:22px 18px 20px;
+    }
+
+    .hub-search-row{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:18px;
+    }
+
+    .hub-search-box{
+      flex:1 1 260px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      background:#020617;
+      border-radius:999px;
+      border:1px solid rgba(30,64,175,.75);
+      padding:6px 11px;
+    }
+    .hub-search-box input{
+      flex:1;
+      border:none;
+      background:transparent;
+      color:#e5e7eb;
+      font-size:13px;
+      padding:7px 6px;
+      outline:none;
+    }
+    .hub-search-box input::placeholder{
+      color:#64748b;
+      font-size:12px;
+    }
+    .hub-search-icon{
+      font-size:16px;
+      opacity:.9;
+    }
+
+    /* فلاتر المناطق + عدد النتائج */
+    .hub-filters-row{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .region-chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .chip{
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--chip-border);
+      background:var(--chip-bg);
+      font-size:11px;
+      color:var(--muted);
+      cursor:pointer;
+      transition:.16s ease;
+    }
+    .chip.is-active{
+      background:rgba(37,99,235,.14);
+      border-color:#3b82f6;
+      color:#e5f2ff;
+    }
+    .chip span{
+      opacity:.8;
+    }
+    .result-count{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      font-size:11px;
+    }
+
+    /* شبكة الكروت */
+    .gh-results-grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:14px;
+    }
+    .gh-card{
+      background:radial-gradient(circle at top,rgba(56,189,248,.25),#020617 68%);
+      border-radius:18px;
+      padding:14px 14px 12px;
+      border:1px solid rgba(51,65,85,.9);
+      box-shadow:0 16px 40px rgba(15,23,42,1);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      font-size:13px;
+    }
+    .gh-card-head{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      align-items:flex-start;
+    }
+    .gh-card-title-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .gh-card-title{
+      font-size:14px;
+      font-weight:700;
+    }
+    .gh-card-badge{
+      display:inline-flex;
+      align-items:center;
+      padding:2px 8px;
+      border-radius:999px;
+      background:rgba(15,118,110,.22);
+      font-size:11px;
+      color:#a5f3fc;
+    }
+    .gh-card-region{
+      font-size:11px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .gh-card-sub{
+      font-size:12px;
+      color:#cbd5f5;
+    }
+    .gh-card-desc{
+      font-size:12px;
+      color:#9ca3af;
+    }
+    .gh-card-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:4px;
+    }
+    .gh-tag{
+      font-size:11px;
+      padding:2px 7px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      color:#cbd5f5;
+    }
+    .gh-card-footer{
+      margin-top:4px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+      font-size:11px;
+    }
+    .gh-card-category{
+      color:var(--muted);
+    }
+    .gh-card-cta{
+      padding:5px 10px;
+      border-radius:999px;
+      border:none;
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+      font-size:11px;
+      font-weight:700;
+      color:#e5fdf5;
+      cursor:pointer;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .gh-card-cta:hover{
+      filter:brightness(1.05);
+    }
+
+    /* الرسالة الفارغة */
+    .gh-empty{
+      margin-top:14px;
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    /* صناديق المعلومات تحت */
+    .info-row{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:14px;
+    }
+    .info-box{
+      background:radial-gradient(circle at top,#020617,#020617 70%);
+      border-radius:20px;
+      border:1px solid rgba(51,65,85,.9);
+      padding:18px 18px 16px;
+      box-shadow:0 16px 40px rgba(15,23,42,.95);
+      font-size:13px;
+    }
+    .info-box h3{
+      font-size:15px;
+      margin-bottom:6px;
+    }
+    .info-box p,
+    .info-box ul{
+      color:#cbd5f5;
+      font-size:13px;
+      line-height:1.8;
+    }
+    .info-box ul{
+      padding-right:18px;
+    }
+
+    footer{
+      margin-top:26px;
+      text-align:center;
+      font-size:11px;
+      color:#6b7280;
+    }
+
+    @media (max-width:768px){
+      .hub-shell{padding:18px 14px 18px;}
+      .gh-results-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- شارة تجريبية صغيرة -->
+    <div class="hub-header">
+      <div class="hub-pill-top">
+        <span>تجريبي · Global Hub</span>
+        <span style="font-size:9px;">● Beta 2025</span>
+      </div>
+      <h1 class="hub-title">OneLink Global Hub</h1>
+      <p class="hub-subtitle">
+        بوابة عالمية ذكية تجمع أهم الخدمات الرقمية الدولية في مكان واحد — للطالب، والمسافر،
+        والمطوّر، وصاحب الأعمال.
+      </p>
+    </div>
+
+    <!-- التبويبات -->
+    <div class="hub-tabs">
+      <button class="pill pill-active" type="button">Global Hub</button>
+      <a class="pill" href="cn.html">China CN</a>
+      <a class="pill" href="eg.html">Egypt EG</a>
+      <a class="pill" href="sa.html">Saudi SA</a>
+    </div>
+
+    <!-- زر العودة للسعودية -->
+    <div class="back-row">
+      <a href="sa.html" class="pill">← العودة لصفحة OneLink السعودية</a>
+    </div>
+
+    <!-- الغلاف الرئيسي: بحث + فلاتر + نتائج -->
+    <section class="hub-shell">
+
+      <!-- صف البحث -->
+      <div class="hub-search-row">
+        <div class="hub-search-box">
+          <span class="hub-search-icon">🔍</span>
+          <input
+            type="search"
+            placeholder="اكتب اسم الخدمة أو كلمة مفتاحية مثل GitHub, Coursera, NASA, Visa…"
+            data-global-search-input
+          />
+        </div>
+
+        <div class="result-count">
+          <span>النتائج:</span>
+          <span data-global-results-count>0 / 0</span>
+        </div>
+      </div>
+
+      <!-- الفلاتر حسب المنطقة -->
+      <div class="hub-filters-row">
+        <div class="region-chips">
+          <button type="button" class="chip is-active" data-global-region="all">
+            <span>All regions</span>
+          </button>
+          <button type="button" class="chip" data-global-region="global">
+            <span>Global</span>
+          </button>
+          <button type="button" class="chip" data-global-region="sa">
+            <span>Saudi SA</span>
+          </button>
+          <button type="button" class="chip" data-global-region="eg">
+            <span>Egypt EG</span>
+          </button>
+          <button type="button" class="chip" data-global-region="cn">
+            <span>China CN</span>
+          </button>
+        </div>
+
+        <div style="font-size:11px;color:#64748b;">
+          يمكنك التبديل بين المناطق أو تركها على <strong>All</strong> لعرض كل الخدمات.
+        </div>
+      </div>
+
+      <!-- مكان الكروت التي يرسمها JS -->
+      <div class="gh-results-grid" data-global-results-list></div>
+
+      <!-- رسالة "لا توجد نتائج" -->
+      <p class="gh-empty" data-global-empty style="display:none;"></p>
+    </section>
+
+    <!-- صناديق معلومات إضافية -->
+    <div class="info-row">
+      <div class="info-box">
+        <h3>رابط المنصّات الرقمية العالمية في صفحة واحدة</h3>
+        <p>
+          ابحث في مجموعة متنوّعة من أهم الخدمات العالمية: تعليم، برمجة، خرائط،
+          سفر، ترفيه، تسوّق، تواصل مهني — وكل الروابط هنا أصلية ومباشرة
+          للمواقع الرسمية.
+        </p>
+      </div>
+
+      <div class="info-box">
+        <h3>كيف أستخدم Global Hub؟</h3>
+        <ul>
+          <li>اكتب اسم الخدمة مثل <strong>GitHub</strong> أو <strong>visa</strong> أو <strong>online courses</strong>.</li>
+          <li>يمكنك فلترة النتائج حسب المنطقة (Saudi / Egypt / China / Global / All).</li>
+          <li>كل عنصر مرتبط برابط رسمي مباشر بدون إعلانات أو وسطاء.</li>
+          <li>تحديث مستمر لإضافة خدمات عالمية جديدة حسب الحاجة.</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      OneLink Global Hub · Private Preview — Developer Safar Al-Ghamdi © 2025
+    </footer>
+  </div>
+
+  <!-- محرك الـ JSON (تحديد المنطقة فقط من deep-search-engine) -->
+  <script src="../core/i18n/js/deep-search-engine.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      if (window.__deep && typeof window.__deep.setRegion === "function") {
+        window.__deep.setRegion("global");
+      }
+    });
+  </script>
+
+  <!-- سكربت الهَب العالمي الذي يقرأ services-data.json -->
+  <script src="app-ui/app-global-hub.js"></script>
+</body>
+</html>

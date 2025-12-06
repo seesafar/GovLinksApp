@@ -1,0 +1,667 @@
+[
+  {
+    "id": "sa-absher",
+    "name": "أبشر — Absher",
+    "subtitle": "منصة وزارة الداخلية لخدمات الأفراد والجهات",
+    "description": "الدخول الموحد لمعاملات المرور والجوازات والأحوال، وأكثر الخدمات استخداماً للمواطنين والمقيمين.",
+    "url": "https://www.absher.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Unified",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Core Saudi",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open in browser",
+    "tags": ["saudi", "interior", "traffic", "passport", "absher"]
+  },
+  {
+    "id": "sa-najiz",
+    "name": "ناجز — Najiz",
+    "subtitle": "منصة الخدمات العدلية والقضائية",
+    "description": "خدمات القضايا والعقود والعقار، مع تكامل مع منصات الهوية ونفاذ الوطني.",
+    "url": "https://najiz.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Justice",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Core Saudi",
+    "category": "justice",
+    "status": "live",
+    "cta": "View in OneLink SA",
+    "tags": ["saudi", "justice", "courts", "real-estate", "najiz"]
+  },
+  {
+    "id": "sa-balady",
+    "name": "بلدي — Balady",
+    "subtitle": "منصة الخدمات البلدية",
+    "description": "إصدار وتجديد رخص الأنشطة التجارية والإنشائية ورخص الشوارع والأراضي واللوحات الإعلانية.",
+    "url": "https://balady.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Municipal",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Core Saudi",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "municipality", "licenses", "balady"]
+  },
+  {
+    "id": "sa-ehkaam",
+    "name": "إحكام — Ehk aam",
+    "subtitle": "منصة إثبات وتوثيق الملكية العقارية",
+    "description": "منصة رقمية لاستقبال طلبات إثبات وتعديل وتوثيق الملكية العقارية في المملكة العربية السعودية.",
+    "url": "https://ehkaam.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Core",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Core Saudi",
+    "category": "justice",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "real-estate", "ownership", "ehkaam"]
+  },
+  {
+    "id": "sa-nafath",
+    "name": "نفاذ — Nafath",
+    "subtitle": "خدمة النفاذ الوطني الموحد",
+    "description": "بوابة الدخول الموحد للهوية الرقمية الوطنية، تربطك بمعظم المنصات الحكومية بأمان عالٍ.",
+    "url": "https://iam.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Identity",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Digital Identity",
+    "category": "identity",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["identity", "login", "nafath", "national-id"]
+  },
+  {
+    "id": "sa-tawakkalna",
+    "name": "توكلنا — Tawakkalna",
+    "subtitle": "منصة الهوية الوطنية والخدمات الذكية",
+    "description": "تطبيق شامل لعرض الهوية الوطنية والقيادة والإقامة، مع باقة من الخدمات الحكومية الذكية.",
+    "url": "https://ta.sdaia.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Identity",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Digital Identity",
+    "category": "identity",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["identity", "tawakkalna", "smart-services"]
+  },
+  {
+    "id": "sa-sehhaty",
+    "name": "صحتي — Sehhaty",
+    "subtitle": "منصة الخدمات الصحية",
+    "description": "حجز المواعيد الطبية، عرض السجلات الصحية ونتائج التحاليل، وخدمات التطعيم وغيرها.",
+    "url": "https://www.sehhaty.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Health",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Health",
+    "category": "health",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["health", "appointments", "sehhaty"]
+  },
+  {
+    "id": "sa-mawid",
+    "name": "موعد — Mawid",
+    "subtitle": "حجز واستعراض المواعيد في مراكز وزارة الصحة",
+    "description": "خدمة إلكترونية تمكّنك من حجز المواعيد في مراكز الرعاية الصحية الأولية وإدارتها.",
+    "url": "https://www.moh.gov.sa/Services/Pages/Appointment.aspx",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Health",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Health",
+    "category": "health",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["health", "mawid", "appointments"]
+  },
+  {
+    "id": "sa-qiwa",
+    "name": "قوى — Qiwa",
+    "subtitle": "منصة الخدمات العمالية",
+    "description": "حزمة خدمات رقمية للمنشآت والموظفين في قطاع العمل، عقود، نقل خدمات، وتحسين العلاقة التعاقدية.",
+    "url": "https://qiwa.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Unified",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Labor",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["labor", "contracts", "qiwa"]
+  },
+  {
+    "id": "sa-zatca",
+    "name": "هيئة الزكاة والضريبة والجمارك — ZATCA",
+    "subtitle": "منصة الزكاة والضريبة والجمارك",
+    "description": "خدمات الإقرارات الضريبية، الزكاة، الفوترة الإلكترونية، وإدارة الرسوم الجمركية.",
+    "url": "https://zatca.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Tax",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Tax & Customs",
+    "category": "tax",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["tax", "vat", "customs", "zatca"]
+  },
+  {
+    "id": "sa-fasah",
+    "name": "فسح — FASAH",
+    "subtitle": "منصة الخدمات اللوجستية والجمارك",
+    "description": "منصة تكامل لفسح البضائع عبر الموانئ والمنافذ البرية والجوية، بالتكامل مع الجمارك والجهات الأخرى.",
+    "url": "https://fasah.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Borders",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Border & Trade",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["customs", "trade", "logistics", "fasah"]
+  },
+  {
+    "id": "sa-masar",
+    "name": "مسار — Masar",
+    "subtitle": "منصة وزارة الموارد البشرية لمسار الموظف الحكومي",
+    "description": "بوابة موحدة لمسار الموظف الحكومي: الترقيات، النقل، والابتعاث وغيرها من خدمات الموارد البشرية.",
+    "url": "https://masar.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Unified",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "HR Gov",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["hr", "government", "masar"]
+  },
+  {
+    "id": "sa-evisa",
+    "name": "Saudi eVisa — التأشيرة السياحية",
+    "subtitle": "منصة إصدار التأشيرة السياحية الإلكترونية",
+    "description": "منصة رسمية لطلب التأشيرة السياحية لزيارة المملكة العربية السعودية إلكترونياً.",
+    "url": "https://visa.visitsaudi.com",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Travel",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Travel",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["visa", "travel", "tourism"]
+  },
+
+  {
+    "id": "sa-mygov",
+    "name": "منصة GOV.SA — الخدمات الحكومية",
+    "subtitle": "البوابة الوطنية الموحدة للخدمات الحكومية في السعودية",
+    "description": "نقطة دخول موحّدة لمعظم الخدمات الحكومية، مع روابط للمنصات المتخصصة مثل أبشر وناجز وبلدي وغيرها.",
+    "url": "https://www.my.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Unified",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Core Saudi",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "gov", "portal", "my.gov.sa"]
+  },
+  {
+    "id": "sa-etimad",
+    "name": "اعتماد — Etimad",
+    "subtitle": "منصة وزارة المالية لتعاقدات القطاع الحكومي",
+    "description": "بوابة موحّدة للعقود الحكومية، المنافسات، المطالبات المالية، وإدارة ميزانيات الجهات الحكومية والموردين.",
+    "url": "https://etimad.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Unified",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Finance & Procurement",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "finance", "procurement", "etimad"]
+  },
+  {
+    "id": "sa-mc-portal",
+    "name": "وزارة التجارة — بوابة الأعمال",
+    "subtitle": "خدمات السجل التجاري، الشركات، وحماية المستهلك",
+    "description": "منصة رقمية لتأسيس وتعديل السجلات التجارية، وخدمات الشركات، مع قنوات للتواصل وحماية المستهلك.",
+    "url": "https://mc.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Business",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Business Portal",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "commerce", "business", "mc.gov.sa"]
+  },
+  {
+    "id": "sa-spl",
+    "name": "سبل — البريد السعودي",
+    "subtitle": "منصة الخدمات اللوجستية والبريدية",
+    "description": "إدارة العناوين الوطنية، تتبّع الشحنات، والخدمات اللوجستية للأفراد والجهات في جميع مناطق المملكة.",
+    "url": "https://splonline.com.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Unified",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Logistics & Address",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "logistics", "address", "spl"]
+  },
+  {
+    "id": "sa-diwan-maeen",
+    "name": "ديوان المظالم — معين",
+    "subtitle": "منصة التقاضي الإلكتروني لديوان المظالم",
+    "description": "خدمات التقاضي أمام ديوان المظالم: تسجيل الدعاوى، المذكرات، والاستعلام عن الجلسات والأحكام إلكترونياً.",
+    "url": "https://maeen.bog.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Justice",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Administrative Justice",
+    "category": "justice",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "justice", "diwan", "maeen"]
+  },
+  {
+    "id": "sa-absher-business",
+    "name": "أبشر أعمال — Absher Business",
+    "subtitle": "خدمات منشآت القطاع الخاص المرتبطة بهوية أبشر",
+    "description": "نسخة مخصّصة من منصة أبشر لخدمة المنشآت، لإدارة خدمات العمالة والمنشأة وربطها بهوية المالك.",
+    "url": "https://business.absher.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Identity",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Business Identity",
+    "category": "identity",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "identity", "business", "absher"]
+  },
+  {
+    "id": "sa-jawazat",
+    "name": "المديرية العامة للجوازات — الجوازات",
+    "subtitle": "معلومات وخدمات الجوازات، الإقامة، والسفر",
+    "description": "بوابة تعريفية لخدمات الجوازات السعودية: الإقامة، السفر، تأشيرات الخروج والعودة، والتعليمات الرسمية للمواطنين والمقيمين.",
+    "url": "https://www.gdp.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Borders",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Passports & Residency",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "jawazat", "residency", "travel"]
+  },
+  {
+    "id": "sa-gosi",
+    "name": "التأمينات الاجتماعية — GOSI",
+    "subtitle": "خدمات الاشتراكات والتقاعد والتأمينات",
+    "description": "منصة إدارة اشتراكات التأمينات الاجتماعية، الرواتب الخاضعة للاشتراك، ومعاشات التقاعد للقطاعين الحكومي والخاص.",
+    "url": "https://www.gosi.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Social & Finance",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Social Insurance",
+    "category": "tax",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "gosi", "social", "pension"]
+  },
+  {
+    "id": "sa-cchi",
+    "name": "مجلس الضمان الصحي — CCHI",
+    "subtitle": "منصة التأمين الصحي في السعودية",
+    "description": "خدمات الاستعلام عن التأمين الصحي، مزودي الخدمة المعتمدين، وسياسات التغطية للمواطنين والمقيمين.",
+    "url": "https://www.cchi.gov.sa",
+    "region": "sa",
+    "region_label": "🇸🇦 Saudi · Health",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Health Insurance",
+    "category": "health",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["saudi", "health", "insurance", "cchi"]
+  },
+{
+  "id": "sa-etimad",
+  "name": "اعتماد — Etimad",
+  "subtitle": "منصة وزارة المالية للخدمات الإلكترونية للجهات الحكومية والمؤسسات",
+  "description": "منصة موحدة لإدارة الميزانيات والعقود والمدفوعات والمنافسات الحكومية إلكترونياً.",
+  "url": "https://etimad.sa",
+  "region": "sa",
+  "region_label": "🇸🇦 Saudi · Finance",
+  "regionTitle": "نتائج مميّزة · السعودية",
+  "regionBadge": "Gov Finance",
+  "category": "unified",
+  "status": "live",
+  "cta": "Open",
+  "tags": ["saudi", "finance", "budget", "etimad"]
+},
+{
+  "id": "sa-sakani",
+  "name": "سكني — Sakani",
+  "subtitle": "منصة الدعم السكني للأفراد والأسر",
+  "description": "خدمات الدعم السكني، الأراضي المجانية، الوحدات الجاهزة، وحلول التمويل بالتعاون مع الجهات التمويلية.",
+  "url": "https://sakani.sa",
+  "region": "sa",
+  "region_label": "🇸🇦 Saudi · Housing",
+  "regionTitle": "نتائج مميّزة · السعودية",
+  "regionBadge": "Housing",
+  "category": "unified",
+  "status": "live",
+  "cta": "Open",
+  "tags": ["saudi", "housing", "sakani", "real-estate"]
+},
+{
+  "id": "sa-musaned",
+  "name": "مسانِد — Musaned",
+  "subtitle": "منصة وزارة الموارد البشرية لخدمات العمالة المنزلية",
+  "description": "منصة لإدارة عقود واستقدام العمالة المنزلية، حفظ الحقوق بين الأطراف، وتقليل الوسطاء غير النظاميين.",
+  "url": "https://musaned.com.sa",
+  "region": "sa",
+  "region_label": "🇸🇦 Saudi · Labor",
+  "regionTitle": "نتائج مميّزة · السعودية",
+  "regionBadge": "Domestic Labor",
+  "category": "unified",
+  "status": "live",
+  "cta": "Open",
+  "tags": ["saudi", "labor", "house", "musaned"]
+},
+{
+  "id": "sa-gosi",
+  "name": "التأمينات الاجتماعية — GOSI",
+  "subtitle": "المؤسسة العامة للتأمينات الاجتماعية",
+  "description": "إدارة الاشتراكات، المعاشات، التعويضات، وسجلات التأمين للأفراد والمنشآت.",
+  "url": "https://www.gosi.gov.sa",
+  "region": "sa",
+  "region_label": "🇸🇦 Saudi · Social",
+  "regionTitle": "نتائج مميّزة · السعودية",
+  "regionBadge": "Social Insurance",
+  "category": "unified",
+  "status": "live",
+  "cta": "Open",
+  "tags": ["saudi", "gosi", "insurance", "social"]
+},
+{
+  "id": "sa-noor",
+  "name": "نظام نور — Noor",
+  "subtitle": "منصة وزارة التعليم لإدارة التعليم العام",
+  "description": "خدمات تسجيل الطلاب، متابعة الدرجات، النتائج، والتقارير لأولياء الأمور والطلاب.",
+  "url": "https://noor.moe.gov.sa",
+  "region": "sa",
+  "region_label": "🇸🇦 Saudi · Education",
+  "regionTitle": "نتائج مميّزة · السعودية",
+  "regionBadge": "Education",
+  "category": "unified",
+  "status": "live",
+  "cta": "Open",
+  "tags": ["saudi", "education", "noor", "school"]
+},
+{
+  "id": "sa-maarouf",
+  "name": "معروف — Maarouf",
+  "subtitle": "منصة توثيق المتاجر والخدمات الإلكترونية",
+  "description": "خدمة من وزارة التجارة توثّق المتاجر الإلكترونية وتساعد المستهلك على التحقق من البائع قبل الشراء.",
+  "url": "https://maroof.sa",
+  "region": "sa",
+  "region_label": "🇸🇦 Saudi · Commerce",
+  "regionTitle": "نتائج مميّزة · السعودية",
+  "regionBadge": "e-Commerce",
+  "category": "unified",
+  "status": "live",
+  "cta": "Open",
+  "tags": ["saudi", "commerce", "online-store", "maaroof"]
+},
+
+  {
+    "id": "eg-digital-egypt",
+    "name": "Digital Egypt · مصر الرقمية",
+    "subtitle": "البوابة الموحدة للخدمات الحكومية المصرية",
+    "description": "بوابة رقمية لتقديم الخدمات الحكومية، الدعم النقدي، التموين، وخدمات المرور والعقارات.",
+    "url": "https://digital.gov.eg",
+    "region": "eg",
+    "region_label": "🇪🇬 Egypt · Unified",
+    "regionTitle": "نتائج · مصر",
+    "regionBadge": "Egypt · Unified",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["egypt", "government", "digital-egypt"]
+  },
+  {
+    "id": "eg-tax",
+    "name": "مصلحة الضرائب المصرية",
+    "subtitle": "منصة الإقرارات الضريبية",
+    "description": "تقديم الإقرارات الضريبية وإدارة ملف الممول إلكترونياً للأفراد والشركات.",
+    "url": "https://eta.gov.eg",
+    "region": "eg",
+    "region_label": "🇪🇬 Egypt · Tax",
+    "regionTitle": "نتائج · مصر",
+    "regionBadge": "Tax",
+    "category": "tax",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["egypt", "tax", "eta"]
+  },
+  {
+    "id": "eg-ration",
+    "name": "دعم التموين — بطاقة التموين",
+    "subtitle": "خدمات بطاقة التموين والدعم",
+    "description": "استعلام وإدارة بيانات بطاقة التموين والدعم الحكومي للسلع الغذائية.",
+    "url": "https://www.tamwin.com.eg",
+    "region": "eg",
+    "region_label": "🇪🇬 Egypt · Unified",
+    "regionTitle": "نتائج · مصر",
+    "regionBadge": "Social Support",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["egypt", "ration", "support"]
+  },
+  {
+    "id": "eg-traffic",
+    "name": "المرور المصري — بوابة المرور",
+    "subtitle": "خدمات رخص القيادة والمركبات",
+    "description": "سداد المخالفات، تجديد التراخيص، والاستعلام عن البيانات المرورية إلكترونياً.",
+    "url": "https://traffic.moi.gov.eg",
+    "region": "eg",
+    "region_label": "🇪🇬 Egypt · Traffic",
+    "regionTitle": "نتائج · مصر",
+    "regionBadge": "Traffic",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["egypt", "traffic", "fines"]
+  },
+  {
+    "id": "eg-evisa",
+    "name": "Egypt eVisa — التأشيرة الإلكترونية",
+    "subtitle": "منصة التأشيرة الإلكترونية لزيارة مصر",
+    "description": "تقديم طلبات التأشيرة السياحية أو زيارة مصر إلكترونياً قبل السفر.",
+    "url": "https://www.visa2egypt.gov.eg",
+    "region": "eg",
+    "region_label": "🇪🇬 Egypt · Travel",
+    "regionTitle": "نتائج · مصر",
+    "regionBadge": "Travel",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["egypt", "visa", "travel"]
+  },
+  {
+    "id": "eg-health",
+    "name": "منظومة الخدمات الصحية — مصر",
+    "subtitle": "بوابة حجز المواعيد في المستشفيات الحكومية",
+    "description": "خدمات حجز المواعيد، الاستعلام عن مبادرات الصحة، والتأمين الصحي الشامل.",
+    "url": "https://www.mohp.gov.eg",
+    "region": "eg",
+    "region_label": "🇪🇬 Egypt · Health",
+    "regionTitle": "نتائج · مصر",
+    "regionBadge": "Health",
+    "category": "health",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["egypt", "health", "appointments"]
+  },
+
+  {
+    "id": "cn-12306",
+    "name": "12306 · Railway Ticketing",
+    "subtitle": "منصة حجز تذاكر القطارات الرسمية في الصين",
+    "description": "منصة رسمية لحجز وإدارة تذاكر القطارات داخل الصين — مصدر موثوق للسفر الداخلي.",
+    "url": "https://www.12306.cn",
+    "region": "cn",
+    "region_label": "🇨🇳 China · Railway",
+    "regionTitle": "China · Global matches",
+    "regionBadge": "Travel",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["china", "railway", "tickets"]
+  },
+  {
+    "id": "cn-gov",
+    "name": "gov.cn — البوابة الحكومية الصينية",
+    "subtitle": "البوابة الوطنية للخدمات الحكومية في الصين",
+    "description": "نقطة دخول رئيسية للمعلومات والخدمات الحكومية الصينية على مستوى الدولة.",
+    "url": "https://www.gov.cn",
+    "region": "cn",
+    "region_label": "🇨🇳 China · Unified",
+    "regionTitle": "China · Global matches",
+    "regionBadge": "e-Gov",
+    "category": "unified",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["china", "government", "portal"]
+  },
+  {
+    "id": "cn-immigration",
+    "name": "National Immigration Administration · China",
+    "subtitle": "منصة خدمات الهجرة والجوازات",
+    "description": "معلومات وخدمات متعلقة بالتأشيرات والإقامة للأجانب والزوار في الصين.",
+    "url": "https://en.nia.gov.cn",
+    "region": "cn",
+    "region_label": "🇨🇳 China · Borders",
+    "regionTitle": "China · Global matches",
+    "regionBadge": "Borders & Visa",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["china", "immigration", "visa"]
+  },
+  {
+    "id": "cn-health-code",
+    "name": "China Health Services (demo)",
+    "subtitle": "منصة تجريبية لعرض الكود الصحي والخدمات الطبية",
+    "description": "تصور واجهة لدمج الخدمات الصحية الصينية في OneLink — للاستخدام التجريبي داخل النموذج فقط.",
+    "url": "",
+    "region": "cn",
+    "region_label": "🇨🇳 China · Health (demo)",
+    "regionTitle": "China · Global matches",
+    "regionBadge": "Concept",
+    "category": "health",
+    "status": "soon",
+    "cta": "Coming soon",
+    "tags": ["demo", "health", "concept"]
+  },
+
+  {
+    "id": "global-schengen",
+    "name": "Schengen Visa Info",
+    "subtitle": "معلومات التأشيرة لمنطقة الشنغن",
+    "description": "بوابة رسمية/إرشادية لمتطلبات تأشيرات الشنغن، نوع التأشيرة، والمستندات المطلوبة قبل السفر لأوروبا.",
+    "url": "https://schengenvisainfo.com",
+    "region": "global",
+    "region_label": "🌍 Global · Travel",
+    "regionTitle": "Global matches",
+    "regionBadge": "Travel",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["schengen", "visa", "europe"]
+  
+  },
+  {
+    "id": "global-iata",
+    "name": "IATA Travel Centre",
+    "subtitle": "متطلبات السفر والدخول لكل دولة",
+    "description": "خدمة تعرض الشروط الصحية والوثائق المطلوبة للسفر بين الدول، مفيدة قبل حجز أي رحلة دولية.",
+    "url": "https://www.iatatravelcentre.com",
+    "region": "global",
+    "region_label": "🌍 Global · Travel",
+    "regionTitle": "Global matches",
+    "regionBadge": "Travel Rules",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["iata", "travel", "rules"]
+  },
+  {
+    "id": "global-who",
+    "name": "WHO · Travel Advice",
+    "subtitle": "نصائح منظمة الصحة العالمية للمسافرين",
+    "description": "إرشادات صحية رسمية من منظمة الصحة العالمية حول اللقاحات والأمراض في الدول المختلفة.",
+    "url": "https://www.who.int/travel-advice",
+    "region": "global",
+    "region_label": "🌍 Global · Health",
+    "regionTitle": "Global matches",
+    "regionBadge": "Health",
+    "category": "health",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["who", "health", "travel"]
+  },
+  {
+    "id": "global-esta",
+    "name": "U.S. ESTA",
+    "subtitle": "نظام السفر الإلكتروني للولايات المتحدة",
+    "description": "منصة رسمية لتقديم طلب تصريح السفر الإلكتروني ESTA للمسافرين المؤهلين إلى الولايات المتحدة.",
+    "url": "https://esta.cbp.dhs.gov",
+    "region": "global",
+    "region_label": "🌍 Global · Travel",
+    "regionTitle": "Global matches",
+    "regionBadge": "USA Travel",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["usa", "visa", "esta"]
+  },
+  {
+    "id": "global-uk-visa",
+    "name": "UK Visas and Immigration",
+    "subtitle": "معلومات وخدمات تأشيرة المملكة المتحدة",
+    "description": "موقع gov.uk الرسمي لمعلومات التأشيرات والهجرة إلى المملكة المتحدة.",
+    "url": "https://www.gov.uk/browse/visas-immigration",
+    "region": "global",
+    "region_label": "🌍 Global · Travel",
+    "regionTitle": "Global matches",
+    "regionBadge": "UK Travel",
+    "category": "travel",
+    "status": "live",
+    "cta": "Open",
+    "tags": ["uk", "visa", "immigration"]
+  },
+  {
+    "id": "global-demo-pack",
+    "name": "Global Gov Pack (demo)",
+    "subtitle": "حزمة تجريبية لتجميع أهم روابط السفارات والخدمات",
+    "description": "مجموعة تجريبية داخل OneLink لعرض روابط السفارات، أرقام الطوارئ، وخدمات المسافر في عدة دول.",
+    "url": "",
+    "region": "global",
+    "region_label": "🌍 Global · Pack (demo)",
+    "regionTitle": "Global matches",
+    "regionBadge": "Concept",
+    "category": "unified",
+    "status": "soon",
+    "cta": "Concept only",
+    "tags": ["demo", "pack", "concept"]
+  }
+]

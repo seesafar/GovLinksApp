@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink Egypt · كل الخدمات الحكومية في مكان واحد</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- خط Cairo من جوجل (لو النت شغال) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ملف الأساس المشترك مع OneLink السعودية -->
+  <link rel="stylesheet" href="../core/css/base.css" />
+
+  <!-- الأيقونة العامة للمشروع -->
+  <link rel="icon" type="image/png" href="/GovLinksApp/icons/android-chrome-512x512.png">
+  <link rel="apple-touch-icon" href="/GovLinksApp/icons/android-chrome-512x512.png">
+
+   <style>
+    :root {
+      /* ألوان هوية مصر */
+      --egypt-red: #ce1b28;
+      --egypt-gold: #fbbf24;
+      --egypt-black: #020617;
+
+      /* ألوان الواجهة الداكنة */
+      --bg-main: #020617;
+      --bg-gradient-top: #022c3a;
+      --panel-bg: rgba(15, 23, 42, 0.98);
+      --card-bg: rgba(15, 23, 42, 0.98);
+      --soft-border: rgba(51, 65, 85, 0.9);
+
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+
+      --gray-100: #0f172a;
+      --gray-300: #1f2937;
+      --gray-600: #9ca3af;
+      --gray-800: #020617;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, var(--bg-gradient-top) 0, var(--bg-main) 45%, #000 100%);
+      color: var(--text-main);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* شريط العلم */
+    .flag-bar {
+      width: 100%;
+      height: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .flag-bar div:nth-child(1) {
+      background: var(--egypt-red);
+    }
+    .flag-bar div:nth-child(2) {
+      background: #f9fafb;
+    }
+    .flag-bar div:nth-child(3) {
+      background: #000000;
+    }
+
+    /* الهيدر */
+    header {
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid rgba(30, 64, 175, 0.55);
+      position: sticky;
+      top: 6px;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, var(--egypt-red));
+      border: 2px solid var(--egypt-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 16px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-text span:nth-child(1) {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .brand-text span:nth-child(2) {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.16s ease;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--egypt-red), #9b111c);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(190, 18, 60, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(190, 18, 60, 0.75);
+    }
+
+    .country-switch {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .country-switch a {
+      color: var(--egypt-gold);
+      font-weight: 600;
+    }
+
+    /* البانر */
+    .hero {
+      max-width: 1100px;
+      margin: 24px auto 24px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .hero-main {
+      background: var(--panel-bg);
+      border-radius: 22px;
+      border: 1px solid
+
+</head>
+
+<body>
+  <!-- شريط العلم -->
+  <div class="flag-bar">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- الهيدر -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo">
+          <span>E</span>
+        </div>
+        <div class="brand-text">
+          <span>OneLink Egypt</span>
+          <span>كل الخدمات الحكومية في رابط واحد</span>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+        <div class="header-actions">
+          <button class="btn btn-ghost" onclick="alert('تسجيل الدخول التجريبي – سيتم تفعيله في النسخة القادمة')">
+            تسجيل الدخول
+          </button>
+          <button class="btn btn-primary" onclick="alert('الاشتراك ٥٠ جنيه شهريًا – نموذج تجريبي حالياً')">
+            اشترك الآن بـ ٥٠ جنيه
+          </button>
+        </div>
+        <div class="country-switch">
+          دول أخرى متاحة:
+          <a href="../index.html">🇸🇦 السعودية</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- البانر -->
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        نسخة مصر · تجريبية
+      </div>
+      <h1>
+        كل خدمات <span>مصر الحكومية</span> في مكان واحد.. بدل ما تلف على عشرين موقع.
+      </h1>
+      <p>
+        OneLink Egypt يجمع لك أهم المواقع والخدمات الحكومية في صفحة واحدة سريعة، مرتبة، وسهلة،
+        عشان تخلّص شغلك في ثواني: بطاقة، مرور، ضرائب، شهر عقاري، تعليم، وصحة – بدون دوخة.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+          استعرض الخدمات الآن
+        </button>
+        <button class="btn btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+          اعرف تفاصيل الاشتراك
+        </button>
+      </div>
+
+      <p class="hero-note">
+        لا نمثّل أي جهة حكومية – نحن فقط ننظّم لك الروابط الرسمية في مكان واحد لتسهيل الوصول إليها.
+      </p>
+    </div>
+
+    <aside class="hero-side">
+      <div>
+        <h2>ليه OneLink Egypt؟</h2>
+        <p>
+          لأن وقتك أثمن من إنك تفضل تدور على كل خدمة في موقع لوحده، أو تحفظ عشرات الروابط في المتصفح.
+        </p>
+        <ul class="hero-side-list">
+          <li>اختصار الوقت في الوصول للخدمات.</li>
+          <li>تنظيم الروابط الحكومية في واجهة سهلة.</li>
+          <li>تعمل من الموبايل أو الكمبيوتر بكل سلاسة.</li>
+        </ul>
+      </div>
+      <div class="hero-price">
+        <span>رسوم شهرية ثابتة</span>
+        <span><strong>٥٠ جنيه</strong> فقط – أقل من سعر كوباية قهوة.</span>
+      </div>
+    </aside>
+  </section>
+
+  <!-- البحث -->
+  <section class="search-section">
+    <div class="search-box">
+      <span class="search-icon">🔎</span>
+      <input type="text" placeholder="ابحث باسم الخدمة: بطاقة، مرور، ضرائب، شهر عقاري، محكمة..." />
+    </div>
+    <p class="search-hint">
+      مثال: اكتب "مرور" أو "بطاقة" أو "ضرائب" وشوف أيقونات الخدمات المناسبة قدامك.
+    </p>
+  </section>
+
+  <!-- الخدمات -->
+  <section class="services-section" id="services">
+    <div class="section-header">
+      <div>
+        <div class="section-title">أهم الخدمات الحكومية في مصر</div>
+        <div class="section-subtitle">يمكن إضافة المزيد من الخدمات حسب احتياج المستخدمين في النسخ القادمة.</div>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <!-- بطاقة الرقم القومي -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🪪</div>
+          <div>
+            <div class="service-name">بطاقة الرقم القومي</div>
+            <div class="service-tagline">استخراج – تجديد – بدل فاقد</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: الأحوال المدنية</span>
+          <span class="highlight">قريباً</span>
+        </div>
+      </a>
+
+      <!-- بوابة مصر الرقمية -->
+      <a href="https://digital.gov.eg" target="_blank" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🌐</div>
+          <div>
+            <div class="service-name">بوابة مصر الرقمية</div>
+            <div class="service-tagline">مجموعة كبيرة من الخدمات في بوابة واحدة</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>official: digital.gov.eg</span>
+          <span class="highlight">مباشر</span>
+        </div>
+      </a>
+
+      <!-- المرور -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🚗</div>
+          <div>
+            <div class="service-name">خدمات المرور</div>
+            <div class="service-tagline">مخالفات – تجديد رخصة – استعلامات</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: المرور</span>
+          <span class="highlight">قريباً</span>
+        </div>
+      </a>
+
+      <!-- الضرائب -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">💰</div>
+          <div>
+            <div class="service-name">الضرائب</div>
+            <div class="service-tagline">إقرارات – استعلام – خدمات إلكترونية</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: المالية</span>
+          <span class="highlight">قيد الإضافة</span>
+        </div>
+      </a>
+
+      <!-- الشهر العقاري -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🏠</div>
+          <div>
+            <div class="service-name">الشهر العقاري</div>
+            <div class="service-tagline">توثيق – تسجيل عقود – خدمات أونلاين</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: العدل</span>
+          <span class="highlight">قريباً</span>
+        </div>
+      </a>
+
+      <!-- القضاء والمحاكم -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">⚖️</div>
+          <div>
+            <div class="service-name">خدمات القضاء والمحاكم</div>
+            <div class="service-tagline">استعلام عن القضايا والمواعيد</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: القضاء</span>
+          <span class="highlight">لاحقاً</span>
+        </div>
+      </a>
+
+      <!-- التعليم والجامعات -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🎓</div>
+          <div>
+            <div class="service-name">التعليم والجامعات</div>
+            <div class="service-tagline">تنسيق – نتائج – خدمات طلابية</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: التعليم</span>
+          <span class="highlight">لاحقاً</span>
+        </div>
+      </a>
+
+      <!-- الصحة -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🏥</div>
+          <div>
+            <div class="service-name">خدمات الصحة</div>
+            <div class="service-tagline">حجز كشف – تأمين صحي – استعلامات</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: الصحة</span>
+          <span class="highlight">لاحقاً</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- التسعير -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-card">
+      <div class="pricing-main">
+        <div class="pricing-pill">
+          اشتراك واحد بسيط · بدون تعقيد
+        </div>
+        <h3>٥٠ جنيه في الشهر — خدمة ترتّب لك حياتك الحكومية أونلاين</h3>
+        <p>
+          الاشتراك في OneLink Egypt يعطيك وصولاً منظماً لأهم الخدمات الحكومية في مكان واحد،
+          مع تحديثات مستمرة وإضافة خدمات جديدة حسب طلب المستخدمين، بدون إعلانات مزعجة
+          أو تشتيت.
+        </p>
+      </div>
+
+      <div class="pricing-side">
+        <div>
+          <div class="pricing-row">
+            <strong>٥٠ جنيه</strong>
+            <span>/ شهريًا</span>
+          </div>
+          <p>
+            أقل من سعر وجبة سريعة، ومع ذلك يوفر عليك وقت، بنزين، أعصاب،
+            وزحمة مواقع وخطوات طويلة.
+          </p>
+        </div>
+        <button class="btn btn-primary" onclick="alert('نموذج اشتراك تجريبي – سيتم ربطه ببوابة دفع لاحقاً')">
+          تفعيل الاشتراك التجريبي
+        </button>
+        <div class="pricing-note">
+          OneLink Egypt · v1.0.0 · Safar Al-Ghamdi · Demo Build
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الفوتر -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        © 2025 OneLink Egypt · Private ownership of Developer Safar Al-Ghamdi.
+      </div>
+      <div class="footer-links">
+        <a href="#">سياسة الاستخدام</a>
+        <a href="#">تنبيه مهم</a>
+        <a href="#">تواصل معنا</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- سكربتات الترجمة والتحويل بين الدول -->
+  <script defer src="../core/js/i18n.js"></script>
+  <script defer src="../core/js/switcher.js"></script>
+</body>
+</html>

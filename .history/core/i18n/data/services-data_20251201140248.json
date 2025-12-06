@@ -1,0 +1,83 @@
+{
+  "saudi": [
+    {
+      "id": "absher",
+      "name_ar": "أبشر",
+      "name_en": "Absher",
+      "region": "Saudi",
+      "category": "Unified",
+      "status": "live",
+      "description": "منصة وزارة الداخلية لخدمات الأفراد والجهات — المرور، الجوازات، الأحوال.",
+      "url": "https://www.absher.sa"
+    },
+    {
+      "id": "najiz",
+      "name_ar": "ناجز",
+      "name_en": "Najiz",
+      "region": "Saudi",
+      "category": "Justice",
+      "status": "live",
+      "description": "منصة وزارة العدل الرسمية — القضايا، العقود، العقارات.",
+      "url": "https://najiz.sa"
+    },
+    {
+      "id": "tawakkalna",
+      "name_ar": "توكلنا",
+      "name_en": "Tawakkalna",
+      "region": "Saudi",
+      "category": "Identity",
+      "status": "live",
+      "description": "الهوية الرقمية، تسجيل الدخول الموحدة، الجواز الصحي.",
+      "url": "https://iam.tawakkalna.sdaia.gov.sa"
+    }
+  ],
+
+  "egypt": [
+    {
+      "id": "digital-egypt",
+      "name_ar": "مصر الرقمية",
+      "name_en": "Digital Egypt",
+      "region": "Egypt",
+      "category": "Unified",
+      "status": "live",
+      "description": "البوابة الموحدة للخدمات الحكومية المصرية — الدعم، التموين، المرور.",
+      "url": "https://digital.gov.eg"
+    },
+    {
+      "id": "tax-eg",
+      "name_ar": "منظومة الضرائب المصرية",
+      "name_en": "Egypt Tax Portal",
+      "region": "Egypt",
+      "category": "Finance",
+      "status": "live",
+      "description": "بوابة الضرائب والخدمات المالية الرسمية.",
+      "url": "https://eta.gov.eg"
+    }
+  ],
+
+  "china": [
+    {
+      "id": "railway-12306",
+      "name_ar": "12306 لحجز القطارات",
+      "name_en": "12306 Railway",
+      "region": "China",
+      "category": "Travel",
+      "status": "live",
+      "description": "حجز وإدارة تذاكر القطارات في الصين.",
+      "url": "https://www.12306.cn"
+    }
+  ],
+
+  "global": [
+    {
+      "id": "gov-warning-example",
+      "name_ar": "مشابه بالاسم",
+      "name_en": "Name-similar (not gov)",
+      "region": "Global",
+      "category": "Check",
+      "status": "risk",
+      "description": "نتيجة غير رسمية — تحذير من إدخال بيانات حساسة.",
+      "url": "https://gov-services-login.info"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "absher",
+    "name": "أبشر — Absher",
+    "subtitle": "منصة وزارة الداخلية لخدمات الأفراد والجهات",
+    "description": "الدخول الموحد لمعاملات المرور والجوازات والأحوال، وأكثر الخدمات استخداماً للمواطنين والمقيمين.",
+    "url": "https://www.absher.sa",
+    "region": "sa",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Core Saudi",
+    "region_label": "🇸🇦 Saudi · Unified",
+    "status": "live"
+  },
+  {
+    "id": "najiz",
+    "name": "ناجز — Najiz",
+    "subtitle": "منصة الخدمات العدلية والقضائية",
+    "description": "خدمات القضايا والعقود والعقار، مع تكامل مع منصات الهوية ونفاذ الوطني.",
+    "url": "https://najiz.sa",
+    "region": "sa",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Core Saudi",
+    "region_label": "🇸🇦 Saudi · Justice",
+    "status": "live"
+  },
+  {
+    "id": "ehkaam",
+    "name": "إحكام — Ehkaam",
+    "subtitle": "منصة إثبات وتوثيق الملكية العقارية",
+    "description": "تملّك العقارات – منصة إثبات وتوثيق الملكية العقارية في السعودية.",
+    "url": "https://ehkaam.sa",
+    "region": "sa",
+    "regionTitle": "نتائج مميّزة · السعودية",
+    "regionBadge": "Core Saudi",
+    "region_label": "🇸🇦 Saudi · Core",
+    "status": "live"
+  },
+  {
+    "id": "digital-egypt",
+    "name": "Digital Egypt · مصر الرقمية",
+    "subtitle": "البوابة الموحدة للخدمات الحكومية المصرية",
+    "description": "بوابة رقمية لتقديم الخدمات الحكومية، الدعم النقدي، التموين، وخدمات المرور والعقارات.",
+    "url": "https://digital.gov.eg",
+    "region": "eg",
+    "regionTitle": "نتائج · مصر",
+    "regionBadge": "Egypt · Unified",
+    "region_label": "🇪🇬 Egypt",
+    "status": "live"
+  },
+  {
+    "id": "12306",
+    "name": "12306 · Railway Ticketing",
+    "subtitle": "حجز تذاكر القطارات الرسمية في الصين",
+    "description": "منصة رسمية لحجز وإدارة تذاكر القطارات داخل الصين — مصدر موثوق للسفر الداخلي.",
+    "url": "https://www.12306.cn",
+    "region": "cn",
+    "regionTitle": "China · Global matches",
+    "regionBadge": "Mixed",
+    "region_label": "🇨🇳 China",
+    "status": "live"
+  },
+  {
+    "id": "fake-gov-login",
+    "name": "مشابه بالاسم · موقع غير حكومي",
+    "subtitle": "Result flagged by OneLink Trust Engine",
+    "description": "هذا الرابط لا يطابق النطاقات الرسمية المعروفة — يُنصح بالتأكد قبل إدخال أي بيانات حساسة.",
+    "url": "https://gov-services-login.info",
+    "region": "global",
+    "regionTitle": "China · Global matches",
+    "regionBadge": "Mixed",
+    "region_label": "🌍 Global",
+    "status": "warning"
+  }
+]

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>About · OneLink China</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../core/css/base.css" />
+
+  <link rel="icon" type="image/png" href="/GovLinksApp/icons/android-chrome-512x512.png">
+  <link rel="apple-touch-icon" href="/GovLinksApp/icons/android-chrome-512x512.png">
+
+  <style>
+    :root {
+      --china-red: #e11d48;
+      --china-gold: #facc15;
+      --bg-main: #020617;
+      --bg-gradient-top: #111827;
+
+      --panel-bg: rgba(15, 23, 42, 0.98);
+      --soft-border: rgba(51, 65, 85, 0.9);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, var(--bg-gradient-top) 0, var(--bg-main) 45%, #000 100%);
+      color: var(--text-main);
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .flag-bar {
+      width: 100%;
+      height: 6px;
+      display: grid;
+      grid-template-columns: 1fr;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    .flag-bar div {
+      background: linear-gradient(90deg, #b91c1c, #e11d48);
+    }
+
+    header {
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(30, 64, 175, 0.7);
+      position: sticky;
+      top: 6px;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .header-title h1 {
+      font-size: 18px;
+    }
+
+    .header-title p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .back-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: transparent;
+      color: var(--text-main);
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all .16s ease;
+      white-space: nowrap;
+    }
+    .back-btn:hover {
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 20px auto 32px;
+      padding: 0 16px 24px;
+    }
+
+    .page-panel {
+      background: var(--panel-bg);
+      border-radius: 22px;
+      border: 1px solid var(--soft-border);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 18px 18px 20px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .bullet-list {
+      list-style: none;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .bullet-list li {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      margin-bottom: 4px;
+    }
+    .bullet-list li::before {
+      content: "•";
+      color: var(--china-gold);
+      font-size: 1rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .note-box {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(248, 250, 252, 0.12);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .footer-mini {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      text-align: left;
+      direction: ltr;
+    }
+  </style>
+</head>
+
+<body>
+    <div data-include="../core/layout/header.html"></div>
+  <div class="flag-bar">
+    <div></div>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>عن OneLink China</h1>
+        <p>نسخة مستقلة لتنظيم روابط الخدمات الحكومية في الصين.</p>
+      </div>
+
+      <button class="back-btn" onclick="window.location.href='index.html'">
+        ⬅ الرجوع للبوابة
+      </button>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <section class="page-panel">
+      <h2>فكرة OneLink China</h2>
+      <p>
+        OneLink China هو نسخة تجريبية من مشروع OneLink، هدفها تجربة فكرة
+        نقطة دخول موحّدة للبوابات والخدمات الحكومية في الصين، بحيث يتم
+        جمع الروابط الأساسية في مكان واحد مع الحفاظ على استقلالية كل منصة.
+      </p>
+
+      <div class="section">
+        <div class="section-title">أهداف النسخة الصينية</div>
+        <ul class="bullet-list">
+          <li>تقديم واجهة بسيطة تربط المستخدم بأهم البوابات الحكومية الصينية.</li>
+          <li>تقليل الوقت الذي يقضيه المستخدم في البحث عن المنصة الصحيحة لكل خدمة.</li>
+          <li>عرض الخدمات بشكل منظّم (أعمال، ضرائب، صحة، تعليم، إقامة... إلخ).</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">استقلالية المشروع</div>
+        <p>
+          OneLink China لا يتبع أي جهة حكومية صينية، ولا يمثّل بوابة رسمية.
+          هو مشروع خاص تجريبي يكتفي بعرض الروابط العامة المتاحة، مع الإشارة
+          دائماً إلى أن جميع المعاملات الفعلية تتم على المواقع الرسمية نفسها.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">عن المطوّر</div>
+        <p>
+          هذا المشروع من تطوير <strong>Safar Al-Ghamdi</strong> كمبادرة شخصية
+          لتجربة توحيد روابط الخدمات الحكومية لعدة دول في واجهة واحدة، مع
+          الحفاظ على هوية كل دولة واحترام خصوصيتها الرقمية والقانونية.
+        </p>
+      </div>
+
+      <div class="note-box">
+        تنبيه: OneLink China لا يجمع بيانات تسجيل الدخول ولا يطلب
+        منك أي كلمات مرور. أي بيانات حساسة يتم إدخالها حصراً داخل
+        المواقع الرسمية التي تفتح في تبويب منفصل.
+      </div>
+
+      <div class="footer-mini">
+        OneLink China · Demo · © 2025 Safar Al-Ghamdi
+      </div>
+    </section>
+  </main>
+
+  <script defer src="../core/js/i18n.js"></script>
+  <script defer src="../core/js/switcher.js"></script>
+  <script src="../core/js/include.js"></script>
+</body>
+</html>

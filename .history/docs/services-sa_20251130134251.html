@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>GovLinksApp OneLink · جميع الخدمات الحكومية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Security headers -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta
+    http-equiv="Permissions-Policy"
+    content="geolocation=(), microphone=(), camera=()"
+  />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline';
+      style-src  'self' 'unsafe-inline';
+      img-src    'self' data: https:;
+      connect-src 'self';
+      font-src   'self' https:;
+      frame-ancestors 'none';
+      base-uri 'self';
+      form-action 'self';
+    "
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="192x192" href="logo/onelink-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="logo/onelink-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="logo/onelink-icon.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="logo/onelink-icon.png?v=1">
+
+  <style>
+    :root {
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.14);
+      --bg-body: radial-gradient(circle at top, #033341 0, #00090c 55%, #000000 100%);
+      --card-bg: rgba(15, 23, 42, 0.98);
+      --border: rgba(148, 163, 184, 0.35);
+      --text-main: #e5f4f4;
+      --text-sub: #9ca9ad;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      direction: rtl;
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 1200px;
+      padding: 24px 16px 32px;
+    }
+
+    /* ===== Header / Back link ===== */
+    .services-header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      text-decoration: none;
+      background: rgba(15, 23, 42, 0.85);
+      transition: all 0.18s ease-out;
+    }
+
+    .back-link span {
+      font-size: 1.1rem;
+      transform: translateY(-1px);
+    }
+
+    .back-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+    }
+
+    .services-title-block h1 {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    .services-title-block p {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+    }
+
+    /* ===== Section wrapper ===== */
+    .section-card {
+      background: radial-gradient(circle at top right, #053848 0, #020816 55%, #020617 100%);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      padding: 18px 18px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.85);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .section-heading h2 {
+      font-size: 1.1rem;
+    }
+
+    .section-heading p {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    /* ===== Grid of services ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .services-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      border-radius: 18px;
+      padding: 10px 10px 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+
+    .service-icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 10%, #ffffff, #dbeafe, #0f766e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+    }
+
+    .service-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #ffffff;
+      object-fit: contain;
+    }
+
+    .service-name-ar {
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .service-name-en {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    .service-meta {
+      font-size: 0.76rem;
+      color: var(--text-sub);
+    }
+
+    .service-chip {
+      display: inline-flex;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.72rem;
+      margin-top: 2px;
+    }
+
+    .service-btn {
+      margin-top: 4px;
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #022c22;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+    }
+
+    .service-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(34, 197, 94, 0.45);
+    }
+
+    /* Footer */
+    .main-footer {
+      max-width: 1200px;
+      width: 100%;
+      font-size: 0.74rem;
+      color: rgba(148, 163, 184, 0.85);
+      text-align: center;
+      padding: 8px 18px 20px;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div class="page-shell">
+    <!-- Header + back -->
+    <header class="services-header">
+      <a href="index.html" class="back-link">
+        <span>↩</span>
+        <span>الرجوع للصفحة الرئيسية</span>
+      </a>
+
+      <div class="services-title-block">
+        <h1>جميع الخدمات الحكومية في OneLink</h1>
+        <p>قائمة مرتّبة لأشهر المنصّات الحكومية والخدمات الرقمية الرسمية في المملكة.</p>
+      </div>
+    </header>
+
+    <!-- Section 1: Unified national platforms -->
+    <section class="section-card">
+      <div class="section-heading">
+        <h2>منصّات وطنية موحّدة</h2>
+        <p>أهم البوابات التي تستخدم للدخول الموحد والخدمات العامة اليومية.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Absher -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/absher.png" alt="Absher" class="service-icon" />
+          </div>
+          <p class="service-name-ar">أبشر</p>
+          <p class="service-name-en">Absher</p>
+          <p class="service-meta">
+            خدمات الجوازات، المرور، الأحوال المدنية، والمخالفات.
+          </p>
+          <span class="service-chip">منصة موحّدة</span>
+          <a href="https://www.absher.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Nafath -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/nafath.png" alt="Nafath" class="service-icon" />
+          </div>
+          <p class="service-name-ar">نفاذ الوطني</p>
+          <p class="service-name-en">Nafath</p>
+          <p class="service-meta">
+            الدخول الموحّد للمنصّات الحكومية باستخدام هوية رقمية واحدة.
+          </p>
+          <span class="service-chip">هوية رقمية</span>
+          <a href="https://www.iam.gov.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Tawakkalna -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/tawakkalna.png" alt="Tawakkalna" class="service-icon" />
+          </div>
+          <p class="service-name-ar">توكلنا</p>
+          <p class="service-name-en">Tawakkalna</p>
+          <p class="service-meta">
+            خدمات الهوية الرقمية، المحفظة الحكومية، العنوان الوطني وغير ذلك.
+          </p>
+          <span class="service-chip">محفظة رقمية</span>
+          <a href="https://tawakkalna.sdaia.gov.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Najiz -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/najiz.png" alt="Najiz" class="service-icon" />
+          </div>
+          <p class="service-name-ar">ناجز</p>
+          <p class="service-name-en">Najiz</p>
+          <p class="service-meta">
+            الخدمات العدلية: الوكالات، العقارات، التقاضي الإلكتروني.
+          </p>
+          <span class="service-chip">وزارة العدل</span>
+          <a href="https://najiz.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Ehkaam -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/ehkaam.png" alt="Ehkaam" class="service-icon" />
+          </div>
+          <p class="service-name-ar">إحكام</p>
+          <p class="service-name-en">Ehkaam</p>
+          <p class="service-meta">
+            تملّك العقارات وإثبات الملكية للأراضي والعقارات.
+          </p>
+          <span class="service-chip">عقارات</span>
+          <a href="https://ehkaam.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Balady -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/balady.png" alt="Balady" class="service-icon" />
+          </div>
+          <p class="service-name-ar">بلدي</p>
+          <p class="service-name-en">Balady</p>
+          <p class="service-meta">
+            الرخص البلدية، خدمات الأنشطة التجارية، الشهادات الصحية.
+          </p>
+          <span class="service-chip">الخدمات البلدية</span>
+          <a href="https://balady.gov.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Etimad -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/etimad.png" alt="Etimad" class="service-icon" />
+          </div>
+          <p class="service-name-ar">اعتماد</p>
+          <p class="service-name-en">Etimad</p>
+          <p class="service-meta">
+            منصة العقود والمنافسات الحكومية للقطاعين العام والخاص.
+          </p>
+          <span class="service-chip">مشتريات حكومية</span>
+          <a href="https://etimad.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Qiwa -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/qiwa.png" alt="Qiwa" class="service-icon" />
+          </div>
+          <p class="service-name-ar">قوى</p>
+          <p class="service-name-en">Qiwa</p>
+          <p class="service-meta">
+            إدارة عقود العمل، نقل الخدمات، توثيق العقود، ونطاقات.
+          </p>
+          <span class="service-chip">سوق العمل</span>
+          <a href="https://qiwa.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 2: Work, social & finance -->
+    <section class="section-card">
+      <div class="section-heading">
+        <h2>العمل، التأمينات، والضرائب</h2>
+        <p>خدمات الموارد البشرية، التأمينات الاجتماعية، والزكاة والضريبة والجمارك.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- HRSD -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/hrsd.png" alt="HRSD" class="service-icon" />
+          </div>
+          <p class="service-name-ar">وزارة الموارد البشرية</p>
+          <p class="service-name-en">HRSD</p>
+          <p class="service-meta">
+            خدمات العمل، الضمان الاجتماعي، برامج الدعم، وخدمة مدد.
+          </p>
+          <span class="service-chip">وزارة حكومية</span>
+          <a href="https://hrsd.gov.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- GOSI -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/gosi.png" alt="GOSI" class="service-icon" />
+          </div>
+          <p class="service-name-ar">التأمينات الاجتماعية</p>
+          <p class="service-name-en">GOSI</p>
+          <p class="service-meta">
+            الاشتراكات، المعاشات، تسجيل المنشآت، والتقارير التأمينية.
+          </p>
+          <span class="service-chip">تأمينات</span>
+          <a href="https://gosi.gov.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- ZATCA -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/zatca.png" alt="ZATCA" class="service-icon" />
+          </div>
+          <p class="service-name-ar">هيئة الزكاة والضريبة والجمارك</p>
+          <p class="service-name-en">ZATCA</p>
+          <p class="service-meta">
+            الزكاة، ضريبة القيمة المضافة، الفوترة الإلكترونية، الجمارك.
+          </p>
+          <span class="service-chip">ضرائب وجمارك</span>
+          <a href="https://zatca.gov.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Monshaat -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/monshaat.png" alt="Monshaat" class="service-icon" />
+          </div>
+          <p class="service-name-ar">منشآت</p>
+          <p class="service-name-en">Monshaat</p>
+          <p class="service-meta">
+            دعم المنشآت الصغيرة والمتوسطة وبرامج نمو الأعمال.
+          </p>
+          <span class="service-chip">منشآت / ريادة</span>
+          <a href="https://monshaat.gov.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- HRDF -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/hrdf.png" alt="HRDF" class="service-icon" />
+          </div>
+          <p class="service-name-ar">صندوق تنمية الموارد البشرية (هدف)</p>
+          <p class="service-name-en">HRDF</p>
+          <p class="service-meta">
+            دعم التوظيف، تمهير، وبرامج التدريب على رأس العمل.
+          </p>
+          <span class="service-chip">دعم التوظيف</span>
+          <a href="https://hrdf.org.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 3: Identity, address, post, data -->
+    <section class="section-card">
+      <div class="section-heading">
+        <h2>الهوية، العنوان، والخدمات اللوجستية</h2>
+        <p>خدمات الهوية الوطنية، العنوان الوطني، البريد، والبيانات الحكومية.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- SPL -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/spl.png" alt="Saudi Post" class="service-icon" />
+          </div>
+          <p class="service-name-ar">البريد السعودي | سبُل</p>
+          <p class="service-name-en">Saudi Post - SPL</p>
+          <p class="service-meta">
+            العنوان الوطني، الشحن، العناوين الرقمية، والطرود.
+          </p>
+          <span class="service-chip">بريد ولوجستيات</span>
+          <a href="https://splonline.com.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- NIC -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/nic.png" alt="NIC" class="service-icon" />
+          </div>
+          <p class="service-name-ar">مركز المعلومات الوطني</p>
+          <p class="service-name-en">NIC</p>
+          <p class="service-meta">
+            بوابة البيانات والخدمات التقنية الداعمة للمنصّات الحكومية.
+          </p>
+          <span class="service-chip">بيانات حكومية</span>
+          <a href="https://nic.gov.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+
+        <!-- Muqeem -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/muqeem.png" alt="Muqeem" class="service-icon" />
+          </div>
+          <p class="service-name-ar">مقيم</p>
+          <p class="service-name-en">Muqeem</p>
+          <p class="service-meta">
+            إدارة بيانات المقيمين للمنشآت والاستعلام عن الإقامات.
+          </p>
+          <span class="service-chip">المقيمون</span>
+          <a href="https://muqeem.sa" target="_blank" rel="noopener" class="service-btn">
+            انتقل
+          </a>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <footer class="main-footer">
+    🔗 S © 2025 Private ownership of Developer Safar Al-Ghamdi — All rights reserved.
+  </footer>
+  <script src="../core/js/include.js"></script>
+</body>
+</html>

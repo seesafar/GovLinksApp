@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink Mobile · Global Deep Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../css/style.css">
+  <style>
+   
+
+
+  </style>
+</head>
+
+<body>
+  <!-- هيدر مشترك -->
+  <div data-include="../core/layout/header.html"></div>
+
+  <div class="app-shell">
+    <div class="status-bar">
+      <span>OneLink · Demo UI</span>
+      <span>5G · 98%</span>
+    </div>
+
+    <div class="header">
+      <div class="header-top">
+        <div class="header-title">
+          <span class="label">OneLink Mobile · Global Deep Search</span>
+          <h1>بحث OneLink العميق 🌐</h1>
+        </div>
+        <div class="badge-beta">
+          Global Index <span>· Preview</span>
+        </div>
+      </div>
+
+      <p class="header-sub">
+        ابحث عن أي خدمة حكومية أو منصة رسمية في السعودية أو مصر أو الصين أو روابط عالمية موثوقة —
+        في مكان واحد يشبه فكرة <span style="color:#facc15;font-weight:600;">Google Gov</span>.
+      </p>
+
+      <!-- Tabs -->
+      <div class="region-tabs">
+  <button class="region-tab" data-region="sa">
+    <span class="flag">🇸🇦</span> Saudi
+  </button>
+  <button class="region-tab" data-region="eg">
+    <span class="flag">🇪🇬</span> Egypt
+  </button>
+  <button class="region-tab" data-region="cn">
+    <span class="flag">🇨🇳</span> China
+  </button>
+  <button class="region-tab" data-region="global">
+    <span class="flag">🌍</span> Global
+  </button>
+  <button class="region-tab is-active is-all" data-region="all">
+    All regions
+  </button>
+</div>
+
+      <!-- Search -->
+      <div class="search-panel">
+        <div class="search-icon">🔍</div>
+        <div class="search-input-wrap">
+          <input
+            type="search"
+            placeholder="ابحث باسم المنصة أو عنوان URL أو نوع الخدمة… (Absher, Najiz, digital.gov.eg, 12306.cn)"
+          />
+          <div class="search-hint">
+            live index · sa + eg + cn + global
+          </div>
+        </div>
+        <div class="search-meta">
+          <span>matches: <strong>24</strong></span>
+          <span>response &lt; 120 ms</span>
+        </div>
+      </div>
+
+      <!-- 🔍 Search Filters -->
+<div class="filters-row">
+  <span class="label">تصنيف النتائج:</span>
+
+  <!-- منصات موحّدة (Absher, Digital Egypt, …) -->
+  <button class="filter-chip" data-filter="unified">
+    منصات موحّدة
+  </button>
+
+  <!-- عدل / قضاء -->
+  <button class="filter-chip" data-filter="justice">
+    خدمات العدل / القضاء
+  </button>
+
+  <!-- هوية رقمية / نفاذ / login الحكومي -->
+  <button class="filter-chip" data-filter="identity">
+    هوية رقمية
+  </button>
+
+  <!-- سفر / حدود / قطارات / تأشيرات -->
+  <button class="filter-chip" data-filter="travel">
+    سفر / حدود
+  </button>
+
+  <!-- ضرائب / مالية / زكاة -->
+  <button class="filter-chip" data-filter="tax">
+    ضرائب / مالية
+  </button>
+
+  <!-- صحة / تأمين طبي حكومي -->
+  <button class="filter-chip" data-filter="health">
+    صحة
+  </button>
+</div>
+    </div>
+
+
+        <!-- 🔍 النتائج -->
+    <section id="search-results" class="results-section"></section>
+
+    <p class="footer-note">
+      مؤشر OneLink العالمي ما زال في <span>نسخة تجريبية</span> · البيانات سيتم توسيعها تدريجياً.
+    </p>
+  </div> <!-- نهاية .app-shell -->
+
+  <!-- 🪟 مودال تفاصيل الخدمة (النسخة الوحيدة) -->
+  <div class="udsal-modal-backdrop" data-service-modal aria-hidden="true">
+    <div class="udsal-modal" role="dialog" aria-modal="true">
+      <button class="udsal-modal-close" type="button" data-modal-close>
+        ✕
+      </button>
+
+      <div class="udsal-modal-header">
+        <span class="udsal-modal-region" data-modal-region>Region · Badge</span>
+        <h2 class="udsal-modal-title" data-modal-title>اسم الخدمة</h2>
+        <p class="udsal-modal-subtitle" data-modal-subtitle>وصف قصير</p>
+
+        <div class="udsal-modal-meta">
+          <span class="udsal-chip" data-modal-region-badge>Core · Saudi</span>
+          <span class="udsal-chip" data-modal-category>Unified Platform</span>
+        </div>
+      </div>
+
+      <div class="udsal-modal-body">
+        <p class="udsal-modal-desc" data-modal-desc>
+          هنا يظهر الوصف التفصيلي للخدمة، يتم تعبئته من services-data.json.
+        </p>
+      </div>
+
+    <div class="service-modal-footer">
+ <div class="modal-actions">
+
+  <!-- زر فتح الخدمة (يمين) -->
+  <a
+    href="#"
+    class="btn-primary"
+    target="_blank"
+    rel="noopener"
+    data-modal-open-link
+  >
+    فتح الخدمة في المتصفح
+  </a>
+
+  <!-- زر نسخ الرابط (يسار) -->
+  <button type="button" class="btn-ghost" data-modal-copy>
+    نسخ الرابط
+  </button>
+
+</div>
+
+
+<!-- ✨ توست نسخ الرابط (داخل المودال) -->
+<div class="udsal-toast" data-udsal-toast aria-hidden="true">
+  <span data-udsal-toast-text>تم النسخ ✅</span>
+</div>
+
+
+</div> <!-- ← إغلاق المودال هنا فقط -->
+
+
+  
+
+ 
+
+  <!-- سكربت البحث العميق -->
+  <script src="../../core/i18n/js/deep-search-engine.js"></script>
+</body>
+</html>
+
+

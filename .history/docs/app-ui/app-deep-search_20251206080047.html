@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink Mobile · Global Deep Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root {
+      --bg-main: #020817;
+      --bg-elevated: #020b18;
+      --panel: #020f23;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.12);
+      --accent-blue: #0ea5e9;
+      --text-main: #e5f3ff;
+      --text-muted: #8b9bb5;
+      --border-soft: rgba(148, 163, 184, 0.45);
+      --chip-bg: rgba(15, 23, 42, 0.95);
+      --danger: #fb7185;
+      --radius-xl: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #021b33 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      padding: 10px 10px 18px;
+    }
+
+    /* Top status bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      opacity: 0.9;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #022c22, #020617);
+      border-radius: 20px;
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      padding: 10px 14px;
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.9);
+      margin-bottom: 12px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .header-title span.label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .header-title h1 {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .badge-beta {
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+    }
+
+    .badge-beta span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .header-sub {
+      margin-top: 4px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Region tabs */
+    .region-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 12px 0 8px;
+    }
+
+    .region-tabs button {
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text-muted);
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .region-tabs button span.flag {
+      font-size: 12px;
+    }
+
+    .region-tabs button.is-active {
+      background: linear-gradient(120deg, #22c55e, #14b8a6);
+      color: #022c22;
+      border-color: rgba(45, 212, 191, 0.8);
+      font-weight: 600;
+      box-shadow: 0 10px 28px rgba(8, 47, 73, 0.9);
+    }
+
+    .region-tabs button.is-all {
+      margin-inline-start: auto;
+    }
+
+    /* Search bar */
+    .search-panel {
+      margin-top: 4px;
+      background: rgba(5, 15, 30, 0.96);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 6px 10px 6px 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      box-shadow: 0 10px 24px rgba(56, 189, 248, 0.6);
+      flex-shrink: 0;
+    }
+
+    .search-input-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .search-input-wrap input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 13px;
+      color: var(--text-main);
+      text-align: right;
+    }
+
+    .search-input-wrap input::placeholder {
+      color: rgba(148, 163, 184, 0.85);
+    }
+
+    .search-hint {
+      font-size: 10px;
+      color: var(--text-muted);
+      direction: ltr;
+      text-align: left;
+      opacity: 0.9;
+    }
+
+    .search-meta {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      text-align: left;
+    }
+
+    .search-meta strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Filter chips */
+    .filters-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .filters-row span.label {
+      color: var(--text-muted);
+    }
+
+    .filter-chip {
+      border-radius: 999px;
+      padding: 4px 9px;
+      background: var(--chip-bg);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .filter-chip.is-on {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    /* Results */
+    .results-section {
+      margin-top: 14px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .section-title span.badge {
+      font-size: 10px;
+      border-radius: 999px;
+      padding: 2px 7px;
+      margin-inline-start: 4px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+    }
+
+    .section-count {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .section-count strong {
+      color: var(--accent);
+    }
+
+      .result-card {
+      background: var(--panel);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(30, 64, 175, 0.8);
+      padding: 14px 16px 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+      min-height: 140px;              /* يخلي الكرت أطول شوي */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .result-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .result-title h3 {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .result-title span.sub {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    .result-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+      font-size: 10px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.96);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pill.region {
+      color: var(--accent-blue);
+      border-color: rgba(56, 189, 248, 0.8);
+    }
+
+    .pill.status-ok {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .pill.status-soon {
+      color: #fbbf24;
+      border-color: rgba(250, 204, 21, 0.9);
+    }
+
+    .pill.status-risk {
+      color: var(--danger);
+      border-color: rgba(248, 113, 113, 0.9);
+    }
+
+    .result-body {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 6px;
+    }
+
+    .result-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .result-url {
+      direction: ltr;
+    }
+
+    .open-btn {
+      border-radius: 999px;
+      border: none;
+      padding: 4px 12px;
+      font-size: 11px;
+      cursor: pointer;
+      background: linear-gradient(120deg, var(--accent), #14b8a6);
+      color: #022c22;
+      font-weight: 600;
+      box-shadow: 0 10px 26px rgba(16, 185, 129, 0.7);
+    }
+
+    .open-btn.secondary {
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text-main);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      box-shadow: none;
+    }
+
+    /* Footer bar */
+    .footer-note {
+      margin-top: 10px;
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
+      opacity: 0.85;
+    }
+
+    .footer-note span {
+      color: var(--accent);
+    }
+    
+  </style>
+</head>
+
+<body>
+  <!-- هيدر مشترك -->
+  <div data-include="../core/layout/header.html"></div>
+
+  <div class="app-shell">
+    <div class="status-bar">
+      <span>OneLink · Demo UI</span>
+      <span>5G · 98%</span>
+    </div>
+
+    <div class="header">
+      <div class="header-top">
+        <div class="header-title">
+          <span class="label">OneLink Mobile · Global Deep Search</span>
+          <h1>بحث OneLink العميق 🌐</h1>
+        </div>
+        <div class="badge-beta">
+          Global Index <span>· Preview</span>
+        </div>
+      </div>
+
+      <p class="header-sub">
+        ابحث عن أي خدمة حكومية أو منصة رسمية في السعودية أو مصر أو الصين أو روابط عالمية موثوقة —
+        في مكان واحد يشبه فكرة <span style="color:#facc15;font-weight:600;">Google Gov</span>.
+      </p>
+
+      <!-- Tabs -->
+      <div class="region-tabs">
+  <button class="region-tab" data-region="sa">
+    <span class="flag">🇸🇦</span> Saudi
+  </button>
+  <button class="region-tab" data-region="eg">
+    <span class="flag">🇪🇬</span> Egypt
+  </button>
+  <button class="region-tab" data-region="cn">
+    <span class="flag">🇨🇳</span> China
+  </button>
+  <button class="region-tab" data-region="global">
+    <span class="flag">🌍</span> Global
+  </button>
+  <button class="region-tab is-active is-all" data-region="all">
+    All regions
+  </button>
+</div>
+
+      <!-- Search -->
+      <div class="search-panel">
+        <div class="search-icon">🔍</div>
+        <div class="search-input-wrap">
+          <input
+            type="search"
+            placeholder="ابحث باسم المنصة أو عنوان URL أو نوع الخدمة… (Absher, Najiz, digital.gov.eg, 12306.cn)"
+          />
+          <div class="search-hint">
+            live index · sa + eg + cn + global
+          </div>
+        </div>
+        <div class="search-meta">
+          <span>matches: <strong>24</strong></span>
+          <span>response &lt; 120 ms</span>
+        </div>
+      </div>
+
+      <!-- 🔍 Search Filters -->
+<div class="filters-row">
+  <span class="label">تصنيف النتائج:</span>
+
+  <!-- منصات موحّدة (Absher, Digital Egypt, …) -->
+  <button class="filter-chip" data-filter="unified">
+    منصات موحّدة
+  </button>
+
+  <!-- عدل / قضاء -->
+  <button class="filter-chip" data-filter="justice">
+    خدمات العدل / القضاء
+  </button>
+
+  <!-- هوية رقمية / نفاذ / login الحكومي -->
+  <button class="filter-chip" data-filter="identity">
+    هوية رقمية
+  </button>
+
+  <!-- سفر / حدود / قطارات / تأشيرات -->
+  <button class="filter-chip" data-filter="travel">
+    سفر / حدود
+  </button>
+
+  <!-- ضرائب / مالية / زكاة -->
+  <button class="filter-chip" data-filter="tax">
+    ضرائب / مالية
+  </button>
+
+  <!-- صحة / تأمين طبي حكومي -->
+  <button class="filter-chip" data-filter="health">
+    صحة
+  </button>
+</div>
+    </div>
+
+
+        <!-- 🔍 النتائج -->
+    <section id="search-results" class="results-section"></section>
+
+    <p class="footer-note">
+      مؤشر OneLink العالمي ما زال في <span>نسخة تجريبية</span> · البيانات سيتم توسيعها تدريجياً.
+    </p>
+  </div> <!-- نهاية .app-shell -->
+
+  <!-- 🪟 مودال تفاصيل الخدمة (النسخة الوحيدة) -->
+  <div class="udsal-modal-backdrop" data-service-modal aria-hidden="true">
+    <div class="udsal-modal" role="dialog" aria-modal="true">
+      <button class="udsal-modal-close" type="button" data-modal-close>
+        ✕
+      </button>
+
+      <div class="udsal-modal-header">
+        <span class="udsal-modal-region" data-modal-region>Region · Badge</span>
+        <h2 class="udsal-modal-title" data-modal-title>اسم الخدمة</h2>
+        <p class="udsal-modal-subtitle" data-modal-subtitle>وصف قصير</p>
+
+        <div class="udsal-modal-meta">
+          <span class="udsal-chip" data-modal-region-badge>Core · Saudi</span>
+          <span class="udsal-chip" data-modal-category>Unified Platform</span>
+        </div>
+      </div>
+
+      <div class="udsal-modal-body">
+        <p class="udsal-modal-desc" data-modal-desc>
+          هنا يظهر الوصف التفصيلي للخدمة، يتم تعبئته من services-data.json.
+        </p>
+      </div>
+
+      <div class="service-modal-footer">
+        <div class="modal-actions">
+          <a
+            href="#"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener"
+            data-modal-open-link
+          >
+            فتح الخدمة في المتصفح
+          </a>
+
+          <button type="button" class="btn-ghost" data-modal-copy>
+            نسخ الرابط
+          </button>
+        </div>
+
+        <div class="modal-qr" data-modal-qr-wrap>
+          <img
+            src=""
+            alt="QR code for this service"
+            data-modal-qr
+            loading="lazy"
+          />
+          <p class="modal-qr-hint">
+            امسح هذا الكود لفتح الخدمة مباشرة على جوالك.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- توست نسخ الرابط -->
+  <div class="udsal-toast" data-udsal-toast aria-hidden="true">
+    <span data-udsal-toast-text>تم نسخ رابط الخدمة بنجاح ✅</span>
+  </div>
+
+  <!-- اختبار جافاسكربت -->
+  <script>
+    alert("✅ inline JS شغّال داخل app-deep-search.html");
+  </script>
+
+  <!-- سكربت البحث العميق -->
+  <script src="../../core/i18n/js/deep-search-engine.js"></script>
+</body>
+</html>
+
+

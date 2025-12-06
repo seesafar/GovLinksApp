@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneLink · جميع الخدمات الحكومية</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      background: #020617;
+      color: #e5e7eb;
+      font-family: "Cairo", system-ui, sans-serif;
+    }
+
+    .page-wrap {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    /* Back button */
+    .back-row {
+      margin-bottom: 30px;
+      text-align: right;
+    }
+    .back-link {
+      padding: 10px 18px;
+      background: #0f766e;
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .back-link:hover {
+      background: #0d5e56;
+    }
+
+    /* Page title */
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #fff;
+      text-align: right;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #9ca3af;
+      margin-bottom: 40px;
+      text-align: right;
+    }
+
+    /* Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 22px;
+    }
+
+    /* Card */
+    .service-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 20px;
+      text-align: center;
+      transition: 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Icon wrap */
+    .service-icon-wrap {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 10px;
+      background: radial-gradient(circle at 30% 10%, #ffffff, #dbeafe, #0f766e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+    }
+
+    .service-icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .service-name {
+      margin: 12px 0 8px;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .service-btn {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 10px;
+      background: #0f766e;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+    .service-btn:hover {
+      background: #0d5e56;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+
+    <!-- Back -->
+    <div class="back-row">
+      <a href="index-ar.html" class="back-link">← الرجوع للبوابة الرئيسية</a>
+    </div>
+
+    <!-- Title -->
+    <h1>جميع الخدمات الحكومية</h1>
+    <p class="subtitle">منصات رسمية موثوقة — مرتبة بوضوح للوصول السريع.</p>
+
+    <!-- Grid -->
+    <div class="services-grid">
+
+      <!-- 1 — Nusuk -->
+      <article class="service-card">
+        <div class="service-icon-wrap">
+          <img src="assets/icons/nusuk.png" class="service-icon" alt="نسك">
+        </div>
+        <p class="service-name">نسك</p>
+        <a href="https://nusuk.sa" target="_blank" class="service-btn">انتقال</a>
+      </article>
+
+      <!-- 2 — Musaned -->
+      <article class="service-card">
+        <div class="service-icon-wrap">
+          <img src="assets/icons/musaned.png" class="service-icon" alt="مساند">
+        </div>
+        <p class="service-name">مساند</p>
+        <a href="https://musaned.com.sa" target="_blank" class="service-btn">انتقال</a>
+      </article>
+
+      <!-- 3 — Najiz -->
+      <article class="service-card">
+        <div class="service-icon-wrap">
+          <img src="assets/icons/najiz.png" class="service-icon" alt="ناجز">
+        </div>
+        <p class="service-name">ناجز</p>
+        <a href="https://najiz.sa" target="_blank" class="service-btn">انتقال</a>
+      </article>
+
+      <!-- 4 — Qiwa -->
+      <article class="service-card">
+        <div class="service-icon-wrap">
+          <img src="assets/icons/qiwa.png" class="service-icon" alt="قوى">
+        </div>
+        <p class="service-name">قوى</p>
+        <a href="https://qiwa.sa" target="_blank" class="service-btn">انتقال</a>
+      </article>
+
+      <!-- 5 — Balady -->
+      <article class="service-card">
+        <div class="service-icon-wrap">
+          <img src="assets/icons/balady.png" class="service-icon" alt="بلدي">
+        </div>
+        <p class="service-name">بلدي</p>
+        <a href="https://balady.gov.sa" target="_blank" class="service-btn">انتقال</a>
+      </article>
+
+      <!-- 6 — Etimad -->
+      <article class="service-card">
+        <div class="service-icon-wrap">
+          <img src="assets/icons/etimad.png" class="service-icon" alt="اعتماد">
+        </div>
+        <p class="service-name">اعتماد</p>
+        <a href="https://etimad.sa" target="_blank" class="service-btn">انتقال</a>
+      </article>
+
+      <!-- 7 — Ehkaam -->
+      <article class="service-card">
+        <div class="service-icon-wrap">
+          <img src="assets/icons/ehkaam.png" class="service-icon" alt="إحكام">
+        </div>
+        <p class="service-name">إحكام</p>
+        <a href="https://ehkaam.sa" target="_blank" class="service-btn">انتقال</a>
+      </article>
+
+    </div>
+  </div>
+</body>
+</html>

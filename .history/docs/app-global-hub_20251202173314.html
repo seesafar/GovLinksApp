@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink · Global Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- إعدادات أمان أساسية -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta
+    http-equiv="Permissions-Policy"
+    content="geolocation=(), microphone=(), camera=()"
+  />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https:;
+      connect-src 'self';
+      font-src 'self' https:;
+      frame-ancestors 'none';
+      base-uri 'self';
+      form-action 'self';
+    "
+  />
+
+  <style>
+    :root {
+      --bg: #020617;
+      --card-bg: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text-main: #e5e7eb;
+      --text-sub: #9ca3af;
+      --border-soft: rgba(148, 163, 184, 0.4);
+      --chip-bg: rgba(15, 23, 42, 0.95);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 1200px;
+      padding: 16px 16px 40px;
+    }
+
+    /* ===== HERO ===== */
+    .hero-header {
+      margin-top: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.78rem;
+      color: var(--text-sub);
+    }
+
+    .hero-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      max-width: 640px;
+    }
+
+    .hero-tabs {
+      margin-top: 6px;
+      display: inline-flex;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-soft);
+      gap: 3px;
+    }
+
+    .hero-tab {
+      border: none;
+      outline: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.83rem;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-sub);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .hero-tab--active {
+      background: var(--accent);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.5);
+    }
+
+    /* ===== MAIN CARD ===== */
+    .global-card {
+      margin-top: 6px;
+      background: radial-gradient(circle at top right, #0f172a 0, #020617 55%, #000 100%);
+      border-radius: 26px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 32px 85px rgba(0, 0, 0, 0.9);
+      padding: 20px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .global-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .global-head-main h2 {
+      font-size: 1.35rem;
+      margin-bottom: 4px;
+    }
+
+    .global-head-main p {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .global-head-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.16s ease-out;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-main);
+      border-color: var(--border-soft);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(148, 163, 184, 0.16);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0b1120;
+      border-color: rgba(56, 189, 248, 0.9);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 35px rgba(56, 189, 248, 0.65);
+    }
+
+    /* ===== SEARCH STRIP (يتعامل معه deep-search-engine.js) ===== */
+    .deep-search-shell {
+      margin-top: 4px;
+      padding: 10px 12px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .deep-search-top {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .deep-search-input-wrap {
+      position: relative;
+      flex: 1;
+    }
+
+    .deep-search-input-wrap span {
+      position: absolute;
+      inset-inline-start: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    #deepSearchInput {
+      width: 100%;
+      padding: 9px 14px;
+      padding-inline-start: 40px; /* نخلي المؤشر بعيد عن الأيقونة */
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      text-align: right;
+      outline: none;
+    }
+
+    #deepSearchInput::placeholder {
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    #deepSearchClear {
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: transparent;
+      color: var(--text-sub);
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    #deepSearchClear:hover {
+      background: rgba(148, 163, 184, 0.16);
+    }
+
+    .deep-search-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      align-items: center;
+    }
+
+    .deep-search-count {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .deep-region-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .region-chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      border: 1px solid transparent;
+      background: var(--chip-bg);
+      color: var(--text-sub);
+      cursor: pointer;
+    }
+
+    .region-chip[data-region="global"] {
+      border-color: rgba(56, 189, 248, 0.65);
+    }
+
+    .region-chip.is-active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ===== GRID (3 أعمدة) ===== */
+    .global-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .card {
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.97);
+      border: 1px solid rgba(30, 64, 175, 0.65);
+      padding: 14px 16px;
+      font-size: 0.86rem;
+    }
+
+    .card h3 {
+      font-size: 0.96rem;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    .card ul {
+      margin: 6px 0 0;
+      padding-inline-start: 16px;
+      color: var(--text-sub);
+      font-size: 0.83rem;
+    }
+
+    .promo-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .promo-inner {
+      text-align: center;
+    }
+
+    .promo-inner h3 {
+      margin-bottom: 6px;
+    }
+
+    .promo-inner p {
+      font-size: 0.85rem;
+    }
+
+    .promo-badges {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      justify-content: center;
+    }
+
+    .promo-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-sub);
+    }
+
+    /* ===== FOOTER ===== */
+    .main-footer {
+      max-width: 1200px;
+      width: 100%;
+      font-size: 0.75rem;
+      color: rgba(148, 163, 184, 0.85);
+      text-align: center;
+      padding: 10px 18px 28px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .global-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .global-head {
+        flex-direction: column;
+      }
+
+      .global-head-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- هيدر وفوتر موحدين للمشروع -->
+  <div data-include="../core/layout/header.html"></div>
+
+  <div class="page-shell">
+    <!-- ===== HERO ===== -->
+    <header class="hero-header">
+      <div class="hero-badge">
+        🌍 Global Hub · تجريبي
+      </div>
+
+      <div>
+        <h1 class="hero-title">OneLink Global Hub</h1>
+        <p class="hero-sub">
+          بوابة عالمية ذكية تجمع أهم المنصّات والخدمات الرقمية الدولية في مكان واحد — للطالب، والمسافر،
+          والمطوّر، وصاحب الأعمال.
+        </p>
+      </div>
+
+      <nav class="hero-tabs" aria-label="Region switch">
+        <a href="../sa.html" class="hero-tab">Saudi SA</a>
+        <a href="../eg.html" class="hero-tab">Egypt EG</a>
+        <a href="../cn.html" class="hero-tab">China CN</a>
+        <button type="button" class="hero-tab hero-tab--active">Global Hub</button>
+      </nav>
+    </header>
+
+    <!-- ===== MAIN CARD ===== -->
+    <main class="global-card">
+      <section class="global-head">
+        <div class="global-head-main">
+          <h2>رابط المنصّات الرقمية العالمية في صفحة واحدة</h2>
+          <p>
+            ابحث في مجموعة منتقاة من الخدمات العالمية: تعليم، برمجة، أبحاث، ترفيه، سفر، وتواصل مهني.
+            كل الروابط هنا أصلية ومباشرة للمواقع الرسمية.
+          </p>
+        </div>
+
+        <div class="global-head-actions">
+          <a href="../index.html" class="btn btn-ghost">⬅ العودة لصفحة OneLink السعودية</a>
+          <a href="#deep-search" class="btn btn-primary">ابدأ البحث العالمي الآن</a>
+        </div>
+      </section>
+
+      <!-- ===== SEARCH STRIP ===== -->
+      <section id="deep-search" class="deep-search-shell">
+        <div class="deep-search-top">
+          <div class="deep-search-input-wrap">
+            <span>🔎</span>
+            <input
+              id="deepSearchInput"
+              type="search"
+              placeholder="اكتب اسم الخدمة أو كلمة مفتاحية (GitHub, Coursera, NASA, Visa...)"
+              autocomplete="off"
+            />
+          </div>
+          <button id="deepSearchClear" type="button">مسح</button>
+        </div>
+
+        <div class="deep-search-meta-row">
+          <div class="deep-search-count">
+            <span>النتائج:</span>
+            <span id="deepMatchCount">0</span>
+            <span>/</span>
+            <span id="deepTotalCount">0</span>
+          </div>
+
+          <div class="deep-region-chips">
+            <button class="region-chip" data-region="sa">Saudi SA</button>
+            <button class="region-chip" data-region="eg">Egypt EG</button>
+            <button class="region-chip" data-region="cn">China CN</button>
+            <button class="region-chip is-active" data-region="global">Global 🌍</button>
+            <button class="region-chip" data-region="all">All regions</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 3 كروت تعريفية ===== -->
+      <section class="global-grid">
+        <article class="card">
+          <h3>كيف أستخدم Global Hub؟</h3>
+          <p>
+            ببساطة: ابدأ بالبحث بكلمة واحدة مثل <b>GitHub</b>، أو <b>visa</b>، أو
+            <b>online courses</b>، ثم اختر المنطقة <b>Global</b> من الشريط أعلاه
+            لمشاهدة النتائج العالمية فقط.
+          </p>
+          <ul>
+            <li>فلترة بالمنطقة (Saudi / Egypt / China / Global / All).</li>
+            <li>كل عنصر مرتبط برابط رسمي مباشر بدون إعلانات.</li>
+            <li>إضافة مستمرة لخدمات عالمية جديدة حسب الحاجة.</li>
+          </ul>
+        </article>
+
+        <article class="card promo-card">
+          <div class="promo-inner">
+            <h3>فئات الخدمات العالمية</h3>
+            <p>تم تجميع الخدمات في فئات واضحة ليسهل الوصول السريع.</p>
+            <div class="promo-badges">
+              <span class="promo-badge">🌐 Travel &amp; Visas</span>
+              <span class="promo-badge">🎓 Online Learning</span>
+              <span class="promo-badge">👨‍💻 Dev &amp; AI</span>
+              <span class="promo-badge">🎵 Media &amp; Streaming</span>
+              <span class="promo-badge">📡 Science &amp; Space</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>ملاحظة خصوصية</h3>
+          <p>
+            OneLink لا يجمع بيانات حساسة عن المستخدم — دور الصفحة هو تنظيم الروابط فقط.
+            أي تسجيل دخول أو دفع يتم داخل الموقع الرسمي للخدمة العالمية نفسها.
+          </p>
+          <p style="margin-top:8px; font-size:0.8rem; color:var(--text-sub);">
+            إذا لاحظت رابطاً غير صحيح أو خدمة تستحق الإضافة، يمكنك دائماً اقتراحها من خلال
+            قناة التواصل في صفحة OneLink الرئيسية.
+          </p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <footer class="main-footer">
+    🌍 OneLink Global Hub · Private Preview — Developer Safar Al-Ghamdi © 2025
+  </footer>
+
+  <!-- include.js للهيدر والفوتر -->
+  <script src="../core/js/include.js"></script>
+
+  <!-- محرّك البحث العميق + ضبط المنطقة Global -->
+  <script src="../core/i18n/js/deep-search-engine.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      if (window.__deep && typeof window.__deep.setRegion === "function") {
+        window.__deep.setRegion("global");
+      }
+    });
+  </script>
+</body>
+</html>

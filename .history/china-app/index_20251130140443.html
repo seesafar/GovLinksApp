@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink China · 政务服务一站通</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- مشترك -->
+  <link rel="stylesheet" href="../core/css/base.css" />
+
+  <style>
+    :root{
+      --cn-red:#D9231E;      /* 中国红 */
+      --cn-gold:#FFDE00;     /* 国徽金 */
+      --cn-black:#0B0B0B;
+      --cn-white:#F8F8F8;
+      --gray-100:#f3f4f6; --gray-300:#d1d5db; --gray-600:#4b5563; --gray-800:#1f2937;
+    }
+    body{background:var(--cn-white); color:var(--cn-black); font-family:"Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;}
+
+    /* Header */
+    header{background:#fff;border-bottom:1px solid var(--gray-300);position:sticky;top:0;z-index:20}
+    .header-inner{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:8px}
+    .brand-logo{width:34px;height:34px;border-radius:10px;background:radial-gradient(circle at 30% 30%,#fff,var(--cn-red));border:2px solid var(--cn-gold);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+    .brand-text{display:flex;flex-direction:column;gap:2px}
+    .brand-text span:first-child{font-weight:700;font-size:16px}
+    .brand-text span:last-child{font-size:11px;color:var(--gray-600)}
+    .btn{border:none;outline:none;border-radius:999px;padding:6px 14px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .16s ease}
+    .btn-ghost{background:#fff;border:1px solid var(--gray-300);color:var(--gray-800)}
+    .btn-ghost:hover{background:var(--gray-100)}
+    .btn-primary{background:linear-gradient(135deg,var(--cn-red),#a31310);color:#fff;font-weight:600;box-shadow:0 8px 20px rgba(217,35,30,.35)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(217,35,30,.5)}
+
+    /* Hero */
+    .hero{max-width:1100px;margin:18px auto 24px;padding:16px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+    .hero-main{background:#fff;border-radius:16px;border:1px solid var(--gray-300);padding:18px 18px 16px;box-shadow:0 12px 30px rgba(0,0,0,.04)}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:rgba(255,222,0,.15);font-size:11px;margin-bottom:10px}
+    .hero-badge-dot{width:8px;height:8px;border-radius:999px;background:var(--cn-gold);box-shadow:0 0 8px rgba(255,222,0,.9)}
+    .hero h1{font-size:22px;margin-bottom:8px}
+    .hero h1 span{color:var(--cn-red)}
+    .hero p{font-size:13px;color:var(--gray-600);margin-bottom:12px;line-height:1.7}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .hero-note{font-size:11px;color:var(--gray-600)}
+
+    .hero-side{background:linear-gradient(145deg,#0b0b0b,#222);border-radius:16px;padding:16px;color:#fff;border:1px solid #000;box-shadow:0 20px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:10px;justify-content:space-between}
+    .hero-side h2{font-size:15px;margin-bottom:4px}
+    .hero-side p{font-size:12px;color:#e5e7eb;line-height:1.6}
+    .hero-side-list{list-style:none;font-size:12px;display:grid;gap:4px;margin-top:4px}
+    .hero-side-list li::before{content:"• ";color:var(--cn-gold);margin-left:4px}
+    .hero-price{border-radius:12px;background:rgba(248,250,252,.08);border:1px solid rgba(255,222,0,.6);padding:8px 10px;font-size:12px;display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+    .hero-price strong{color:var(--cn-gold);font-size:14px}
+
+    /* Search */
+    .search-section{max-width:1100px;margin:0 auto 18px;padding:0 16px}
+    .search-box{background:#fff;border-radius:999px;border:1px solid var(--gray-300);padding:6px 12px;display:flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,.03)}
+    .search-box input{flex:1;border:none;outline:none;background:transparent;font-size:13px}
+    .search-icon{font-size:16px;color:var(--gray-600)}
+    .search-hint{font-size:11px;color:var(--gray-600);margin-top:4px}
+
+    /* Services */
+    .services-section{max-width:1100px;margin:10px auto 24px;padding:0 16px}
+    .section-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+    .section-title{font-size:15px;font-weight:600}
+    .section-subtitle{font-size:12px;color:var(--gray-600)}
+    .services-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+    @media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.services-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media (max-width:640px){.header-inner{flex-direction:column;align-items:flex-start}.hero{margin-top:10px}.services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+    .service-card{background:#fff;border-radius:14px;border:1px solid var(--gray-300);padding:10px;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:all .16s ease;min-height:88px}
+    .service-card:hover{border-color:var(--cn-red);box-shadow:0 10px 22px rgba(217,35,30,.15);transform:translateY(-2px)}
+    .service-top{display:flex;align-items:center;gap:8px}
+    .service-icon{width:30px;height:30px;border-radius:10px;background:linear-gradient(140deg,var(--cn-red),#a31310);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0}
+    .service-name{font-size:13px;font-weight:600}
+    .service-tagline{font-size:11px;color:var(--gray-600)}
+    .service-meta{font-size:10px;color:var(--gray-600);display:flex;justify-content:space-between;margin-top:auto}
+    .service-meta .highlight{color:var(--cn-red);font-weight:600}
+
+    /* Pricing */
+    .pricing-section{max-width:1100px;margin:0 auto 28px;padding:0 16px}
+    .pricing-card{background:#fff;border-radius:18px;border:1px solid var(--cn-gold);box-shadow:0 16px 32px rgba(0,0,0,.06);padding:14px 16px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px}
+    @media (max-width:720px){.pricing-card{grid-template-columns:minmax(0,1fr)}}
+    .pricing-main h3{font-size:15px;margin-bottom:4px}
+    .pricing-main p{font-size:12px;color:var(--gray-600);line-height:1.6}
+    .pricing-pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:rgba(217,35,30,.07);color:var(--cn-red);font-size:11px;margin-bottom:4px}
+    .pricing-side{padding:8px 10px;border-radius:14px;background:linear-gradient(140deg,#111,#272727);color:#fff;border:1px solid #000;display:flex;flex-direction:column;gap:8px;justify-content:space-between}
+    .pricing-row{display:flex;align-items:baseline;gap:6px}
+    .pricing-row strong{font-size:20px;color:var(--cn-gold)}
+    .pricing-row span{font-size:11px}
+    .pricing-side p{font-size:11px;color:#e5e7eb;line-height:1.6}
+    .pricing-side .btn-primary{width:100%;justify-content:center;margin-top:4px}
+    .pricing-note{font-size:10px;color:#9ca3af;text-align:left;direction:ltr;margin-top:4px}
+
+    /* Footer */
+    footer{border-top:1px solid var(--gray-300);padding:10px 16px 14px;background:#fff}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:var(--gray-600)}
+    .footer-links{display:flex;gap:10px;flex-wrap:wrap}
+    .footer-links a{color:var(--gray-600)}
+    .footer-links a:hover{color:var(--cn-red)}
+  </style>
+</head>
+<body>
+  <!-- علم (أحمر/ذهبي/أحمر) كإيماءة بصرية -->
+  <div class="flag-bar cn">
+    <div style="background:#DE2910"></div>
+    <div style="background:#FFDE00"></div>
+    <div style="background:#DE2910"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo">CN</div>
+        <div class="brand-text">
+          <span>OneLink China</span>
+          <span>政务服务一站式 · All services in one link</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-ghost" onclick="alert('Demo login – coming soon')">登录 / Sign in</button>
+          <button class="btn btn-primary" onclick="location.href='../core/payment-demo.html?country=cn'">订阅 ¥8 / Subscribe</button>
+        </div>
+        <div style="font-size:12px;color:var(--gray-600)">
+          Other regions:
+          <a href="../saudi-app/index.html" style="color:var(--cn-red);font-weight:600">Saudi</a> ·
+          <a href="../egypt-app/index.html" style="color:var(--cn-red);font-weight:600">Egypt</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> China · 演示版 Demo</div>
+      <h1>政府服务 <span>一站式聚合</span>，更快、更清晰、更省心。</h1>
+      <p>
+        OneLink China 将常用政务与公共服务聚合到一个快速、清晰的页面：
+        交通、税务、社保、教育、医疗、住房……几秒直达你要的服务。
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="services-china.html">
+          浏览服务 / Browse
+        </a>
+
+        <button class="btn btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+          了解订阅 / Pricing
+        </button>
+
+        <a class="btn btn-ghost" href="about-china-ar.html">
+          ℹ️ 关于 OneLink China / About
+        </a>
+      </div>
+
+      <p class="hero-note">
+        非官方门户，我们仅做链接聚合与导航，帮助更快找到官方服务。
+      </p>
+    </div> <!-- نهاية hero-main -->
+
+    <aside class="hero-side">
+      <div>
+        <h2>为什么选择 OneLink？</h2>
+        <p>你不必再在多个网站来回找服务，收藏夹也不再凌乱。</p>
+        <ul class="hero-side-list">
+          <li>秒达常用服务 · Less clicks.</li>
+          <li>分类清晰 · 统一入口。</li>
+          <li>移动端与桌面端均友好。</li>
+        </ul>
+      </div>
+      <div class="hero-price">
+        <span>订阅价格</span><span><strong>¥8</strong> / 月</span>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Search -->
+  <section class="search-section">
+    <div class="search-box">
+      <span class="search-icon">🔎</span>
+      <input type="text" placeholder="搜索服务：交通 / 税务 / 社保 / 医疗 / 教育 ..." />
+    </div>
+    <p class="search-hint">例：输入“税务”或“社保”或“住房”，即可查看相关服务图标。</p>
+  </section>
+
+  <!-- Services -->
+  <section class="services-section" id="services">
+    <div class="section-header">
+      <div>
+        <div class="section-title">常用政务与公共服务</div>
+        <div class="section-subtitle">后续将按用户需求持续扩充。</div>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🚦</div>
+          <div>
+            <div class="service-name">交通出行 · Traffic</div>
+            <div class="service-tagline">违章查询 · 驾照/车辆</div>
+          </div>
+        </div>
+        <div class="service-meta"><span>Public Security</span><span class="highlight">Soon</span></div>
+      </a>
+
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">💼</div>
+          <div>
+            <div class="service-name">税务服务 · Tax</div>
+            <div class="service-tagline">申报 · 查询 · 发票</div>
+          </div>
+        </div>
+        <div class="service-meta"><span>Finance</span><span class="highlight">Adding</span></div>
+      </a>
+
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🧾</div>
+          <div>
+            <div class="service-name">社保/医保 · Social Insurance</div>
+            <div class="service-tagline">缴纳 · 查询 · 医保卡</div>
+          </div>
+        </div>
+        <div class="service-meta"><span>Social</span><span class="highlight">Soon</span></div>
+      </a>
+
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🏥</div>
+          <div>
+            <div class="service-name">医疗健康 · Health</div>
+            <div class="service-tagline">挂号 · 查询 · 健康码</div>
+          </div>
+        </div>
+        <div class="service-meta"><span>Health</span><span class="highlight">Later</span></div>
+      </a>
+
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🎓</div>
+          <div>
+            <div class="service-name">教育 · Education</div>
+            <div class="service-tagline">考试 · 成绩 · 学籍</div>
+          </div>
+        </div>
+        <div class="service-meta"><span>Education</span><span class="highlight">Later</span></div>
+      </a>
+
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🏠</div>
+          <div>
+            <div class="service-name">住房公积金 · Housing</div>
+            <div class="service-tagline">缴存 · 提取 · 贷款</div>
+          </div>
+        </div>
+        <div class="service-meta"><span>Housing</span><span class="highlight">Soon</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-card">
+      <div class="pricing-main">
+        <div class="pricing-pill">统一订阅 · 简单清晰</div>
+        <h3>¥8 / 月 — 让政务办理更省时、更省心</h3>
+        <p>订阅 OneLink China 后，你可在一个入口快速直达常用官方服务。我们持续更新服务分类，不投放干扰广告，不做复杂流程。</p>
+      </div>
+
+      <div class="pricing-side">
+        <div>
+          <div class="pricing-row"><strong>¥8</strong><span>/ month</span></div>
+          <p>比一杯咖啡更省钱，却能帮你少走很多弯路与页面。</p>
+        </div>
+        <button class="btn btn-primary" onclick="location.href='../core/payment-demo.html?country=cn'">Start Demo Subscription</button>
+        <div class="pricing-note">OneLink China · v1.0.0 · Safar Al-Ghamdi · Demo Build</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>© 2025 OneLink China · Private ownership of Developer Safar Al-Ghamdi.</div>
+      <div class="footer-links">
+        <a href="#">使用条款</a>
+        <a href="#">重要提示</a>
+        <a href="#">联系我们</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- محوّل الدول -->
+  <nav class="country-switcher" aria-label="Switch country">
+    <a href="../saudi-app/index.html" data-country="sa">🇸🇦 Saudi</a>
+    <span class="sep"></span>
+    <a href="../egypt-app/index.html" data-country="eg">🇪🇬 Egypt</a>
+    <span class="sep"></span>
+    <a href="../china-app/index.html" data-country="cn">🇨🇳 China</a>
+  </nav>
+
+  <script defer src="../core/js/i18n.js"></script>
+  <script defer src="../core/js/switcher.js"></script>
+  
+</body>
+</html>

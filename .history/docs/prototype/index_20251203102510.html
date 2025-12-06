@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink Prototype · Unified Access Layer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="ui.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <p class="beta">Prototype · UDSAL v1.0</p>
+      <h1>OneLink · Global Unified Layer (نموذج أولي)</h1>
+      <p class="subtitle">
+        هذا النموذج يبرهن فكرة <strong>طبقة الوصول الموحّدة</strong>: ملف JSON واحد لخدمات
+        السعودية، مصر، الصين، والعالم، مع بحث + فلاتر + توجيه ذكي.
+      </p>
+    </header>
+
+    <!-- شريط المناطق -->
+    <div class="regions-bar">
+      <button class="chip chip-active" data-region="all">All regions</button>
+      <button class="chip" data-region="sa">Saudi SA</button>
+      <button class="chip" data-region="eg">Egypt EG</button>
+      <button class="chip" data-region="cn">China CN</button>
+      <button class="chip" data-region="global">Global</button>
+    </div>
+
+    <!-- البحث -->
+    <div class="search-row">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="اكتب اسم خدمة أو كلمة مفتاحية مثل: Absher, Visa, GitHub..."
+        data-search-input
+      />
+      <span class="results-count" data-results-count>0 / 0</span>
+    </div>
+
+    <!-- منطقة النتائج -->
+    <section class="results" data-results-list>
+      <!-- الكروت تنضاف هنا من JS -->
+    </section>
+
+    <p class="empty" data-empty-state>يتم تحميل قائمة الخدمات الموحدة...</p>
+
+    <footer class="page-footer">
+      <p>
+        هذا النموذج الأولي جزء من مشروع
+        <strong>OneLink</strong> لتجربة
+        <strong>Unified Digital Services Access Layer (UDSAL)</strong>.
+      </p>
+    </footer>
+  </main>
+
+  <script src="engine.js"></script>
+</body>
+</html>

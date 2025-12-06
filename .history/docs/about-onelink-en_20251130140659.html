@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>About OneLink · GovLinksApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #022c3a 0, #020617 55%, #000 100%);
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 1100px;
+      padding: 32px 16px 40px;
+    }
+
+    .hero-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .hero-logo-wrap img {
+      width: 90px;
+      height: 90px;
+      border-radius: 28px;
+      box-shadow: 0 18px 45px rgba(15, 118, 110, 0.7);
+      object-fit: contain;
+    }
+
+    .hero-header h1 {
+      font-size: 1.9rem;
+      margin: 6px 0 4px;
+    }
+
+    .hero-header p {
+      font-size: 0.98rem;
+      color: #9ca3af;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .card {
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 18px 18px 20px;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .muted {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    .bullet-list li {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      color: #22c55e;
+      margin-top: 1px;
+    }
+
+    .back-row {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 0.86rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    .back-link span {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="page-shell">
+    <header class="hero-header">
+      <div class="hero-logo-wrap">
+        <img src="logo/onelink-header.png" alt="OneLink logo" />
+      </div>
+      <h1>About OneLink</h1>
+      <p>
+        OneLink is an independent unified gateway that organizes links to trusted
+        Saudi government platforms in one secure, modern page.
+      </p>
+    </header>
+
+    <section class="about-grid">
+      <article class="card">
+        <h2>Vision & Purpose</h2>
+        <p class="muted">
+          OneLink is designed to solve a simple daily problem:
+          “Where is the correct official link for this service?”
+        </p>
+        <ul class="bullet-list">
+          <li>Collects the most important Saudi government platforms in one page.</li>
+          <li>Uses only official domains — no random ads, no trackers, no shortcuts.</li>
+          <li>Provides a clean and fast layout that works on mobile and desktop.</li>
+          <li>Helps citizens, residents and visitors reach services with less time and effort.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Developer & License</h2>
+        <p class="muted">
+          Developed and maintained by independent developer
+          <strong>Safar Al-Ghamdi</strong>.
+        </p>
+        <ul class="bullet-list">
+          <li>Private License © 2025 — all rights reserved.</li>
+          <li>Source code and design are owned by the developer.</li>
+          <li>Re-use, copying or redistribution is not allowed without written consent.</li>
+          <li>Future regions: Egypt, China and more (configurable from the same layout).</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="back-row">
+      <a href="index-en.html" class="back-link">
+        <span>←</span>
+        Back to main portal
+      </a>
+    </div>
+  </div>
+  <script src="../core/js/include.js"></script>
+</body>
+</html>

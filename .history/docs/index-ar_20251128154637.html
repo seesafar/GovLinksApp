@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>GovLinksApp OneLink · البوابة الموحدة للخدمات الحكومية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- إعدادات أمان أساسية -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: https:;
+    connect-src 'self';
+    font-src 'self' https:;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+
+  <style>
+    :root {
+      --bg: #020617;
+      --card: #020617;
+      --surface: #020617;
+      --surface-soft: #020617;
+      --accent: #16a34a;
+      --accent-soft: rgba(34, 197, 94, 0.15);
+      --accent-strong: #22c55e;
+      --border-subtle: rgba(148, 163, 184, 0.25);
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --chip: #0f172a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1729 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    /* الشريط العلوي */
+    .top-bar {
+      max-width: 1180px;
+      margin: 24px auto 0;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 30% 20%, #a7f3d0, #16a34a 45%, #052e16 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 45px rgba(16, 185, 129, 0.65);
+    }
+
+    .brand-mark span {
+      font-size: 26px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-text-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-text-sub {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    /* أزرار اللغة و زر عن OneLink */
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      background: #020617;
+      border-radius: 999px;
+      padding: 3px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .lang-btn {
+      border: none;
+      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: transparent;
+      color: var(--text-soft);
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .lang-btn a {
+      color: inherit;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .btn-about {
+      border-radius: 999px;
+      background: #020617;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #e5e7eb;
+      padding: 7px 14px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn-about span {
+      font-size: 14px;
+    }
+
+    .btn-about:hover {
+      border-color: var(--accent-strong);
+      color: #f9fafb;
+    }
+
+    /* البانر الرئيسي */
+    .hero {
+      max-width: 1180px;
+      margin: 4px auto 0;
+      padding: 20px 16px 10px;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, rgba(15, 118, 110, 0.35), #020617 55%, #020617 100%);
+      border-radius: 26px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 32px 60px rgba(15, 23, 42, 0.9);
+      padding: 22px 20px 16px;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .hero-badge span {
+      color: #bbf7d0;
+      font-weight: 500;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .regions-pill {
+      padding: 6px 12px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+    }
+
+    .regions-pill span {
+      color: #a5b4fc;
+      font-weight: 600;
+    }
+
+    .btn-all-services {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 18px;
+      background: var(--accent);
+      color: #f9fafb;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.45);
+    }
+
+    .btn-all-services a {
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-all-services:hover {
+      background: var(--accent-strong);
+    }
+
+    /* شريط البحث */
+    .search-bar {
+      margin-top: 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 18px;
+      padding: 10px 12px 12px;
+      border: 1px solid rgba(30, 64, 175, 0.6);
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    .search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-input-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-input-wrap input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(30, 64, 175, 0.6);
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .search-input-wrap input::placeholder {
+      color: #6b7280;
+    }
+
+    .search-chip {
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent-soft);
+      color: #bbf7d0;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .search-meta {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-soft);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* شريط الكروت (7 أيقونات فقط) */
+    .strip {
+      max-width: 1180px;
+      margin: 10px auto 30px;
+      padding: 0 16px 30px;
+    }
+
+    .strip-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .strip-sub {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+    }
+
+    .strip-scroll {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-color: #22c55e #020617;
+      scrollbar-width: thin;
+    }
+
+    .strip-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+    .strip-scroll::-webkit-scrollbar-track {
+      background: #020617;
+    }
+    .strip-scroll::-webkit-scrollbar-thumb {
+      background: #22c55e;
+      border-radius: 999px;
+    }
+
+    .service-card {
+      min-width: 150px;
+      max-width: 170px;
+      background: radial-gradient(circle at top, #0b1120, #020617);
+      border-radius: 22px;
+      padding: 16px 12px 12px;
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      box-shadow:
+        0 14px 35px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .service-icon-wrap {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 10%, #ffffff, #dbeafe, #0f766e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+    }
+
+    .service-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #ffffff;
+      object-fit: contain;
+    }
+
+    .service-name-ar {
+      margin: 4px 0 0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .service-name-en {
+      margin: 2px 0 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .service-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 72px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #f9fafb;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .service-btn:hover {
+      background: var(--accent-strong);
+    }
+
+    /* فوتر بسيط */
+    footer {
+      margin-top: auto;
+      padding: 14px 10px 18px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      background: radial-gradient(circle at bottom, #0b1120, #020617 55%, #000 100%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+
+    <!-- الشريط العلوي -->
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-mark">
+          <span>🌴</span>
+        </div>
+        <div class="brand-text">
+          <div class="brand-text-title">OneLink</div>
+          <div class="brand-text-sub">البوابة الذكية الموحدة للخدمات الحكومية</div>
+        </div>
+      </div>
+
+     <div class="top-actions"></div>
+
+
+        <div class="lang-toggle">
+          <button class="lang-btn active">العربية</button>
+          <button class="lang-btn">
+            <a href="index-en.html">English</a>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- البانر الرئيسي -->
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-top">
+          <div class="hero-title-block">
+            <div class="hero-badge">
+              <span>GovLinksApp OneLink</span>
+              · Unified Smart Gateway
+            </div>
+            <div class="hero-title">رابط الخدمات الحكومية الموحد</div>
+            <div class="hero-sub">
+              جميع المنصات الحكومية الموثوقة في صفحة واحدة آمنة — واجهة حديثة، تنظيم واضح، وحماية قوية للمتصفح.
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <div class="regions-pill">
+              المناطق الحالية:
+              <span>السعودية</span> · مصر · الصين (قريباً)
+            </div>
+            <button class="btn-all-services">
+              <a href="services-sa.html">
+                عرض كل الخدمات
+                <span>↗</span>
+              </a>
+            </button>
+          </div>
+        </div>
+
+        <!-- شريط البحث (ديكور حالياً) -->
+        <div class="search-bar">
+          <div class="search-row">
+            <button class="search-chip">
+              بحث
+            </button>
+            <div class="search-input-wrap">
+              <input
+                type="search"
+                placeholder="ابحث باسم المنصة بالعربي أو الإنجليزي (أبشر، Najiz، Qiwa…)"
+                aria-label="ابحث عن خدمة حكومية" />
+            </div>
+          </div>
+          <div class="search-meta">
+            <span>النتائج: 0 / 0 (تجريبي – سيتم تفعيل البحث لاحقاً)</span>
+            <span>يمكنك استعراض جميع الخدمات من زر &quot;عرض كل الخدمات&quot;.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- شريط مختصر لأهم 7 منصات -->
+    <section class="strip">
+      <div class="strip-title">منصات موحدة وأساسيات</div>
+      <div class="strip-sub">أهم المنصات الوطنية المستخدمة من المواطنين والمقيمين والزوار.</div>
+
+      <div class="strip-scroll">
+
+        <!-- Nusuk -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/nusuk.png" alt="Nusuk" class="service-icon" />
+          </div>
+          <p class="service-name-ar">نسك</p>
+          <p class="service-name-en">Nusuk</p>
+          <a href="https://www.nusuk.sa" target="_blank" rel="noopener" class="service-btn">انتقل</a>
+        </article>
+
+        <!-- Musaned -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/musaned.png" alt="Musaned" class="service-icon" />
+          </div>
+          <p class="service-name-ar">مساند</p>
+          <p class="service-name-en">Musaned</p>
+          <a href="https://www.musaned.com.sa" target="_blank" rel="noopener" class="service-btn">انتقل</a>
+        </article>
+
+        <!-- Ehkaam -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/ehkaam.png" alt="Ehkaam" class="service-icon" />
+          </div>
+          <p class="service-name-ar">إحكام</p>
+          <p class="service-name-en">Ehkaam</p>
+          <a href="https://ehkaam.sa" target="_blank" rel="noopener" class="service-btn">انتقل</a>
+        </article>
+
+        <!-- Etimad -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/etimad.png" alt="Etimad" class="service-icon" />
+          </div>
+          <p class="service-name-ar">اعتماد</p>
+          <p class="service-name-en">Etimad</p>
+          <a href="https://etimad.sa" target="_blank" rel="noopener" class="service-btn">انتقل</a>
+        </article>
+
+        <!-- Balady -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/balady.png" alt="Balady" class="service-icon" />
+          </div>
+          <p class="service-name-ar">بلدي</p>
+          <p class="service-name-en">Balady</p>
+          <a href="https://balady.gov.sa" target="_blank" rel="noopener" class="service-btn">انتقل</a>
+        </article>
+
+        <!-- Qiwa -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/qiwa.png" alt="Qiwa" class="service-icon" />
+          </div>
+          <p class="service-name-ar">قوى</p>
+          <p class="service-name-en">Qiwa</p>
+          <a href="https://qiwa.sa" target="_blank" rel="noopener" class="service-btn">انتقل</a>
+        </article>
+
+        <!-- Najiz -->
+        <article class="service-card">
+          <div class="service-icon-wrap">
+            <img src="assets/icons/najiz.png" alt="Najiz" class="service-icon" />
+          </div>
+          <p class="service-name-ar">ناجز</p>
+          <p class="service-name-en">Najiz</p>
+          <a href="https://najiz.sa" target="_blank" rel="noopener" class="service-btn">انتقل</a>
+        </article>
+
+      </div>
+    </section>
+
+    <footer>
+      OneLink © 2025 — جميع الحقوق محفوظة للمطور سفر الغامدي.
+    </footer>
+<div class="back-row">
+     <a href="index-ar.html" class="back-link">← الرجوع للبوابة الرئيسية</a> 
+    </div>
+
+
+  </div>
+</body>
+</html>

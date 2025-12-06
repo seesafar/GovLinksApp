@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+ <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OneLink - All Government Services in One Place</title>
+
+<!-- ✅ إعدادات الأمان -->
+<meta http-equiv="X-Frame-Options" content="DENY" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="Referrer-Policy" content="no-referrer" />
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  connect-src 'self';
+  font-src 'self' https:;
+  frame-ancestors 'none';
+  base-uri 'self';
+  form-action 'self';
+">
+
+
+  <style>
+    :root{
+      --green:#006c35;
+      --green-700:#00562a;
+      --green-500:#00a04a;
+      --bg:#f5f5f5;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:rgba(0,0,0,0.06);
+      --shadow-sm:0 2px 6px rgba(0,0,0,0.08);
+      --shadow-md:0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      padding:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    /* Header */
+    header.site-header{
+      background:var(--green);
+      color:#fff;
+      text-align:center;
+      padding:32px 16px 26px;
+      box-shadow:var(--shadow-sm);
+      position:relative;
+    }
+    .brand-top{
+      font-size:15px;
+      font-weight:700;
+      opacity:.95;
+      letter-spacing:.03em;
+      margin-bottom:6px;
+    }
+    .brand-top span{
+      display:block;
+      font-size:13px;
+      opacity:.9;
+    }
+    header.site-header h1{
+      margin:4px 0 6px;
+      font-size:32px;
+      font-weight:800;
+    }
+    header.site-header .hero-sub{
+      margin:0;
+      font-size:14px;
+      opacity:.95;
+    }
+    header.site-header .hero-sub span{
+      display:block;
+      font-size:13px;
+      opacity:.9;
+      margin-top:4px;
+    }
+    .hero-actions{
+      margin-top:16px;
+    }
+    .btn-ghost{
+      display:inline-block;
+      padding:8px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.7);
+      color:#fff;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:500;
+      background:rgba(255,255,255,0.06);
+    }
+    .btn-ghost:hover{
+      background:rgba(255,255,255,0.14);
+    }
+
+    main{
+      max-width:1100px;
+      margin:26px auto 40px;
+      padding:0 16px 40px;
+    }
+
+    .section{
+      margin-bottom:28px;
+    }
+
+    .section-title{
+      margin:0 0 8px;
+      font-size:20px;
+      font-weight:700;
+      border-left:4px solid var(--green);
+      padding-left:10px;
+    }
+    .section-sub{
+      margin:0 0 14px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:14px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow-sm);
+      padding:18px 18px 16px;
+      font-size:14px;
+    }
+
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:16px;
+    }
+
+    .card-title{
+      margin:0 0 6px;
+      font-size:15px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .card-title span.icon{
+      font-size:17px;
+    }
+    .card p{
+      margin:0;
+      font-size:14px;
+      color:#1f2933;
+    }
+
+    /* Steps list */
+    .steps{
+      padding-left:18px;
+      margin:0;
+      font-size:14px;
+    }
+    .steps li{
+      margin-bottom:6px;
+    }
+
+    .pill-row{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .pill{
+      font-size:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      border:1px solid rgba(15,118,110,0.2);
+      background:#ecfdf3;
+      color:#065f46;
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+    }
+
+    /* Call-to-action buttons */
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .btn-primary,
+    .btn-outline{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:500;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid transparent;
+    }
+    .btn-primary{
+      background:var(--green);
+      border-color:var(--green);
+      color:#fff;
+    }
+    .btn-primary:hover{
+      background:var(--green-700);
+    }
+    .btn-outline{
+      background:#fff;
+      border-color:rgba(55,65,81,0.25);
+      color:#111827;
+    }
+    .btn-outline:hover{
+      background:#f9fafb;
+    }
+
+    /* Footer */
+    footer.footer{
+      background:#202124;
+      color:#e5e7eb;
+      text-align:center;
+      padding:18px 10px 16px;
+      font-size:12px;
+    }
+    footer .line{
+      margin:4px 0;
+    }
+    footer a{
+      color:#a5f3fc;
+      text-decoration:none;
+    }
+    footer a:hover{
+      text-decoration:underline;
+    }
+
+    /* Smooth entrance */
+    @keyframes fadeUp{
+      0%{ opacity:0; transform:translateY(18px); }
+      100%{ opacity:1; transform:translateY(0); }
+    }
+    .fade-in{
+      opacity:0;
+      animation:fadeUp .7s ease-out forwards;
+    }
+    .fade-in.delay{
+      animation-delay:.15s;
+    }
+
+    /* 🌐 language menu (top-right) */
+    .lang-menu{
+      position:fixed;
+      top:16px;
+      right:20px;
+      z-index:9999;
+    }
+    .lang-toggle{
+      background:#ffffff;
+      color:#111827;
+      border:none;
+      border-radius:50%;
+      width:40px;
+      height:40px;
+      cursor:pointer;
+      font-size:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .18s ease, background .2s ease;
+    }
+    .lang-toggle:hover{
+      background:#f3f4f6;
+      transform:scale(1.05);
+    }
+
+    .lang-dropdown{
+      position:absolute;
+      top:46px;
+      right:0;
+      background:#fff;
+      border-radius:10px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.18);
+      padding:4px 0;
+      min-width:160px;
+      display:none;
+      flex-direction:column;
+      opacity:0;
+      transform:translateY(-6px);
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .lang-dropdown.show{
+      display:flex;
+      opacity:1;
+      transform:translateY(0);
+    }
+    .lang-dropdown a{
+      padding:8px 14px;
+      font-size:14px;
+      text-decoration:none;
+      color:#111827;
+      border-bottom:1px solid rgba(0,0,0,0.04);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .lang-dropdown a:last-child{
+      border-bottom:none;
+    }
+    .lang-dropdown a:hover{
+      background:var(--green);
+      color:#fff;
+    }
+
+    @media (max-width:640px){
+      header.site-header h1{ font-size:26px; }
+      main{ margin-top:18px; }
+    }
+    /* Footer link styling for English version */
+.footer a {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.footer a:hover {
+  color: var(--green-700);
+  text-decoration: underline;
+}
+/* ===== حركة دخول ناعمة للفوتر ===== */
+@keyframes fadeUpFooter {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+footer.footer {
+  animation: fadeUpFooter 1.2s ease-out forwards;
+}
+/* ===== حركة ناعمة لزر الرجوع للأعلى ===== */
+@keyframes fadeInUpBtn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#backToTop {
+  animation: fadeInUpBtn 1s ease-out forwards;
+}
+/* ===== تدرج لوني أنيق لخلفية الفوتر ===== */
+footer.footer {
+  background: linear-gradient(180deg, #004d2a 0%, #002a16 100%);
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  margin-top: 40px;
+  font-size: 13px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* ===== تأثير وميض خفيف عند مرور الماوس على الفوتر ===== */
+footer.footer {
+  transition: background 0.6s ease, box-shadow 0.6s ease;
+}
+
+footer.footer:hover {
+  background: linear-gradient(180deg, #006c35 0%, #00401f 100%);
+  box-shadow: 0 -6px 16px rgba(0, 108, 53, 0.35);
+}
+/* ===== وميض خافت لعبارة الحقوق عند تحميل الصفحة ===== */
+@keyframes softGlow {
+  0% {
+    opacity: 0;
+    text-shadow: 0 0 4px rgba(0, 255, 128, 0.2);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(0, 255, 128, 0.35);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.footer .line:nth-child(2) {
+  animation: softGlow 2.8s ease-out forwards;
+}
+
+  </style>
+</head>
+
+<body>
+<div data-include="../core/layout/header.html"></div>
+  <!-- Header -->
+  <header class="site-header fade-in">
+    <div class="brand-top">
+      Unified Link
+      <span>All Saudi government services in one place</span>
+    </div>
+
+    <h1>About OneLink</h1>
+
+    <p class="hero-sub">
+      A small personal project to gather key Saudi government platforms in one clean page.
+      <span>No logins, no forms – just official links arranged neatly.</span>
+    </p>
+
+    <div class="hero-actions">
+      <a href="index-en.html" class="btn-ghost">⬅ Back to main page</a>
+    </div>
+
+    <!-- Language picker (about pages) -->
+    <div class="lang-menu">
+      <button id="langToggle" class="lang-toggle" type="button" aria-label="Change language">
+        🌐
+      </button>
+      <div id="langDropdown" class="lang-dropdown">
+        <a href="about.html">🇸🇦 Arabic version</a>
+        <a href="about-en.html">🇬🇧 English version</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- What is OneLink -->
+    <section class="section fade-in">
+      <h2 class="section-title">What is OneLink?</h2>
+      <p class="section-sub">A quick overview of the idea behind the project.</p>
+
+      <div class="card">
+        <p>
+          <strong>OneLink</strong> is a non-official personal project that collects the most important
+          Saudi government e-services on a single page. Instead of searching every time or jumping
+          between many apps and websites, the user can start from one place and quickly reach the
+          right service.
+        </p>
+        <p style="margin-top:6px;">
+          The page simply works as a <strong>unified directory</strong> of official websites
+          (Absher, Najiz, Qiwa, health services, traffic, business, housing, and more) – with a
+          focus on clarity, speed and simplicity.
+        </p>
+      </div>
+    </section>
+
+    <!-- Goals -->
+    <section class="section fade-in delay">
+      <h2 class="section-title">Project goals</h2>
+      <p class="section-sub">What OneLink is trying to make easier for visitors.</p>
+
+      <div class="cards-grid">
+        <article class="card">
+          <h3 class="card-title"><span class="icon">🚀</span> Easier access to services</h3>
+          <p>
+            Group the most used Saudi government platforms in one place so the visitor reaches the
+            correct official website with fewer clicks.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title"><span class="icon">🧭</span> Less confusion and searching</h3>
+          <p>
+            Instead of searching each time or remembering full URLs, the visitor can depend on
+            OneLink as a starting point and choose the category that fits the service.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title"><span class="icon">📱</span> Simple, mobile-friendly layout</h3>
+          <p>
+            A light design that works well on both phone and desktop, with focus on readability and
+            quick scanning of cards without clutter.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title"><span class="icon">🌱</span> Room to grow</h3>
+          <p>
+            The project can grow gradually with more sections, a better search experience,
+            multilingual support, and future helper tools.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- How to use -->
+    <section class="section fade-in">
+      <h2 class="section-title">How do you use the OneLink page?</h2>
+      <p class="section-sub">A simple flow to get the most out of the directory.</p>
+
+      <div class="card">
+        <ol class="steps">
+          <li>Open the main page <strong>OneLink</strong> (index-en.html or its main URL).</li>
+          <li>
+            Use the search bar to type the service name in English or Arabic
+            (for example: Absher, Najiz, Qiwa, MOH).
+          </li>
+          <li>
+            Or scroll to the relevant section such as health, work & labor, transport, finance,
+            housing, tourism, etc.
+          </li>
+          <li>
+            Click the green <strong>Open</strong> button on the card – you will be taken directly to
+            the official government website in a new tab.
+          </li>
+        </ol>
+
+        <div class="pill-row">
+          <span class="pill">✅ Official websites only</span>
+          <span class="pill">🔐 No login or data stored on OneLink</span>
+          <span class="pill">🧭 Just a helper start page</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notes -->
+    <section class="section fade-in">
+      <h2 class="section-title">Notes & disclaimers</h2>
+      <p class="section-sub">Important clarifications about the nature of the project.</p>
+
+      <div class="card">
+        <ul style="margin:0; padding-left:18px; font-size:14px;">
+          <li style="margin-bottom:6px;">
+            <strong>OneLink is not an official government service.</strong> It is a personal
+            initiative to organize links to public e-services only.
+          </li>
+          <li style="margin-bottom:6px;">
+            All logos and names belong to their respective official entities. OneLink only points to
+            their public websites and does not represent them.
+          </li>
+          <li style="margin-bottom:6px;">
+            No accounts, passwords or form data are stored inside OneLink. All sensitive actions are
+            done on the official government platforms directly.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Suggestions -->
+    <section class="section fade-in">
+      <h2 class="section-title">Your suggestions help the project grow</h2>
+      <p class="section-sub">
+        If you have a new idea, missing service, or a design suggestion – you are very welcome to share it.
+      </p>
+
+      <div class="card">
+        <p style="margin:0 0 10px;">
+          I am happy to receive your ideas to improve OneLink – whether it's adding a service,
+          rearranging sections, or making the user journey even smoother.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn-primary" href="mailto:support@onelink.sa">
+            📩 Email the developer
+          </a>
+          <a class="btn-outline" href="https://x.com/onelinke" target="_blank" rel="noopener">
+            🐦 OneLink on X (Twitter)
+          </a>
+          <a class="btn-outline" href="index-en.html">
+            ⬅ Back to main page
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+  <div class="line">
+    Developer: Safer Al-Ghamdi — <span dir="ltr">See Safar</span>
+  </div>
+  <div class="line">
+    OneLink © 2025 — All rights reserved
+  </div>
+  <div class="line">
+    <a href="about.html">Switch to Arabic about page</a>
+  </div>
+</footer>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.getElementById('langToggle');
+      const dropdown = document.getElementById('langDropdown');
+      if (!btn || !dropdown) return;
+
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+      });
+
+      window.addEventListener('click', function () {
+        dropdown.classList.remove('show');
+      });
+    });
+  </script>
+  <script src="security-header.js"></script>
+<script src="../core/js/include.js"></script>
+
+</body>
+</html>

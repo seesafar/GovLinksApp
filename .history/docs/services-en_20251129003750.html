@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneLink · All Government Services</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    .page-wrap {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    /* Back button */
+    .back-row {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .back-link {
+      padding: 10px 18px;
+      background: #0f766e;
+      color: #fff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+    .back-link:hover {
+      background: #0d5e56;
+    }
+
+    /* Page title */
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #fff;
+      text-align: center;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #9ca3af;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    /* Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 22px;
+      justify-items: center;
+    }
+
+    /* Card */
+    .service-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 18px 16px 20px;
+      border-radius: 20px;
+      text-align: center;
+      width: 170px;
+      transition: 0.2s;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      border-color: rgba(45, 212, 191, 0.7);
+    }
+
+    /* Logo circle (زي اللي في الصور) */
+    .service-logo-ring {
+      width: 80px;
+      height: 80px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(34,197,163,0.45), #020617 65%);
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .service-logo-ring img {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      object-fit: cover;
+      background: #020617;
+    }
+
+    .service-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .service-btn {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 8px 24px;
+      border-radius: 999px;
+      border: none;
+      background: #0f766e;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .service-btn:hover {
+      background: #059669;
+      box-shadow: 0 8px 22px rgba(16, 185, 129, 0.6);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+    <div class="back-row">
+      <a href="index-en.html" class="back-link">Back to main portal ←</a>
+    </div>
+
+    <h1>All Government Services</h1>
+    <p class="subtitle">
+      Trusted official platforms — arranged clearly for fast access.
+    </p>
+
+    <div class="services-grid">
+
+      <!-- مثال: أول خدمة -->
+      <a href="https://ehkaam.sa" target="_blank" rel="noopener noreferrer" class="service-card">
+        <div class="service-logo-ring">
+          <img src="assets/services/service-01.png" alt="Ehkaam" />
+        </div>
+        <div class="service-name">Ehkaam</div>
+        <button class="service-btn">Open</button>
+      </a>
+
+      <!-- مثال: خدمة ثانية -->
+      <a href="https://www.etimad.sa" target="_blank" rel="noopener noreferrer" class="service-card">
+        <div class="service-logo-ring">
+          <img src="assets/services/service-02.png" alt="Etimad" />
+        </div>
+        <div class="service-name">Etimad</div>
+        <button class="service-btn">Open</button>
+      </a>
+
+      <!-- مثال: خدمة ثالثة -->
+      <a href="https://balady.gov.sa" target="_blank" rel="noopener noreferrer" class="service-card">
+        <div class="service-logo-ring">
+          <img src="assets/services/service-03.png" alt="Balady" />
+        </div>
+        <div class="service-name">Balady</div>
+        <button class="service-btn">Open</button>
+      </a>
+
+      <!-- ... كرّر نفس البلوك لكل شعار عندك ... -->
+      <!-- انسخ <a class="service-card">...</a> وعدّل: href + src + الاسم -->
+      <!-- تقدر تكمّل إلى 52 خدمة عادي، الجريد بيلف تلقائي -->
+
+    </div>
+  </div>
+</body>
+</html>

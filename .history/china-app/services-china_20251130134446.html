@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink China · الخدمات الحكومية الصينية في مكان واحد</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- خط Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- لو حاب تربطه مع ستايل مشترك -->
+  <link rel="stylesheet" href="../core/css/base.css" />
+
+  <link rel="icon" type="image/png" href="/GovLinksApp/icons/android-chrome-512x512.png">
+  <link rel="apple-touch-icon" href="/GovLinksApp/icons/android-chrome-512x512.png">
+
+  <style>
+    :root {
+      --china-red: #e11d48;
+      --china-red-deep: #b91c1c;
+      --china-gold: #facc15;
+      --bg-main: #020617;
+      --panel-bg: rgba(15, 23, 42, 0.98);
+      --soft-border: rgba(55, 65, 81, 0.9);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --chip-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #111827 0, var(--bg-main) 45%, #000 100%);
+      color: var(--text-main);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* شريط علوي بلون العلم */
+    .top-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--china-red-deep), var(--china-red));
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    }
+
+    header {
+      position: sticky;
+      top: 6px;
+      z-index: 20;
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(30, 64, 175, 0.7);
+      backdrop-filter: blur(16px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .header-title h1 {
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-title h1 span.flag {
+      font-size: 18px;
+    }
+
+    .header-title p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .back-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: transparent;
+      color: var(--text-main);
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.16s ease;
+      white-space: nowrap;
+    }
+
+    .back-btn:hover {
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 18px auto 32px;
+      padding: 0 16px 24px;
+    }
+
+    .intro-panel {
+      background: var(--panel-bg);
+      border-radius: 20px;
+      border: 1px solid var(--soft-border);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 16px 16px 14px;
+      margin-bottom: 14px;
+    }
+
+    .intro-panel h2 {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .intro-panel p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .tags-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11.5px;
+    }
+
+    .tag-chip {
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: var(--chip-bg);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tag-chip span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--china-gold);
+    }
+
+    .filters-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .filter-label {
+      color: var(--text-muted);
+    }
+
+    .filter-chip {
+      border-radius: 999px;
+      padding: 5px 12px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: rgba(15, 23, 42, 0.92);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 11.5px;
+    }
+
+    .filter-chip--active {
+      border-color: var(--china-gold);
+      color: var(--china-gold);
+      font-weight: 600;
+      background: rgba(30, 64, 175, 0.2);
+    }
+
+    /* شبكة الخدمات */
+    .services-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 960px) {
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .service-card {
+      background: rgba(15, 23, 42, 0.97);
+      border-radius: 18px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 12px 12px 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .service-header {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .service-emoji {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #fee2e2, #7f1d1d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(185, 28, 28, 0.7);
+    }
+
+    .service-titles {
+      flex: 1;
+    }
+
+    .service-name-cn {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .service-name-en {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .service-name-ar {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .service-meta-row {
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .service-badge {
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 10.5px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .service-badge--live {
+      border-color: var(--china-gold);
+      color: var(--china-gold);
+    }
+
+    .service-badge--soon {
+      border-color: rgba(248, 250, 252, 0.16);
+      color: #f97316;
+    }
+
+    .service-badge--planned {
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--text-muted);
+    }
+
+    .service-footer {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    .service-link {
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: linear-gradient(120deg, var(--china-red), var(--china-red-deep));
+      border: 1px solid rgba(248, 250, 252, 0.14);
+      color: #f9fafb;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .service-link span.cn {
+      font-size: 12px;
+    }
+
+    .service-note {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      text-align: left;
+      direction: ltr;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>
+          <span class="flag">🇨🇳</span>
+          OneLink China · صفحة الخدمات
+        </h1>
+        <p>تجميع لأهم المنصّات والخدمات الحكومية الصينية في مكان واحد.</p>
+      </div>
+
+      <button class="back-btn" onclick="window.location.href='index.html'">
+        ⬅ الرجوع إلى البوابة الرئيسية
+      </button>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <section class="intro-panel">
+      <h2>الخدمات الحكومية الصينية المرتبطة بـ OneLink China</h2>
+      <p>
+        هذه الصفحة تجمع لك عدداً من البوابات والمنصّات الحكومية أو شبه الحكومية
+        الأكثر استخداماً في الصين، مع توضيح نوع الخدمة وحالة الربط (مباشرة، قريباً، أو مخطّطة).
+      </p>
+
+      <div class="tags-row">
+        <div class="tag-chip">
+          <span class="dot"></span>
+          China · e-Gov Services
+        </div>
+        <div class="tag-chip">
+          روابط توجيهية فقط — المعاملات تتم على المواقع الرسمية.
+        </div>
+      </div>
+
+      <div class="filters-row">
+        <span class="filter-label">تصفية حسب النوع (شكل رمزي فقط):</span>
+        <button class="filter-chip filter-chip--active" type="button">الكل</button>
+        <button class="filter-chip" type="button">أعمال / Business</button>
+        <button class="filter-chip" type="button">إقامة / Residence</button>
+        <button class="filter-chip" type="button">مواصلات / Transport</button>
+        <button class="filter-chip" type="button">ضرائب / Taxes</button>
+      </div>
+    </section>
+
+    <section class="services-grid">
+      <!-- 1. البوابة الوطنية -->
+      <article class="service-card">
+        <div class="service-header">
+          <div class="service-emoji">🏛️</div>
+          <div class="service-titles">
+            <div class="service-name-cn">国家政务服务平台</div>
+            <div class="service-name-en">National Government Service Platform</div>
+            <div class="service-name-ar">البوابة الوطنية للخدمات الحكومية في الصين</div>
+          </div>
+        </div>
+        <div class="service-meta-row">
+          <span>القطاع: خدمات عامة شاملة</span>
+          <span class="service-badge service-badge--live">متاح · Live</span>
+        </div>
+        <div class="service-footer">
+          <button class="service-link" onclick="window.open('https://www.gjzwfw.gov.cn','_blank')">
+            <span class="cn">打开</span> / Open
+          </button>
+          <span>official: gjzwfw.gov.cn</span>
+        </div>
+      </article>
+
+      <!-- 2. منصة الأعمال -->
+      <article class="service-card">
+        <div class="service-header">
+          <div class="service-emoji">💼</div>
+          <div class="service-titles">
+            <div class="service-name-cn">企业服务 / 工商服务</div>
+            <div class="service-name-en">Business & Market Supervision</div>
+            <div class="service-name-ar">خدمات تسجيل وترخيص الشركات</div>
+          </div>
+        </div>
+        <div class="service-meta-row">
+          <span>القطاع: الأعمال / الشركات</span>
+          <span class="service-badge service-badge--soon">قريباً · Coming soon</span>
+        </div>
+        <div class="service-footer">
+          <button class="service-link" onclick="alert('سيتم الربط مباشرة بأشهر بوابات الأعمال في التحديث القادم.')">
+            تفاصيل قريباً
+          </button>
+          <span>link: سيتم تحديده لاحقاً</span>
+        </div>
+      </article>
+
+      <!-- 3. الضرائب -->
+      <article class="service-card">
+        <div class="service-header">
+          <div class="service-emoji">💰</div>
+          <div class="service-titles">
+            <div class="service-name-cn">电子税务</div>
+            <div class="service-name-en">Electronic Tax Services</div>
+            <div class="service-name-ar">خدمات الضرائب الإلكترونية للأفراد والشركات</div>
+          </div>
+        </div>
+        <div class="service-meta-row">
+          <span>القطاع: الضرائب</span>
+          <span class="service-badge service-badge--planned">قيد التخطيط</span>
+        </div>
+        <div class="service-footer">
+          <button class="service-link" onclick="alert('سيتم إضافة روابط الضرائب الصينية في نسخة لاحقة.')">
+            معلومات لاحقاً
+          </button>
+          <span>status: under study</span>
+        </div>
+      </article>
+
+      <!-- 4. المواصلات / السكك الحديدية -->
+      <article class="service-card">
+        <div class="service-header">
+          <div class="service-emoji">🚆</div>
+          <div class="service-titles">
+            <div class="service-name-cn">12306 铁路</div>
+            <div class="service-name-en">Railway Ticketing (12306)</div>
+            <div class="service-name-ar">حجز تذاكر القطارات عبر المنصة الرسمية</div>
+          </div>
+        </div>
+        <div class="service-meta-row">
+          <span>القطاع: مواصلات / سكك حديدية</span>
+          <span class="service-badge service-badge--live">متاح · Live</span>
+        </div>
+        <div class="service-footer">
+          <button class="service-link" onclick="window.open('https://www.12306.cn','_blank')">
+            <span class="cn">打开</span> / Open
+          </button>
+          <span>official: 12306.cn</span>
+        </div>
+      </article>
+
+      <!-- 5. الضمان الاجتماعي -->
+      <article class="service-card">
+        <div class="service-header">
+          <div class="service-emoji">🩺</div>
+          <div class="service-titles">
+            <div class="service-name-cn">社保 / 医保</div>
+            <div class="service-name-en">Social Security & Medical Insurance</div>
+            <div class="service-name-ar">التأمينات الاجتماعية والتأمين الطبي</div>
+          </div>
+        </div>
+        <div class="service-meta-row">
+          <span>القطاع: ضمان اجتماعي وصحة</span>
+          <span class="service-badge service-badge--soon">قريباً</span>
+        </div>
+        <div class="service-footer">
+          <button class="service-link" onclick="alert('سيتم تجميع أشهر بوابات التأمينات الصينية لاحقاً.')">
+            تفاصيل قريباً
+          </button>
+          <span>status: mapping services</span>
+        </div>
+      </article>
+
+      <!-- 6. الإقامة للأجانب (مثال توضيحي) -->
+      <article class="service-card">
+        <div class="service-header">
+          <div class="service-emoji">🛂</div>
+          <div class="service-titles">
+            <div class="service-name-cn">出入境 / Residence</div>
+            <div class="service-name-en">Entry & Residence Services</div>
+            <div class="service-name-ar">خدمات الإقامة والدخول والخروج (مثال توضيحي)</div>
+          </div>
+        </div>
+        <div class="service-meta-row">
+          <span>القطاع: إقامة / جوازات</span>
+          <span class="service-badge service-badge--planned">تخطيط أولي</span>
+        </div>
+        <div class="service-footer">
+          <button class="service-link" onclick="alert('سيتم تحديث روابط الإقامة المعتمدة لاحقاً.')">
+            تحديث لاحق
+          </button>
+          <span>note: demo only</span>
+        </div>
+      </article>
+    </section>
+
+    <p class="service-note">
+      * OneLink China يقوم فقط بتجميع روابط عامة متاحة للجمهور، ولا يطلب بيانات تسجيل الدخول
+      أو كلمات المرور، ولا يمثّل أي جهة حكومية صينية. كل المعاملات الفعلية تتم على
+      البوابات الرسمية التي يتم فتحها في تبويب منفصل.
+    </p>
+  </main>
+  
+</body>
+</html>

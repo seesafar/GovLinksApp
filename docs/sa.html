@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink · Saudi Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- خط Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- CSS العام للمشروع -->
+  <!-- <link rel="stylesheet" href="assets/css/style.css" /> -->
+
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #000 55%, #020617 100%);
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sa-shell {
+      max-width: 1100px;
+      margin: 24px auto 40px;
+      padding: 16px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c55e, #a3e635);
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.9);
+    }
+
+    .top-title-main {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .top-title-sub {
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .flags-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 11px;
+    }
+
+    .flag-link {
+      border-radius: 999px;
+      padding: 4px 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.8;
+    }
+
+    .flag-link span.flag {
+      font-size: 14px;
+    }
+
+    .flag-link.is-active {
+      border-color: rgba(52, 211, 153, 0.9);
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.18), transparent 60%);
+      opacity: 1;
+    }
+
+    .flag-link:hover {
+      opacity: 1;
+    }
+
+    .sa-hero {
+      margin-top: 10px;
+      margin-bottom: 18px;
+      padding: 18px 18px 16px;
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.22), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+    }
+
+    .sa-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      margin-bottom: 8px;
+    }
+
+    .sa-hero-badge span.flag {
+      font-size: 16px;
+    }
+
+    .sa-hero-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .sa-hero-subtitle {
+      font-size: 13px;
+      color: #cbd5f5;
+      max-width: 520px;
+    }
+
+    .sa-hero-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    .sa-hero-footer strong {
+      font-weight: 600;
+    }
+
+    .back-home-link {
+      font-size: 11px;
+      color: #a5b4fc;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.9;
+    }
+
+    .back-home-link:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+
+    .search-panel {
+      margin-top: 18px;
+      margin-bottom: 18px;
+      padding: 14px 14px 12px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+    }
+
+    .search-input-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .search-input-wrap input[type="search"] {
+      width: 100%;
+      padding: 10px 12px 10px 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.85);
+      background: rgba(15, 23, 42, 0.96);
+      color: #e5e7eb;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .search-input-wrap input[type="search"]::placeholder {
+      color: rgba(148, 163, 184, 0.85);
+    }
+
+    .search-input-icon {
+      position: absolute;
+      right: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      opacity: 0.75;
+    }
+
+    .search-hints {
+      font-size: 11px;
+      opacity: 0.75;
+      margin-bottom: 8px;
+    }
+
+    .filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .filter-chip {
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      padding: 4px 9px;
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.96);
+      cursor: pointer;
+      color: #e5e7eb;
+      opacity: 0.9;
+    }
+
+    .filter-chip.is-on {
+      border-color: rgba(34, 197, 94, 0.9);
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.22), rgba(15, 23, 42, 0.96));
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.6);
+      opacity: 1;
+    }
+
+    .region-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .region-tab {
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.95);
+      background: rgba(15, 23, 42, 0.98);
+      color: #e5e7eb;
+      font-size: 11px;
+      padding: 4px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      opacity: 0.9;
+    }
+
+    .region-tab span.flag {
+      font-size: 14px;
+    }
+
+    .region-tab.is-active {
+      border-color: rgba(59, 130, 246, 0.9);
+      background: radial-gradient(circle at top, rgba(59, 130, 246, 0.28), rgba(15, 23, 42, 0.98));
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.55);
+      opacity: 1;
+    }
+
+    .region-tab.is-all {
+      opacity: 0.85;
+    }
+
+    .sa-main-results {
+      margin-top: 6px;
+    }
+
+    .footer-mini {
+      margin-top: 22px;
+      font-size: 11px;
+      text-align: center;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 640px) {
+      .sa-shell {
+        padding: 10px;
+      }
+      .sa-hero {
+        padding: 14px 12px;
+      }
+      .sa-hero-title {
+        font-size: 18px;
+      }
+    }
+    /* إصلاح مكان المؤشر في شريط البحث */
+.search-row .search-input {
+  padding: 10px 44px 10px 8px !important; /* نبعد المؤشر عن دائرة الأيقونة */
+  text-align: right;
+  box-sizing: border-box;
+}
+/* Fix search cursor alignment */
+.search-input-wrap input[type="search"] {
+  padding-right: 46px !important;   /* يبعد المؤشر عن دائرة الأيقونة */
+  text-align: right !important;      /* النص من اليمين */
+  box-sizing: border-box !important;
+}
+  </style>
+</head>
+<body>
+  <div class="sa-shell">
+    <!-- الشريط العلوي + شعار OneLink + أعلام الدول -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <div class="logo-dot"></div>
+        <div>
+          <div class="top-title-main">OneLink · Saudi</div>
+          <div class="top-title-sub">كل الخدمات الحكومية السعودية في مكان واحد</div>
+        </div>
+      </div>
+
+      <nav class="flags-bar" aria-label="Switch country">
+        <a href="sa.html" class="flag-link is-active" title="Saudi Arabia">
+          <span class="flag">🇸🇦</span>
+          <span>Saudi</span>
+        </a>
+        <a href="eg.html" class="flag-link" title="Egypt">
+          <span class="flag">🇪🇬</span>
+          <span>Egypt</span>
+        </a>
+        <a href="cn.html" class="flag-link" title="China">
+          <span class="flag">🇨🇳</span>
+          <span>China</span>
+        </a>
+        <a href="app-global-hub.html" class="flag-link" title="Global Hub">
+          <span class="flag">🌍</span>
+          <span>Global</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- البطاقة التعريفية للسعودية -->
+    <section class="sa-hero">
+      <div class="sa-hero-badge">
+        <span class="flag">🇸🇦</span>
+        <span>Saudi Gov · Core Pack</span>
+      </div>
+      <h1 class="sa-hero-title">الخدمات الحكومية السعودية · OneLink SA</h1>
+      <p class="sa-hero-subtitle">
+        بوابة موحدة لاستعراض أهم المنصات الحكومية في السعودية: الهوية الرقمية، القضاء، الصحة،
+        السفر، الضرائب، والمنصات الموحدة – مع بحث عميق وفلاتر ذكية.
+      </p>
+      <div class="sa-hero-footer">
+        <span>تمت مزامنة <strong>السعودية، مصر، الصين، والعالمي</strong> في ملف بيانات واحد.</span>
+        <a href="index.html" class="back-home-link">
+          ← الرجوع للصفحة الرئيسية
+        </a>
+      </div>
+    </section>
+
+    <!-- لوحة البحث والفلاتر -->
+    <section class="search-panel">
+      <div class="search-input-wrap">
+        <input
+          type="search"
+          placeholder="ابحث باسم الخدمة، مثل: أبشر، نفاذ، صحتي، eVisa، ZATCA…"
+          aria-label="بحث في الخدمات الحكومية"
+        />
+        <span class="search-input-icon">🔍</span>
+      </div>
+      <div class="search-hints">
+        يمكنك الجمع بين <strong>الدولة + نوع الخدمة + البحث النصي</strong> معًا.  
+        مثلاً: اختر السعودية + صحة ثم اكتب (موعد) أو (صحتي).
+      </div>
+
+      <!-- فلاتر التصنيف (تعمل مع FILTER_MAP في ملف JS) -->
+      <div class="filters-row">
+        <button type="button" class="filter-chip">منصات موحدة</button>
+        <button type="button" class="filter-chip">العدل / القضاء</button>
+        <button type="button" class="filter-chip">هوية رقمية</button>
+        <button type="button" class="filter-chip">سفر وحدود</button>
+        <button type="button" class="filter-chip">ضرائب ومالية</button>
+        <button type="button" class="filter-chip">صحة</button>
+      </div>
+
+      <!-- Tabs الدول (Saudi / Egypt / China / Global / All) -->
+      <div class="region-tabs">
+        <button class="region-tab is-active" data-region="sa">
+          <span class="flag">🇸🇦</span> Saudi
+        </button>
+        <button class="region-tab" data-region="eg">
+          <span class="flag">🇪🇬</span> Egypt
+        </button>
+        <button class="region-tab" data-region="cn">
+          <span class="flag">🇨🇳</span> China
+        </button>
+        <button class="region-tab" data-region="global">
+          <span class="flag">🌍</span> Global
+        </button>
+        <button class="region-tab is-all" data-region="all">
+          All regions
+        </button>
+      </div>
+    </section>
+
+    <!-- منطقة عرض النتائج التي يكتب فيها ملف JS -->
+    <main class="sa-main-results">
+      <div id="search-results">
+        <!-- سيتم ملؤها ديناميكياً بواسطة ملف الـ JS (Deep Search) -->
+      </div>
+    </main>
+
+    <div class="footer-mini">
+      OneLink · Deep Search · SA / EG / CN / Global — experimental front-end demo.
+    </div>
+  </div>
+
+  <!-- ✅ مهم: هنا تربط ملف JS الخاص بالبحث العميق -->
+  <!-- انسخ نفس سطر <script> المستخدم في app-deep-search.html -->
+  <!-- مثال (عدّل المسار حسب عندك): -->
+  <!-- <script src="app-ui/js/deep-search.js"></script> -->
+
+  <!-- لو كنت تستخدم نفس ملف JS الذي أرسلتَه لي سابقاً، ضعه هنا مثلاً: -->
+  
+  <!-- لو المسار مختلف عندك، غيّر السطر أعلاه للمسار الصحيح لملف الـ JS -->
+<script src="../../core/i18n/js/deep-search-engine.js"></script>
+<script>
+  // ضبط صفحة السعودية بحيث تفتح مباشرة على Saudi SA
+  window.addEventListener("load", function () {
+    if (window.__deep && typeof window.__deep.setRegion === "function") {
+      window.__deep.setRegion("sa");
+    }
+  });
+</script>
+</body>
+</html>

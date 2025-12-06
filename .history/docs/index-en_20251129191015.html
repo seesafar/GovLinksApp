@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>GovLinksApp OneLink · Unified Government Services Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Security headers -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta
+    http-equiv="Permissions-Policy"
+    content="geolocation=(), microphone=(), camera=()"
+  />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https:;
+      connect-src 'self';
+      font-src 'self' https:;
+      frame-ancestors 'none';
+      base-uri 'self';
+      form-action 'self';
+    "
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="192x192" href="logo/onelink-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32"  href="logo/onelink-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16"  href="logo/onelink-icon.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="logo/onelink-icon.png?v=1">
+
+  <style>
+    :root {
+      --bg-main: #064e3b;
+      --hero-bg: #0f7a3a;
+      --card-bg: #02141b;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.12);
+      --text-main: #e5f4f4;
+      --text-sub: #9ca9ad;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --badge-bg: rgba(15, 23, 42, 0.9);
+      --card-border: rgba(15, 23, 42, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #033341 0, #00090c 55%, #000000 100%);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-shell {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 16px 24px;   /* كان 8px من فوق، خليناه 0 */
+}
+
+
+    /* ---------- HEADER ---------- */
+    .hero-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  margin-top: -40px;   /* كان -24px -> رفعناه أكثر */
+  margin-bottom: 0;    /* كان 4px -> لصقناه أكثر بالكرت */
+  text-align: center;
+}
+
+
+    .hero-logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-banner {
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+      display: block;
+      margin: 0 auto 4px;
+      filter: drop-shadow(0 18px 45px rgba(0, 0, 0, 0.55));
+    }
+
+    .hero-title h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+    }
+
+    .hero-title p {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+    }
+
+    .hero-meta-row {
+      display: flex;
+      width: 100%;
+      max-width: 900px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .region-chip {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--badge-bg);
+      border: 1px solid var(--border-soft);
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .region-chip strong {
+      color: var(--accent);
+    }
+
+    .lang-tabs {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .lang-tab {
+      border: none;
+      outline: none;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-sub);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .lang-tab--active {
+      background: var(--accent);
+      color: #022c22;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(20, 184, 166, 0.5);
+    }
+
+    /* ---------- MAIN CARD ---------- */
+    .portal-card {
+      background: radial-gradient(circle at top right, #053848 0, #03161c 45%, #02070a 95%);
+      border-radius: 26px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+      padding: 22px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      margin-top: -6px;
+    }
+
+    .portal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .portal-title-block h2 {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .portal-title-block p {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .portal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.16s ease-out;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #022c22;
+      border-color: rgba(20, 184, 166, 0.8);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 30px rgba(20, 184, 166, 0.6);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-main);
+      border-color: rgba(148, 163, 184, 0.6);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(148, 163, 184, 0.15);
+    }
+
+    /* ---------- SEARCH STRIP ---------- */
+    .search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      direction: ltr;
+    }
+
+    .search-chip {
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-sub);
+      cursor: pointer;
+    }
+
+    .search-chip--active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 180px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-main);
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    .search-input::placeholder {
+      color: rgba(156, 172, 175, 0.9);
+    }
+
+    .search-meta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      white-space: nowrap;
+    }
+
+    /* ---------- SERVICES STRIP ---------- */
+    .strip-header {
+      margin-top: 6px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .strip-title {
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+
+    .strip-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    .services-row {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(140px, 1fr);
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-color: var(--accent) transparent;
+      scrollbar-width: thin;
+    }
+
+    .services-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .services-row::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .services-row::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    .service-card {
+      min-width: 150px;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 12px 10px 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+
+    .service-icon-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 10%, #ffffff, #dbeafe, #0f766e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+    }
+
+    .service-icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #ffffff;
+      object-fit: contain;
+    }
+
+    .service-name-en {
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .service-name-ar {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    .service-btn {
+      margin-top: 4px;
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #022c22;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* ---------- GRID SECTION ---------- */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--card-border);
+      padding: 14px 16px;
+      text-align: left;
+    }
+
+    .dev-title {
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .dev-name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .dev-role {
+      font-size: 0.83rem;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .dev-license {
+      font-size: 0.75rem;
+      color: rgba(148, 163, 184, 0.9);
+      line-height: 1.6;
+    }
+
+    .features-title {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .features-list {
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-sub);
+    }
+
+    .features-list li {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      margin-bottom: 5px;
+    }
+
+    .features-list li::before {
+      content: "•";
+      color: var(--accent);
+      font-size: 1rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .promo-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .promo-img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 18px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ---------- CONTACT + DOWNLOAD ---------- */
+    .contact-download {
+  margin-top: 12px;   /* كان 18px */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;          /* بدل 14px */
+}
+
+    .contact-card,
+    .download-card {
+      border-radius: 22px;
+      background: rgba(4, 12, 24, 0.96);
+      border: 1px solid rgba(30, 64, 175, 0.5);
+      padding: 16px 20px 18px;
+      text-align: center;
+    }
+
+    .contact-card h3,
+    .download-card h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .contact-card p,
+    .download-card p {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      text-decoration: none;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-main);
+      background: rgba(15, 23, 42, 0.9);
+      transition: all 0.16s ease-out;
+      white-space: nowrap;
+    }
+
+    .contact-pill-primary {
+      background: var(--accent);
+      color: #022c22;
+      border-color: rgba(34, 197, 94, 0.9);
+      font-weight: 600;
+    }
+
+    .contact-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.6);
+    }
+
+    .download-card {
+      padding-top: 14px;
+    }
+
+    /* ===== Store Badges – layout ===== */
+    .store-badges {
+      margin-top: 12px;
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ===== Final perfect badges style ===== */
+    .store-badge img {
+      display: block;
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 14px;
+      filter: drop-shadow(0 10px 26px rgba(0,0,0,0.65));
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    /* Google Play – upscale متوازن */
+    .store-badge:nth-child(2) img {
+      transform: scale(1.48);
+    }
+
+    /* Hover effect */
+    .store-badge:hover img {
+      transform: scale(1.05);
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,0.85));
+    }
+
+    /* ---------- FOOTER ---------- */
+    .main-footer {
+  max-width: 1200px;
+  width: 100%;
+  font-size: 0.74rem;
+  color: rgba(148, 163, 184, 0.85);
+  text-align: center;
+  padding: 6px 18px 18px;  /* قللنا الفراغ العمودي */
+  margin-top: 50px;
+}
+
+    @media (max-width: 1024px) {
+      .portal-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-areas:
+          "features dev"
+          "promo   promo";
+      }
+
+      .card.features-card { grid-area: features; }
+      .card.dev-card      { grid-area: dev; }
+      .promo-card         { grid-area: promo; }
+    }
+
+    @media (max-width: 768px) {
+      .portal-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-meta-row {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+
+      .portal-header {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-shell">
+    <!-- ===== HEADER ===== -->
+    <header class="hero-header">
+      <div class="hero-logo-wrap">
+        <img src="logo/onelink-header.png" alt="OneLink Logo" class="brand-banner" />
+
+        <div class="hero-title">
+          <h1>GovLinksApp OneLink</h1>
+          <p>A unified smart gateway for official government services.</p>
+        </div>
+      </div>
+
+      <div class="hero-meta-row">
+        <div class="region-chip">
+          <span>Regions:</span>
+          <strong>Saudi Arabia · Egypt · China (soon)</strong>
+        </div>
+
+        <div class="lang-tabs">
+          <button class="lang-tab lang-tab--active" type="button">English</button>
+          <a href="index.html" class="lang-tab">العربية</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== MAIN PORTAL CARD ===== -->
+    <main class="portal-card">
+      <header class="portal-header">
+        <div class="portal-title-block">
+          <h2>Unified Government Services Portal</h2>
+          <p>
+            All trusted government platforms in one secure page — modern UX,
+            clean layout, and strong browser protection for users.
+          </p>
+        </div>
+
+        <div class="portal-actions">
+          <a href="about-en.html" class="btn btn-ghost">ℹ️ About OneLink</a>
+          <a href="services-en.html" class="btn btn-primary">View all services</a>
+        </div>
+      </header>
+
+      <!-- Search strip (UI only for now) -->
+      <div class="search-row">
+        <button class="search-chip search-chip--active" type="button">
+          Search
+        </button>
+        <input
+          class="search-input"
+          type="search"
+          placeholder="Search by Arabic or English service name (Absher, Najiz, HRSD, Qiwa...)"
+        />
+        <div class="search-meta">
+          <span>Results:</span><span>0 / 0</span>
+        </div>
+      </div>
+
+      <!-- ===== MAIN SERVICES STRIP ===== -->
+      <section>
+        <header class="strip-header">
+          <h3 class="strip-title">Unified Platforms &amp; Essentials</h3>
+          <p class="strip-subtitle">
+            The most used national platforms for citizens and residents.
+          </p>
+        </header>
+
+        <div class="services-row">
+          <!-- Tawakkalna -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img src="assets/icons/tawakkalna.png" alt="Tawakkalna" class="service-icon" />
+            </div>
+            <p class="service-name-en">Tawakkalna</p>
+            <p class="service-name-ar">توكلنا</p>
+            <a href="https://tawakkalna.sdaia.gov.sa" target="_blank" rel="noopener" class="service-btn">
+              Go
+            </a>
+          </article>
+
+          <!-- Ehkaam -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img src="assets/icons/ehkaam.png" alt="Ehkaam" class="service-icon" />
+            </div>
+            <p class="service-name-en">Ehkaam</p>
+            <p class="service-name-ar">إحكام</p>
+            <a href="https://ehkaam.sa" target="_blank" rel="noopener" class="service-btn">
+              Go
+            </a>
+          </article>
+
+          <!-- Balady -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img src="assets/icons/balady.png" alt="Balady" class="service-icon" />
+            </div>
+            <p class="service-name-en">Balady</p>
+            <p class="service-name-ar">بلدي</p>
+            <a href="https://balady.gov.sa" target="_blank" rel="noopener" class="service-btn">
+              Go
+            </a>
+          </article>
+
+          <!-- Etimad -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img src="assets/icons/etimad.png" alt="Etimad" class="service-icon" />
+            </div>
+            <p class="service-name-en">Etimad</p>
+            <p class="service-name-ar">اعتماد</p>
+            <a href="https://etimad.sa" target="_blank" rel="noopener" class="service-btn">
+              Go
+            </a>
+          </article>
+
+          <!-- Najiz -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img src="assets/icons/najiz.png" alt="Najiz" class="service-icon" />
+            </div>
+            <p class="service-name-en">Najiz</p>
+            <p class="service-name-ar">ناجز</p>
+            <a href="https://najiz.sa" target="_blank" rel="noopener" class="service-btn">
+              Go
+            </a>
+          </article>
+
+          <!-- Nafath -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img src="assets/icons/nafath.png" alt="Nafath" class="service-icon" />
+            </div>
+            <p class="service-name-en">Nafath</p>
+            <p class="service-name-ar">نفاذ الوطني</p>
+            <a href="https://www.iam.gov.sa" target="_blank" rel="noopener" class="service-btn">
+              Go
+            </a>
+          </article>
+
+          <!-- Absher -->
+          <article class="service-card">
+            <div class="service-icon-wrap">
+              <img src="assets/icons/absher.png" alt="Absher" class="service-icon" />
+            </div>
+            <p class="service-name-en">Absher</p>
+            <p class="service-name-ar">أبشر</p>
+            <a href="https://www.absher.sa" target="_blank" rel="noopener" class="service-btn">
+              Go
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===== GRID: Why use + Promo + Developer ===== -->
+      <section class="portal-grid">
+        <!-- Why use card -->
+        <article class="card features-card">
+          <h3 class="features-title">Why use GovLinksApp OneLink?</h3>
+          <ul class="features-list">
+            <li>Modern bilingual interface (Arabic / English) optimized for all devices.</li>
+            <li>Clean categories for ministries, platforms and essential public services.</li>
+            <li>Security headers + CSP for stronger browser protection.</li>
+            <li>Only official government domains — no random ads, no tracking scripts.</li>
+          </ul>
+        </article>
+
+        <!-- Center promo image -->
+        <article class="card promo-card">
+          <img
+            src="preview/onelink-promo.png"
+            alt="OneLink – Unified Government Services"
+            class="promo-img"
+          />
+        </article>
+
+        <!-- Developer card -->
+        <article class="card dev-card">
+          <h3 class="dev-title">DEVELOPER</h3>
+          <p class="dev-name">Safar Al-Ghamdi</p>
+          <p class="dev-role">
+            Independent developer · Private unified gateway for official Saudi government services.
+          </p>
+          <p class="dev-license">
+            Private License © 2025 🔒 — All rights reserved.
+            Reproduction or redistribution of this project is prohibited without written permission.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <!-- ===== CONTACT & DOWNLOAD ===== -->
+    <section class="contact-download">
+      <div class="contact-card">
+        <h3>Contact Us</h3>
+        <p>Your feedback and suggestions help us improve OneLink and add new features.</p>
+
+        <div class="contact-actions">
+          <a href="mailto:support@onelink.sa" class="contact-pill contact-pill-primary">
+            📧 Email support@onelink.sa
+          </a>
+
+          <a href="#" class="contact-pill">
+            💬 WhatsApp (coming soon)
+          </a>
+
+          <a href="#" class="contact-pill">
+            ✖ Platform&nbsp;X (coming soon)
+          </a>
+        </div>
+      </div>
+
+      <div class="download-card">
+        <h3>Download OneLink App (soon)</h3>
+        <p>OneLink will be available later on all official app stores.</p>
+
+        <div class="store-badges">
+          <a href="#" class="store-badge">
+            <img src="assets/icons/appstore-en.png" alt="Download on the App Store" />
+          </a>
+
+          <a href="#" class="store-badge">
+            <img src="assets/icons/googleplay-en.png" alt="Get it on Google Play" />
+          </a>
+
+          <a href="#" class="store-badge">
+            <img src="assets/icons/appgallery-en.png" alt="Explore it on AppGallery" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      🔗 S © 2025 Private ownership of Developer Safar Al-Ghamdi — All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>

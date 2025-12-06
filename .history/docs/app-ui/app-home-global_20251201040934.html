@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink Mobile · Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- خط Cairo (نفس طابع OneLink) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #000 60%, #000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5e7eb;
+    }
+
+    .app-frame {
+      width: 100%;
+      max-width: 430px;
+      height: 820px;
+      max-height: 96vh;
+      border-radius: 32px;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      box-shadow:
+        0 40px 120px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* شريط علوي */
+    .top-status {
+      padding: 10px 18px 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .signal-dots {
+      display: flex;
+      gap: 3px;
+    }
+
+    .signal-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: #22c55e;
+      opacity: 0.35;
+    }
+
+    .signal-dots span:nth-child(3) {
+      opacity: 1;
+    }
+
+    .battery {
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .battery-bar {
+      width: 16px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+    }
+
+    .battery-tip {
+      width: 3px;
+      height: 5px;
+      border-radius: 2px;
+      background: rgba(148, 163, 184, 0.9);
+    }
+
+    /* هيدر التطبيق */
+    .app-header {
+      padding: 4px 18px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(30, 64, 175, 0.5);
+      background: radial-gradient(circle at top, #022c22 0, #020617 45%, #020617 100%);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5);
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-orb {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ecfee8, #bbf7d0, #16a34a);
+      box-shadow:
+        0 0 40px rgba(16, 185, 129, 0.8),
+        0 8px 26px rgba(15, 23, 42, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #022c22;
+      font-weight: 700;
+    }
+
+    .brand-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .brand-texts h1 {
+      font-size: 15px;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-texts span {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .region-pill {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 6px 11px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .region-pill strong {
+      color: #22c55e;
+    }
+
+    /* المحتوى */
+    .content {
+      flex: 1;
+      padding: 10px 18px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #22c55e transparent;
+    }
+
+    .welcome {
+      margin-top: 2px;
+    }
+
+    .welcome h2 {
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .welcome p {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* البحث */
+    .search-box {
+      margin-top: 4px;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-icon {
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 12px;
+    }
+
+    .search-input::placeholder {
+      color: #6b7280;
+    }
+
+    /* محوّل الدول السريع */
+    .region-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .region-chip {
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.92);
+      color: #cbd5f5;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .region-chip span.flag {
+      font-size: 13px;
+    }
+
+    .region-chip--active {
+      border-color: #22c55e;
+      background: radial-gradient(circle at top, #16a34a 0, #065f46 55%, #022c22 100%);
+      color: #ecfdf5;
+      box-shadow: 0 10px 28px rgba(16, 185, 129, 0.6);
+    }
+
+    /* قسم المختصرات */
+    .section-title {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-title span.label {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .section-title span.mini {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .quick-actions {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .quick-card {
+      border-radius: 18px;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 75%);
+      border: 1px solid rgba(30, 64, 175, 0.8);
+      padding: 10px 9px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+      border-color: #22c55e;
+    }
+
+    .quick-tag {
+      font-size: 10px;
+      color: #93c5fd;
+    }
+
+    .quick-main {
+      font-weight: 600;
+    }
+
+    .quick-sub {
+      color: #9ca3af;
+      font-size: 10.5px;
+    }
+
+    /* كروت الخدمات */
+    .services-grid {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .service-card {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      padding: 9px 9px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-1px);
+      border-color: #22c55e;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.9);
+    }
+
+    .service-top {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .service-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ecfdf5, #bbf7d0, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #022c22;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+      box-shadow: 0 10px 24px rgba(16, 185, 129, 0.65);
+    }
+
+    .service-names {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .service-title {
+      font-weight: 600;
+    }
+
+    .service-sub {
+      font-size: 10px;
+      color: #9ca3af;
+    }
+
+    .service-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #9ca3af;
+      margin-top: 3px;
+    }
+
+    .service-badge {
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(34, 197, 94, 0.8);
+      color: #bbf7d0;
+      font-size: 10px;
+    }
+
+    .service-link-mini {
+      font-size: 9.5px;
+      color: #64748b;
+      direction: ltr;
+    }
+
+    /* ملحوظة أسفل الخدمات */
+    .note {
+      margin-top: 4px;
+      font-size: 9.5px;
+      color: #6b7280;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* التاب بار السفلي */
+    .tabbar {
+      height: 62px;
+      border-top: 1px solid rgba(30, 64, 175, 0.6);
+      background: radial-gradient(circle at top, #020617 0, #000 80%);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 6px 10px 8px;
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      color: #6b7280;
+      cursor: pointer;
+    }
+
+    .tab-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .tab-item--active {
+      color: #22c55e;
+    }
+
+    .tab-item--active .tab-icon {
+      border-color: #22c55e;
+      background: radial-gradient(circle at top, #16a34a 0, #022c22 70%);
+      box-shadow: 0 12px 26px rgba(16, 185, 129, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <body>
+  <div data-include="../core/layout/header.html"></div>
+  <div class="app-frame">
+    <!-- شريط أعلى بسيط (إشارة جوال) -->
+    <div class="top-status">
+      <div class="signal-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="battery">
+        <div class="battery-bar"></div>
+        <div class="battery-tip"></div>
+      </div>
+    </div>
+
+    <!-- هيدر التطبيق -->
+    <header class="app-header">
+      <div class="brand-left">
+        <div class="brand-orb">
+          One<br>Link
+        </div>
+        <div class="brand-texts">
+          <h1>ONELINK</h1>
+          <span>Unified Government Links Hub</span>
+        </div>
+      </div>
+
+      <button class="region-pill" type="button">
+        <span>Region:</span>
+        <strong>Saudi · Egypt · China</strong>
+      </button>
+    </header>
+<div class="region-tabs">
+  <!-- tabs السعودية - مصر - الصين - عالمي -->
+</div>
+    <!-- المحتوى الرئيسي -->
+    <main class="content">
+      <section class="welcome">
+        <h2>مرحبا بك في OneLink Mobile 👋</h2>
+        <p>ابحث عن خدمة حكومية، أو اختر دولة، أو افتح منصّة موحدة مباشرة.</p>
+      </section>
+<div class="global-search-box">
+  <!-- صندوق البحث + الأيقونة -->
+</div>
+<div class="main-sections">
+  <!-- الكروت: خدمات أساسية - اختصارات - روابط موثوقة -->
+</div>
+      <!-- البحث -->
+      <section>
+        <div class="search-box">
+          <span class="search-icon">🔎</span>
+          <input
+            class="search-input"
+            type="search"
+            placeholder="ابحث باسم الخدمة بالعربي أو الإنجليزي (Absher, Najiz, قوى...)"
+          />
+        </div>
+
+        <div class="region-row">
+          <button class="region-chip region-chip--active" type="button">
+            <span class="flag">🇸🇦</span> السعودية · Saudi
+          </button>
+          <button class="region-chip" type="button">
+            <span class="flag">🇪🇬</span> مصر · Egypt
+          </button>
+          <button class="region-chip" type="button">
+            <span class="flag">🇨🇳</span> الصين · China
+          </button>
+        </div>
+      </section>
+
+      <!-- مختصرات -->
+      <section>
+        <div class="section-title">
+          <span class="label">الوصول السريع · Quick shortcuts</span>
+          <span class="mini">Tap once → open official hub</span>
+        </div>
+
+        <div class="quick-actions">
+          <div class="quick-card">
+            <span class="quick-tag">🇸🇦 Saudi · Unified</span>
+            <div class="quick-main">فتح بوابة OneLink السعودية</div>
+            <div class="quick-sub">أهم المنصّات الرسمية في صفحة واحدة.</div>
+          </div>
+
+          <div class="quick-card">
+            <span class="quick-tag">🌍 Global Links</span>
+            <div class="quick-main">مفضّلة الروابط · Favorites</div>
+            <div class="quick-sub">حفظ روابطك الحكومية الخاصة في مكان واحد.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- خدمات أساسية -->
+      <section>
+        <div class="section-title">
+          <span class="label">الخدمات الحكومية الأساسية</span>
+          <span class="mini">Core Saudi platforms · demo</span>
+        </div>
+
+        <div class="services-grid">
+          <!-- Ehkaam -->
+          <article class="service-card">
+            <div class="service-top">
+              <div class="service-icon">E</div>
+              <div class="service-names">
+                <div class="service-title">Ehkaam · إحكام</div>
+                <div class="service-sub">إثبات وتملك العقارات.</div>
+              </div>
+            </div>
+            <div class="service-meta">
+              <span class="service-badge">Open</span>
+              <span class="service-link-mini">ehkaam.sa</span>
+            </div>
+          </article>
+
+          <!-- Balady -->
+          <article class="service-card">
+            <div class="service-top">
+              <div class="service-icon">B</div>
+              <div class="service-names">
+                <div class="service-title">Balady · بلدي</div>
+                <div class="service-sub">رخص بلدية، منصات المدن.</div>
+              </div>
+            </div>
+            <div class="service-meta">
+              <span class="service-badge">Open</span>
+              <span class="service-link-mini">balady.gov.sa</span>
+            </div>
+          </article>
+
+          <!-- Najiz -->
+          <article class="service-card">
+            <div class="service-top">
+              <div class="service-icon">N</div>
+              <div class="service-names">
+                <div class="service-title">Najiz · ناجز</div>
+                <div class="service-sub">الخدمات العدلية والمحاكم.</div>
+              </div>
+            </div>
+            <div class="service-meta">
+              <span class="service-badge">Open</span>
+              <span class="service-link-mini">najiz.sa</span>
+            </div>
+          </article>
+
+          <!-- Absher -->
+          <article class="service-card">
+            <div class="service-top">
+              <div class="service-icon">A</div>
+              <div class="service-names">
+                <div class="service-title">Absher · أبشر</div>
+                <div class="service-sub">الجوازات، المرور، الأحوال.</div>
+              </div>
+            </div>
+            <div class="service-meta">
+              <span class="service-badge">Open</span>
+              <span class="service-link-mini">absher.sa</span>
+            </div>
+          </article>
+
+          <!-- Tawakkalna -->
+          <article class="service-card">
+            <div class="service-top">
+              <div class="service-icon">T</div>
+              <div class="service-names">
+                <div class="service-title">Tawakkalna · توكلنا</div>
+                <div class="service-sub">هوية رقمية وخدمات عامة.</div>
+              </div>
+            </div>
+            <div class="service-meta">
+              <span class="service-badge">Open</span>
+              <span class="service-link-mini">tawakkalna.sa</span>
+            </div>
+          </article>
+
+          <!-- Nafath -->
+          <article class="service-card">
+            <div class="service-top">
+              <div class="service-icon">ID</div>
+              <div class="service-names">
+                <div class="service-title">Nafath · نفاذ</div>
+                <div class="service-sub">دخول موحّد للخدمات الرقمية.</div>
+              </div>
+            </div>
+            <div class="service-meta">
+              <span class="service-badge">Open</span>
+              <span class="service-link-mini">iam.gov.sa</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <p class="note">
+        هذا التصميم واجهة تجريبية (Concept UI) لتطبيق OneLink Mobile — جميع الروابط
+        الحقيقية ستفتح دائماً في المواقع الحكومية الرسمية فقط.
+      </p>
+    </main>
+
+    <!-- شريط التبويب السفلي -->
+    <nav class="tabbar">
+      <div class="tab-item tab-item--active">
+        <div class="tab-icon">🏠</div>
+        <span>الرئيسية</span>
+      </div>
+      <div class="tab-item">
+        <div class="tab-icon">⭐</div>
+        <span>المفضّلة</span>
+      </div>
+      <div class="tab-item">
+        <div class="tab-icon">⚙️</div>
+        <span>الإعدادات</span>
+      </div>
+    </nav>
+  </div>
+  <div data-include="../core/layout/footer.html"></div>
+<script src="../core/js/include.js"></script>
+<!--
+<nav class="app-nav">
+  <a href="app-home-global.html" class="active">الرئيسية</a>
+  <a href="app-deep-search.html">بحث عميق</a>
+  <a href="app-global-hub.html">بوابة عالمية</a>
+  <a href="app-favorites-global.html">المفضلة</a>
+  <a href="app-account.html">الحساب</a>
+</nav>
+-->
+
+</body>
+</html>
+<nav class="app-nav">
+  <a href="app-home-global.html" class="active">الرئيسية</a>
+  <a href="app-deep-search.html">بحث عميق</a>
+  <a href="app-global-hub.html">بوابة عالمية</a>
+  <a href="app-favorites-global.html">المفضّلة</a>
+  <a href="app-account.html">الحساب</a>
+</nav>
+</body>
+</html>
+

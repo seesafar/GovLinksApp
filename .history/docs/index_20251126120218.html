@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GovLinksApp OneLink</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      background: #062b30;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Switch Languages -->
+  <div style="text-align:center; margin-top: 22px;">
+    <button onclick="setLang('ar')" class="lang-btn active">العربية</button>
+    <button onclick="setLang('en')" class="lang-btn">English</button>
+  </div>
+
+  <div class="container">
+    <h1 class="title">رابط الخدمات الحكومية الموحد</h1>
+    <p class="subtitle">كل الروابط الحكومية الرسمية في مكان واحد — تجربة حديثة وسريعة وآمنة.</p>
+
+    <div class="services-grid">
+      <a href="https://www.moj.gov.sa" class="service-box">
+        <img src="assets/icons/moj.png" />
+        <span>وزارة العدل</span>
+      </a>
+
+      <a href="https://absher.sa" class="service-box">
+        <img src="assets/icons/absher.png" />
+        <span>أبشر</span>
+      </a>
+
+      <a href="https://tawakkalna.sdaia.gov.sa" class="service-box">
+        <img src="assets/icons/tawakkalna.png" />
+        <span>توكلنا</span>
+      </a>
+
+      <a href="https://naz.gov.sa" class="service-box">
+        <img src="assets/icons/naz.png" />
+        <span>ناجز</span>
+      </a>
+
+      <a href="https://sso.sadad.com" class="service-box">
+        <img src="assets/icons/sadad.png" />
+        <span>سداد</span>
+      </a>
+
+      <a href="https://mc.gov.sa" class="service-box">
+        <img src="assets/icons/mc.png" />
+        <span>وزارة التجارة</span>
+      </a>
+    </div>
+
+    <footer class="footer">
+      <p>
+        © 2025 Private ownership of Developer Safar Al-Ghamdi — All rights reserved.
+      </p>
+    </footer>
+  </div>
+
+  <script src="services.js"></script>
+</body>
+</html>

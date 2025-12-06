@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink China · كل الخدمات الحكومية الصينية في مكان واحد</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- خطوط -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../core/css/base.css" />
+
+  <link rel="icon" type="image/png" href="/GovLinksApp/icons/android-chrome-512x512.png">
+  <link rel="apple-touch-icon" href="/GovLinksApp/icons/android-chrome-512x512.png">
+
+  <style>
+    :root {
+      /* ألوان هوية الصين */
+      --china-red: #e11d48;
+      --china-gold: #facc15;
+
+      --bg-main: #020617;
+      --bg-gradient-top: #111827;
+
+      --panel-bg: rgba(15, 23, 42, 0.98);
+      --card-bg: rgba(15, 23, 42, 0.98);
+      --soft-border: rgba(51, 65, 85, 0.9);
+
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, var(--bg-gradient-top) 0, var(--bg-main) 45%, #000 100%);
+      color: var(--text-main);
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* شريط علم الصين */
+    .flag-bar {
+      width: 100%;
+      height: 6px;
+      display: grid;
+      grid-template-columns: 1fr;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    .flag-bar div {
+      background: linear-gradient(90deg, #b91c1c, #e11d48);
+    }
+
+    /* الهيدر */
+    header {
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid rgba(30, 64, 175, 0.55);
+      position: sticky;
+      top: 6px;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 30%, #fecaca, var(--china-red));
+      border: 2px solid var(--china-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fffff0;
+      font-size: 16px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-text span:nth-child(1) {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .brand-text span:nth-child(2) {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.16s ease;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--china-red), #b91c1c);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(190, 24, 93, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(190, 24, 93, 0.8);
+    }
+
+    .country-switch {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .country-switch a {
+      color: var(--china-gold);
+      font-weight: 600;
+    }
+
+    /* البانر */
+    .hero {
+      max-width: 1100px;
+      margin: 24px auto 24px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .hero-main {
+      background: var(--panel-bg);
+      border-radius: 22px;
+      border: 1px solid var(--soft-border);
+      padding: 18px 20px 16px;
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.8);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: rgba(250, 204, 21, 0.08);
+      color: #fef9c3;
+      font-size: 11px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(250, 204, 21, 0.5);
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--china-gold);
+      box-shadow: 0 0 10px rgba(250, 204, 21, 0.9);
+    }
+
+    .hero h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 span {
+      color: var(--china-gold);
+    }
+
+    .hero p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-side {
+      background: radial-gradient(circle at top left, #111827, #020617 65%);
+      border-radius: 22px;
+      padding: 16px;
+      color: #e5e7eb;
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      box-shadow:
+        0 24px 52px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .hero-side h2 {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .hero-side p {
+      font-size: 12px;
+      color: #d1d5db;
+      line-height: 1.7;
+    }
+
+    .hero-side-list {
+      list-style: none;
+      font-size: 12px;
+      display: grid;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .hero-side-list li::before {
+      content: "• ";
+      color: var(--china-gold);
+      margin-left: 4px;
+    }
+
+    .hero-price {
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(250, 204, 21, 0.7);
+      padding: 8px 10px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .hero-price strong {
+      color: var(--china-gold);
+      font-size: 14px;
+    }
+
+    /* قسم الاشتراك أسفل */
+    .pricing-section {
+      max-width: 1100px;
+      margin: 0 auto 32px;
+      padding: 0 16px 24px;
+    }
+
+    .pricing-card {
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #000 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(30, 64, 175, 0.8);
+      box-shadow:
+        0 26px 60px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+      .pricing-card { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .pricing-main h3 {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .pricing-main p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .pricing-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(52, 211, 153, 0.08);
+      color: #bbf7d0;
+      font-size: 11px;
+      margin-bottom: 4px;
+      border: 1px solid rgba(52, 211, 153, 0.5);
+    }
+
+    .pricing-side {
+      padding: 8px 10px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.98);
+      color: #ffffff;
+      border: 1px solid rgba(30, 64, 175, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: space-between;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.9);
+    }
+
+    .pricing-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .pricing-row strong {
+      font-size: 20px;
+      color: var(--china-gold);
+    }
+
+    .pricing-row span {
+      font-size: 11px;
+    }
+
+    .pricing-side p {
+      font-size: 11px;
+      color: #d1d5db;
+      line-height: 1.7;
+    }
+
+    .pricing-side .btn-primary {
+      width: 100%;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .pricing-note {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: left;
+      direction: ltr;
+      margin-top: 4px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      padding: 10px 16px 18px;
+      background: transparent;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--china-gold);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- شريط العلم -->
+  <div class="flag-bar">
+    <div></div>
+  </div>
+
+  <!-- الهيدر -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo">CN</div>
+        <div class="brand-text">
+          <span>OneLink China</span>
+          <span>كل الخدمات الحكومية الصينية في رابط واحد</span>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+        <div class="header-actions">
+          <button class="btn btn-ghost" onclick="alert('تسجيل الدخول التجريبي – سيتم تفعيله في النسخة القادمة')">
+            登录 / تسجيل الدخول
+          </button>
+          <button class="btn btn-primary" onclick="alert('الاشتراك ٨ يوان شهريًا – نموذج تجريبي حالياً')">
+            اشترك الآن بـ ٨ ¥
+          </button>
+        </div>
+        <div class="country-switch">
+          دول أخرى متاحة:
+          <a href="../index.html">🇸🇦 السعودية</a> ·
+          <a href="../egypt-app/index.html">🇪🇬 مصر</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- البانر -->
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        China · نسخة تجريبية
+      </div>
+      <h1>
+        كل خدمات <span>الصين الحكومية</span> في مكان واحد.. بدل ما تفتح عشر منصات مختلفة.
+      </h1>
+      <p>
+        OneLink China يجمع لك أهم البوابات والخدمات الحكومية في الصين في صفحة واحدة سريعة،
+        مرتبة، وسهلة، عشان تخلّص معاملاتك إلكترونيًا بدون تشتت بين مواقع كثيرة.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="window.location.href='services-china.html'">
+          استعرض الخدمات الآن
+        </button>
+        <button class="btn btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+          اعرف تفاصيل الاشتراك
+        </button>
+      </div>
+
+      <p class="hero-note">
+        لا نمثّل أي جهة حكومية – فقط نرتّب لك الروابط الرسمية في مكان واحد مع هوية مستقلة للصين.
+      </p>
+    </div>
+
+    <aside class="hero-side">
+      <div>
+        <h2>لماذا OneLink China؟</h2>
+        <p>
+          في الصين توجد منصات حكومية عديدة، وكل منصة متخصصة في جزء معيّن. OneLink China
+          يساعدك تجمعها في نقطة دخول واحدة مرتبة.
+        </p>
+        <ul class="hero-side-list">
+          <li>تجميـع الروابط الرسمية في واجهة واحدة.</li>
+          <li>اختصار الوقت وتقليل الأخطاء في البحث عن المنصة المناسبة.</li>
+          <li>تعمل من المتصفح على الجوال أو الكمبيوتر بسهولة.</li>
+        </ul>
+      </div>
+      <div class="hero-price">
+        <span>رسوم شهرية ثابتة</span>
+        <span><strong>٨ ¥</strong> فقط – أقل من سعر كوب قهوة.</span>
+      </div>
+    </aside>
+  </section>
+
+  <!-- قسم التسعير -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-card">
+      <div class="pricing-main">
+        <div class="pricing-pill">
+          اشتراك واحد بسيط · نموذج تجريبي
+        </div>
+        <h3>٨ يوان في الشهر — نقطة دخول موحدة للخدمات الحكومية في الصين</h3>
+        <p>
+          الاشتراك في OneLink China يعطيك وصولاً منظماً لأهم البوابات الحكومية الصينية من مكان واحد،
+          مع إمكانية إضافة خدمات جديدة حسب احتياج المستخدمين في النسخ القادمة.
+        </p>
+      </div>
+
+      <div class="pricing-side">
+        <div>
+          <div class="pricing-row">
+            <strong>٨ ¥</strong>
+            <span>/ شهريًا</span>
+          </div>
+          <p>
+            تكلفة بسيطة أمام الوقت الذي يتم توفيره من التنقل بين مواقع ومنصات متعددة.
+          </p>
+        </div>
+        <button class="btn btn-primary" onclick="alert('نموذج اشتراك تجريبي – سيتم ربطه ببوابة دفع لاحقاً')">
+          تفعيل الاشتراك التجريبي
+        </button>
+        <div class="pricing-note">
+          OneLink China · v1.0.0 · Safar Al-Ghamdi · Demo Build
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        © 2025 OneLink China · Private ownership of Developer Safar Al-Ghamdi.
+      </div>
+      <div class="footer-links">
+        <a href="#">Terms</a>
+        <a href="#">Usage Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="../core/js/i18n.js"></script>
+  <script defer src="../core/js/switcher.js"></script>
+</body>
+</html>

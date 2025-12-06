@@ -1,0 +1,27 @@
+# Ignore VS Code history folders
+.history/
+docs/_checkpoints/
+docs/checkpoints/
+
+# Ignore VS Code workspace settings
+.vscode/
+
+# OS junk files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temp & log files
+*.log
+*.tmp
+
+# Backups
+*backup*
+*bak*
+
+# Node modules (في حال استخدمنا npm لاحقاً)
+node_modules/
+
+# Env files
+.env
+.env.*

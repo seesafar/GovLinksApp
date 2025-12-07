@@ -1,650 +1,622 @@
-
-// core/i18n/js/deep-search-engine.js
-// =====================================
-// OneLink UDSAL · Global Deep Search (نسخة جديدة منظمة)
-
+// ================================================
+//  OneLink Deep Search · Golden Engine + Fuzzy + DidYouMean
+// ================================================
 (function () {
-  // 🔧 توحيد النصوص للبحث (إزالة تنوين، همزات، تحويل إنجليزي إلى lowercase)
-function normalizeText(str) {
-  if (!str) return "";
-  
-  return str
-    .toString()
-    .trim()
-    .toLowerCase()
-    .replace(/[أإآ]/g, "ا")
-    .replace(/ى/g, "ي")
-    .replace(/ة/g, "ه")
-    .replace(/ؤ/g, "و")
-    .replace(/ئ/g, "ي")
-    .replace(/\s+/g, " ");
-}
-  // 🗂 مسار ملف الخدمات
+  // ------------- Normalization ----------------
+  function normalizeText(str) {
+    if (!str) return "";
+    return String(str)
+      .toLowerCase()
+      .trim()
+      .replace(/[أإآا]/g, "ا")
+      .replace(/ى/g, "ي")
+      .replace(/ة/g, "ه")
+      .replace(/[\u064B-\u065F]/g, "") // إزالة التشكيل
+      .replace(/[^\w\u0600-\u06FF]+/g, " ")
+      .replace(/\s+/g, " ");
+  }
+
+  // ✅ المسار من docs/app-ui/app-deep-search.html إلى ملف الخدمات
   const SERVICES_JSON_URL = "../core/i18n/data/services-data.json";
 
-  // 🧠 حالة التطبيق
+  // ------------- State ----------------
   const state = {
-    allServices: [],      // كل الخدمات من JSON
-    filtered: [],         // النتائج بعد الفلترة
-    query: "",            // نص البحث
-    activeRegion: "all",  // all | sa | eg | cn | global
-    activeFilters: new Set(), // unified / justice / identity / travel / tax / health
+    all: [],
+    filtered: [],
+    query: "",
+    region: "all",        // all | sa | eg | cn | global
+    filters: new Set(),   // unified / justice / identity / travel / tax / health
   };
 
-  // خريطة الفلاتر → category داخل JSON
   const FILTER_MAP = {
-    unified: "unified",   // منصات موحدة
-    justice: "justice",   // العدل / القضاء
-    identity: "identity", // هوية رقمية
-    travel: "travel",     // سفر / حدود
-    tax: "tax",           // ضرائب / مالية
-    health: "health",     // صحة
+    unified: "unified",
+    justice: "justice",
+    identity: "identity",
+    travel: "travel",
+    tax: "tax",
+    health: "health",
   };
 
-  // 🧩 عناصر الواجهة
-  const els = {
-    searchInput: null,
-    searchResults: null,
+  const ui = {
+    input: null,
+    results: null,
+    matches: null,
+    suggestions: null,
+    loadingDot: null,
     regionTabs: [],
     filterChips: [],
-    matchesCounter: null,
-    // عناصر المودال
-    modalBackdrop: null,
+    modal: null,
     modalTitle: null,
     modalSubtitle: null,
     modalRegion: null,
     modalRegionBadge: null,
     modalCategory: null,
     modalDesc: null,
-    modalOpenLink: null,
-    modalCopyBtn: null,
-    modalQrWrap: null,
-    modalQrImg: null,
+    modalOpen: null,
+    modalCopy: null,
+    modalQR: null,
+    modalQRimg: null,
     toast: null,
     toastText: null,
+    didYouMeanBox: null,
   };
 
-  // 🧱 دالة مساعدة: تطبيع شكل الخدمة من JSON
-  function normalizeService(raw) {
-    // نحاول نتوقع أسماء الحقول قدر الإمكان
-    const service = {
-      id: raw.id || raw.key || raw.slug || raw.code || "",
-      name:
-        raw.name_ar ||
-        raw.name ||
-        raw.title_ar ||
-        raw.title ||
-        "خدمة بدون اسم",
-      subtitle:
-        raw.subtitle_ar ||
-        raw.subtitle ||
-        raw.sub ||
-        raw.owner ||
-        "",
-      desc:
-        raw.description_ar ||
-        raw.description ||
-        raw.desc ||
-        "",
-      region: (raw.region || raw.country || "global").toLowerCase(),
-      category:
-        raw.category ||
-        raw.type ||
-        raw.group ||
-        "other",
-      url: raw.url || raw.link || raw.href || "#",
-      status: (raw.status || "ok").toLowerCase(), // ok | soon | risk
-      // لو عندك رابط ثابت لصورة QR في JSON:
-      qr: raw.qr || "",
+  // ------------- Service normalization -------------
+  function normalizeService(raw, fallbackRegion) {
+    return {
+      id: raw.id || raw.key || raw.slug || "",
+      name: raw.name_ar || raw.name || raw.title || "خدمة",
+      subtitle: raw.subtitle || raw.subtitle_ar || raw.owner || "",
+      desc: raw.description || raw.description_ar || raw.desc || "",
+      url: raw.url || raw.href || "#",
+      region:
+        (raw.region || raw.country || fallbackRegion || "global").toLowerCase(),
+      category: (raw.category || raw.type || "other").toLowerCase(),
+      status: (raw.status || "ok").toLowerCase(),
     };
-
-    return service;
   }
-// 🧹 دالة لتطبيع النص (توحيد أبشر / ابشر / آ / أ / إ...)
-function normalizeText(str) {
-  if (!str) return "";
-  return String(str)
-    .toLowerCase()
-    .trim()
-    .replace(/[أإآا]/g, "ا") // كل أشكال الألف → ا
-    .replace(/ى/g, "ي")      // ى → ي
-    .replace(/ة/g, "ه")      // ة → ه
-    .replace(/[^\w\u0600-\u06FF]+/g, " "); // حذف الرموز الزائدة
-}
 
-    // 🧮 فلترة الخدمات حسب الحالة الحالية
- function applyFilters() {
-  const rawQuery = state.query.trim();
-  const q = normalizeText(rawQuery); // ← نطبّع نص البحث
+  // ------------- Levenshtein + Fuzzy -------------
+  function levenshtein(a, b) {
+    if (!a) return b ? b.length : 0;
+    if (!b) return a.length;
+    a = a.toString();
+    b = b.toString();
 
-  state.filtered = state.allServices.filter((svc) => {
-    // فلتر المنطقة
-    if (state.activeRegion !== "all" && svc.region !== state.activeRegion) {
-      return false;
+    const m = a.length;
+    const n = b.length;
+    const dp = Array.from({ length: m + 1 }, () => new Array(n + 1));
+
+    for (let i = 0; i <= m; i++) dp[i][0] = i;
+    for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+    for (let i = 1; i <= m; i++) {
+      for (let j = 1;  j <= n; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        dp[i][j] = Math.min(
+          dp[i - 1][j] + 1,
+          dp[i][j - 1] + 1,
+          dp[i - 1][j - 1] + cost
+        );
+      }
+    }
+    return dp[m][n];
+  }
+
+  function fuzzyTokenScore(field, token, baseWeight, maxDist) {
+    if (!field || !token) return 0;
+    const words = field.split(/\s+/).filter(Boolean);
+    if (!words.length) return 0;
+
+    let best = Infinity;
+    for (const w of words) {
+      const d = levenshtein(w, token);
+      if (d < best) best = d;
     }
 
-    // فلتر التصنيف
-    if (state.activeFilters.size > 0) {
-      let ok = false;
-      for (const f of state.activeFilters) {
-        const cat = FILTER_MAP[f];
-        if (cat && svc.category === cat) {
-          ok = true;
-          break;
+    if (best > maxDist) return 0;
+
+    const factor = maxDist - best + 1; // d=0 → أعلى
+    return baseWeight * factor;
+  }
+
+  // ------------- Match scoring (exact + fuzzy) -------------
+  function computeMatchScore(svc, tokens) {
+    if (!tokens.length) return 1;
+
+    const nameNorm = normalizeText(svc.name);
+    const subNorm  = normalizeText(svc.subtitle);
+    const descNorm = normalizeText(svc.desc);
+    const urlNorm  = normalizeText(svc.url);
+
+    const nameDense = nameNorm.replace(/\s+/g, "");
+    const subDense  = subNorm.replace(/\s+/g, "");
+    const descDense = descNorm.replace(/\s+/g, "");
+    const urlDense  = urlNorm.replace(/\s+/g, "");
+
+    let total = 0;
+
+    for (const t of tokens) {
+      if (!t) continue;
+      let tokenScore = 0;
+
+      function fieldScore(field, dense, base, startBonus, exactBonus) {
+        if (!field && !dense) return 0;
+        let s = 0;
+        if (field.includes(t) || dense.includes(t)) s += base;
+        if (field.startsWith(t) || dense.startsWith(t)) s += startBonus;
+        if (field === t || dense === t) s += exactBonus;
+        return s;
+      }
+
+      // تطابق مباشر
+      tokenScore += fieldScore(nameNorm, nameDense, 8, 6, 10);
+      tokenScore += fieldScore(subNorm,  subDense,  4, 3, 5);
+      tokenScore += fieldScore(descNorm, descDense, 2, 2, 3);
+      tokenScore += fieldScore(urlNorm,  urlDense,  2, 1, 3);
+
+      // فزي إذا ما فيه ولا تطابق مباشر
+      if (tokenScore === 0) {
+        const maxDist = 2;
+        tokenScore += fuzzyTokenScore(nameNorm, t, 4, maxDist);
+        tokenScore += fuzzyTokenScore(subNorm,  t, 2, maxDist);
+        tokenScore += fuzzyTokenScore(descNorm, t, 1, maxDist);
+        tokenScore += fuzzyTokenScore(urlNorm,  t, 1, maxDist);
+      }
+
+      total += tokenScore;
+    }
+
+    return total;
+  }
+
+  // ------------- Filtering + Ranking + DidYouMean -------------
+  function applyFilters() {
+    const qNorm  = normalizeText(state.query);
+    const tokens = qNorm.split(/\s+/).filter(Boolean);
+
+    if (ui.loadingDot) ui.loadingDot.hidden = false;
+
+    const ranked = [];
+
+    for (const svc of state.all) {
+      // فلتر المنطقة
+      if (state.region !== "all" && svc.region !== state.region) continue;
+
+      // فلتر التصنيفات
+      if (state.filters.size) {
+        let ok = false;
+        for (const f of state.filters) {
+          if (svc.category === FILTER_MAP[f]) {
+            ok = true;
+            break;
+          }
         }
+        if (!ok) continue;
       }
-      if (!ok) return false;
-    }
 
-    // فلتر نص البحث
-    if (!q) return true;
-
-    const haystackRaw = [
-      svc.name,
-      svc.subtitle,
-      svc.desc,
-      svc.url,
-      svc.region,
-      svc.category,
-    ].join(" ");
-
-    const haystack = normalizeText(haystackRaw); // ← نطبّع الحقول أيضاً
-
-    return haystack.includes(q);
-  });
-}
-
-
-  // 🧾 تحديث عدّاد النتائج في الهيدر
-  function updateMatchesCounter() {
-    if (!els.matchesCounter) return;
-    els.matchesCounter.textContent = String(state.filtered.length);
-  }
-
-  // 🧱 إنشاء كرت خدمة واحد
-  function createServiceCard(service) {
-    const card = document.createElement("article");
-    card.className = "result-card";
-    card.tabIndex = 0;
-    card.setAttribute("role", "button");
-
-    // هيدر الكرت
-    const header = document.createElement("div");
-    header.className = "result-header";
-
-    const titleWrap = document.createElement("div");
-    titleWrap.className = "result-title";
-
-    const h3 = document.createElement("h3");
-    h3.textContent = service.name;
-
-    const sub = document.createElement("span");
-    sub.className = "sub";
-    sub.textContent = service.subtitle || service.url;
-
-    titleWrap.appendChild(h3);
-    titleWrap.appendChild(sub);
-
-    const pillsWrap = document.createElement("div");
-    pillsWrap.className = "result-pills";
-
-    // حبة المنطقة
-    const regionPill = document.createElement("span");
-    regionPill.className = "pill region";
-    regionPill.textContent = regionLabel(service.region);
-    pillsWrap.appendChild(regionPill);
-
-    // حبة الحالة
-    const statusPill = document.createElement("span");
-    statusPill.className = "pill " + statusClass(service.status);
-    statusPill.textContent = statusLabel(service.status);
-    pillsWrap.appendChild(statusPill);
-
-    header.appendChild(titleWrap);
-    header.appendChild(pillsWrap);
-
-    // جسم الكرت
-    const body = document.createElement("p");
-    body.className = "result-body";
-    body.textContent = service.desc || "وصف الخدمة سيظهر هنا من ملف JSON.";
-
-    // ميتا سطر أخير
-    const metaRow = document.createElement("div");
-    metaRow.className = "result-meta-row";
-
-    const urlSpan = document.createElement("span");
-    urlSpan.className = "result-url";
-    urlSpan.textContent = service.url;
-
-        const openBtn = document.createElement("button");
-    openBtn.type = "button";
-    openBtn.className = "open-btn";
-    openBtn.textContent = "فتح";
-
-    // ✅ خله يفتح المودال بدل ما يفتح الموقع مباشرة
-    openBtn.addEventListener("click", (ev) => {
-      ev.stopPropagation();
-      openServiceModal(service);
-    });
-
-    metaRow.appendChild(urlSpan);
-    metaRow.appendChild(openBtn);
-
-    // تجميع
-    card.appendChild(header);
-    card.appendChild(body);
-    card.appendChild(metaRow);
-
-    // عند الضغط على الكرت → افتح المودال
-    card.addEventListener("click", () => {
-      openServiceModal(service);
-    });
-
-    card.addEventListener("keyup", (ev) => {
-      if (ev.key === "Enter" || ev.key === " ") {
-        openServiceModal(service);
+      // حساب السكور
+      let score = 1;
+      if (tokens.length) {
+        score = computeMatchScore(svc, tokens);
+        if (score <= 0) continue;
       }
+
+      ranked.push({ svc, score });
+    }
+
+    ranked.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.svc.name.localeCompare(b.svc.name, "ar");
     });
 
-    return card;
-  }
+    state.filtered = ranked.map((r) => r.svc);
 
-  function regionLabel(region) {
-    switch (region) {
-      case "sa":
-        return "Saudi · 🇸🇦";
-      case "eg":
-        return "Egypt · 🇪🇬";
-      case "cn":
-        return "China · 🇨🇳";
-      case "global":
-        return "Global · 🌍";
-      default:
-        return region || "Other";
+     // ------ "هل تقصد؟" بعد الترتيب ------
+  if (ui.didYouMeanBox) {
+    // لو مافيه استعلام → نخفي الصندوق
+    if (!tokens.length) {
+      ui.didYouMeanBox.style.display = "none";
+      ui.didYouMeanBox.innerHTML = "";
+    } else {
+      const queryNorm = tokens.join(" "); // مثال: "ابشر" أو "ايشر"
+      const candidates = [];
+
+      for (const svc of state.all) {
+        const nameNorm = normalizeText(svc.name); // "absher ابشر اعمال"
+        const words = nameNorm.split(/\s+/).filter(Boolean);
+        if (!words.length) continue;
+
+        // أقل مسافة بين الكلمة المدخلة وأي كلمة في اسم الخدمة
+        let minDist = Infinity;
+        for (const w of words) {
+          const d = levenshtein(w, queryNorm);
+          if (d < minDist) minDist = d;
+        }
+
+        // أبعد من حرفين → نخليه
+        if (minDist > 2) continue;
+
+        const s = computeMatchScore(svc, tokens);
+        if (s <= 0) continue;
+
+        candidates.push({ svc, dist: minDist, score: s });
+      }
+
+      if (!candidates.length) {
+        ui.didYouMeanBox.style.display = "none";
+        ui.didYouMeanBox.innerHTML = "";
+      } else {
+        // ترتيب: الأقرب في المسافة، ثم الأعلى في السكور
+        candidates.sort((a, b) => {
+          if (a.dist !== b.dist) return a.dist - b.dist;
+          return b.score - a.score;
+        });
+
+        // نأخذ أفضل 3 اقتراحات
+        const top = candidates.slice(0, 3);
+
+        // بناء HTML: هل تقصد: [زر][·][زر][·][زر]
+        let html = "هل تقصد:";
+        html += top
+          .map((item) => {
+            const safeName = item.svc.name.replace(/"/g, "&quot;");
+            return ` <button type="button" class="dym-pill" data-dym-name="${safeName}">${safeName}</button>`;
+          })
+          .join(" ·");
+
+        ui.didYouMeanBox.innerHTML = html;
+        ui.didYouMeanBox.style.display = "block";
+
+        // ربط الأزرار: عند الضغط نعيد البحث باسم الخدمة
+        const buttons = ui.didYouMeanBox.querySelectorAll("[data-dym-name]");
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const name = btn.getAttribute("data-dym-name");
+            if (ui.input) {
+              ui.input.value = name;
+            }
+            state.query = name;
+            applyFilters();
+          });
+        });
+      }
     }
   }
 
-  function statusLabel(status) {
-    switch (status) {
-      case "ok":
-        return "Ready · متاحة";
-      case "soon":
-        return "Soon · قريباً";
-      case "risk":
-        return "Deprecated / Risk";
-      default:
-        return status || "Status";
-    }
+
+
+    // إعادة الرسم + الاقتراحات
+    requestAnimationFrame(() => {
+      renderResults();
+      updateSuggestionsWithRanking(tokens);
+      if (ui.loadingDot) ui.loadingDot.hidden = true;
+    });
   }
 
-  function statusClass(status) {
-    switch (status) {
-      case "ok":
-        return "status-ok";
-      case "soon":
-        return "status-soon";
-      case "risk":
-        return "status-risk";
-      default:
-        return "status-ok";
-    }
-  }
-
-  // 🧱 إعادة رسم النتائج في DOM
+  // ------------- Render results -------------
   function renderResults() {
-    if (!els.searchResults) return;
+    if (!ui.results) return;
+    ui.results.innerHTML = "";
 
-    els.searchResults.innerHTML = "";
+    if (ui.matches) ui.matches.textContent = String(state.filtered.length);
 
     if (!state.filtered.length) {
-      const empty = document.createElement("p");
-      empty.className = "result-empty";
-      empty.textContent =
-        "لا توجد نتائج مطابقة حالياً… جرّب كلمة أخرى مثل Absher أو digital.gov.eg.";
-      els.searchResults.appendChild(empty);
-      updateMatchesCounter();
+      const p = document.createElement("p");
+      p.style.textAlign = "center";
+      p.style.color = "#8b9bb5";
+      p.style.marginTop = "20px";
+      p.innerHTML =
+        'لا توجد نتائج مطابقة… جرّب كلمة أخرى مثل <b>Absher</b>.';
+      ui.results.appendChild(p);
       return;
     }
 
     state.filtered.forEach((svc) => {
-      const card = createServiceCard(svc);
-      els.searchResults.appendChild(card);
-    });
+      const card = document.createElement("article");
+      card.className = "result-card";
 
-    updateMatchesCounter();
+      card.innerHTML = `
+        <div class="result-header">
+          <div class="result-title">
+            <h3>${svc.name}</h3>
+            <span class="sub">${svc.subtitle || svc.url}</span>
+          </div>
+          <div class="result-pills">
+            <span class="pill region">${regionLabel(svc.region)}</span>
+            <span class="pill ${statusClass(svc.status)}">${statusLabel(svc.status)}</span>
+          </div>
+        </div>
+        <p class="result-body">${svc.desc}</p>
+        <div class="result-meta-row">
+          <span class="result-url">${svc.url}</span>
+          <button type="button" class="open-btn">فتح</button>
+        </div>
+      `;
+
+      const openBtn = card.querySelector(".open-btn");
+      if (openBtn) {
+        openBtn.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          openModal(svc);
+        });
+      }
+
+      card.addEventListener("click", () => openModal(svc));
+      ui.results.appendChild(card);
+    });
   }
 
-  // 🧷 فتح المودال وملء البيانات
-    function openServiceModal(service) {
-    if (!els.modalBackdrop) return;
+  function regionLabel(r) {
+    switch (r) {
+      case "sa": return "Saudi · 🇸🇦";
+      case "eg": return "Egypt · 🇪🇬";
+      case "cn": return "China · 🇨🇳";
+      case "global": return "Global · 🌍";
+      default: return r || "Other";
+    }
+  }
 
-    if (els.modalTitle)       els.modalTitle.textContent = service.name;
-    if (els.modalSubtitle)    els.modalSubtitle.textContent = service.subtitle || "";
-    if (els.modalRegion)      els.modalRegion.textContent = regionLabel(service.region);
-    if (els.modalRegionBadge) els.modalRegionBadge.textContent = regionLabel(service.region);
-    if (els.modalCategory)    els.modalCategory.textContent = service.category || "Service";
-    if (els.modalDesc)        els.modalDesc.textContent =
-      service.desc || "تفاصيل الخدمة سيتم إدراجها من ملف JSON.";
+  function statusLabel(s) {
+    switch (s) {
+      case "ok":   return "Ready · متاحة";
+      case "soon": return "Soon · قريباً";
+      case "risk": return "Deprecated";
+      default:     return s || "Status";
+    }
+  }
 
-    if (els.modalOpenLink) {
-      els.modalOpenLink.href = service.url || "#";
+  function statusClass(s) {
+    switch (s) {
+      case "ok":   return "status-ok";
+      case "soon": return "status-soon";
+      case "risk": return "status-risk";
+      default:     return "status-ok";
+    }
+  }
+
+  // ------------- Modal -------------
+  function openModal(svc) {
+    if (!ui.modal) return;
+
+    if (ui.modalTitle)   ui.modalTitle.textContent   = svc.name;
+    if (ui.modalSubtitle)ui.modalSubtitle.textContent= svc.subtitle || "";
+    if (ui.modalRegion)  ui.modalRegion.textContent  = regionLabel(svc.region);
+    if (ui.modalRegionBadge) ui.modalRegionBadge.textContent = regionLabel(svc.region);
+    if (ui.modalCategory)ui.modalCategory.textContent= svc.category || "Service";
+    if (ui.modalDesc)    ui.modalDesc.textContent    = svc.desc || "—";
+    if (ui.modalOpen)    ui.modalOpen.href           = svc.url || "#";
+
+    if (ui.modalQRimg && svc.url) {
+      const qrUrl =
+        "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+        encodeURIComponent(svc.url);
+      ui.modalQRimg.src = qrUrl;
+      if (ui.modalQR) ui.modalQR.style.display = "";
+    } else if (ui.modalQR) {
+      ui.modalQR.style.display = "none";
     }
 
-    // 🔐 QR: من JSON لو موجود، أو توليد تلقائي من رابط الخدمة
-    if (els.modalQrWrap && els.modalQrImg) {
-      let qrUrl = service.qr;
-
-      if (!qrUrl && service.url) {
-        qrUrl =
-          "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
-          encodeURIComponent(service.url);
-      }
-
-      if (qrUrl) {
-        els.modalQrImg.src = qrUrl;
-        els.modalQrWrap.style.display = "";
-      } else {
-        els.modalQrImg.src = "";
-        els.modalQrWrap.style.display = "none";
-      }
-    }
-
-    // إظهار المودال
-    els.modalBackdrop.setAttribute("aria-hidden", "false");
+    ui.modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
   }
 
-  function closeServiceModal() {
-    if (!els.modalBackdrop) return;
-    els.modalBackdrop.setAttribute("aria-hidden", "true");
+  function closeModal() {
+    if (!ui.modal) return;
+    ui.modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
   }
 
-  // 📋 نسخ الرابط وإظهار التوست
-  function copyServiceLink() {
-    if (!els.modalOpenLink || !els.toast) return;
-    const url = els.modalOpenLink.href;
+  function copyLink() {
+    if (!ui.modalOpen) return;
+    const url = ui.modalOpen.href;
     if (!url || url === "#") return;
 
     navigator.clipboard
       .writeText(url)
-      .then(() => {
-        showToast("تم نسخ رابط الخدمة بنجاح ✅");
-      })
-      .catch(() => {
-        showToast("تعذّر نسخ الرابط، جرّب يدويًا.");
-      });
+      .then(() => showToast("تم نسخ الرابط بنجاح ✅"))
+      .catch(() => showToast("تعذّر نسخ الرابط، جرّب يدويًا."));
   }
 
-  function showToast(message) {
-    if (!els.toast) return;
-    if (els.toastText) {
-      els.toastText.textContent = message;
-    } else {
-      els.toast.textContent = message;
-    }
-    els.toast.setAttribute("aria-hidden", "false");
-
-    setTimeout(() => {
-      els.toast.setAttribute("aria-hidden", "true");
-    }, 2500);
+  function showToast(msg) {
+    if (!ui.toast) return;
+    if (ui.toastText) ui.toastText.textContent = msg;
+    ui.toast.setAttribute("aria-hidden", "false");
+    setTimeout(() => ui.toast.setAttribute("aria-hidden", "true"), 2200);
   }
 
-  // ⚙️ ربط عناصر الواجهة والأحداث
-  function wireUI() {
-    els.searchInput = document.querySelector(".search-input-wrap input");
-    els.searchResults = document.getElementById("search-results");
-    els.regionTabs = Array.from(document.querySelectorAll(".region-tab"));
-    els.filterChips = Array.from(document.querySelectorAll(".filter-chip"));
-    els.matchesCounter = document.querySelector(".search-meta strong");
-    els.suggestions = document.querySelector("[data-suggestions]");
+  // ------------- Suggestions -------------
+  function updateSuggestionsWithRanking(tokens) {
+    if (!ui.suggestions) return;
+    const q = state.query.trim();
+    if (!q) return clearSuggestions();
 
-    // المودال
-    els.modalBackdrop = document.querySelector(
-      ".udsal-modal-backdrop[data-service-modal]"
-    );
-    if (els.modalBackdrop) {
-      els.modalTitle = els.modalBackdrop.querySelector(
-        "[data-modal-title]"
-      );
-      els.modalSubtitle = els.modalBackdrop.querySelector(
-        "[data-modal-subtitle]"
-      );
-      els.modalRegion = els.modalBackdrop.querySelector(
-        "[data-modal-region]"
-      );
-      els.modalRegionBadge = els.modalBackdrop.querySelector(
-        "[data-modal-region-badge]"
-      );
-      els.modalCategory = els.modalBackdrop.querySelector(
-        "[data-modal-category]"
-      );
-      els.modalDesc = els.modalBackdrop.querySelector(
-        "[data-modal-desc]"
-      );
-      els.modalOpenLink = els.modalBackdrop.querySelector(
-        "[data-modal-open-link]"
-      );
-      els.modalCopyBtn = els.modalBackdrop.querySelector(
-        "[data-modal-copy]"
-      );
-      els.modalQrWrap = els.modalBackdrop.querySelector(
-        "[data-modal-qr-wrap]"
-      );
-      els.modalQrImg = els.modalBackdrop.querySelector(
-        "[data-modal-qr]"
-      );
+    const base = state.filtered.length ? state.filtered : state.all;
+    const normTokens =
+      tokens && tokens.length
+        ? tokens
+        : normalizeText(q).split(/\s+/).filter(Boolean);
+
+    const ranked = [];
+
+    for (const svc of base) {
+      const score = computeMatchScore(svc, normTokens);
+      if (score <= 0) continue;
+      ranked.push({ svc, score });
     }
 
-
-    els.toast = document.querySelector("[data-udsal-toast]");
-    els.toastText = els.toast
-      ? els.toast.querySelector("[data-udsal-toast-text]")
-      : null;
-  
-
-    // 🔍 البحث المباشر
-    if (els.searchInput) {
-      els.searchInput.addEventListener("input", (ev) => {
-        state.query = ev.target.value || "";
-        applyFilters();
-        renderResults();
-        updateSuggestions(state.query);
-
-      });
-    }
-
-    // 🌍 تبويبات المناطق
-    els.regionTabs.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const region = btn.dataset.region || "all";
-        state.activeRegion = region;
-
-        els.regionTabs.forEach((b) =>
-          b.classList.remove("is-active")
-        );
-        btn.classList.add("is-active");
-
-        applyFilters();
-        renderResults();
-      });
-    });
-
-    // 🏷 فلاتر التصنيف
-    els.filterChips.forEach((chip) => {
-      chip.addEventListener("click", () => {
-        const key = chip.dataset.filter;
-        if (!key) return;
-
-        if (chip.classList.contains("is-on")) {
-          chip.classList.remove("is-on");
-          state.activeFilters.delete(key);
-        } else {
-          chip.classList.add("is-on");
-          state.activeFilters.add(key);
-        }
-
-        applyFilters();
-        renderResults();
-      });
-    });
-
-    // 🎛 أزرار المودال
-    if (els.modalBackdrop) {
-      const closeBtn = els.modalBackdrop.querySelector(
-        "[data-modal-close]"
-      );
-      if (closeBtn) {
-        closeBtn.addEventListener("click", closeServiceModal);
-      }
-
-      els.modalBackdrop.addEventListener("click", (ev) => {
-        if (ev.target === els.modalBackdrop) {
-          closeServiceModal();
-        }
-      });
-
-      document.addEventListener("keyup", (ev) => {
-        if (ev.key === "Escape") {
-          closeServiceModal();
-        }
-      });
-
-      if (els.modalCopyBtn) {
-        els.modalCopyBtn.addEventListener("click", copyServiceLink);
-      }
-    }
+    ranked.sort((a, b) => b.score - a.score);
+    renderSuggestions(ranked.slice(0, 8).map((r) => r.svc));
   }
 
-  // 🌐 تحميل ملف JSON
-  async function loadServices() {
-    try {
-      const res = await fetch(SERVICES_JSON_URL, {
-        headers: {
-          "Accept": "application/json",
-        },
-      });
-      if (!res.ok) {
-        console.error("⚠️ فشل تحميل الخدمات:", res.status, res.statusText);
-        showToast("تعذّر تحميل قائمة الخدمات حالياً.");
-        return;
-      }
-
-      const data = await res.json();
-      const list = Array.isArray(data)
-        ? data
-        : Array.isArray(data.services)
-        ? data.services
-        : [];
-
-      state.allServices = list.map(normalizeService);
-
-      // أول رسم
-      applyFilters();
-      renderResults();
-    } catch (err) {
-      console.error("⚠️ خطأ أثناء جلب الخدمات:", err);
-      showToast("حدث خطأ أثناء الاتصال بملف الخدمات.");
-    }
+  function clearSuggestions() {
+    if (!ui.suggestions) return;
+    ui.suggestions.innerHTML = "";
+    ui.suggestions.hidden = true;
   }
 
-    // 🚀 تشغيل المحرك بعد تحميل الـ DOM (بطريقة ذكية)
-  function initDeepSearch() {
-    wireUI();
-    loadServices();
-  }
-/* -----------------------------
-   🔍 Suggestions Engine (Safe)
-------------------------------*/
-
-// 🧠 إنشاء قائمة اقتراحات
-function buildSuggestions(q) {
-  const nq = normalizeText(q);
-  if (!nq) return [];
-
-  const base = state.filtered.length ? state.filtered : state.allServices;
-
-  const out = [];
-  for (const svc of base) {
-    const name = normalizeText(svc.name || "");
-    const url = normalizeText(svc.url || "");
-
-    if (name.includes(nq) || url.includes(nq)) {
-      out.push({
-        name: svc.name,
-        url: svc.url,
-        region: svc.region,
-      });
-    }
-    if (out.length >= 8) break;
-  }
-
-  return out;
-}
-
-// 🧹 مسح
-function clearSuggestions() {
-  if (!els.suggestions) return;
-  els.suggestions.innerHTML = "";
-  els.suggestions.hidden = true;
-}
-
-// 🧩 رسم
-function renderSuggestions(list) {
-  if (!els.suggestions) return;
-
+  function renderSuggestions(list) {
+  if (!ui.suggestions) return;
+  ui.suggestions.innerHTML = "";
   if (!list.length) return clearSuggestions();
 
-  els.suggestions.innerHTML = "";
+  list.forEach((svc) => {
+    const b = document.createElement("button");
+    b.type = "button";
 
-  list.forEach((item) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.innerHTML = `
-      <span>${item.name} — <small>${item.region}</small></span>
-      <span class="url">${item.url}</span>
+    b.innerHTML = `
+      <div class="sugg-main">
+        <span class="sugg-name">${svc.name}</span>
+        <span class="sugg-region">${regionLabel(svc.region)}</span>
+      </div>
+      <span class="sugg-url">${svc.url}</span>
     `;
 
-    btn.addEventListener("click", () => {
-      els.searchInput.value = item.name;
-      state.query = item.name;
+    b.addEventListener("click", () => {
+      if (ui.input) {
+        ui.input.value = svc.name;
+      }
+      state.query = svc.name;
       applyFilters();
-      renderResults();
       clearSuggestions();
     });
 
-    els.suggestions.appendChild(btn);
+    ui.suggestions.appendChild(b);
   });
 
-  els.suggestions.hidden = false;
+  ui.suggestions.hidden = false;
 }
 
-// 🔁 تحديث الاقتراحات
-function updateSuggestions(q) {
-  q = q.trim();
-  if (!q) return clearSuggestions();
 
-  const items = buildSuggestions(q);
-  renderSuggestions(items);
-}
+  document.addEventListener("click", (ev) => {
+    if (!ui.suggestions || ui.suggestions.hidden) return;
+    const inside =
+      ui.suggestions.contains(ev.target) ||
+      (ui.input && ui.input.contains(ev.target));
+    if (!inside) clearSuggestions();
+  });
 
-// 🔒 إخفاء عند الضغط خارج البحث
-document.addEventListener("click", (ev) => {
-  if (!els.suggestions) return;
+  // ------------- Bind UI -------------
+  function bindUI() {
+    ui.input       = document.querySelector(".search-input-wrap input");
+    ui.results     = document.getElementById("search-results");
+    ui.matches     = document.querySelector(".search-meta strong");
+    ui.suggestions = document.querySelector("[data-suggestions]");
+    ui.loadingDot  = document.querySelector("[data-search-loading]");
+    ui.regionTabs  = Array.from(document.querySelectorAll(".region-tab"));
+    ui.filterChips = Array.from(document.querySelectorAll(".filter-chip"));
 
-  const inside =
-    els.suggestions.contains(ev.target) ||
-    (els.searchInput && els.searchInput.contains(ev.target));
+    ui.modal       = document.querySelector("[data-service-modal]");
+    ui.modalTitle  = document.querySelector("[data-modal-title]");
+    ui.modalSubtitle = document.querySelector("[data-modal-subtitle]");
+    ui.modalRegion = document.querySelector("[data-modal-region]");
+    ui.modalRegionBadge = document.querySelector("[data-modal-region-badge]");
+    ui.modalCategory = document.querySelector("[data-modal-category]");
+    ui.modalDesc   = document.querySelector("[data-modal-desc]");
+    ui.modalOpen   = document.querySelector("[data-modal-open-link]");
+    ui.modalCopy   = document.querySelector("[data-modal-copy]");
+    ui.modalQR     = document.querySelector("[data-modal-qr-wrap]");
+    ui.modalQRimg  = document.querySelector("[data-modal-qr]");
 
-  if (!inside) clearSuggestions();
-});
+    ui.toast       = document.querySelector("[data-udsal-toast]");
+    ui.toastText   = ui.toast
+      ? ui.toast.querySelector("[data-udsal-toast-text]")
+      : null;
+
+    ui.didYouMeanBox = document.getElementById("did-you-mean");
+
+    if (ui.input) {
+      ui.input.addEventListener("input", (e) => {
+        state.query = e.target.value || "";
+        applyFilters();
+      });
+    }
+
+    ui.regionTabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.region = btn.dataset.region || "all";
+        ui.regionTabs.forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        applyFilters();
+      });
+    });
+
+    ui.filterChips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const k = chip.dataset.filter;
+        if (!k) return;
+        if (chip.classList.contains("is-on")) {
+          chip.classList.remove("is-on");
+          state.filters.delete(k);
+        } else {
+          chip.classList.add("is-on");
+          state.filters.add(k);
+        }
+        applyFilters();
+      });
+    });
+
+    if (ui.modal) {
+      ui.modal.addEventListener("click", (ev) => {
+        if (ev.target === ui.modal) closeModal();
+      });
+    }
+
+    const closeBtn = document.querySelector("[data-modal-close]");
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (ui.modalCopy) ui.modalCopy.addEventListener("click", copyLink);
+
+    document.addEventListener("keyup", (ev) => {
+      if (ev.key === "Escape") closeModal();
+    });
+  }
+
+  // ------------- Load services -------------
+  async function loadServices() {
+    try {
+      const res = await fetch(SERVICES_JSON_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(res.status + " " + res.statusText);
+      const data = await res.json();
+
+      let list = [];
+
+      if (Array.isArray(data)) {
+        list = data;
+      } else if (Array.isArray(data.services)) {
+        list = data.services;
+      } else if (data && typeof data === "object") {
+        for (const key of Object.keys(data)) {
+          const val = data[key];
+          if (Array.isArray(val)) {
+            list = list.concat(
+              val.map((svc) => normalizeService(svc, key))
+            );
+          }
+        }
+        state.all = list;
+        applyFilters();
+        return;
+      }
+
+      state.all = list.map((svc) => normalizeService(svc));
+      applyFilters();
+    } catch (err) {
+      console.error("Deep Search JSON error:", err);
+      showToast("تعذّر تحميل قائمة الخدمات حالياً.");
+      state.all = [];
+      state.filtered = [];
+      renderResults();
+    }
+  }
+
+  function init() {
+    bindUI();
+    loadServices();
+  }
 
   if (document.readyState === "loading") {
-    // لو الصفحة لسه ما خلصت تحميل الـ DOM
-    document.addEventListener("DOMContentLoaded", initDeepSearch);
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    // لو السكربت انحط بعد ما الـ DOM جاهز (زي حالتنا)
-    initDeepSearch();
+    init();
   }
 })();
-

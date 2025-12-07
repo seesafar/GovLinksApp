@@ -173,11 +173,13 @@
     }
 
     .search-input-wrap {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;   /* أضفناها عشان اللودينغ والاقتراحات */
+}
+
 
     .search-input-wrap input {
       border: none;
@@ -191,6 +193,49 @@
     .search-input-wrap input::placeholder {
       color: rgba(148, 163, 184, 0.85);
     }
+/* 🟢 مؤشر التحميل داخل مربع البحث */
+.search-input-wrap {
+  position: relative; /* عشان نقدر نثبت المؤشر فوق الإدخال */
+}
+
+/* نقطة تحميل صغيرة تنبض */
+.search-loading {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+  box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease-out;
+  animation: onelink-pulse 1s ease-out infinite;
+}
+
+/* لما يكون ظاهر */
+.search-loading:not([hidden]) {
+  opacity: 1;
+}
+
+/* أنيميشن النبض */
+@keyframes onelink-pulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.5);
+  }
+  70% {
+    transform: translateY(-50%) scale(1.4);
+    box-shadow: 0 0 0 8px rgba(14, 165, 233, 0);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0);
+  }
+}
+
 
     .search-hint {
       font-size: 10px;
@@ -596,6 +641,86 @@ body {
   opacity: 1;
 }
 
+/* أزرار "هل تقصد؟" */
+.dym-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  margin-inline-start: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.6);
+  background: rgba(15,23,42,0.9);
+  color: #e5f3ff;
+  font-size: 12px;
+}
+
+.dym-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  cursor: pointer;
+}
+/* 🔽 قائمة الاقتراحات تحت خانة البحث */
+.search-suggestions {
+  position: absolute;
+  inset-inline: 0;
+  top: 32px;                 /* تحت خانة الإدخال بشوي */
+  background: rgba(15,23,42,0.98);
+  border-radius: 14px;
+  border: 1px solid rgba(148,163,184,0.45);
+  box-shadow: 0 18px 45px rgba(15,23,42,0.9);
+  padding: 6px 0;
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 50;
+}
+
+/* زر الاقتراح نفسه */
+.search-suggestions button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: right;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  color: #e5f3ff;
+}
+
+/* أول اقتراح مميز شوي */
+.search-suggestions button:first-child {
+  background: radial-gradient(circle at 0 0,#0f172a 0,#020617 45%,#000 100%);
+}
+
+/* هوفر الاقتراح */
+.search-suggestions button:hover {
+  background: rgba(15,23,42,0.95);
+  cursor: pointer;
+}
+
+/* السطر العلوي: الاسم + المنطقة */
+.sugg-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sugg-name {
+  font-weight: 600;
+}
+
+.sugg-region {
+  font-size: 11px;
+  color: #38bdf8;
+}
+
+/* السطر الثاني: الرابط */
+.sugg-url {
+  direction: ltr;
+  font-size: 10px;
+  color: #9ca3af;
+}
 
   </style>
 </head>
@@ -646,23 +771,32 @@ body {
 </div>
 
       <!-- Search -->
-      <div class="search-panel">
-        <div class="search-icon">🔍</div>
-        <div class="search-input-wrap">
-          <input
-            type="search"
-            placeholder="ابحث باسم المنصة أو عنوان URL أو نوع الخدمة… (Absher, Najiz, digital.gov.eg, 12306.cn)"
-          />
-          <div class="search-hint">
-            live index · sa + eg + cn + global
-          </div>
-      </div>
-      <div class="search-suggestions" data-suggestions hidden></div>
-        <div class="search-meta">
-          <span>matches: <strong>24</strong></span>
-          <span>response &lt; 120 ms</span>
-        </div>
-      </div>
+<div class="search-panel">
+  <div class="search-icon">🔍</div>
+
+  <div class="search-input-wrap">
+    <input
+      type="search"
+      placeholder="ابحث باسم المنصة أو عنوان URL أو نوع الخدمة… (Absher, Najiz, digital.gov.eg, 12306.cn)"
+    />
+
+    <div class="search-hint">
+      live index · sa + eg + cn + global
+    </div>
+
+    <!-- 🔍 اقتراحات البحث الذكية -->
+    <div class="search-suggestions" data-suggestions hidden></div>
+
+    <!-- 🔄 مؤشر التحميل الصغير -->
+    <div class="search-loading" data-search-loading hidden></div>
+  </div>
+
+  <div class="search-meta">
+    <span>matches: <strong>60</strong></span>
+    <span>response &lt; 120 ms</span>
+  </div>
+</div>
+
      
       <!-- 🔍 Search Filters -->
 <div class="filters-row">
@@ -699,6 +833,20 @@ body {
   </button>
 </div>
     </div>
+
+<div id="did-you-mean" style="
+  display:none;
+  background:rgba(15,23,42,0.85);
+  border:1px solid rgba(148,163,184,0.35);
+  color:#e5f3ff;
+  padding:10px 14px;
+  border-radius:14px;
+  margin-bottom:12px;
+  font-size:13px;
+  line-height:1.6;
+  cursor:pointer;
+">
+</div>
 
 
         <!-- 🔍 النتائج -->

@@ -3509,48 +3509,101 @@ body.is-modal-open {
   opacity: 1;
   transform: translateY(0);
 }
-/* منع القص من search-panel */
+/* عشان الاقتراحات تطلع خارج إطار البحث بدون قص */
 .search-panel {
   position: relative;
-  overflow: visible !important; /* أهم وحدة */
+  overflow: visible !important;
 }
 
-/* صندوق الاقتراحات */
+/* لما يكون مخفي */
+.search-suggestions[hidden] {
+  display: none !important;
+}
+
+/* الصندوق اللي يحتوي الاقتراحات */
 .search-suggestions {
   position: absolute;
-  top: calc(100% + 10px);
-  left: 20px;
-  right: 20px;
-
-  background: rgba(5,15,30,0.97);
-  border: 1px solid rgba(148,163,184,0.4);
-  border-radius: 16px;
-  padding: 10px;
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  z-index: 9999 !important;
-}
-
-/* تظهر لما ما يكون hidden */
-.search-suggestions:not([hidden]) {
+  right: 52px;
+  left: 16px;
+  top: calc(100% + 6px);
+  background: rgba(5, 15, 30, 0.98);
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+  padding: 6px;
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 30;
+  pointer-events: none; /* الصندوق نفسه ما يحجب الضغط */
 }
 
+/* كل اقتراح كزر كامل بعرض الصندوق */
 .search-suggestions button {
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  padding: 6px 8px;
+  width: 100%;
   text-align: right;
+  border: none;
+  background: transparent;
   color: var(--text-main);
-  font-size: 12px;
-  border-radius: 10px;
+  font-size: 11px;
+  border-radius: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: auto; /* الأزرار فقط تستقبل الكليك */
+}
+
+.search-suggestions button span.url {
+  direction: ltr;
+  font-size: 10px;
+  color: var(--text-muted);
 }
 
 .search-suggestions button:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(15, 23, 42, 0.9);
 }
+/* -----------------------------------------
+   🟢 OneLink Search Loading Indicator
+------------------------------------------*/
+
+/* مؤشر التحميل داخل مربع البحث */
+.search-loading {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+  box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease-out;
+  animation: onelink-pulse 1s ease-out infinite;
+}
+
+.search-loading:not([hidden]) {
+  opacity: 1;
+}
+
+@keyframes onelink-pulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.5);
+  }
+  70% {
+    transform: translateY(-50%) scale(1.4);
+    box-shadow: 0 0 0 8px rgba(14, 165, 233, 0);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0);
+  }
+}
+
 
 
 

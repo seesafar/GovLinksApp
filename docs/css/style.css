@@ -3509,6 +3509,48 @@ body.is-modal-open {
   opacity: 1;
   transform: translateY(0);
 }
+/* منع القص من search-panel */
+.search-panel {
+  position: relative;
+  overflow: visible !important; /* أهم وحدة */
+}
+
+/* صندوق الاقتراحات */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 20px;
+  right: 20px;
+
+  background: rgba(5,15,30,0.97);
+  border: 1px solid rgba(148,163,184,0.4);
+  border-radius: 16px;
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 9999 !important;
+}
+
+/* تظهر لما ما يكون hidden */
+.search-suggestions:not([hidden]) {
+  display: flex;
+}
+
+.search-suggestions button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 6px 8px;
+  text-align: right;
+  color: var(--text-main);
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+.search-suggestions button:hover {
+  background: rgba(255,255,255,0.05);
+}
 
 
 

@@ -397,6 +397,7 @@ function normalizeText(str) {
     els.regionTabs = Array.from(document.querySelectorAll(".region-tab"));
     els.filterChips = Array.from(document.querySelectorAll(".filter-chip"));
     els.matchesCounter = document.querySelector(".search-meta strong");
+    els.suggestions = document.querySelector("[data-suggestions]");
 
     // المودال
     els.modalBackdrop = document.querySelector(
@@ -448,6 +449,8 @@ function normalizeText(str) {
         state.query = ev.target.value || "";
         applyFilters();
         renderResults();
+        updateSuggestions(state.query);
+
       });
     }
 
@@ -550,6 +553,91 @@ function normalizeText(str) {
     wireUI();
     loadServices();
   }
+/* -----------------------------
+   🔍 Suggestions Engine (Safe)
+------------------------------*/
+
+// 🧠 إنشاء قائمة اقتراحات
+function buildSuggestions(q) {
+  const nq = normalizeText(q);
+  if (!nq) return [];
+
+  const base = state.filtered.length ? state.filtered : state.allServices;
+
+  const out = [];
+  for (const svc of base) {
+    const name = normalizeText(svc.name || "");
+    const url = normalizeText(svc.url || "");
+
+    if (name.includes(nq) || url.includes(nq)) {
+      out.push({
+        name: svc.name,
+        url: svc.url,
+        region: svc.region,
+      });
+    }
+    if (out.length >= 8) break;
+  }
+
+  return out;
+}
+
+// 🧹 مسح
+function clearSuggestions() {
+  if (!els.suggestions) return;
+  els.suggestions.innerHTML = "";
+  els.suggestions.hidden = true;
+}
+
+// 🧩 رسم
+function renderSuggestions(list) {
+  if (!els.suggestions) return;
+
+  if (!list.length) return clearSuggestions();
+
+  els.suggestions.innerHTML = "";
+
+  list.forEach((item) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.innerHTML = `
+      <span>${item.name} — <small>${item.region}</small></span>
+      <span class="url">${item.url}</span>
+    `;
+
+    btn.addEventListener("click", () => {
+      els.searchInput.value = item.name;
+      state.query = item.name;
+      applyFilters();
+      renderResults();
+      clearSuggestions();
+    });
+
+    els.suggestions.appendChild(btn);
+  });
+
+  els.suggestions.hidden = false;
+}
+
+// 🔁 تحديث الاقتراحات
+function updateSuggestions(q) {
+  q = q.trim();
+  if (!q) return clearSuggestions();
+
+  const items = buildSuggestions(q);
+  renderSuggestions(items);
+}
+
+// 🔒 إخفاء عند الضغط خارج البحث
+document.addEventListener("click", (ev) => {
+  if (!els.suggestions) return;
+
+  const inside =
+    els.suggestions.contains(ev.target) ||
+    (els.searchInput && els.searchInput.contains(ev.target));
+
+  if (!inside) clearSuggestions();
+});
 
   if (document.readyState === "loading") {
     // لو الصفحة لسه ما خلصت تحميل الـ DOM

@@ -249,12 +249,132 @@
       text-align: center;
       padding: 8px 18px 20px;
     }
+
+    /* =========================================
+       OneLink SA · شريط البحث عن الخدمات
+       ========================================= */
+
+    .sa-search-container {
+      max-width: 820px;
+      margin: 14px auto 6px;
+    }
+
+    .sa-search-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+      transition:
+        border-color 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        transform 0.16s ease-out,
+        background 0.2s ease-out;
+    }
+
+    .sa-search-wrapper:focus-within {
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(56, 189, 248, 0.4),
+        0 18px 45px rgba(15, 23, 42, 0.95);
+      transform: translateY(-1px);
+      background: radial-gradient(circle at top, #02091a 0, #020617 55%, #020617 100%);
+    }
+
+    .sa-search-icon {
+      font-size: 17px;
+      opacity: 0.9;
+    }
+
+    .sa-search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e5f4f4;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .sa-search-input::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+
+    .sa-search-clear {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 2px 6px;
+      color: #9ca3af;
+      border-radius: 999px;
+      transition:
+        color 0.16s ease-out,
+        background 0.16s ease-out,
+        transform 0.12s ease-out;
+    }
+
+    .sa-search-clear:hover {
+      color: #fb7185;
+      background: rgba(15, 23, 42, 0.85);
+      transform: translateY(-1px);
+    }
+
+    .sa-search-meta {
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .sa-search-count {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    /* تصحيح محاذاة الأيقونات فوق أسماء الخدمات */
+.section-card .service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;  /* وسط أفقياً */
+  text-align: center !important;   /* النص في المنتصف */
+}
+
+/* نتأكد أن دائرة الأيقونة نفسها في المنتصف */
+.section-card .service-icon-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* تأثير hover للبطاقة */
+.service-card {
+  transition: all 0.28s ease-out;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(34, 197, 94, 0.20);
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+/* حركة الأيقونة */
+.service-card:hover .service-icon-wrap {
+  transform: translateY(-3px) scale(1.04);
+  transition: 0.25s ease-out;
+  box-shadow: 0 14px 32px rgba(34, 197, 94, 0.25);
+}
+
   </style>
 </head>
 
 <body>
+  <!-- الهيدر والفوتر العامة للموقع -->
   <div data-include="../core/layout/header.html"></div>
   <div data-include="../core/layout/footer.html"></div>
+
   <div class="page-shell">
     <!-- Header + back -->
     <header class="services-header">
@@ -262,12 +382,40 @@
         <span>↩</span>
         <span>الرجوع للصفحة الرئيسية</span>
       </a>
-
       <div class="services-title-block">
         <h1>جميع الخدمات الحكومية في OneLink</h1>
         <p>قائمة مرتّبة لأشهر المنصّات الحكومية والخدمات الرقمية الرسمية في المملكة.</p>
       </div>
     </header>
+
+    <!-- 🔍 شريط البحث عن الخدمات -->
+    <div class="sa-search-container">
+      <div class="sa-search-wrapper">
+        <span class="sa-search-icon" aria-hidden="true">🔍</span>
+
+        <input
+          id="sa-services-search"
+          type="search"
+          class="sa-search-input"
+          placeholder="ابحث باسم الخدمة (أبشر، Absher، نفاذ، Najiz…)"
+          autocomplete="off"
+        />
+
+        <button
+          type="button"
+          class="sa-search-clear"
+          aria-label="مسح البحث"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="sa-search-meta">
+        <span id="sa-services-count" class="sa-search-count">
+          0 / 0 النتائج
+        </span>
+      </div>
+    </div>
 
     <!-- Section 1: Unified national platforms -->
     <section class="section-card">
@@ -559,6 +707,76 @@
   <footer class="main-footer">
     🔗 S © 2025 Private ownership of Developer Safar Al-Ghamdi — All rights reserved.
   </footer>
+
+  <!-- سكربت البحث -->
+  <script>
+    (function () {
+      const input    = document.getElementById("sa-services-search");
+      const counter  = document.getElementById("sa-services-count");
+      const sections = document.querySelectorAll(".section-card");
+      const allCards = document.querySelectorAll(".service-card");
+
+      if (!input || !sections.length) return;
+
+      function normalize(str) {
+        return (str || "")
+          .toLowerCase()
+          .replace(/[أإآا]/g, "ا")
+          .replace(/ى/g, "ي")
+          .replace(/ة/g, "ه")
+          .replace(/[\u064B-\u065F]/g, "");
+      }
+
+      function applySearch() {
+        const rawQuery = input.value || "";
+        const qNorm = normalize(rawQuery);
+        const hasQuery = qNorm.length > 0;
+
+        let totalMatches = 0;
+
+        sections.forEach(section => {
+          const cards = section.querySelectorAll(".service-card");
+          let sectionHasMatch = false;
+
+          cards.forEach(card => {
+            const nameAr = card.querySelector(".service-name-ar")?.textContent || "";
+            const nameEn = card.querySelector(".service-name-en")?.textContent || "";
+            const haystack = normalize(nameAr + " " + nameEn);
+
+            const isMatch = !hasQuery || haystack.includes(qNorm);
+
+            if (isMatch) {
+              sectionHasMatch = true;
+              totalMatches++;
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          section.style.display = (sectionHasMatch || !hasQuery) ? "block" : "none";
+        });
+
+        if (counter) {
+          const totalCards = allCards.length;
+          counter.textContent = `${totalMatches} / ${totalCards} النتائج`;
+        }
+      }
+
+      const clearBtn = document.querySelector(".sa-search-clear");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          input.value = "";
+          input.focus();
+          applySearch();
+        });
+      }
+
+      applySearch();
+      input.addEventListener("input", applySearch);
+    })();
+  </script>
+
   <script src="../core/js/include.js"></script>
 </body>
 </html>

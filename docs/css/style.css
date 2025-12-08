@@ -3603,8 +3603,498 @@ body.is-modal-open {
     box-shadow: 0 0 0 0 rgba(14, 165, 233, 0);
   }
 }
+/* ====== جعل كروت الخدمات في شكل Grid ذكي ====== */
+.section-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(2, 11, 24, 0.4); /* خيار تجميلي، احذف لو ما تبيه */
+}
 
+/* لو تبغى الكرت الوحيد يكون في الوسط */
+.section-card:has(.service-card:nth-child(1)):not(:has(.service-card:nth-child(2))) {
+  justify-items: center;
+}
+.section-card {
+  position: relative;
+}
 
+/* بس عشان لو عندك grid أو flex، نخلي الكرت الوحيد واضح ومتنفس */
+.section-card .service-card {
+  transition: all 0.18s ease-out;
+}
+/* -------------------------------------------------------
+   ✨ تحسين شكل أقسام OneLink الحكومية
+------------------------------------------------------- */
+
+/* صندوق القسم */
+.section-card {
+  background: rgba(2, 15, 35, 0.55);
+  padding: 35px;
+  border-radius: 22px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  margin-bottom: 55px;
+  backdrop-filter: blur(6px);
+  transition: 0.35s ease;
+}
+
+/* تأثير عند اللمس / الهوفر */
+.section-card:hover {
+  border-color: rgba(34, 197, 94, 0.35);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+}
+
+/* عنوان القسم */
+.section-heading h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.section-heading p {
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+/* فاصل جميل قبل العنوان */
+.section-heading h2::before {
+  content: "━━━";
+  color: var(--accent);
+  margin-left: 8px;
+}
+
+.section-heading h2::after {
+  content: "━━━";
+  color: var(--accent);
+  margin-right: 8px;
+}
+/* -------------------------------------------------------
+   ✨ تحسين بطاقات الخدمات
+------------------------------------------------------- */
+
+.service-card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 22px;
+  border-radius: 18px;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+/* تأثير بصري عند المرور */
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(34, 197, 94, 0.4);
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.18);
+}
+
+/* اسم الخدمة */
+.service-name-ar {
+  font-size: 20px;
+  margin-top: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.service-name-en {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+/* وصف الخدمة */
+.service-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* شارة منصة موحدة */
+.service-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+
+/* زر الانتقال */
+.service-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: var(--accent-blue);
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.service-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
+/* -------------------------------------------------------
+   ✨ تنسيق الشبكة
+------------------------------------------------------- */
+
+.services-grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  margin-top: 25px;
+  /* -------------------------------------------------------
+   🔍 صندوق البحث — نسخة VIP
+------------------------------------------------------- */
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(2, 15, 35, 0.55);
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.25);
+  backdrop-filter: blur(6px);
+  transition: 0.3s ease;
+}
+
+/* تأثير عند التركيز */
+.search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.25);
+}
+
+}
+/* حقل البحث */
+.search-box input[type="search"] {
+  flex: 1;
+  background: transparent !important;
+  border: none;
+  outline: none;
+  color: #e5f3ff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* زر × لمسح البحث */
+.search-clear {
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px 8px;
+  color: #9ca3af;
+  transition: 0.2s;
+}
+
+.search-clear:hover {
+  color: var(--danger);
+}
+/* ─────────────────────────────
+   🔍 شريط بحث صفحة الخدمات السعودية
+───────────────────────────── */
+.services-search-bar {
+  margin: 0 auto 24px;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 10px;
+  border-radius: 999px;
+
+  background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.92));
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.85);
+
+  backdrop-filter: blur(12px);
+}
+
+/* حقل الإدخال */
+.services-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e5f3ff;
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
+.services-search-input::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+/* عدّاد النتائج */
+.services-search-count {
+  font-size: 12px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+.services-search-bar {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 25px;
+  padding: 8px 18px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.services-search-bar input[type="search"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e5f3ff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+#sa-services-count {
+  font-size: 12px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+/* =========================================
+   OneLink · Saudi Services Search Bar
+========================================= */
+
+.sa-services-search-bar {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+}
+
+/* الصندوق الداكن اللي يحتوي الأيقونة + الحقل + زر × */
+.sa-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: radial-gradient(circle at top left,
+    rgba(15, 23, 42, 0.98),
+    rgba(2, 6, 23, 0.96)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
+}
+
+/* أيقونة البحث */
+.sa-search-icon {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+/* حقل البحث – داكن ومتوسط */
+.sa-search-inner input[type="search"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e5f3ff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* زر X لمسح النص */
+.sa-search-clear {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.18s ease, transform 0.12s ease;
+}
+
+.sa-search-clear:hover {
+  color: #fb7185;             /* نفس لون التحذير عندك */
+  transform: scale(1.08);
+}
+
+.sa-search-clear[hidden] {
+  display: none;
+}
+
+/* عدّاد النتائج */
+.sa-search-count {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: left;
+  direction: rtl;
+}
+/* =========================================
+   OneLink · Saudi Services Search (services-sa.html)
+========================================= */
+
+.services-search-bar {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto 26px !important;  /* وسط الصفحة */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* حقل البحث نفسه */
+.services-search-bar #sa-services-search {
+  flex: 1;
+  padding: 10px 16px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(148, 163, 184, 0.55) !important;
+  background: radial-gradient(circle at top left,
+    rgba(15, 23, 42, 0.98),
+    rgba(2, 6, 23, 0.96)
+  ) !important;
+  color: #e5f3ff !important;
+  font-size: 15px !important;
+  font-weight: 500;
+  outline: none;
+}
+
+/* عدّاد النتائج على اليمين / اليسار */
+#sa-services-count {
+  font-size: 12px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+/* =========================================
+   OneLink SA · خدمات السعودية (شريط البحث)
+   ========================================= */
+
+.sa-search-container {
+  max-width: 820px;
+  margin: 14px auto 4px;
+}
+
+/* الصندوق الأساسي للشريط */
+.sa-search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+  transition:
+    border-color 0.18s ease-out,
+    box-shadow 0.18s ease-out,
+    transform 0.16s ease-out,
+    background 0.2s ease-out;
+}
+
+/* لما المستخدم يكتب / يضغط داخل الشريط */
+.sa-search-wrapper:focus-within {
+  border-color: rgba(56, 189, 248, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.4),
+    0 18px 45px rgba(15, 23, 42, 0.95);
+  transform: translateY(-1px);
+  background: radial-gradient(circle at top, #02091a 0, #020617 55%, #020617 100%);
+}
+
+/* أيقونة البحث */
+.sa-search-icon {
+  font-size: 17px;
+  opacity: 0.9;
+}
+
+/* حقل الإدخال نفسه */
+.sa-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e5f3ff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* زر X لمسح البحث */
+.sa-search-clear {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 6px;
+  color: #9ca3af;
+  border-radius: 999px;
+  transition: color 0.16s ease-out, background 0.16s ease-out, transform 0.12s ease-out;
+}
+
+.sa-search-clear:hover {
+  color: #fb7185;
+  background: rgba(15, 23, 42, 0.85);
+  transform: translateY(-1px);
+}
+
+/* العدّاد تحت الشريط */
+.sa-search-meta {
+  margin-top: 4px;
+  text-align: center;
+}
+
+.sa-search-count {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* =========================================
+   أنيميشن كروت الخدمات والأقسام
+   ========================================= */
+
+/* نضيف هذه الكلاس للكروت من الجافاسكربت */
+.service-card.sa-animated {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.22s ease-out,
+    box-shadow 0.22s ease-out;
+}
+
+/* حالة الإخفاء بالفِيد */
+.service-card.sa-hidden {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+/* إخفاء قسم كامل لما ما فيه نتائج مطابقة */
+.section-card.sa-section-hidden {
+  opacity: 0;
+  transform: translateY(-4px);
+  max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.22s ease-out,
+    max-height 0.22s ease-out,
+    margin 0.22s ease-out,
+    padding 0.22s ease-out;
+}
 
 
 

@@ -69,64 +69,77 @@
     .flag-bar div:nth-child(2) { background: #f9fafb; }
     .flag-bar div:nth-child(3) { background: #000000; }
 
-    /* الهيدر الصغير */
-    header {
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(30, 64, 175, 0.7);
-      position: sticky;
-      top: 6px;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-    }
+    
+    /* نفس ستايل هيدر الصين بالضبط */
+.page-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
 
-    .title-side {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+    /* هيدر العنوان */
+.services-header {
+  margin: 18px auto 8px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;   /* كله يمين */
+  gap: 10px;
+  text-align: right;
+}
 
-    .title-side h1 {
-      font-size: 18px;
-    }
+   .back-link {
+  align-self: flex-start;   /* يصير على اليسار زي الصين */
+  background: rgba(15, 23, 42, 0.95);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  border: 1px solid rgba(148,163,184,0.7);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(15,23,42,0.9);
+  transition: 0.18s ease;
+  white-space: nowrap;
+}
 
-    .title-side p {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
+.back-link:hover {
+  background: #020617;
+  transform: translateY(-1px);
+}
 
-    .back-btn {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: transparent;
-      color: var(--text-main);
-      padding: 6px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all .16s ease;
-      white-space: nowrap;
-    }
 
-    .back-btn:hover {
-      background: rgba(15, 23, 42, 0.95);
+    .services-title-block {
+  text-align: right;
+  width: 100%;
+}
+
+    .services-title-block h1 {
+  font-size: 1.7rem;      /* نفس إحساس الصين */
+  margin: 0;
+  line-height: 1.4;
+  white-space: nowrap;    /* يبقى في سطر واحد على الشاشات الواسعة */
+}
+
+    .services-title-block p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+    @media (max-width: 900px) {
+      .services-title-block h1 {
+        font-size: 1.5rem;
+        white-space: normal;      /* على الجوال عادي ينزل سطرين */
+      }
     }
 
     /* صندوق المحتوى */
     .page-wrapper {
       max-width: 1100px;
-      margin: 20px auto 32px;
+      margin: 10px auto 32px;
       padding: 0 16px 24px;
     }
 
@@ -140,52 +153,70 @@
       padding: 18px 18px 20px;
     }
 
-    .page-header {
+    /* شريط البحث (نفس السعودية) */
+    .ol-search-shell {
+      margin: 4px auto 18px;
+      padding: 0 12px;
+      max-width: 980px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 4px;
     }
 
-    .page-header-main h2 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .page-header-main p {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .search-box {
-      background: rgba(15, 23, 42, 1);
+    .ol-search-pill {
+      width: 100%;
+      max-width: 880px;
+      background: rgba(3, 7, 18, 0.98);
       border-radius: 999px;
-      border: 1px solid rgba(30, 64, 175, 0.8);
-      padding: 6px 12px;
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      padding: 4px 10px;
       display: flex;
       align-items: center;
       gap: 8px;
-      min-width: 260px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
     }
 
-    .search-box input {
+    .ol-search-input {
       flex: 1;
       border: none;
       outline: none;
       background: transparent;
-      font-size: 13px;
-      color: var(--text-main);
+      font-size: 0.9rem;
+      color: #e5f3ff;
     }
 
-    .search-box input::placeholder {
-      color: rgba(148, 163, 184, 0.8);
+    .ol-search-input::placeholder {
+      color: rgba(148, 163, 184, 0.9);
     }
 
-    .search-icon {
-      font-size: 16px;
-      color: var(--text-muted);
+    .ol-search-input::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .ol-search-clear {
+      border: none;
+      background: transparent;
+      color: rgba(148, 163, 184, 0.9);
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .ol-search-clear:hover {
+      color: #fca5a5;
+    }
+
+    .ol-search-icon {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .ol-search-results {
+      font-size: 0.78rem;
+      color: rgba(148, 163, 184, 0.9);
+      text-align: center;
     }
 
     .services-grid {
@@ -269,12 +300,46 @@
       color: var(--egypt-gold);
       font-weight: 600;
     }
+    .search-wrapper-eg {
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  padding: 20px 10px 12px;
+  margin-bottom: 18px;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.45);
+}
+.search-wrapper-eg {
+  background: transparent;            /* بدون خلفية */
+  border: none;                       /* بدون إطار */
+  border-radius: 0;                   /* بدون زوايا إضافية */
+  padding: 0;                         /* نشيل الفراغ الزائد */
+  margin-bottom: 12px;                /* مسافة بسيطة تحت البحث فقط */
+  box-shadow: none;                   /* بدون ظل داخلي */
+}
+/* عنوان مصر */
+.services-title-block h1 {
+  font-size: 1.4rem;
+  margin: 0 0 4px;
+  line-height: 1.4;
+  text-align: right;   /* ← رجعت لليمين */
+}
+
+/* الوصف تحت العنوان */
+.services-title-block p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: right;   /* ← يمين */
+}
+
+
   </style>
 </head>
 
+
 <body>
-    <div data-include="../core/layout/header.html"></div>
-    <div data-include="../core/layout/footer.html"></div>
+  <div data-include="../core/layout/header.html"></div>
+  <div data-include="../core/layout/footer.html"></div>
+
   <!-- شريط العلم -->
   <div class="flag-bar">
     <div></div>
@@ -282,158 +347,220 @@
     <div></div>
   </div>
 
-  <!-- هيدر صفحة الخدمات -->
-  <header>
-    <div class="header-inner">
-      <div class="title-side">
-        <h1>جميع الخدمات الحكومية في OneLink Egypt</h1>
-        <p>قائمة مرتبة لأهم المنصات والمواقع الرسمية في مصر.</p>
-      </div>
+  <!-- هيدر الصفحة -->
+<div class="page-shell">
+  <header class="services-header">
+    <a href="index.html" class="back-link">
+      <span>↩</span>
+      <span>الرجوع للصفحة الرئيسية</span>
+    </a>
 
-      <button class="back-btn" onclick="window.location.href='index.html'">
-        ⬅ الرجوع للبوابة الرئيسية
-      </button>
+    <div class="services-title-block">
+      <h1>جميع الخدمات الحكومية في OneLink Egypt</h1>
+      <p>قائمة مرتّبة لأشهر المنصّات الحكومية والخدمات الرقمية الرسمية في مصر.</p>
     </div>
   </header>
+</div>
 
-  <!-- محتوى صفحة الخدمات -->
-  <main class="page-wrapper">
-    <div class="page-panel">
-      <div class="page-header">
-        <div class="page-header-main">
-          <h2>قائمة الخدمات</h2>
-          <p>اختر الخدمة التي تحتاجها، وسيتم توجيهك للبوابة الحكومية المناسبة.</p>
-        </div>
+<!-- محتوى صفحة الخدمات -->
+<main class="page-wrapper">
+  <div class="page-panel">
 
-        <div class="search-box">
-          <span class="search-icon">🔎</span>
-          <input type="text" placeholder="ابحث: بطاقة، مرور، ضرائب، شهر عقاري..." />
-        </div>
+    <!-- شريط البحث -->
+    <div class="ol-search-shell">
+      <div class="ol-search-pill">
+        <span class="ol-search-icon">🔍</span>
+
+        <input
+          id="eg-services-search"
+          class="ol-search-input"
+          type="search"
+          placeholder="ابحث باسم الخدمة (بطاقة، ضرائب، مرور، شهر عقاري...)"
+        />
+
+        <button
+          type="button"
+          class="ol-search-clear"
+          id="eg-search-clear"
+          aria-label="مسح البحث"
+        >
+          ×
+        </button>
       </div>
 
-      <div class="services-grid">
-        <!-- بطاقة الرقم القومي -->
-        <a href="#" class="service-card">
-          <div class="service-top">
-            <div class="service-icon">🪪</div>
-            <div>
-              <div class="service-name">بطاقة الرقم القومي</div>
-              <div class="service-tagline">استخراج – تجديد – بدل فاقد</div>
-            </div>
-          </div>
-          <div class="service-meta">
-            <span>القطاع: الأحوال المدنية</span>
-            <span class="highlight">قريباً</span>
-          </div>
-        </a>
-
-        <!-- بوابة مصر الرقمية -->
-        <a href="https://digital.gov.eg" target="_blank" class="service-card">
-          <div class="service-top">
-            <div class="service-icon">🌐</div>
-            <div>
-              <div class="service-name">بوابة مصر الرقمية</div>
-              <div class="service-tagline">مجموعة كبيرة من الخدمات في بوابة واحدة</div>
-            </div>
-          </div>
-          <div class="service-meta">
-            <span>official: digital.gov.eg</span>
-            <span class="highlight">مباشر</span>
-          </div>
-        </a>
-
-        <!-- المرور -->
-        <a href="#" class="service-card">
-          <div class="service-top">
-            <div class="service-icon">🚗</div>
-            <div>
-              <div class="service-name">خدمات المرور</div>
-              <div class="service-tagline">مخالفات – تجديد رخصة – استعلامات</div>
-            </div>
-          </div>
-          <div class="service-meta">
-            <span>القطاع: المرور</span>
-            <span class="highlight">قريباً</span>
-          </div>
-        </a>
-
-        <!-- الضرائب -->
-        <a href="#" class="service-card">
-          <div class="service-top">
-            <div class="service-icon">💰</div>
-            <div>
-              <div class="service-name">الضرائب</div>
-              <div class="service-tagline">إقرارات – استعلام – خدمات إلكترونية</div>
-            </div>
-          </div>
-          <div class="service-meta">
-            <span>القطاع: المالية</span>
-            <span class="highlight">قيد الإضافة</span>
-          </div>
-        </a>
-
-        <!-- الشهر العقاري -->
-        <a href="#" class="service-card">
-          <div class="service-top">
-            <div class="service-icon">🏠</div>
-            <div>
-              <div class="service-name">الشهر العقاري</div>
-              <div class="service-tagline">توثيق – تسجيل عقود – خدمات أونلاين</div>
-            </div>
-          </div>
-          <div class="service-meta">
-            <span>القطاع: العدل</span>
-            <span class="highlight">قريباً</span>
-          </div>
-        </a>
-
-        <!-- القضاء والمحاكم -->
-        <a href="#" class="service-card">
-          <div class="service-top">
-            <div class="service-icon">⚖️</div>
-            <div>
-              <div class="service-name">خدمات القضاء والمحاكم</div>
-              <div class="service-tagline">استعلام عن القضايا والمواعيد</div>
-            </div>
-          </div>
-          <div class="service-meta">
-            <span>القطاع: القضاء</span>
-            <span class="highlight">لاحقاً</span>
-          </div>
-        </a>
-
-        <!-- التعليم والجامعات -->
-        <a href="#" class="service-card">
-          <div class="service-top">
-            <div class="service-icon">🎓</div>
-            <div>
-              <div class="service-name">التعليم والجامعات</div>
-              <div class="service-tagline">تنسيق – نتائج – خدمات طلابية</div>
-            </div>
-          </div>
-          <div class="service-meta">
-            <span>القطاع: التعليم</span>
-            <span class="highlight">لاحقاً</span>
-          </div>
-        </a>
-
-        <!-- الصحة -->
-        <a href="#" class="service-card">
-          <div class="service-top">
-            <div class="service-icon">🏥</div>
-            <div>
-              <div class="service-name">خدمات الصحة</div>
-              <div class="service-tagline">حجز كشف – تأمين صحي – استعلامات</div>
-            </div>
-          </div>
-          <div class="service-meta">
-            <span>القطاع: الصحة</span>
-            <span class="highlight">لاحقاً</span>
-          </div>
-        </a>
-      </div>
+      <p id="eg-services-count" class="ol-search-results"></p>
     </div>
-  </main>
+
+    <!-- شبكة البطاقات -->
+    <div class="services-grid">
+      <!-- الضرائب -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">💰</div>
+          <div>
+            <div class="service-name">الضرائب</div>
+            <div class="service-tagline">إقرارات – استعلام – خدمات إلكترونية</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: المالية</span>
+          <span class="highlight">قيد الإضافة</span>
+        </div>
+      </a>
+
+      <!-- خدمات المرور -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🚗</div>
+          <div>
+            <div class="service-name">خدمات المرور</div>
+            <div class="service-tagline">مخالفات – تجديد رخصة – استعلامات</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: المرور</span>
+          <span class="highlight">قريباً</span>
+        </div>
+      </a>
+
+      <!-- بوابة مصر الرقمية -->
+      <a href="https://digital.gov.eg" target="_blank" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🌐</div>
+          <div>
+            <div class="service-name">بوابة مصر الرقمية</div>
+            <div class="service-tagline">مجموعة كبيرة من الخدمات في بوابة واحدة</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>official: digital.gov.eg</span>
+          <span class="highlight">مباشر</span>
+        </div>
+      </a>
+
+      <!-- بطاقة الرقم القومي -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🪪</div>
+          <div>
+            <div class="service-name">بطاقة الرقم القومي</div>
+            <div class="service-tagline">استخراج – تجديد – بدل فاقد</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: الأحوال المدنية</span>
+          <span class="highlight">قريباً</span>
+        </div>
+      </a>
+
+      <!-- الشهر العقاري -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🏠</div>
+          <div>
+            <div class="service-name">الشهر العقاري</div>
+            <div class="service-tagline">توثيق – تسجيل عقود – خدمات أونلاين</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: العدل</span>
+          <span class="highlight">قريباً</span>
+        </div>
+      </a>
+
+      <!-- القضاء والمحاكم -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">⚖️</div>
+          <div>
+            <div class="service-name">خدمات القضاء والمحاكم</div>
+            <div class="service-tagline">استعلام عن القضايا والمواعيد</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: القضاء</span>
+          <span class="highlight">لاحقاً</span>
+        </div>
+      </a>
+
+      <!-- التعليم والجامعات -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🎓</div>
+          <div>
+            <div class="service-name">التعليم والجامعات</div>
+            <div class="service-tagline">تنسيق – نتائج – خدمات طلابية</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: التعليم</span>
+          <span class="highlight">لاحقاً</span>
+        </div>
+      </a>
+
+      <!-- خدمات الصحة -->
+      <a href="#" class="service-card">
+        <div class="service-top">
+          <div class="service-icon">🏥</div>
+          <div>
+            <div class="service-name">خدمات الصحة</div>
+            <div class="service-tagline">حجز كشف – تأمين صحي – استعلامات</div>
+          </div>
+        </div>
+        <div class="service-meta">
+          <span>القطاع: الصحة</span>
+          <span class="highlight">لاحقاً</span>
+        </div>
+      </a>
+
+    </div><!-- /services-grid -->
+  </div><!-- /page-panel -->
+</main>
+
+
+  <!-- سكربت فلترة الخدمات + عداد النتائج -->
+  <script>
+    (function () {
+      const input = document.getElementById("eg-services-search");
+      const cards = Array.from(document.querySelectorAll(".services-grid .service-card"));
+      const counter = document.getElementById("eg-services-count");
+      const clearBtn = document.getElementById("eg-search-clear");
+
+      if (!input || !cards.length || !counter) return;
+
+      const normalize = (txt) =>
+        (txt || "")
+          .toString()
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .trim();
+
+      function applySearch() {
+        const q = normalize(input.value);
+        let visible = 0;
+
+        cards.forEach((card) => {
+          const text = normalize(card.textContent);
+          const match = !q || text.includes(q);
+          card.style.display = match ? "" : "none";
+          if (match) visible++;
+        });
+
+        counter.textContent = `${visible} / ${cards.length} النتائج`;
+      }
+
+      applySearch();
+      input.addEventListener("input", applySearch);
+
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          input.value = "";
+          applySearch();
+          input.focus();
+        });
+      }
+    })();
+  </script>
 
   <script defer src="../core/js/i18n.js"></script>
   <script defer src="../core/js/switcher.js"></script>

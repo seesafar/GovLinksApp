@@ -4094,7 +4094,14 @@ body.is-modal-open {
     max-height 0.22s ease-out,
     margin 0.22s ease-out,
     padding 0.22s ease-out;
+}.page-title {
+  font-size: 2rem !important;   /* صغرنا الخط */
+  font-weight: 700;
+  white-space: nowrap !important;  /* يمنع كسر السطر */
+  text-align: right !important;
+  margin-bottom: 10px;
 }
+
 
 
 

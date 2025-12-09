@@ -371,3 +371,371 @@ body.is-modal-open {
   pointer-events: none;
   cursor: default;
 }
+/* شكل صندوق البحث (لو حاب تتأكد أنه موحّد) */
+.search-box {
+  background: rgba(15, 23, 42, 1);
+  border-radius: 999px;
+  border: 1px solid rgba(30, 64, 175, 0.8);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 260px;
+}
+
+.search-box input[type="search"],
+.search-box input[type="text"] {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.search-box input::placeholder {
+  color: rgba(148, 163, 184, 0.8);
+}
+
+/* زر × لمسح البحث */
+.search-clear {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0 4px;
+  color: #9ca3af;
+  line-height: 1;
+}
+
+.search-clear:hover {
+  color: var(--egypt-red, #fbbf24); /* في الصين تقدر تعرف متغير خاص لو حاب */
+}
+
+/* أيقونة العدسة */
+.search-icon {
+  font-size: 17px;
+  color: #9ca3af;
+}
+/* 🔍 شريط البحث الموحّد لمصر والصين (تحت العنوان + في المنتصف) */
+
+/* تصغير وعمل سنتر لشريط البحث */
+.services-search-strip {
+  max-width: 900px;           /* عرض أقل من عرض الصفحة */
+  margin: 16px auto 10px;     /* سنتر في النص */
+}
+
+/* شكل خانة البحث نفسها */
+.services-search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(4, 6, 24, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.75);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+}
+
+/* إخفاء زر الـ X */
+.services-search-clear {
+  display: none !important;
+}
+
+/* أيقونة البحث الصغيرة */
+.services-search-icon {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* حقل الإدخال */
+.services-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e5f3ff;
+  font-size: 14px;
+}
+
+.services-search-input::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+/* عدد النتائج تحت خانة البحث وفي النص */
+.services-results-count {
+  margin-top: 4px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(148, 163, 184, 0.9);
+}
+/* 🔹 شريط البحث الموحّد لمصر والصين */
+.services-search-strip {
+  max-width: 900px;
+  margin: 14px auto 6px;   /* يتوسط الصفحة */
+}
+
+/* صندوق البحث نفسه */
+.services-search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(4, 6, 24, 0.98);
+  border: 1px solid rgba(59, 130, 246, 0.75);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.95);
+  width: 100%;
+}
+
+/* حقل الكتابة */
+.services-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e5f3ff;
+  font-size: 14px;
+}
+
+/* أيقونة البحث (يمين) */
+.services-search-icon {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* زر × لمسح البحث (يسار) */
+.services-search-clear {
+  border: none;
+  background: none;
+  color: #9ca3af;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* سطر عدد النتائج – في المنتصف */
+.services-results-count {
+  margin-top: 4px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(148,163,184,0.9);
+}
+
+/* احتياط: لو بقي أي X من نوع search شيله */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none !important;
+}
+/* شريط البحث المشترك لمصر والصين (نفس روح السعودية) */
+.services-search-wrap {
+  margin: 12px auto 18px;
+  padding: 0 12px;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.services-search-pill {
+  width: 100%;
+  max-width: 820px;            /* لتقصير المستطيل مثل السعودية */
+  background: rgba(3, 7, 18, 0.98);
+  border-radius: 999px;
+  border: 1px solid rgba(59, 130, 246, 0.7);
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+}
+
+.services-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #e5f3ff;
+}
+
+/* لون البلِيس هولدر */
+.services-search-input::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+/* لو نسيت وحطيت type="search" ما يظهر X الأبيض */
+.services-search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* زر × لمسح البحث */
+.services-search-clear {
+  border: none;
+  background: transparent;
+  color: rgba(148, 163, 184, 0.9);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.services-search-clear:hover {
+  color: #fca5a5;
+}
+
+/* أيقونة العدسة */
+.services-search-icon {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* نص عدد النتائج تحت شريط البحث في المنتصف */
+.services-results-text {
+  font-size: 0.78rem;
+  color: rgba(148, 163, 184, 0.9);
+  text-align: center;
+}
+/* العنوان الوسطاني (عندك جاهز، بس نخليه موحّد لو احتجته) */
+.egypt-hero-header,
+.china-hero-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.egypt-hero-header h1,
+.china-hero-header h1 {
+  font-size: 1.9rem;
+  margin-bottom: 4px;
+}
+
+.egypt-hero-header p,
+.china-hero-header p {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+/* شريط البحث لمصر والصين */
+.ol-search-shell {
+  margin: 10px auto 18px;
+  padding: 0 12px;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ol-search-pill {
+  width: 100%;
+  max-width: 880px;              /* يقلل طول المستطيل */
+  background: rgba(3, 7, 18, 0.98);
+  border-radius: 999px;
+  border: 1px solid rgba(59, 130, 246, 0.7);
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+}
+
+.ol-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #e5f3ff;
+}
+
+.ol-search-input::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+/* إزالة X الأبيض حق المتصفح */
+.ol-search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ol-search-clear {
+  border: none;
+  background: transparent;
+  color: rgba(148, 163, 184, 0.9);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.ol-search-clear:hover {
+  color: #fca5a5;
+}
+
+.ol-search-icon {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* نص "8 / 8 النتائج" متوسّط */
+.ol-search-results {
+  font-size: 0.78rem;
+  color: rgba(148, 163, 184, 0.9);
+  text-align: center;
+}
+/* ===========================
+   Fix Egypt & China headers like Saudi
+   =========================== */
+
+/* هيدر مصر والصين: نفس توزيع السعودية (زر الرجوع فوق يمين، العنوان والوصف يمين) */
+body.eg .services-header,
+body.cn .services-header {
+  max-width: 1160px;
+  margin: 18px auto 8px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;   /* كل شيء يمين */
+  gap: 8px;
+  text-align: right;
+}
+
+/* زر الرجوع – فوق ويمين */
+body.eg .services-header .back-link,
+body.cn .services-header .back-link {
+  align-self: flex-end;
+  margin-bottom: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* بلوك العنوان */
+body.eg .services-title-block,
+body.cn .services-title-block {
+  text-align: right;
+  width: 100%;
+}
+
+/* تصغير عنوان OneLink Egypt/China حتى لا ينزل سطرين */
+body.eg .services-title-block h1,
+body.cn .services-title-block h1 {
+  font-size: 1.7rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* الوصف تحت العنوان */
+body.eg .services-title-block p,
+body.cn .services-title-block p {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}

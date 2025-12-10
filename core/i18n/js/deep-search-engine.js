@@ -18,7 +18,7 @@
 
   // ✅ المسار من docs/app-ui/app-deep-search.html إلى ملف الخدمات
   const SERVICES_JSON_URL = "../core/i18n/data/services-data.json";
-
+ui.resultsCount = document.getElementById("results-count");
   // ------------- State ----------------
   const state = {
     all: [],
@@ -341,17 +341,47 @@
     ui.results.innerHTML = "";
 
     if (ui.matches) ui.matches.textContent = String(state.filtered.length);
+if (ui.resultsCount) {
+  const isArabicUI =
+    document.documentElement.lang === "ar" ||
+    document.documentElement.dir === "rtl";
 
-    if (!state.filtered.length) {
-      const p = document.createElement("p");
-      p.style.textAlign = "center";
-      p.style.color = "#8b9bb5";
-      p.style.marginTop = "20px";
-      p.innerHTML =
-        'لا توجد نتائج مطابقة… جرّب كلمة أخرى مثل <b>Absher</b>.';
-      ui.results.appendChild(p);
-      return;
-    }
+  if (isArabicUI) {
+    ui.resultsCount.textContent =
+      state.filtered.length === 0
+        ? "لا توجد خدمات مطابقة حاليًا."
+        : `عدد النتائج: ${state.filtered.length}`;
+  } else {
+    ui.resultsCount.textContent =
+      state.filtered.length === 0
+        ? "No services match your search yet."
+        : `Results: ${state.filtered.length}`;
+  }
+}
+   // ------------- Render results -------------
+function renderResults() {
+  if (!ui.results) return;
+  ui.results.innerHTML = "";
+
+  if (ui.matches) ui.matches.textContent = String(state.filtered.length);
+
+  if (!state.filtered.length) {
+    const p = document.createElement("p");
+    p.style.textAlign = "center";
+    p.style.color = "#8b9bb5";
+    p.style.marginTop = "20px";
+
+    // نستخدم النص اللي حددناه فوق حسب اللغة
+    p.textContent = NO_RESULTS_TEXT;
+
+    ui.results.appendChild(p);
+    return;
+  }
+
+  // ... باقي الكود القديم كما هو ...
+}
+
+
 
     state.filtered.forEach((svc) => {
       const card = document.createElement("article");

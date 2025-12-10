@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>OneLink Global Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../core/css/base.css">
+
+  <style>
+    body {
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 50%, #000 100%);
+      color: #e5e7eb;
+      text-align: center;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    .hub-shell {
+      max-width: 1100px;
+      margin: 32px auto 0;
+      padding: 0 16px 32px;
+    }
+
+    .hub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+      font-size: 0.78rem;
+      margin-bottom: 10px;
+    }
+
+    .hub-badge span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.25);
+    }
+
+    .hub-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .hub-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      max-width: 640px;
+      margin: 0 auto 18px;
+    }
+
+    .hub-tabs {
+      margin: 18px auto 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(51,65,85,0.9);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+    }
+
+    .hub-pill {
+      border-radius: 999px;
+      padding: 7px 16px;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.16s ease;
+      white-space: nowrap;
+    }
+
+    .hub-pill:hover {
+      background: rgba(30,64,175,0.35);
+    }
+
+    .hub-pill-active {
+      background: #2563eb;
+      box-shadow: 0 0 0 1px rgba(191,219,254,0.7);
+    }
+
+    .search-shell {
+      margin: 0 auto 18px;
+      max-width: 980px;
+      padding: 14px 14px 12px;
+      border-radius: 22px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(51,65,85,0.9);
+      box-shadow: 0 22px 50px rgba(15,23,42,0.95);
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(75,85,99,0.85);
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      padding: 9px 14px 9px 34px;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: rgba(148,163,184,0.9);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .search-hint {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: rgba(148,163,184,0.9);
+      text-align: left;
+    }
+
+    .services-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .service-card {
+      text-align: left;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.95), #020617 70%);
+      border-radius: 18px;
+      border: 1px solid rgba(55,65,81,0.95);
+      padding: 12px 12px 10px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.85);
+      transition: 0.18s ease;
+      cursor: pointer;
+    }
+
+    .service-card:hover {
+      transform: translateY(-2px);
+      border-color: #22c55e;
+      box-shadow: 0 22px 55px rgba(22,163,74,0.85);
+    }
+
+    .service-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .service-tagline {
+      font-size: 0.8rem;
+      color: rgba(148,163,184,0.95);
+      margin-bottom: 6px;
+    }
+
+    .service-meta {
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(148,163,184,0.9);
+    }
+
+    .service-meta span.highlight {
+      color: #22c55e;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hub-shell">
+
+    <div class="hub-badge">
+      <span class="dot"></span>
+      <span>Global Hub · Beta 2025 · Experimental</span>
+    </div>
+
+    <h1 class="hub-title">OneLink Global Hub</h1>
+    <p class="hub-subtitle">
+      A unified global gateway that gathers the most important digital services and platforms in one place — 
+      for students, travelers, developers, and business owners.
+    </p>
+
+   <div class="hub-tabs">
+  <button class="hub-pill hub-pill-active" type="button">Global Hub</button>
+
+  <!-- هذه تفتح صفحة الصين الرئيسية cn.html -->
+  <a class="hub-pill" href="../cn.html">China CN</a>
+
+  <!-- هذه تفتح صفحة مصر الرئيسية eg.html -->
+  <a class="hub-pill" href="../eg.html">Egypt EG</a>
+
+  <!-- هذه تفتح صفحة السعودية الرئيسية sa.html -->
+   <a class="hub-pill" href="../sa.html">Saudi SA</a>
+</div>
+
+
+    <section class="search-shell">
+      <div class="search-box">
+        <input id="global-hub-search" class="search-input"
+               type="search"
+               placeholder="Search for a global service (GitHub, Coursera, NASA, Visa...)">
+        <span class="search-icon">🔍</span>
+      </div>
+      <p class="search-hint">
+        This is an experimental search bar — later it will be connected to the UDSAL™ deep search engine.
+      </p>
+    </section>
+
+    <section class="services-grid">
+
+      <article class="service-card">
+        <h3 class="service-title">GitHub</h3>
+        <p class="service-tagline">Code hosting, developer collaboration, and project management.</p>
+        <div class="service-meta">
+          <span>Category: Developer Tools</span>
+          <span class="highlight">Global</span>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <h3 class="service-title">Coursera</h3>
+        <p class="service-tagline">Online university courses from top global institutions.</p>
+        <div class="service-meta">
+          <span>Category: Learning</span>
+          <span class="highlight">Global</span>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <h3 class="service-title">UN · United Nations</h3>
+        <p class="service-tagline">Reports, programs, global initiatives from the United Nations.</p>
+        <div class="service-meta">
+          <span>Category: Governance</span>
+          <span class="highlight">Global</span>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <h3 class="service-title">WHO · World Health Organization</h3>
+        <p class="service-tagline">Reliable global health reports, data, and guidance.</p>
+        <div class="service-meta">
+          <span>Category: Health</span>
+          <span class="highlight">Global</span>
+        </div>
+      </article>
+
+    </section>
+
+  </div>
+</body>
+</html>

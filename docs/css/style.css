@@ -4101,6 +4101,119 @@ body.is-modal-open {
   text-align: right !important;
   margin-bottom: 10px;
 }
+.hero-footer-link {
+  margin-top: 25px;
+}
+
+.footer-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border: 1.5px solid rgba(148, 163, 184, 0.45);
+  border-radius: 999px;
+  color: #e5f3ff;
+  text-decoration: none;
+  background: rgba(15, 23, 42, 0.5);
+  transition: 0.25s;
+}
+
+.footer-btn:hover {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: #22c55e;
+}
+/* إزالة الفاصل بين البطاقة وزر الاستعراض */
+.sa-hero-footer-link {
+  border-top: none !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.sa-hero-footer {
+  margin-top: 25px;
+}
+
+.sa-hero-footer-link {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 12px 22px;
+  border-radius: 30px;
+  color: #a7c7ff;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: 0.2s ease;
+}
+
+.sa-hero-footer-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.sa-hero {
+  margin-top: 10px;
+  margin-bottom: 10px;  /* كان 18px */
+}
+
+.search-panel {
+  margin-top: 8px;      /* كان 18px */
+  margin-bottom: 16px;  /* خفّضناها شوي */
+}
+.hero-tip {
+  margin-top: 0;
+}
+/* === Glow Pulse for hero pills & buttons === */
+.glow-pulse {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.0);
+  animation: glowPulse 2.6s ease-in-out infinite;
+}
+
+.glow-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at top,
+    rgba(34, 197, 94, 0.22),
+    transparent 60%
+  );
+  opacity: 0.0;
+  z-index: -1;
+  transition: opacity 0.25s ease;
+}
+
+.glow-pulse:hover::before {
+  opacity: 1;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.0);
+  }
+  45% {
+    box-shadow: 0 0 32px 10px rgba(34, 197, 94, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.0);
+  }
+}
+/* Glow Pulse Animation */
+.glow-pulse {
+  position: relative;
+  animation: pulseGlow 2.4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0px rgba(34, 197, 94, 0.0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(34, 197, 94, 0.0);
+  }
+}
+
 
 
 

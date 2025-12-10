@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <title>OneLink · الخدمات الحكومية المصرية</title>
+  <title>OneLink · China Services (EN)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- خط Cairo -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -14,6 +13,24 @@
   />
 
   <style>
+    /* نفس ستايل الدول الأخرى */
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      font-size: 13px;
+      text-decoration: none;
+    }
+    .pill-link:hover {
+      border-color: rgba(96, 165, 250, 0.9);
+      color: #bfdbfe;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -24,13 +41,12 @@
       flex-direction: column;
     }
 
-    .shell {
+    .sa-shell {
       max-width: 1100px;
       margin: 24px auto 40px;
       padding: 16px;
     }
 
-    /* الشريط العلوي */
     .top-bar {
       display: flex;
       align-items: center;
@@ -85,37 +101,30 @@
       align-items: center;
       gap: 4px;
       opacity: 0.8;
-      transition: 0.18s ease;
     }
-
     .flag-link span.flag {
       font-size: 14px;
     }
-
     .flag-link.is-active {
       border-color: rgba(52, 211, 153, 0.9);
       background: radial-gradient(circle at top, rgba(34, 197, 94, 0.18), transparent 60%);
       opacity: 1;
     }
-
     .flag-link:hover {
       opacity: 1;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.75);
     }
 
-    /* كرت الهيرو */
-    .hero {
+    .sa-hero {
       margin-top: 10px;
       margin-bottom: 18px;
-      padding: 18px 18px 18px;
+      padding: 18px 18px 16px;
       border-radius: 20px;
       background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.22), rgba(15, 23, 42, 0.96));
       border: 1px solid rgba(55, 65, 81, 0.8);
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
     }
 
-    .hero-badge {
+    .sa-hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -126,35 +135,32 @@
       border: 1px solid rgba(148, 163, 184, 0.6);
       margin-bottom: 8px;
     }
-
-    .hero-badge span.flag {
+    .sa-hero-badge span.flag {
       font-size: 16px;
     }
 
-    .hero-title {
+    .sa-hero-title {
       font-size: 22px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
-    .hero-subtitle {
+    .sa-hero-subtitle {
       font-size: 13px;
       color: #cbd5f5;
       max-width: 520px;
-      line-height: 1.7;
     }
 
-    .hero-footer {
+    .sa-hero-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      margin-top: 14px;
+      margin-top: 12px;
       font-size: 11px;
-      opacity: 0.85;
+      opacity: 0.8;
     }
-
-    .hero-footer strong {
+    .sa-hero-footer strong {
       font-weight: 600;
     }
 
@@ -188,53 +194,16 @@
 }
 
 
-    /* زر استعراض جميع الخدمات + وميض */
-    .full-list-wrap {
-      margin-top: 18px;
+    .hero-tip {
+      margin-top: 10px;
+      font-size: 11px;
+      opacity: 0.85;
     }
 
-    .pill-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 8px 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      font-size: 13px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: 0.22s ease;
+    .sa-hero-footer-link {
+      margin-top: 14px;
     }
 
-    .pill-link:hover {
-      border-color: #38bdf8;
-      color: #e0f2fe;
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), rgba(15, 23, 42, 0.96));
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.8);
-    }
-
-    /* وميض ناعم */
-    .glow-pulse {
-      animation: glowPulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
-      }
-      40% {
-        box-shadow: 0 0 18px 0 rgba(56, 189, 248, 0.6);
-      }
-      70% {
-        box-shadow: 0 0 26px 4px rgba(56, 189, 248, 0.18);
-      }
-    }
-
-    /* صندوق البحث */
     .search-panel {
       margin-top: 18px;
       margin-bottom: 18px;
@@ -248,57 +217,42 @@
       position: relative;
       margin-bottom: 10px;
     }
-
     .search-input-wrap input[type="search"] {
       width: 100%;
-      padding: 10px 44px 10px 12px;
+      padding: 10px 12px 10px 44px;
       border-radius: 999px;
       border: 1px solid rgba(75, 85, 99, 0.85);
       background: rgba(15, 23, 42, 0.96);
       color: #e5e7eb;
       font-size: 13px;
       outline: none;
-      text-align: right;
-      box-sizing: border-box;
+      text-align: left !important;
+      box-sizing: border-box !important;
     }
-
     .search-input-wrap input[type="search"]::placeholder {
       color: rgba(148, 163, 184, 0.85);
     }
-
     .search-input-icon {
       position: absolute;
-      left: 16px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
       font-size: 13px;
-      opacity: 0.8;
+      opacity: 0.75;
     }
-.search-input-icon {
-  position: absolute;
-  right: 16px;      /* الأيقونة تلصق يمين */
-  left: auto;       /* نلغي الـ left القديم لو كان موجود */
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 13px;
-  opacity: 0.8;
-  pointer-events: none;  /* عشان ما تمنع الضغط داخل الحقل */
-}
 
     .search-hints {
       font-size: 11px;
-      opacity: 0.8;
+      opacity: 0.75;
       margin-bottom: 8px;
     }
 
-    /* فلاتر الأقسام + هيرف */
     .filters-row {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
       margin-bottom: 8px;
     }
-
     .filter-chip {
       border-radius: 999px;
       border: 1px solid rgba(75, 85, 99, 0.9);
@@ -308,10 +262,7 @@
       cursor: pointer;
       color: #e5e7eb;
       opacity: 0.9;
-      transition: background 0.18s ease, transform 0.15s ease,
-                  box-shadow 0.18s ease, border-color 0.18s ease;
     }
-
     .filter-chip.is-on {
       border-color: rgba(34, 197, 94, 0.9);
       background: radial-gradient(circle at top, rgba(34, 197, 94, 0.22), rgba(15, 23, 42, 0.96));
@@ -319,20 +270,12 @@
       opacity: 1;
     }
 
-    .filter-chip:hover {
-      transform: translateY(-1px);
-      border-color: rgba(34, 197, 94, 1);
-      box-shadow: 0 10px 22px rgba(22, 163, 74, 0.4);
-    }
-
-    /* تبويبات المناطق + هيرف */
     .region-tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
       margin-top: 4px;
     }
-
     .region-tab {
       border-radius: 999px;
       border: 1px solid rgba(75, 85, 99, 0.95);
@@ -345,32 +288,21 @@
       gap: 5px;
       cursor: pointer;
       opacity: 0.9;
-      transition: background 0.18s ease, transform 0.15s ease,
-                  box-shadow 0.18s ease, border-color 0.18s ease;
     }
-
     .region-tab span.flag {
       font-size: 14px;
     }
-
     .region-tab.is-active {
       border-color: rgba(59, 130, 246, 0.9);
       background: radial-gradient(circle at top, rgba(59, 130, 246, 0.28), rgba(15, 23, 42, 0.98));
       box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.55);
       opacity: 1;
     }
-
     .region-tab.is-all {
       opacity: 0.85;
     }
 
-    .region-tab:hover {
-      transform: translateY(-1px);
-      border-color: rgba(59, 130, 246, 1);
-      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
-    }
-
-    .results {
+    .sa-main-results {
       margin-top: 6px;
     }
 
@@ -382,27 +314,32 @@
     }
 
     @media (max-width: 640px) {
-      .shell {
+      .sa-shell {
         padding: 10px;
       }
-      .hero {
+      .sa-hero {
         padding: 14px 12px;
       }
-      .hero-title {
+      .sa-hero-title {
         font-size: 18px;
       }
     }
-    .search-input-wrap input[type="search"] {
-  width: 100%;
-  padding: 10px 44px 10px 12px; /* مساحة أكبر من اليمين للأيقونة */
-  border-radius: 999px;
-  border: 1px solid rgba(75, 85, 99, 0.85);
-  background: rgba(15, 23, 42, 0.96);
-  color: #e5e7eb;
-  font-size: 13px;
-  outline: none;
-  text-align: right;
-  box-sizing: border-box;
+    /* تأثير الوميض */
+.glow-pulse {
+  position: relative;
+  animation: pulseGlow 2.4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0px rgba(34, 197, 94, 0.0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(34, 197, 94, 0.0);
+  }
 }
 /* تأثير hover للأزرار */
 .filter-chip:hover,
@@ -446,125 +383,128 @@
   </style>
 </head>
 <body>
-  <div class="shell">
-    <!-- الشريط العلوي -->
+  <div class="sa-shell">
+    <!-- Top bar -->
     <header class="top-bar">
       <div class="top-bar-left">
         <div class="logo-dot"></div>
         <div>
-          <div class="top-title-main">مصر · OneLink</div>
-          <div class="top-title-sub">كل الخدمات الحكومية المصرية في مكان واحد</div>
+          <div class="top-title-main">OneLink · China</div>
+          <div class="top-title-sub">All Chinese government services in one place</div>
         </div>
       </div>
 
-      <nav class="flags-bar" aria-label="اختيار الدولة">
-        <a href="global-hub.html" class="flag-link" title="العالمية">
+      <nav class="flags-bar" aria-label="Switch country">
+        <a href="sa-en.html" class="flag-link" title="Saudi Arabia">
+          <span class="flag">🇸🇦</span>
+          <span>Saudi</span>
+        </a>
+        <a href="eg-en.html" class="flag-link" title="Egypt">
+          <span class="flag">🇪🇬</span>
+          <span>Egypt</span>
+        </a>
+        <a href="cn-en.html" class="flag-link is-active" title="China">
+          <span class="flag">🇨🇳</span>
+          <span>China</span>
+        </a>
+        <a href="app-global-hub.html" class="flag-link" title="Global Hub">
           <span class="flag">🌍</span>
           <span>Global</span>
-        </a>
-        <a href="cn.html" class="flag-link" title="الصين">
-          <span class="flag">🇨🇳</span>
-          <span>China CN</span>
-        </a>
-        <a href="eg.html" class="flag-link is-active" title="مصر">
-          <span class="flag">🇪🇬</span>
-          <span>Egypt EG</span>
-        </a>
-        <a href="sa.html" class="flag-link" title="السعودية">
-          <span class="flag">🇸🇦</span>
-          <span>Saudi SA</span>
         </a>
       </nav>
     </header>
 
-    <!-- كرت الهيرو لمصر -->
-    <section class="hero">
-      <div class="hero-badge">
-        <span class="flag">🇪🇬</span>
-        <span>الحزمة الأساسية للخدمات الحكومية المصرية · EG</span>
+    <!-- China hero card -->
+    <section class="sa-hero">
+      <div class="sa-hero-badge">
+        <span class="flag">🇨🇳</span>
+        <span>China Gov · Core Pack</span>
       </div>
 
-      <h1 class="hero-title">OneLink EG · الخدمات الحكومية المصرية</h1>
+      <h1 class="sa-hero-title">China Government Services · OneLink CN</h1>
 
-      <p class="hero-subtitle">
-        بوابة موحّدة لاكتشاف أهم المنصّات الحكومية المصرية: الهوية الرقمية، العدل،
-        الصحة، المرور، الضرائب، والمنصّات الوطنية الموحّدة — مع بحث عميق وفلاتر ذكية.
+      <p class="sa-hero-subtitle">
+        A unified gateway to explore the most important Chinese government portals:
+        digital identity, justice, health, travel, taxation, and unified national platforms —
+        all with deep search and smart filtering.
       </p>
 
-      <div class="hero-footer">
-        <span>
-          تم مزامنة بيانات <strong>السعودية، مصر، الصين، والبوابة العالمية</strong> بشكل كامل.
-        </span>
-        <a href="index.html" class="back-home-link">← العودة لصفحة OneLink الرئيسية</a>
+      <div class="sa-hero-footer">
+        <span><strong>Saudi, Egypt, China, and Global</strong> datasets are fully synchronized.</span>
+        <a href="index.html" class="back-home-link">← Back to Home</a>
       </div>
+
+      <p class="hero-tip">
+        Tip: combine <strong>country + service type + keyword</strong>.
+        Example: <strong>China + Health</strong> → <em>appointment</em> or <em>hospital</em>.
+      </p>
 
       <div class="full-list-wrap">
-        <a href="services-eg.html" class="pill-link glow-pulse">
-          ⇠ استعراض جميع الخدمات الحكومية المصرية
-        </a>
-      </div>
+  <a href="services-cn.html" class="pill-link glow-pulse">
+    ← View the full list of Chinese government services
+  </a>
+</div>
+
     </section>
 
-    <!-- لوحة البحث -->
+    <!-- Search panel -->
     <section class="search-panel">
       <div class="search-input-wrap">
         <input
           type="search"
-          placeholder="ابحث باسم الخدمة مثل: التأمين الصحي، الضرائب، eVisa، ZATCA..."
-          aria-label="بحث في الخدمات الحكومية المصرية"
+          placeholder="Search for a service, e.g.: 12306, taxes, health, visas..."
+          aria-label="Search Chinese government digital services"
         />
         <span class="search-input-icon">🔍</span>
       </div>
 
       <div class="search-hints">
-        يمكنك الجمع بين <strong>الدولة + نوع الخدمة + البحث النصي</strong> معًا.
-        مثلاً: اختر <strong>مصر + صحة</strong> ثم اكتب <em>موعد</em> أو <em>مستشفى</em>.
+        You can combine <strong>country + service type + keyword</strong> together.<br />
+        Example: select <strong>China + Travel &amp; Borders</strong> then type <em>visa</em> or <em>railway</em>.
       </div>
 
       <div class="filters-row">
-        <button type="button" class="filter-chip">منصات موحدة</button>
-        <button type="button" class="filter-chip">العدل / القضاء</button>
-        <button type="button" class="filter-chip">هوية رقمية</button>
-        <button type="button" class="filter-chip">سفر وحدود</button>
-        <button type="button" class="filter-chip">ضرائب ومالية</button>
-        <button type="button" class="filter-chip">صحة</button>
+        <button type="button" class="filter-chip">Unified Platforms</button>
+        <button type="button" class="filter-chip">Justice / Courts</button>
+        <button type="button" class="filter-chip">Digital Identity</button>
+        <button type="button" class="filter-chip">Travel &amp; Borders</button>
+        <button type="button" class="filter-chip">Tax &amp; Finance</button>
+        <button type="button" class="filter-chip">Health</button>
       </div>
 
       <div class="region-tabs">
         <button class="region-tab" data-region="sa">
-          <span class="flag">🇸🇦</span> السعودية SA
+          <span class="flag">🇸🇦</span> SA Saudi
         </button>
-        <button class="region-tab is-active" data-region="eg">
-          <span class="flag">🇪🇬</span> مصر EG
+        <button class="region-tab" data-region="eg">
+          <span class="flag">🇪🇬</span> EG Egypt
         </button>
-        <button class="region-tab" data-region="cn">
-          <span class="flag">🇨🇳</span> الصين CN
+        <button class="region-tab is-active" data-region="cn">
+          <span class="flag">🇨🇳</span> CN China
         </button>
         <button class="region-tab" data-region="global">
-          <span class="flag">🌍</span> البوابة العالمية
+          <span class="flag">🌍</span> Global Hub
         </button>
         <button class="region-tab is-all" data-region="all">
-          كل المناطق
+          All regions
         </button>
       </div>
     </section>
 
-    <!-- النتائج -->
-    <main class="results">
+    <main class="sa-main-results">
       <div id="search-results"></div>
     </main>
 
     <div class="footer-mini">
-      OneLink · Deep Search · SA / EG / CN / Global — واجهة تجربة العرض الأمامي.
+      OneLink · Deep Search · SA / EG / CN / Global — experimental front-end demo.
     </div>
   </div>
 
-  <!-- سكربت البحث العميق (عدّل المسار إذا لزم) -->
-  <script src="core/i18n/js/deep-search-engine.js"></script>
+  <script src="../../core/i18n/js/deep-search-engine.js"></script>
   <script>
     window.addEventListener("load", function () {
       if (window.__deep && typeof window.__deep.setRegion === "function") {
-        window.__deep.setRegion("eg"); // مصر
+        window.__deep.setRegion("cn");
       }
     });
   </script>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink Egypt · قائمة الخدمات الحكومية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- خط Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ستايل مشترك مع السعودية -->
+  <link rel="stylesheet" href="../core/css/base.css" />
+
+  <link rel="icon" type="image/png" href="/GovLinksApp/icons/android-chrome-512x512.png">
+  <link rel="apple-touch-icon" href="/GovLinksApp/icons/android-chrome-512x512.png">
+
+  <style>
+    :root {
+      --egypt-red: #ce1b28;
+      --egypt-gold: #fbbf24;
+      --bg-main: #020617;
+      --bg-gradient-top: #022c3a;
+
+      --panel-bg: rgba(15, 23, 42, 0.98);
+      --card-bg: rgba(15, 23, 42, 0.98);
+      --soft-border: rgba(51, 65, 85, 0.9);
+
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, var(--bg-gradient-top) 0, var(--bg-main) 45%, #000 100%);
+      color: var(--text-main);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* شريط العلم */
+    .flag-bar {
+      width: 100%;
+      height: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .flag-bar div:nth-child(1) { background: #ce1b28; }
+    .flag-bar div:nth-child(2) { background: #f9fafb; }
+    .flag-bar div:nth-child(3) { background: #000000; }
+
+    /* الحاوية العامة */
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 16px auto 32px;
+      padding: 0 16px 24px;
+    }
+
+    .page-panel {
+      background: var(--panel-bg);
+      border-radius: 22px;
+      border: 1px solid var(--soft-border);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 18px 18px 20px;
+    }
+
+    /* هيدر العنوان + زر الرجوع */
+    .services-header {
+      margin: 0 auto 12px;
+      padding: 0 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .back-link {
+      align-self: flex-start;
+      background: rgba(15, 23, 42, 0.95);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      border: 1px solid rgba(148,163,184,0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.9);
+      transition: 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .back-link:hover {
+      background: #020617;
+      transform: translateY(-1px);
+    }
+
+    .services-title-block {
+      width: 100%;
+    }
+
+    .services-title-block h1 {
+      font-size: 1.2rem;
+      margin: 0 0 4px;
+      line-height: 1.4;
+      text-align: right;
+    }
+
+    .services-title-block p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    @media (max-width: 900px) {
+      .services-title-block h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* شريط البحث */
+    .ol-search-shell {
+      margin: 4px auto 18px;
+      padding: 0 12px;
+      max-width: 980px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ol-search-pill {
+      width: 100%;
+      max-width: 880px;
+      background: rgba(3, 7, 18, 0.98);
+      border-radius: 999px;
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      padding: 4px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .ol-search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 0.9rem;
+      color: #e5f3ff;
+    }
+
+    .ol-search-input::placeholder {
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .ol-search-input::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .ol-search-clear {
+      border: none;
+      background: transparent;
+      color: rgba(148, 163, 184, 0.9);
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .ol-search-clear:hover {
+      color: #fca5a5;
+    }
+
+    .ol-search-icon {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .ol-search-results {
+      font-size: 0.78rem;
+      color: rgba(148, 163, 184, 0.9);
+      text-align: center;
+    }
+
+    /* شبكة البطاقات */
+    .services-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .services-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      transition: all .16s ease;
+      min-height: 88px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.9);
+    }
+
+    .service-card:hover {
+      border-color: var(--egypt-red);
+      box-shadow: 0 22px 48px rgba(190, 18, 60, 0.9);
+      transform: translateY(-2px);
+    }
+
+    .service-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #fecaca, var(--egypt-red));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 18px rgba(190, 18, 60, 0.85);
+    }
+
+    .service-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .service-tagline {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .service-meta {
+      font-size: 10px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .service-meta span.highlight {
+      color: var(--egypt-gold);
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body class="eg-services">
+  <!-- هيدر مشترك -->
+  <div data-include="../core/layout/header.html"></div>
+
+  <!-- شريط العلم -->
+  <div class="flag-bar">
+    <div></div><div></div><div></div>
+  </div>
+
+  <!-- العنوان + البحث + البطاقات -->
+  <main class="page-wrapper">
+    <header class="services-header">
+      <a href="../index.html" class="back-link">الرجوع للصفحة الرئيسية ↩</a>
+
+      <div class="services-title-block">
+        <h1>جميع الخدمات الحكومية في مصر · OneLink Egypt</h1>
+        <p>قائمة مرتبة لأشهر المنصّات الحكومية والخدمات الرقمية الرسمية في مصر.</p>
+      </div>
+    </header>
+
+    <section class="page-panel">
+      <!-- شريط البحث -->
+      <div class="ol-search-shell">
+        <div class="ol-search-pill">
+          <span class="ol-search-icon">🔍</span>
+
+          <input
+            id="eg-services-search"
+            class="ol-search-input"
+            type="search"
+            placeholder="ابحث باسم الخدمة (بطاقة، ضرائب، مرور، شهر عقاري...)"
+          />
+
+          <button
+            type="button"
+            class="ol-search-clear"
+            id="eg-search-clear"
+            aria-label="مسح البحث"
+          >
+            ×
+          </button>
+        </div>
+
+        <p id="eg-services-count" class="ol-search-results"></p>
+      </div>
+
+      <!-- شبكة البطاقات -->
+      <div class="services-grid">
+
+        <!-- الضرائب -->
+        <a href="#" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">💰</div>
+            <div>
+              <div class="service-name">الضرائب</div>
+              <div class="service-tagline">إقرارات – استعلام – خدمات إلكترونية</div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>القطاع: Finance</span>
+            <span class="highlight">قيد الإضافة</span>
+          </div>
+        </a>
+
+        <!-- خدمات المرور -->
+        <a href="#" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🚗</div>
+            <div>
+              <div class="service-name">خدمات المرور</div>
+              <div class="service-tagline">مخالفات – تجديد رخصة – استعلامات</div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>القطاع: Traffic</span>
+            <span class="highlight">قريباً</span>
+          </div>
+        </a>
+
+        <!-- بوابة مصر الرقمية -->
+        <a href="https://digital.gov.eg" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🌐</div>
+            <div>
+              <div class="service-name">بوابة مصر الرقمية</div>
+              <div class="service-tagline">مجموعة كبيرة من الخدمات في بوابة واحدة</div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>official: digital.gov.eg</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+        <!-- بطاقة الرقم القومي -->
+        <a href="#" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🪪</div>
+            <div>
+              <div class="service-name">بطاقة الرقم القومي</div>
+              <div class="service-tagline">استخراج – تجديد – بدل فاقد</div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>القطاع: Civil Affairs</span>
+            <span class="highlight">قريباً</span>
+          </div>
+        </a>
+
+        <!-- الشهر العقاري -->
+        <a href="#" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🏠</div>
+            <div>
+              <div class="service-name">الشهر العقاري</div>
+              <div class="service-tagline">توثيق – تسجيل عقود – خدمات أونلاين</div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>القطاع: Justice</span>
+            <span class="highlight">قريباً</span>
+          </div>
+        </a>
+
+        <!-- القضاء والمحاكم -->
+        <a href="#" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">⚖️</div>
+            <div>
+              <div class="service-name">خدمات القضاء والمحاكم</div>
+              <div class="service-tagline">استعلام عن القضايا والمواعيد</div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>القطاع: Courts</span>
+            <span class="highlight">لاحقاً</span>
+          </div>
+        </a>
+
+        <!-- التعليم والجامعات -->
+        <a href="#" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🎓</div>
+            <div>
+              <div class="service-name">التعليم والجامعات</div>
+              <div class="service-tagline">تنسيق – نتائج – خدمات طلابية</div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>القطاع: Education</span>
+            <span class="highlight">لاحقاً</span>
+          </div>
+        </a>
+
+        <!-- خدمات الصحة -->
+        <a href="#" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🏥</div>
+            <div>
+              <div class="service-name">خدمات الصحة</div>
+              <div class="service-tagline">حجز كشف – تأمين صحي – استعلامات</div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>القطاع: Health</span>
+            <span class="highlight">لاحقاً</span>
+          </div>
+        </a>
+
+      </div><!-- /services-grid -->
+    </section>
+  </main>
+
+  <!-- فوتر مشترك -->
+  <div data-include="../core/layout/footer.html"></div>
+
+  <!-- سكربت الفلترة -->
+  <script>
+    (function () {
+      const input = document.getElementById("eg-services-search");
+      const cards = Array.from(document.querySelectorAll(".services-grid .service-card"));
+      const counter = document.getElementById("eg-services-count");
+      const clearBtn = document.getElementById("eg-search-clear");
+
+      if (!input || !cards.length || !counter) return;
+
+      const normalize = (txt) =>
+        (txt || "")
+          .toString()
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .trim();
+
+      function applySearch() {
+        const q = normalize(input.value);
+        let visible = 0;
+
+        cards.forEach((card) => {
+          const text = normalize(card.textContent);
+          const match = !q || text.includes(q);
+          card.style.display = match ? "" : "none";
+          if (match) visible++;
+        });
+
+        counter.textContent = `${visible} / ${cards.length} النتائج`;
+      }
+
+      applySearch();
+      input.addEventListener("input", applySearch);
+
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          input.value = "";
+          applySearch();
+          input.focus();
+        });
+      }
+    })();
+  </script>
+
+  <script defer src="../core/js/i18n.js"></script>
+  <script defer src="../core/js/switcher.js"></script>
+  <script src="../core/js/include.js"></script>
+</body>
+</html>

@@ -18,7 +18,7 @@
 
   // ✅ المسار من docs/app-ui/app-deep-search.html إلى ملف الخدمات
   const SERVICES_JSON_URL = "../core/i18n/data/services-data.json";
-ui.resultsCount = document.getElementById("results-count");
+
   // ------------- State ----------------
   const state = {
     all: [],
@@ -212,69 +212,79 @@ ui.resultsCount = document.getElementById("results-count");
 
     state.filtered = ranked.map((r) => r.svc);
 
-    // ------ "هل تقصد؟" بعد الترتيب ------
-    if (ui.didYouMeanBox) {
-      if (!tokens.length) {
-        // لا يوجد استعلام → إخفاء الصندوق
+     // ------ "هل تقصد؟" بعد الترتيب ------
+  if (ui.didYouMeanBox) {
+    // لو مافيه استعلام → نخفي الصندوق
+    if (!tokens.length) {
+      ui.didYouMeanBox.style.display = "none";
+      ui.didYouMeanBox.innerHTML = "";
+    } else {
+      const queryNorm = tokens.join(" "); // مثال: "ابشر" أو "ايشر"
+      const candidates = [];
+
+      for (const svc of state.all) {
+        const nameNorm = normalizeText(svc.name); // "absher ابشر اعمال"
+        const words = nameNorm.split(/\s+/).filter(Boolean);
+        if (!words.length) continue;
+
+        // أقل مسافة بين الكلمة المدخلة وأي كلمة في اسم الخدمة
+        let minDist = Infinity;
+        for (const w of words) {
+          const d = levenshtein(w, queryNorm);
+          if (d < minDist) minDist = d;
+        }
+
+        // أبعد من حرفين → نخليه
+        if (minDist > 2) continue;
+
+        const s = computeMatchScore(svc, tokens);
+        if (s <= 0) continue;
+
+        candidates.push({ svc, dist: minDist, score: s });
+      }
+
+      if (!candidates.length) {
         ui.didYouMeanBox.style.display = "none";
         ui.didYouMeanBox.innerHTML = "";
       } else {
-        const queryNorm = tokens.join(" "); // مثال: "ابشر" أو "ايشر"
-        const candidates = [];
+        // ترتيب: الأقرب في المسافة، ثم الأعلى في السكور
+        candidates.sort((a, b) => {
+          if (a.dist !== b.dist) return a.dist - b.dist;
+          return b.score - a.score;
+        });
 
-        for (const svc of state.all) {
-          const nameNorm = normalizeText(svc.name); // "absher ابشر اعمال"
-          const words = nameNorm.split(/\s+/).filter(Boolean);
-          if (!words.length) continue;
+        // نأخذ أفضل 3 اقتراحات
+        const top = candidates.slice(0, 3);
 
-          let minDist = Infinity;
-          for (const w of words) {
-            const d = levenshtein(w, queryNorm);
-            if (d < minDist) minDist = d;
-          }
+        // بناء HTML: هل تقصد: [زر][·][زر][·][زر]
+        let html = "هل تقصد:";
+        html += top
+          .map((item) => {
+            const safeName = item.svc.name.replace(/"/g, "&quot;");
+            return ` <button type="button" class="dym-pill" data-dym-name="${safeName}">${safeName}</button>`;
+          })
+          .join(" ·");
 
-          if (minDist > 2) continue; // أبعد من حرفين → نتجاهله
+        ui.didYouMeanBox.innerHTML = html;
+        ui.didYouMeanBox.style.display = "block";
 
-          const s = computeMatchScore(svc, tokens);
-          if (s <= 0) continue;
-
-          candidates.push({ svc, dist: minDist, score: s });
-        }
-
-        if (!candidates.length) {
-          ui.didYouMeanBox.style.display = "none";
-          ui.didYouMeanBox.innerHTML = "";
-        } else {
-          candidates.sort((a, b) => {
-            if (a.dist !== b.dist) return a.dist - b.dist;
-            return b.score - a.score;
+        // ربط الأزرار: عند الضغط نعيد البحث باسم الخدمة
+        const buttons = ui.didYouMeanBox.querySelectorAll("[data-dym-name]");
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const name = btn.getAttribute("data-dym-name");
+            if (ui.input) {
+              ui.input.value = name;
+            }
+            state.query = name;
+            applyFilters();
           });
-
-          const top = candidates.slice(0, 3);
-
-          let html = "هل تقصد:";
-          html += top
-            .map((item) => {
-              const safeName = item.svc.name.replace(/"/g, "&quot;");
-              return ` <button type="button" class="dym-pill" data-dym-name="${safeName}">${safeName}</button>`;
-            })
-            .join(" · ");
-
-          ui.didYouMeanBox.innerHTML = html;
-          ui.didYouMeanBox.style.display = "block";
-
-          const buttons = ui.didYouMeanBox.querySelectorAll("[data-dym-name]");
-          buttons.forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const name = btn.getAttribute("data-dym-name");
-              if (ui.input) ui.input.value = name;
-              state.query = name;
-              applyFilters();
-            });
-          });
-        }
+        });
       }
     }
+  }
+
+
 
     // إعادة الرسم + الاقتراحات
     requestAnimationFrame(() => {
@@ -282,58 +292,7 @@ ui.resultsCount = document.getElementById("results-count");
       updateSuggestionsWithRanking(tokens);
       if (ui.loadingDot) ui.loadingDot.hidden = true;
     });
-
-    // تحديث أقسام الخدمات الثابتة في صفحة OneLink السعودية
-    updateServiceSections();
   }
-
-  function updateServiceSections() {
-  // نستخدم نفس التطبيع حق المحرك
-  const queryNorm = normalizeText(state.query);
-
-  // كل الأقسام (منصات موحدة – العمل – الهوية…)
-  document.querySelectorAll(".section-card").forEach((section) => {
-    const cards = section.querySelectorAll(".service-card");
-    let hasMatch = false;
-
-    cards.forEach((card) => {
-      const nameArRaw =
-        card.querySelector(".service-name-ar")?.textContent || "";
-      const nameEnRaw =
-        card.querySelector(".service-name-en")?.textContent || "";
-
-      const nameAr = normalizeText(nameArRaw);
-      const nameEn = normalizeText(nameEnRaw);
-
-      const match =
-        !queryNorm ||              // لو حقل البحث فاضي → أظهر الكل
-        nameAr.includes(queryNorm) ||
-        nameEn.includes(queryNorm);
-
-      // نخلي الـ display فاضي عشان يرجع لستايله الطبيعي (grid)
-      card.style.display = match ? "" : "none";
-      if (match) hasMatch = true;
-    });
-
-    // لو القسم ما فيه ولا كرت مطابق → نخفيه
-    section.style.display = hasMatch ? "" : "none";
-  });
-
-  // ✅ تحديث عدّاد النتائج  (مثال: 1 / 16 النتائج)
-  const counter = document.getElementById("sa-services-count");
-  if (counter) {
-    let total = 0;
-    let visible = 0;
-
-    document.querySelectorAll(".service-card").forEach((card) => {
-      total++;
-      if (card.style.display !== "none") visible++;
-    });
-
-    counter.textContent = `${visible} / ${total} النتائج`;
-  }
-}
-
 
   // ------------- Render results -------------
   function renderResults() {
@@ -341,47 +300,17 @@ ui.resultsCount = document.getElementById("results-count");
     ui.results.innerHTML = "";
 
     if (ui.matches) ui.matches.textContent = String(state.filtered.length);
-if (ui.resultsCount) {
-  const isArabicUI =
-    document.documentElement.lang === "ar" ||
-    document.documentElement.dir === "rtl";
 
-  if (isArabicUI) {
-    ui.resultsCount.textContent =
-      state.filtered.length === 0
-        ? "لا توجد خدمات مطابقة حاليًا."
-        : `عدد النتائج: ${state.filtered.length}`;
-  } else {
-    ui.resultsCount.textContent =
-      state.filtered.length === 0
-        ? "No services match your search yet."
-        : `Results: ${state.filtered.length}`;
-  }
-}
-   // ------------- Render results -------------
-function renderResults() {
-  if (!ui.results) return;
-  ui.results.innerHTML = "";
-
-  if (ui.matches) ui.matches.textContent = String(state.filtered.length);
-
-  if (!state.filtered.length) {
-    const p = document.createElement("p");
-    p.style.textAlign = "center";
-    p.style.color = "#8b9bb5";
-    p.style.marginTop = "20px";
-
-    // نستخدم النص اللي حددناه فوق حسب اللغة
-    p.textContent = NO_RESULTS_TEXT;
-
-    ui.results.appendChild(p);
-    return;
-  }
-
-  // ... باقي الكود القديم كما هو ...
-}
-
-
+    if (!state.filtered.length) {
+      const p = document.createElement("p");
+      p.style.textAlign = "center";
+      p.style.color = "#8b9bb5";
+      p.style.marginTop = "20px";
+      p.innerHTML =
+        'لا توجد نتائج مطابقة… جرّب كلمة أخرى مثل <b>Absher</b>.';
+      ui.results.appendChild(p);
+      return;
+    }
 
     state.filtered.forEach((svc) => {
       const card = document.createElement("article");
@@ -527,36 +456,37 @@ function renderResults() {
   }
 
   function renderSuggestions(list) {
-    if (!ui.suggestions) return;
-    ui.suggestions.innerHTML = "";
-    if (!list.length) return clearSuggestions();
+  if (!ui.suggestions) return;
+  ui.suggestions.innerHTML = "";
+  if (!list.length) return clearSuggestions();
 
-    list.forEach((svc) => {
-      const b = document.createElement("button");
-      b.type = "button";
+  list.forEach((svc) => {
+    const b = document.createElement("button");
+    b.type = "button";
 
-      b.innerHTML = `
-        <div class="sugg-main">
-          <span class="sugg-name">${svc.name}</span>
-          <span class="sugg-region">${regionLabel(svc.region)}</span>
-        </div>
-        <span class="sugg-url">${svc.url}</span>
-      `;
+    b.innerHTML = `
+      <div class="sugg-main">
+        <span class="sugg-name">${svc.name}</span>
+        <span class="sugg-region">${regionLabel(svc.region)}</span>
+      </div>
+      <span class="sugg-url">${svc.url}</span>
+    `;
 
-      b.addEventListener("click", () => {
-        if (ui.input) {
-          ui.input.value = svc.name;
-        }
-        state.query = svc.name;
-        applyFilters();
-        clearSuggestions();
-      });
-
-      ui.suggestions.appendChild(b);
+    b.addEventListener("click", () => {
+      if (ui.input) {
+        ui.input.value = svc.name;
+      }
+      state.query = svc.name;
+      applyFilters();
+      clearSuggestions();
     });
 
-    ui.suggestions.hidden = false;
-  }
+    ui.suggestions.appendChild(b);
+  });
+
+  ui.suggestions.hidden = false;
+}
+
 
   document.addEventListener("click", (ev) => {
     if (!ui.suggestions || ui.suggestions.hidden) return;

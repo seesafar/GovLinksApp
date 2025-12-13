@@ -284,6 +284,27 @@
     }
   }
 
+function escapeHTML(str=""){
+  return str.replace(/[&<>"']/g, m => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  }[m]));
+}
+
+function highlightText(text, q){
+  const safe = escapeHTML(text || "");
+  const query = (q || "").trim();
+  if(!query) return safe;
+
+  const esc = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return safe.replace(
+    new RegExp(`(${esc})`, "ig"),
+    `<mark class="hl">$1</mark>`
+  );
+}
 
 
     // إعادة الرسم + الاقتراحات
@@ -301,38 +322,83 @@
 
     if (ui.matches) ui.matches.textContent = String(state.filtered.length);
 
-    if (!state.filtered.length) {
-      const p = document.createElement("p");
-      p.style.textAlign = "center";
-      p.style.color = "#8b9bb5";
-      p.style.marginTop = "20px";
-      p.innerHTML =
-        'لا توجد نتائج مطابقة… جرّب كلمة أخرى مثل <b>Absher</b>.';
-      ui.results.appendChild(p);
-      return;
-    }
+   function renderResults() {
+  if (!ui.results) return;
+  ui.results.innerHTML = "";
+
+  if (ui.matches) {
+    ui.matches.textContent = String(state.filtered.length);
+  }
+
+  const empty = document.getElementById("emptyState");
+  const q = (ui.search?.value || "").trim();
+
+  if (empty) {
+    const shouldShow = (q.length >= 2 && state.filtered.length === 0);
+    empty.hidden = !shouldShow;
+    empty.classList.toggle("show", shouldShow);
+  }
+
+  if (!state.filtered.length) {
+    return;
+  }
+
+  // هنا يكمل رسم الكروت
+  state.filtered.forEach(svc => {
+    // render card
+  });
+}
+
+
+
 
     state.filtered.forEach((svc) => {
       const card = document.createElement("article");
       card.className = "result-card";
+function escapeHTML(str = "") {
+  return str.replace(/[&<>"']/g, m => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  }[m]));
+}
 
-      card.innerHTML = `
-        <div class="result-header">
-          <div class="result-title">
-            <h3>${svc.name}</h3>
-            <span class="sub">${svc.subtitle || svc.url}</span>
-          </div>
-          <div class="result-pills">
-            <span class="pill region">${regionLabel(svc.region)}</span>
-            <span class="pill ${statusClass(svc.status)}">${statusLabel(svc.status)}</span>
-          </div>
-        </div>
-        <p class="result-body">${svc.desc}</p>
-        <div class="result-meta-row">
-          <span class="result-url">${svc.url}</span>
-          <button type="button" class="open-btn">فتح</button>
-        </div>
-      `;
+function highlightText(text, q) {
+  const safe = escapeHTML(text || "");
+  const query = (q || "").trim();
+  if (!query) return safe;
+
+  const esc = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return safe.replace(
+    new RegExp(`(${esc})`, "ig"),
+    `<mark class="hl">$1</mark>`
+  );
+}
+
+     const q = document.getElementById("global-hub-search")?.value || "";
+
+card.innerHTML = `
+  <div class="result-header">
+    <div class="result-title">
+      <h3>${highlightText(svc.name, q)}</h3>
+      <span class="sub">${highlightText(svc.subtitle || svc.url, q)}</span>
+    </div>
+    <div class="result-pills">
+      <span class="pill region">${regionLabel(svc.region)}</span>
+      <span class="pill ${statusClass(svc.status)}">${statusLabel(svc.status)}</span>
+    </div>
+  </div>
+
+  <p class="result-body">${highlightText(svc.desc, q)}</p>
+
+  <div class="result-meta-row">
+    <span class="result-url">${highlightText(svc.url, q)}</span>
+    <button type="button" class="open-btn">فتح</button>
+  </div>
+`;
+
 
       const openBtn = card.querySelector(".open-btn");
       if (openBtn) {
@@ -620,5 +686,70 @@
     init();
   }
 })();
+// كود تبديل اللغة
+// دوال الديمو
+// أي منطق آخر...
+
+// ⬇️ هنا بالضبط
+const copyBtn = document.getElementById("copyDemo");
+if (copyBtn) {
+  copyBtn.addEventListener("click", async () => {
+    const url = location.href.split("#")[0];
+    try {
+      await navigator.clipboard.writeText(url);
+      const isAR = document.documentElement.lang === "ar";
+      copyBtn.textContent = isAR ? "✅ تم النسخ" : "✅ Copied";
+      setTimeout(() => {
+        copyBtn.textContent = isAR ? "نسخ رابط الديمو" : "Copy demo link";
+      }, 1200);
+    } catch {
+      prompt("Copy this link:", url);
+    }
+  });
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const copyBtn = document.getElementById("copyDemo");
+  if (!copyBtn) return;
+
+  copyBtn.addEventListener("click", async () => {
+    const url = location.href.split("#")[0];
+    const isAR = document.documentElement.lang === "ar";
+
+    // 1) Clipboard API (الأفضل)
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(url);
+        copyBtn.textContent = isAR ? "✅ تم النسخ" : "✅ Copied";
+        setTimeout(() => {
+          copyBtn.textContent = isAR ? "نسخ رابط الديمو" : "Copy demo link";
+        }, 1200);
+        return;
+      }
+    } catch (e) {
+      // نروح للفولباك
+    }
+
+    // 2) Fallback: textarea copy
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = url;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+
+      copyBtn.textContent = isAR ? "✅ تم النسخ" : "✅ Copied";
+      setTimeout(() => {
+        copyBtn.textContent = isAR ? "نسخ رابط الديمو" : "Copy demo link";
+      }, 1200);
+    } catch (e) {
+      // 3) آخر حل: prompt
+      prompt(isAR ? "انسخ الرابط:" : "Copy this link:", url);
+    }
+  });
+});
 
 

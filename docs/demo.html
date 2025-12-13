@@ -91,7 +91,7 @@
       box-shadow: 0 0 0 3px rgba(34,197,94,.12);
     }
 
-```
+
 .content{ padding:18px; }
 .grid{
   display:grid;
@@ -177,7 +177,13 @@ a.btn.primary{
   font-size:12.5px;
 }
 .hide{display:none!important}
-```
+
+#copyDemo{
+  border:1px solid rgba(148,163,184,.25);
+  background: rgba(2,8,23,.55);
+  color: var(--text);
+}
+#copyDemo:active{ transform: translateY(1px); }
 
   </style>
 </head>
@@ -222,6 +228,9 @@ a.btn.primary{
         <a class="btn" href="./app-ui/global-hub.html#tips"
            data-ar="نصائح الاستخدام"
            data-en="Usage tips">نصائح الاستخدام</a>
+           <a class="btn primary" href="./app-ui/global-hub.html?v=20251213"
+   data-ar="فتح Global Hub"
+   data-en="Open Global Hub">فتح Global Hub</a>
       </div>
 
       <div class="note">
@@ -245,18 +254,11 @@ a.btn.primary{
       </p>
 
       <div class="actions">
-        <a class="btn" href="./services-sa.html"
-           data-ar="🇸🇦 السعودية"
-           data-en="🇸🇦 Saudi">🇸🇦 السعودية</a>
+  <a class="btn" href="./services-sa.html?v=20251213">🇸🇦 السعودية</a>
+  <a class="btn" href="./egypt-app/services-egypt.html?v=20251213">🇪🇬 مصر</a>
+  <a class="btn" href="./china-app/services-china.html?v=20251213">🇨🇳 الصين</a>
+</div>
 
-        <a class="btn" href="./egypt-app/services-egypt.html"
-           data-ar="🇪🇬 مصر"
-           data-en="🇪🇬 Egypt">🇪🇬 مصر</a>
-
-        <a class="btn" href="./china-app/services-china.html"
-           data-ar="🇨🇳 الصين"
-           data-en="🇨🇳 China">🇨🇳 الصين</a>
-      </div>
 
       <div class="note">
         <span data-ar="ملاحظة:"
@@ -277,6 +279,9 @@ a.btn.primary{
        data-en="Tip: Share the demo link and collect only two notes (logic + clarity).">
     نصيحة: شارك رابط الديمو ثم اجمع ملاحظتين فقط (المنطق + الوضوح).
   </div>
+  <button class="pill" id="copyDemo" type="button"
+        data-ar="نسخ رابط الديمو"
+        data-en="Copy demo link">نسخ رابط الديمو</button>
 </footer>
 ```
 
@@ -305,6 +310,32 @@ a.btn.primary{
       setLang('ar');
     })();
   </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const copyBtn = document.getElementById("copyDemo");
+  if (!copyBtn) return;
 
+  copyBtn.addEventListener("click", () => {
+    const url = location.href.split("#")[0];
+    const isAR = document.documentElement.lang === "ar";
+
+    // نسخ مضمون (fallback)
+    const ta = document.createElement("textarea");
+    ta.value = url;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch(e) {}
+    document.body.removeChild(ta);
+
+    copyBtn.textContent = isAR ? "✅ تم النسخ" : "✅ Copied";
+    setTimeout(() => {
+      copyBtn.textContent = isAR ? "نسخ رابط الديمو" : "Copy demo link";
+    }, 1200);
+  });
+});
+</script>
 </body>
 </html>

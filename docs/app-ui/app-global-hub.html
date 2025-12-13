@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneLink Global Hub · الخدمات العالمية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- خط Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ستايل أساسي مشترك (لو تستخدمه في بقية الصفحات) -->
+  <link rel="stylesheet" href="../core/css/base.css" />
+
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-top: #022c3a;
+      --panel-bg: rgba(15, 23, 42, 0.98);
+      --soft-border: rgba(51, 65, 85, 0.9);
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.18);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, var(--bg-top) 0, var(--bg-main) 50%, #000 100%);
+      color: var(--text-main);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* الحاوية العامة */
+    .hub-shell {
+      max-width: 1100px;
+      margin: 20px auto 40px;
+      padding: 0 16px;
+    }
+
+    /* زر الرجوع */
+    .back-home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+      margin-bottom: 18px;
+    }
+
+    .back-home-link:hover {
+      background: #020617;
+      transform: translateY(-1px);
+    }
+
+    /* العنوان الرئيسي */
+    .hub-header {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .hub-title {
+      font-size: 2.1rem;
+      margin-bottom: 6px;
+    }
+
+    .hub-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* تبويبات Global / الدول */
+    .hub-tabs {
+      margin: 18px auto 22px;
+      display: inline-flex;
+      padding: 4px;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 999px;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      gap: 6px;
+    }
+
+    .hub-pill {
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      cursor: pointer;
+      opacity: 0.85;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hub-pill span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.9);
+    }
+
+    .hub-pill-active {
+      background: radial-gradient(circle at top, var(--accent-soft), rgba(15, 23, 42, 0.98));
+      opacity: 1;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.9);
+    }
+
+    /* البانل الرئيسي للبحث + النتائج */
+    .hub-panel {
+      background: var(--panel-bg);
+      border-radius: 22px;
+      border: 1px solid var(--soft-border);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 18px 18px 22px;
+    }
+
+    /* شريط البحث */
+    .search-shell {
+      margin: 4px auto 18px;
+      padding: 0 6px;
+      max-width: 980px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .search-pill {
+      width: 100%;
+      background: rgba(3, 7, 18, 0.98);
+      border-radius: 999px;
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .search-icon {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 0.9rem;
+      color: #e5f3ff;
+      text-align: right;
+    }
+
+    .search-input::placeholder {
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .search-input::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .search-clear {
+      border: none;
+      background: transparent;
+      color: rgba(148, 163, 184, 0.9);
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .search-clear:hover {
+      color: #fca5a5;
+    }
+
+    .search-hint {
+      font-size: 0.78rem;
+      color: rgba(148, 163, 184, 0.9);
+      text-align: center;
+    }
+
+    .results-counter {
+      font-size: 0.8rem;
+      color: rgba(148, 163, 184, 0.9);
+      margin: 6px 0 10px;
+      text-align: center;
+    }
+
+    /* شبكة الخدمات العالمية */
+    .services-grid {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .services-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .service-card {
+      background: radial-gradient(circle at top, #020617 0, #020617 60%);
+      border-radius: 16px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      transition: all .16s ease;
+      min-height: 90px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.95);
+    }
+
+    .service-card:hover {
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 22px 48px rgba(15, 23, 42, 0.95);
+      transform: translateY(-2px);
+    }
+
+    .service-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #bfdbfe, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.85);
+    }
+
+    .service-name {
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .service-tagline {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .service-meta {
+      font-size: 10px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .service-meta span.highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .footer-mini {
+      margin-top: 18px;
+      font-size: 0.8rem;
+      text-align: center;
+      color: rgba(148, 163, 184, 0.9);
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hub-shell">
+    <!-- زر رجوع -->
+    <a href="../index.html" class="back-home-link">
+      الرجوع للصفحة الرئيسية ↩
+    </a>
+
+    <!-- العنوان الرئيسي -->
+    <header class="hub-header">
+      <h1 class="hub-title">OneLink Global Hub</h1>
+      <p class="hub-subtitle">
+        بوابة عالمية ذكية تجمع أهم المنصّات والخدمات الرقمية الدولية في مكان واحد.
+      </p>
+
+      <!-- تبويبات Global / الدول -->
+      <nav class="hub-tabs" aria-label="Switch region">
+        <a class="hub-pill hub-pill-active" href="app-global-hub.html">
+          <span class="dot"></span>
+          Global Hub
+        </a>
+        <a class="hub-pill" href="../cn.html">China CN</a>
+        <a class="hub-pill" href="../eg.html">Egypt EG</a>
+        <a class="hub-pill" href="../sa.html">Saudi SA</a>
+      </nav>
+    </header>
+
+    <!-- بانل البحث + النتائج -->
+    <section class="hub-panel">
+      <!-- شريط البحث -->
+      <div class="search-shell">
+        <div class="search-pill">
+          <span class="search-icon">🔍</span>
+          <input
+            id="global-search-input"
+            class="search-input"
+            type="search"
+            placeholder="ابحث عن خدمة عالمية مثل: GitHub، Coursera، NASA، WHO، UN..."
+          />
+          <button
+            type="button"
+            id="global-search-clear"
+            class="search-clear"
+            aria-label="مسح البحث"
+          >
+            ×
+          </button>
+        </div>
+        <p class="search-hint">
+          يمكنك البحث باسم المنصّة، المجال، أو الكلمات المفتاحية (learning, code, health, space...).
+        </p>
+        <p id="global-results-counter" class="results-counter"></p>
+      </div>
+
+      <!-- شبكة الخدمات العالمية -->
+      <div id="global-services-grid" class="services-grid">
+        <!-- الأمم المتحدة -->
+        <a href="https://www.un.org" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🌐</div>
+            <div>
+              <div class="service-name">United Nations</div>
+              <div class="service-tagline">
+                منظمة الأمم المتحدة – برامج، تقارير، اتفاقيات دولية.
+              </div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>Global Governance</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+        <!-- منظمة الصحة العالمية -->
+        <a href="https://www.who.int" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🩺</div>
+            <div>
+              <div class="service-name">WHO</div>
+              <div class="service-tagline">
+                منظمة الصحة العالمية – معلومات وتقارير صحية.
+              </div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>Health</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+        <!-- Coursera -->
+        <a href="https://www.coursera.org" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🎓</div>
+            <div>
+              <div class="service-name">Coursera</div>
+              <div class="service-tagline">
+                دورات جامعية عالمية وبرامج كبرى عبر الإنترنت.
+              </div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>Education</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">💻</div>
+            <div>
+              <div class="service-name">GitHub</div>
+              <div class="service-tagline">
+                استضافة الأكواد، التعاون مع المطورين، وإدارة المشاريع.
+              </div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>Developer Tools</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+        <!-- NASA -->
+        <a href="https://www.nasa.gov" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🚀</div>
+            <div>
+              <div class="service-name">NASA</div>
+              <div class="service-tagline">
+                وكالة الفضاء الأمريكية – صور، بعثات، بيانات علمية.
+              </div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>Space & Science</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+        <!-- Khan Academy -->
+        <a href="https://www.khanacademy.org" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">📚</div>
+            <div>
+              <div class="service-name">Khan Academy</div>
+              <div class="service-tagline">
+                منصة تعليمية مجانية لمواد الرياضيات والعلوم واللغات.
+              </div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>Learning</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+        <!-- Stack Overflow -->
+        <a href="https://stackoverflow.com" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">🧠</div>
+            <div>
+              <div class="service-name">Stack Overflow</div>
+              <div class="service-tagline">
+                أسئلة وأجوبة للمبرمجين – حلول لمشاكل البرمجة.
+              </div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>Developers Q&A</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+        <!-- Wikipedia -->
+        <a href="https://www.wikipedia.org" target="_blank" class="service-card">
+          <div class="service-top">
+            <div class="service-icon">📖</div>
+            <div>
+              <div class="service-name">Wikipedia</div>
+              <div class="service-tagline">
+                موسوعة حرة عالمية بمختلف اللغات والمواضيع.
+              </div>
+            </div>
+          </div>
+          <div class="service-meta">
+            <span>Knowledge</span>
+            <span class="highlight">مباشر</span>
+          </div>
+        </a>
+
+      </div><!-- /services-grid -->
+
+      <div class="footer-mini">
+        OneLink · Global Hub · experimental front-end demo.
+      </div>
+    </section>
+  </div>
+
+  <!-- سكربت البحث البسيط -->
+  <script>
+    (function () {
+      const input = document.getElementById("global-search-input");
+      const cards = Array.from(document.querySelectorAll("#global-services-grid .service-card"));
+      const counter = document.getElementById("global-results-counter");
+      const clearBtn = document.getElementById("global-search-clear");
+
+      if (!input || !cards.length || !counter) return;
+
+      function normalize(txt) {
+        return (txt || "")
+          .toString()
+          .trim()
+          .toLowerCase()
+          .replace(/[إأآا]/g, "ا")
+          .replace(/ى/g, "ي")
+          .replace(/ة/g, "ه");
+      }
+
+      const total = cards.length;
+
+      function applyFilter() {
+        const q = normalize(input.value);
+        let visible = 0;
+
+        cards.forEach((card) => {
+          const text = normalize(card.textContent);
+          const match = !q || text.includes(q);
+          card.style.display = match ? "" : "none";
+          if (match) visible++;
+        });
+
+        counter.textContent = q
+          ? `${visible} / ${total} النتائج`
+          : `${total} / ${total} النتائج`;
+      }
+
+      applyFilter();
+      input.addEventListener("input", applyFilter);
+
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          input.value = "";
+          applyFilter();
+          input.focus();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

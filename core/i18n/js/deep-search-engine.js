@@ -16,8 +16,11 @@
       .replace(/\s+/g, " ");
   }
 
-  // ✅ المسار من docs/app-ui/app-deep-search.html إلى ملف الخدمات
-  const SERVICES_JSON_URL = "../core/i18n/data/services-data.json";
+  // ✅ مسار ثابت + كسر كاش (يحمي الجوال/WebView)
+const IS_GH = location.hostname.includes("github.io");
+const SERVICES_JSON_URL = IS_GH
+  ? `${location.origin}/GovLinksApp/core/i18n/data/services-data.json?v=20251213`
+  : "../core/i18n/data/services-data.json";
 
   // ------------- State ----------------
   const state = {

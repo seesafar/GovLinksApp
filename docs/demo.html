@@ -1,0 +1,310 @@
+<!doctype html>
+
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OneLink · Demo</title>
+  <meta name="description" content="OneLink Demo (AR/EN) — Global Hub + country gateways" />
+  <style>
+    :root{
+      --bg:#020617;
+      --panel:rgba(2,15,35,.55);
+      --border:rgba(148,163,184,.28);
+      --text:#e5f3ff;
+      --muted:rgba(148,163,184,.92);
+      --accent:rgba(34,197,94,.9);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background: radial-gradient(circle at top, #06122b 0%, #000 65%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .wrap{
+      width:min(980px, 100%);
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(2,15,35,.65), rgba(2,15,35,.35));
+      border-radius: var(--radius);
+      box-shadow: 0 24px 70px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    .top{
+      padding:18px 18px 12px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom:1px solid rgba(148,163,184,.18);
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      min-width:0;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(148,163,184,.25);
+      background: rgba(2,8,23,.65);
+      display:grid;place-items:center;
+      font-weight:800;
+    }
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .lang{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-shrink:0;
+    }
+    .pill{
+      border:1px solid rgba(148,163,184,.25);
+      background: rgba(2,8,23,.55);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:12.5px;
+    }
+    .pill.active{
+      border-color: rgba(34,197,94,.55);
+      box-shadow: 0 0 0 3px rgba(34,197,94,.12);
+    }
+
+```
+.content{ padding:18px; }
+.grid{
+  display:grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap:14px;
+}
+@media (max-width: 860px){
+  .grid{grid-template-columns:1fr}
+}
+.card{
+  border:1px solid var(--border);
+  background: var(--panel);
+  border-radius: 18px;
+  padding:16px;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(148,163,184,.45);
+  box-shadow: 0 16px 50px rgba(0,0,0,.55);
+}
+.card h2{
+  margin:0 0 6px;
+  font-size:16px;
+}
+.card p{
+  margin:0 0 12px;
+  color:var(--muted);
+  line-height:1.65;
+  font-size:13.5px;
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+a.btn{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border-radius: 12px;
+  border:1px solid rgba(148,163,184,.22);
+  background: rgba(2,8,23,.55);
+  color: var(--text);
+  font-weight:800;
+  font-size:13px;
+}
+a.btn.primary{
+  border-color: rgba(34,197,94,.45);
+  box-shadow: 0 0 0 3px rgba(34,197,94,.10);
+}
+.note{
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius: 14px;
+  border:1px dashed rgba(148,163,184,.28);
+  background: rgba(2,8,23,.35);
+  color: var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+.kbd{
+  padding:2px 8px;
+  border-radius: 10px;
+  border:1px solid rgba(148,163,184,.25);
+  background: rgba(2,8,23,.65);
+  color: var(--text);
+  font-weight:800;
+  font-size:12px;
+  display:inline-block;
+}
+.foot{
+  padding:14px 18px;
+  border-top:1px solid rgba(148,163,184,.18);
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:12.5px;
+}
+.hide{display:none!important}
+```
+
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="logo">OL</div>
+        <div style="min-width:0">
+          <h1>OneLink · Demo</h1>
+          <p data-ar="بوابة تجربة ثنائية اللغة (AR/EN) — جاهزة للعرض"
+             data-en="Bilingual demo landing (AR/EN) — ready to share">
+            بوابة تجربة ثنائية اللغة (AR/EN) — جاهزة للعرض
+          </p>
+        </div>
+      </div>
+
+```
+  <div class="lang" role="group" aria-label="Language">
+    <button class="pill active" id="btnAR" type="button">العربية</button>
+    <button class="pill" id="btnEN" type="button">English</button>
+  </div>
+</header>
+
+<section class="content">
+  <div class="grid">
+    <article class="card">
+      <h2 data-ar="🌍 Global Hub (Beta)"
+          data-en="🌍 Global Hub (Beta)">🌍 Global Hub (Beta)</h2>
+
+      <p data-ar="بحث سريع عن الخدمات الرقمية العالمية الموثوقة في مكان واحد. جرّب كلمات مثل: WHO, UN, Visa, GitHub."
+         data-en="Fast search for trusted global digital services in one place. Try: WHO, UN, Visa, GitHub.">
+        بحث سريع عن الخدمات الرقمية العالمية الموثوقة في مكان واحد. جرّب كلمات مثل: WHO, UN, Visa, GitHub.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="./app-ui/global-hub.html"
+           data-ar="فتح Global Hub"
+           data-en="Open Global Hub">فتح Global Hub</a>
+
+        <a class="btn" href="./app-ui/global-hub.html#tips"
+           data-ar="نصائح الاستخدام"
+           data-en="Usage tips">نصائح الاستخدام</a>
+      </div>
+
+      <div class="note">
+        <span data-ar="سيناريو تجربة سريع:"
+              data-en="Quick test flow:">سيناريو تجربة سريع:</span>
+        <br />
+        <span data-ar="1) اكتب <span class='kbd'>WHO</span>  2) جرّب <span class='kbd'>Visa</span>  3) اكتب <span class='kbd'>zzzz</span> لمعاينة No results."
+              data-en="1) Type <span class='kbd'>WHO</span>  2) Try <span class='kbd'>Visa</span>  3) Type <span class='kbd'>zzzz</span> to see the empty state.">
+          1) اكتب <span class='kbd'>WHO</span>  2) جرّب <span class='kbd'>Visa</span>  3) اكتب <span class='kbd'>zzzz</span> لمعاينة No results.
+        </span>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2 data-ar="بوابات الدول"
+          data-en="Country Gateways">بوابات الدول</h2>
+
+      <p data-ar="افتح بوابات الخدمات حسب الدولة (نسخ تجريبية)."
+         data-en="Open country service gateways (demo builds).">
+        افتح بوابات الخدمات حسب الدولة (نسخ تجريبية).
+      </p>
+
+      <div class="actions">
+        <a class="btn" href="./services-sa.html"
+           data-ar="🇸🇦 السعودية"
+           data-en="🇸🇦 Saudi">🇸🇦 السعودية</a>
+
+        <a class="btn" href="./egypt-app/services-egypt.html"
+           data-ar="🇪🇬 مصر"
+           data-en="🇪🇬 Egypt">🇪🇬 مصر</a>
+
+        <a class="btn" href="./china-app/services-china.html"
+           data-ar="🇨🇳 الصين"
+           data-en="🇨🇳 China">🇨🇳 الصين</a>
+      </div>
+
+      <div class="note">
+        <span data-ar="ملاحظة:"
+              data-en="Note:">ملاحظة:</span>
+        <span data-ar="إذا ظهر 404 لصفحة دولة، تأكد أن الملف موجود داخل مجلد docs وأن الرابط بدون /docs."
+              data-en="If you see 404 on a country page, make sure the file exists under /docs and the URL doesn’t include /docs.">
+          إذا ظهر 404 لصفحة دولة، تأكد أن الملف موجود داخل مجلد docs وأن الرابط بدون /docs.
+        </span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer class="foot">
+  <div data-ar="OneLink · Demo Build"
+       data-en="OneLink · Demo Build">OneLink · Demo Build</div>
+  <div data-ar="نصيحة: شارك رابط الديمو ثم اجمع ملاحظتين فقط (المنطق + الوضوح)."
+       data-en="Tip: Share the demo link and collect only two notes (logic + clarity).">
+    نصيحة: شارك رابط الديمو ثم اجمع ملاحظتين فقط (المنطق + الوضوح).
+  </div>
+</footer>
+```
+
+  </main>
+
+  <script>
+    (function(){
+      const btnAR = document.getElementById('btnAR');
+      const btnEN = document.getElementById('btnEN');
+
+      function setLang(lang){
+        const isAR = (lang === 'ar');
+        document.documentElement.lang = isAR ? 'ar' : 'en';
+        document.documentElement.dir  = isAR ? 'rtl' : 'ltr';
+
+        btnAR.classList.toggle('active', isAR);
+        btnEN.classList.toggle('active', !isAR);
+
+        document.querySelectorAll('[data-ar]').forEach(el=>{
+          el.innerHTML = isAR ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+        });
+      }
+
+      btnAR.addEventListener('click', ()=>setLang('ar'));
+      btnEN.addEventListener('click', ()=>setLang('en'));
+      setLang('ar');
+    })();
+  </script>
+
+</body>
+</html>

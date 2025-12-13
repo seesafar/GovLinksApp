@@ -213,6 +213,7 @@
 </div>
 
 
+
     <section class="search-shell">
       <div class="search-box">
         <input id="global-hub-search" class="search-input"
@@ -266,5 +267,37 @@
     </section>
 
   </div>
+  <script>
+  (function () {
+    const input = document.getElementById("global-hub-search");
+    const cards = Array.from(document.querySelectorAll(".service-card"));
+
+    if (!input || !cards.length) return;
+
+    function textOf(card) {
+      const title = card.querySelector(".service-title")?.textContent || "";
+      const tag = card.querySelector(".service-tagline")?.textContent || "";
+      const meta = card.querySelector(".service-meta")?.textContent || "";
+      return (title + " " + tag + " " + meta).toLowerCase();
+    }
+
+    function applyFilter(q) {
+      const query = (q || "").trim().toLowerCase();
+      cards.forEach(card => {
+        const ok = !query || textOf(card).includes(query);
+        card.style.display = ok ? "" : "none";
+      });
+    }
+
+    input.addEventListener("input", (e) => applyFilter(e.target.value));
+
+    // يمنع أي سلوك غريب عند Enter (لو فيه فورم)
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") e.preventDefault();
+    });
+
+    applyFilter("");
+  })();
+</script>
 </body>
 </html>

@@ -1,296 +1,187 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>OneLink Global Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- ✅ Correct CSS link (works from docs/app-ui/) -->
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../core/css/base.css">
 
   <style>
-    body{
+    body {
       font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #0f172a 0, #020617 50%, #000 100%);
-      color:#e5e7eb;
-      text-align:center;
-      min-height:100vh;
-      padding-bottom:60px;
+      color: #e5e7eb;
+      text-align: center;
+      min-height: 100vh;
+      padding-bottom: 60px;
     }
 
-    .hub-shell{ max-width:1100px; margin:32px auto 0; padding:0 16px 32px; }
-
-    .hub-badge{
-      display:inline-flex; align-items:center; gap:6px;
-      padding:4px 12px; border-radius:999px;
-      border:1px solid rgba(148,163,184,0.6);
-      background:rgba(15,23,42,0.9);
-      font-size:0.78rem; margin-bottom:10px;
-    }
-    .hub-badge span.dot{
-      width:7px; height:7px; border-radius:999px;
-      background:#22c55e; box-shadow:0 0 0 4px rgba(34,197,94,0.25);
+    .hub-shell {
+      max-width: 1100px;
+      margin: 32px auto 0;
+      padding: 0 16px 32px;
     }
 
-    .hub-title{ font-size:2rem; font-weight:700; margin-bottom:6px; }
-    .hub-subtitle{
-      font-size:0.95rem; opacity:0.85;
-      max-width:640px; margin:0 auto 18px;
+    .hub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+      font-size: 0.78rem;
+      margin-bottom: 10px;
     }
 
-    .hub-tabs{
-      margin:18px auto 20px;
-      display:inline-flex; align-items:center; gap:8px;
-      padding:4px; border-radius:999px;
-      background:rgba(15,23,42,0.95);
-      border:1px solid rgba(51,65,85,0.9);
-      box-shadow:0 18px 40px rgba(15,23,42,0.9);
-    }
-    .hub-pill{
-      border-radius:999px; padding:7px 16px; border:none;
-      background:transparent; color:#e5e7eb;
-      font-size:0.85rem; cursor:pointer;
-      transition:0.16s ease; white-space:nowrap;
-      text-decoration:none; display:inline-flex; align-items:center; justify-content:center;
-    }
-    .hub-pill:hover{ background: rgba(30,64,175,0.35); }
-    .hub-pill-active{
-      background:#2563eb;
-      box-shadow:0 0 0 1px rgba(191,219,254,0.7);
+    .hub-badge span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.25);
     }
 
-    .search-shell{
-      margin:0 auto 18px;
-      max-width:980px;
-      padding:14px 14px 12px;
-      border-radius:22px;
-      background:rgba(15,23,42,0.96);
-      border:1px solid rgba(51,65,85,0.9);
-      box-shadow:0 22px 50px rgba(15,23,42,0.95);
-    }
-    .search-box{ position:relative; display:flex; align-items:center; gap:8px; }
-    .search-input{
-      flex:1;
-      border-radius:999px;
-      border:1px solid rgba(75,85,99,0.85);
-      background:#020617;
-      color:#e5e7eb;
-      font-size:0.9rem;
-      padding:9px 14px 9px 34px;
-      outline:none;
-    }
-    .search-input::placeholder{ color: rgba(148,163,184,0.9); }
-    .search-icon{ position:absolute; left:12px; font-size:0.9rem; opacity:0.8; }
-    .search-hint{
-      margin-top:6px;
-      font-size:0.78rem;
-      color:rgba(148,163,184,0.9);
-      text-align:left;
+    .hub-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .services-grid{
-      margin-top:20px;
-      display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
-      gap:12px;
+    .hub-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      max-width: 640px;
+      margin: 0 auto 18px;
     }
 
-    .service-card{
-      text-align:left;
+    .hub-tabs {
+      margin: 18px auto 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(51,65,85,0.9);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+    }
+
+    .hub-pill {
+      border-radius: 999px;
+      padding: 7px 16px;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.16s ease;
+      white-space: nowrap;
+    }
+
+    .hub-pill:hover {
+      background: rgba(30,64,175,0.35);
+    }
+
+    .hub-pill-active {
+      background: #2563eb;
+      box-shadow: 0 0 0 1px rgba(191,219,254,0.7);
+    }
+
+    .search-shell {
+      margin: 0 auto 18px;
+      max-width: 980px;
+      padding: 14px 14px 12px;
+      border-radius: 22px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(51,65,85,0.9);
+      box-shadow: 0 22px 50px rgba(15,23,42,0.95);
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(75,85,99,0.85);
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      padding: 9px 14px 9px 34px;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: rgba(148,163,184,0.9);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .search-hint {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: rgba(148,163,184,0.9);
+      text-align: left;
+    }
+
+    .services-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .service-card {
+      text-align: left;
       background: radial-gradient(circle at top, rgba(15,23,42,0.95), #020617 70%);
-      border-radius:18px;
-      border:1px solid rgba(55,65,81,0.95);
-      padding:12px 12px 10px;
-      box-shadow:0 18px 40px rgba(0,0,0,0.85);
-      transition:0.18s ease;
-      cursor:pointer;
-    }
-    .service-card:hover{
-      transform:translateY(-2px);
-      border-color:#22c55e;
-      box-shadow:0 22px 55px rgba(22,163,74,0.85);
+      border-radius: 18px;
+      border: 1px solid rgba(55,65,81,0.95);
+      padding: 12px 12px 10px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.85);
+      transition: 0.18s ease;
+      cursor: pointer;
     }
 
-    .service-title{ font-size:0.95rem; font-weight:600; margin-bottom:2px; }
-    .service-tagline{ font-size:0.8rem; color:rgba(148,163,184,0.95); margin-bottom:6px; }
-
-    .service-meta{
-      font-size:0.75rem;
-      display:flex;
-      justify-content:space-between;
-      color:rgba(148,163,184,0.9);
-      gap:10px;
-    }
-    .service-meta span.highlight{ color:#22c55e; font-weight:600; }
-
-    /* Button inside cards */
-    .service-open-btn{
-      margin-top:10px;
-      border:1px solid rgba(34,197,94,0.55);
-      background: rgba(34,197,94,0.12);
-      color:#e5e7eb;
-      border-radius:999px;
-      padding:7px 14px;
-      cursor:pointer;
-      font-size:0.82rem;
-      transition:0.16s ease;
-    }
-    .service-open-btn:hover{
-      background: rgba(34,197,94,0.22);
-      transform: translateY(-1px);
+    .service-card:hover {
+      transform: translateY(-2px);
+      border-color: #22c55e;
+      box-shadow: 0 22px 55px rgba(22,163,74,0.85);
     }
 
-    /* ===== Modal (self-contained) ===== */
-    .service-modal{
-      position:fixed;
-      inset:0;
-      background: rgba(0,0,0,0.65);
-      z-index:99999;
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .2s ease;
+    .service-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2px;
     }
-    .service-modal.open{
-      opacity:1;
-      pointer-events:auto;
-    }
-    .service-modal-content{
-      position:fixed;
-      top:50%;
-      left:50%;
-      transform: translate(-50%,-50%);
-      width: min(560px, 92vw);
-      max-height: 86vh;
-      overflow:auto;
-      border-radius:18px;
-      padding:22px;
-      background:#020617;
-      border:1px solid rgba(148,163,184,0.25);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
-      direction: rtl; /* Arabic UI inside modal */
-      text-align: right;
-    }
-    .modal-close{
-      position:absolute;
-      top:14px;
-      left:14px;
-      width:34px;
-      height:34px;
-      border-radius:10px;
-      border:1px solid rgba(148,163,184,0.35);
-      background: rgba(2,6,23,0.6);
-      color:#fff;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .modal-header{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:10px;
-    }
-    .modal-region{
-      font-size:0.75rem;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.28);
-      background: rgba(15,23,42,0.65);
-      color: rgba(229,231,235,0.95);
-      white-space:nowrap;
-    }
-    #modal-title{
-      margin:0;
-      font-size:1.1rem;
-      line-height:1.35;
-    }
-    #modal-description{
-      margin:10px 0 0;
+
+    .service-tagline {
+      font-size: 0.8rem;
       color: rgba(148,163,184,0.95);
-      font-size:0.9rem;
-      line-height:1.6;
+      margin-bottom: 6px;
     }
-    .modal-actions{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:16px;
+
+    .service-meta {
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(148,163,184,0.9);
     }
-    #copy-link-btn{
-      border:1px solid rgba(148,163,184,0.35);
-      background: rgba(15,23,42,0.65);
-      color:#e5e7eb;
-      border-radius:999px;
-      padding:8px 14px;
-      cursor:pointer;
+
+    .service-meta span.highlight {
+      color: #22c55e;
+      font-weight: 600;
     }
-    #open-service-btn{
-      border:1px solid rgba(34,197,94,0.55);
-      background: rgba(34,197,94,0.16);
-      color:#e5e7eb;
-      border-radius:999px;
-      padding:8px 14px;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .search-shell{
-  max-width: 820px;          /* كان 980 */
-  padding: 16px 18px 14px;
-}
-
-.search-box{
-  align-items: center;
-}
-
-.search-input{
-  height: 44px;
-  font-size: 0.9rem;
-}
-/* ===== HARD OVERRIDE: global-hub search input ===== */
-#global-hub-search.search-input{
-  width: 100% !important;
-  height: 46px !important;
-  border-radius: 999px !important;
-  border: 1px solid rgba(75,85,99,0.9) !important;
-  background: #020617 !important;
-  color: #e5e7eb !important;
-  padding: 10px 16px 10px 40px !important;
-  outline: none !important;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02) !important;
-  appearance: none !important;
-}
-
-.search-box{
-  position: relative !important;
-}
-
-.search-box .search-icon{
-  position: absolute !important;
-  left: 14px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  opacity: 0.75 !important;
-  pointer-events: none !important;
-}
-#global-hub-search::placeholder{
-  color: rgba(148,163,184,0.9) !important;
-  opacity: 1 !important;
-}
-#global-hub-search:focus{
-  border-color: rgba(34,197,94,0.75) !important;
-  box-shadow: 0 0 0 4px rgba(34,197,94,0.14) !important;
-}
-/* Hide native clear button (WebKit/Chromium) */
-#global-hub-search::-webkit-search-cancel-button{
-  -webkit-appearance: none;
-  appearance: none;
-  display: none;
-}
   </style>
 </head>
 
@@ -304,15 +195,21 @@
 
     <h1 class="hub-title">OneLink Global Hub</h1>
     <p class="hub-subtitle">
-      A unified global gateway that gathers the most important digital services and platforms in one place —
+      A unified global gateway that gathers the most important digital services and platforms in one place — 
       for students, travelers, developers, and business owners.
     </p>
 
-    <div class="hub-tabs">
+   <div class="hub-tabs">
   <button class="hub-pill hub-pill-active" type="button">Global Hub</button>
+
+  <!-- هذه تفتح صفحة الصين الرئيسية cn.html -->
   <a class="hub-pill" href="../cn.html">China CN</a>
+
+  <!-- هذه تفتح صفحة مصر الرئيسية eg.html -->
   <a class="hub-pill" href="../eg.html">Egypt EG</a>
-  <a class="hub-pill" href="../sa.html">Saudi SA</a>
+
+  <!-- هذه تفتح صفحة السعودية الرئيسية sa.html -->
+   <a class="hub-pill" href="../sa.html">Saudi SA</a>
 </div>
 
 
@@ -324,160 +221,50 @@
         <span class="search-icon">🔍</span>
       </div>
       <p class="search-hint">
-  This is an experimental search bar — later it will be connected to the UDSAL™ deep search engine
-</p>
+        This is an experimental search bar — later it will be connected to the UDSAL™ deep search engine.
+      </p>
     </section>
-<section class="services-grid" id="global-services">
 
-  <article class="service-card">
-    <h3 class="service-title">GitHub</h3>
-    <p class="service-tagline">Code hosting, collaboration, and repositories.</p>
-    <div class="service-meta">
-      <span>Category: Developer Tools</span>
-      <span class="highlight">Global</span>
-    </div>
-    <button class="service-open-btn" type="button"
-      onclick='openServiceModal({title:"GitHub",description:"Global platform for code hosting & collaboration.",region:"Global",url:"https://github.com"})'>فتح</button>
-  </article>
+    <section class="services-grid">
 
-  <article class="service-card">
-    <h3 class="service-title">Coursera</h3>
-    <p class="service-tagline">Online courses from top universities.</p>
-    <div class="service-meta">
-      <span>Category: Learning</span>
-      <span class="highlight">Global</span>
-    </div>
-    <button class="service-open-btn" type="button"
-      onclick='openServiceModal({title:"Coursera",description:"Courses and certificates worldwide.",region:"Global",url:"https://www.coursera.org"})'>فتح</button>
-  </article>
+      <article class="service-card">
+        <h3 class="service-title">GitHub</h3>
+        <p class="service-tagline">Code hosting, developer collaboration, and project management.</p>
+        <div class="service-meta">
+          <span>Category: Developer Tools</span>
+          <span class="highlight">Global</span>
+        </div>
+      </article>
 
-  <article class="service-card">
-    <h3 class="service-title">UN · United Nations</h3>
-    <p class="service-tagline">Programs, initiatives, and global reports.</p>
-    <div class="service-meta">
-      <span>Category: Governance</span>
-      <span class="highlight">Global</span>
-    </div>
-    <button class="service-open-btn" type="button"
-      onclick='openServiceModal({title:"UN · United Nations",description:"Official UN portal.",region:"Global",url:"https://www.un.org"})'>فتح</button>
-  </article>
+      <article class="service-card">
+        <h3 class="service-title">Coursera</h3>
+        <p class="service-tagline">Online university courses from top global institutions.</p>
+        <div class="service-meta">
+          <span>Category: Learning</span>
+          <span class="highlight">Global</span>
+        </div>
+      </article>
 
-  <article class="service-card">
-    <h3 class="service-title">WHO · World Health Organization</h3>
-    <p class="service-tagline">Health guidance, data, and reports.</p>
-    <div class="service-meta">
-      <span>Category: Health</span>
-      <span class="highlight">Global</span>
-    </div>
-    <button class="service-open-btn" type="button"
-      onclick='openServiceModal({title:"WHO",description:"Trusted global health guidance.",region:"Global",url:"https://www.who.int"})'>فتح</button>
-  </article>
+      <article class="service-card">
+        <h3 class="service-title">UN · United Nations</h3>
+        <p class="service-tagline">Reports, programs, global initiatives from the United Nations.</p>
+        <div class="service-meta">
+          <span>Category: Governance</span>
+          <span class="highlight">Global</span>
+        </div>
+      </article>
 
-</section>
+      <article class="service-card">
+        <h3 class="service-title">WHO · World Health Organization</h3>
+        <p class="service-tagline">Reliable global health reports, data, and guidance.</p>
+        <div class="service-meta">
+          <span>Category: Health</span>
+          <span class="highlight">Global</span>
+        </div>
+      </article>
 
-
-   
-
+    </section>
 
   </div>
-
-  <!-- Service Modal -->
-  <div id="service-modal" class="service-modal" aria-hidden="true">
-    <div class="service-modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-
-      <button class="modal-close" type="button" onclick="closeServiceModal()">✕</button>
-
-      <div class="modal-header">
-        <span class="modal-region" id="modal-region"></span>
-        <h2 id="modal-title"></h2>
-      </div>
-
-      <p id="modal-description"></p>
-
-      <div class="modal-actions">
-        <button id="copy-link-btn" type="button">نسخ الرابط</button>
-        <a id="open-service-btn" target="_blank" rel="noopener">فتح الخدمة في المتصفح</a>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-    function openServiceModal(service){
-      const modal = document.getElementById("service-modal");
-      const titleEl = document.getElementById("modal-title");
-      const descEl = document.getElementById("modal-description");
-      const regionEl = document.getElementById("modal-region");
-      const openBtn = document.getElementById("open-service-btn");
-
-      titleEl.textContent = service.title || "";
-      descEl.textContent = service.description || "";
-      regionEl.textContent = service.region || "";
-
-      openBtn.href = service.url || "#";
-
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeServiceModal(){
-      const modal = document.getElementById("service-modal");
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    // Close when clicking outside the dialog
-    document.getElementById("service-modal").addEventListener("click", (e) => {
-      if (e.target.id === "service-modal") closeServiceModal();
-    });
-
-    // Close with ESC
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeServiceModal();
-    });
-
-    // Copy link
-    document.getElementById("copy-link-btn").addEventListener("click", async () => {
-      const url = document.getElementById("open-service-btn").href;
-      try{
-        await navigator.clipboard.writeText(url);
-        // optional tiny feedback
-        const btn = document.getElementById("copy-link-btn");
-        const old = btn.textContent;
-        btn.textContent = "تم النسخ ✅";
-        setTimeout(() => (btn.textContent = old), 900);
-      }catch{
-        alert("تعذر النسخ تلقائيًا — انسخ الرابط يدويًا.");
-      }
-    });
-
-  
-  // Global Hub Search (filter cards) — FINAL
-  document.addEventListener("DOMContentLoaded", () => {
-    const ghSearch = document.getElementById("global-hub-search");
-    const ghCards = Array.from(
-      document.querySelectorAll("#global-services .service-card")
-    );
-
-    console.log("Search ready:", {
-      input: !!ghSearch,
-      cards: ghCards.length
-    });
-
-    if (!ghSearch || !ghCards.length) return;
-
-    ghSearch.addEventListener("input", () => {
-      const q = ghSearch.value.trim().toLowerCase();
-
-      ghCards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(q) ? "" : "none";
-      });
-    });
-  });
-</script>
-
 </body>
 </html>

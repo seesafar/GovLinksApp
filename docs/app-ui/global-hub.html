@@ -1,3 +1,4 @@
+<!-- DEBUG PATH -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -5,7 +6,10 @@
   <title>OneLink Global Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="../core/css/base.css">
+  <link rel="stylesheet" href="../css/global-hub.css">
+
+
+
 
   <style>
     body {
@@ -113,7 +117,7 @@
       background: #020617;
       color: #e5e7eb;
       font-size: 0.9rem;
-      padding: 9px 14px 9px 34px;
+      padding: 9px 60px 9px 34px;
       outline: none;
     }
 
@@ -182,6 +186,53 @@
       color: #22c55e;
       font-weight: 600;
     }
+    .clear-btn{
+  position: absolute;
+  right: 16px;            /* بدل 48px */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;   /* دائرة ناعمة */
+  border: 1px solid rgba(148,163,184,.28);
+  background: rgba(2,15,35,.35);
+  color: rgba(229,243,255,.92);
+
+  font-size: 22px;
+  line-height: 1;
+  padding: 0;
+
+  box-shadow: none;
+  outline: none;
+}
+
+.clear-btn:hover{
+  background: rgba(2,15,35,.65);
+  border-color: rgba(148,163,184,.45);
+}
+
+.clear-btn:active{
+  transform: translateY(-50%) scale(.96);
+}
+
+/* أهم سطرين: يلغون أي ستايل “كبسولة” وراثي */
+.clear-btn,
+.clear-btn:focus{
+  -webkit-appearance: none;
+  appearance: none;
+}
+mark.hl{
+  padding: 0 .22em;
+  border-radius: .35em;
+  background: rgba(34,197,94,.22);
+  color: #e5f3ff;
+  border: 1px solid rgba(34,197,94,.45);
+}
   </style>
 </head>
 
@@ -215,25 +266,31 @@
 
 
     <section class="search-shell">
-      <div class="search-box">
-      <input
-  id="global-hub-search"
-  class="search-input"
-  type="text"
-  placeholder="Search for a global service (GitHub, Coursera, NASA, Visa...)"
-  autocomplete="off"
-  autocapitalize="off"
-  autocorrect="off"
-  spellcheck="false"
-  inputmode="search"
-  name="q_onelink_udsalt_2025"
-/>
+     <div class="search-box">
+  <input
+    id="global-hub-search"
+    class="search-input"
+    type="text"
+    placeholder="Search for a global service (GitHub, Coursera, NASA, Visa...)"
+    autocomplete="off"
+    autocapitalize="off"
+    autocorrect="off"
+    spellcheck="false"
+    inputmode="search"
+    name="q_onelink_udsalt_2025"
+  />
 
-        <span class="search-icon">🔍</span>
-      </div>
-      <p class="search-hint">
-        This is an experimental search bar — later it will be connected to the UDSAL™ deep search engine.
-      </p>
+  <button
+    id="clearSearchBtn"
+    class="clear-btn"
+    type="button"
+    aria-label="Clear search"
+    title="Clear"
+  >×</button>
+
+  <span class="search-icon">🔍</span>
+</div>
+
     </section>
 
     <section class="services-grid">
@@ -308,6 +365,27 @@
 
     applyFilter("");
   })();
+</script>
+<script>
+(function(){
+  const input = document.getElementById("global-hub-search");
+  const btn = document.getElementById("clearSearchBtn");
+  if(!input || !btn) return;
+
+  function syncClear(){
+    btn.style.display = input.value.trim() ? "inline-flex" : "none";
+  }
+
+  btn.addEventListener("click", () => {
+    input.value = "";
+    input.focus();
+    syncClear();
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+
+  input.addEventListener("input", syncClear);
+  syncClear();
+})();
 </script>
 </body>
 </html>

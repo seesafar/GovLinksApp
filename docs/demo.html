@@ -91,7 +91,7 @@
       box-shadow: 0 0 0 3px rgba(34,197,94,.12);
     }
 
-```
+
 .content{ padding:18px; }
 .grid{
   display:grid;
@@ -177,7 +177,7 @@ a.btn.primary{
   font-size:12.5px;
 }
 .hide{display:none!important}
-```
+
 
   </style>
 </head>
@@ -196,7 +196,7 @@ a.btn.primary{
         </div>
       </div>
 
-```
+
   <div class="lang" role="group" aria-label="Language">
     <button class="pill active" id="btnAR" type="button">العربية</button>
     <button class="pill" id="btnEN" type="button">English</button>
@@ -215,7 +215,12 @@ a.btn.primary{
       </p>
 
       <div class="actions">
-        <a class="btn primary" href="./app-ui/global-hub.html"
+        <a class="btn btn-ghost" href="/GovLinksApp/docs/app-ui/app-deep-search.html?v=20251213">
+  البحث العالمي
+</a>
+<button id="copyDemo" class="btn btn-outline">
+  نسخ رابط الديمو
+</button>
            data-ar="فتح Global Hub"
            data-en="Open Global Hub">فتح Global Hub</a>
 
@@ -278,7 +283,7 @@ a.btn.primary{
     نصيحة: شارك رابط الديمو ثم اجمع ملاحظتين فقط (المنطق + الوضوح).
   </div>
 </footer>
-```
+
 
   </main>
 
@@ -305,6 +310,23 @@ a.btn.primary{
       setLang('ar');
     })();
   </script>
+<script>
+  const copyBtn = document.getElementById("copyDemo");
 
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const url = location.href.split("?")[0];
+      try {
+        await navigator.clipboard.writeText(url);
+        copyBtn.textContent = "✅ تم النسخ";
+        setTimeout(() => {
+          copyBtn.textContent = "نسخ رابط الديمو";
+        }, 1500);
+      } catch {
+        copyBtn.textContent = "❌ فشل النسخ";
+      }
+    });
+  }
+</script>
 </body>
 </html>
